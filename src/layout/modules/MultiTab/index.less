@@ -1,0 +1,32 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2021-07-07 13:44:34
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2021-07-12 20:59:56
+ */
+.app-multi-tab {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: -1px;
+  .ant-tabs {
+    .ant-tabs-nav {
+      margin: 0;
+      .ant-tabs-tab {
+        & + .ant-tabs-tab {
+          margin-left: -1px;
+        }
+        &.ant-tabs-tab-active {
+          border-bottom-color: transparent;
+        }
+        border-color: @borderColor;
+        background: #fff;
+      }
+    }
+    .ant-tabs-content {
+      display: none;
+    }
+  }
+  .ant-dropdown-menu {
+    z-index: 9;
+  }
+}
