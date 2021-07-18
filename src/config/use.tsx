@@ -2,15 +2,16 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 17:35:53
+ * @Last Modified time: 2021-07-18 18:07:19
  */
 import React, { Component } from 'react';
+import '@/locale/setting';
+
 import { withRouter } from 'react-router-dom';
 import { notification, message, ConfigProvider } from 'antd';
 import { connect } from 'react-redux';
 import { createDictData } from '@/store/actions';
 import { isIframe } from '@/router/index';
-import '@/locale/setting';
 
 import zhCN from 'antd/lib/locale/zh_CN';
 import enGB from 'antd/lib/locale/en_GB';
@@ -41,11 +42,18 @@ class UseConfig extends Component<any> {
 
   componentWillUnmount() {
     window.removeEventListener('message', this.messageEventHandle);
+    document.removeEventListener('click', this.clickEventHandle);
   }
 
   getDictData() {
     if (!isIframe(this.props.location.pathname)) return;
     this.props.createDictData();
+  }
+
+  createMouseEvent() {
+    document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+    document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+    document.body.click();
   }
 
   clickEventHandle = () => {
@@ -55,9 +63,7 @@ class UseConfig extends Component<any> {
   messageEventHandle = ({ data }) => {
     if (typeof data !== 'object') return;
     if (data.type === 'outside_click') {
-      document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-      document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
-      document.body.click();
+      this.createMouseEvent();
     }
   };
 
