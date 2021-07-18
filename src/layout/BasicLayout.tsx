@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-17 07:41:46
+ * @Last Modified time: 2021-07-18 14:25:50
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -37,11 +37,11 @@ class BasicLayout extends Component<any> {
     const { iframeMenus } = this.props;
     return iframeMenus.map((x) => (
       <div
-        key={x.path}
+        key={x.key}
         className="iframe-wrapper"
-        style={{ display: route.path === x.path ? 'block' : 'none' }}
+        style={{ display: route.path === x.key ? 'block' : 'none' }}
       >
-        <iframe id={x.path} src={x.value} width="100%" height="100%" frameBorder="0" />
+        <iframe id={x.key} src={x.value} width="100%" height="100%" frameBorder="0" />
       </div>
     ));
   }

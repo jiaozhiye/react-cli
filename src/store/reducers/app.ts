@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-17 07:39:49
+ * @Last Modified time: 2021-07-18 14:25:15
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -81,8 +81,8 @@ const setIframeMenus = (state, payload, behavior) => {
   return Object.assign({}, state, {
     iframeMenus:
       behavior === 'add'
-        ? uniqBy([...state.iframeMenus, payload], 'path')
-        : state.iframeMenus.filter((x) => x.path !== payload),
+        ? uniqBy([...state.iframeMenus, payload], 'key')
+        : state.iframeMenus.filter((x) => x.key !== payload),
   });
 };
 
