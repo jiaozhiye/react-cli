@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 14:25:50
+ * @Last Modified time: 2021-07-18 22:12:01
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -74,8 +74,8 @@ class BasicLayout extends Component<any> {
           <Content className={classNames(!route.meta?.bgColor ? 'no-bg-color' : '')}>
             {renderRoutes(routes)}
             {this.createIframeView(route)}
-            <Watermark />
           </Content>
+          <Watermark />
         </Layout>
       </Layout>
     );

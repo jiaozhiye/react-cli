@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 14:17:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 17:19:03
+ * @Last Modified time: 2021-07-18 22:12:07
  */
 .app-layout {
   height: 100%;
@@ -40,8 +40,9 @@
     }
   }
   .ant-layout-content {
-    position: relative;
     padding: @modulePadding @modulePadding 0;
+    overflow-x: hidden;
+    overflow-y: auto;
     &.no-bg-color {
       background-color: #fff;
     }

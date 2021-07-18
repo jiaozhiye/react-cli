@@ -2,12 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 13:44:13
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 17:22:00
+ * @Last Modified time: 2021-07-18 21:30:11
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import classNames from 'classnames';
+import appTool from '@/hoc/application';
 import { t } from '@/locale';
 
 import { connect } from 'react-redux';
@@ -20,6 +21,7 @@ const { TabPane } = Tabs;
 
 const CTX_MENU_ID = 'SIMPLE';
 
+@appTool
 @withRouter
 class MultiTab extends Component<any> {
   state = {
@@ -39,14 +41,7 @@ class MultiTab extends Component<any> {
 
   refreshTagHandle = () => {
     const { activeKey } = this.state;
-    const { search } = this.props.location;
-    this.props.history.replace(`/redirect${activeKey}` + search);
-    let $iframe = document.getElementById(activeKey) as any;
-    if ($iframe) {
-      // 可能未释放内存，待优化
-      $iframe.contentWindow.location.reload();
-    }
-    $iframe = null;
+    this.props.refreshView(activeKey);
   };
 
   closeTagHandle = (dir) => {
