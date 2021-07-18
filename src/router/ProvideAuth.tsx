@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 17:13:55
+ * @Last Modified time: 2021-07-18 17:19:44
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -44,6 +44,7 @@ class ProvideAuth extends Component<any> {
     const { route } = matchRoutes(routes, pathname).pop();
     if (whiteAuth.some((x) => pathname.startsWith(x))) return;
     if (tabMenus.some((x) => x.path === pathname)) return;
+    // 选项卡菜单
     this.props.createTabMenu({ path: pathname, title: route.meta.title }, 'add');
     // iframe 模式
     if (route.iframePath) {

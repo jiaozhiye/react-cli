@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 13:44:13
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 17:16:29
+ * @Last Modified time: 2021-07-18 17:22:00
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -43,7 +43,7 @@ class MultiTab extends Component<any> {
     this.props.history.replace(`/redirect${activeKey}` + search);
     let $iframe = document.getElementById(activeKey) as any;
     if ($iframe) {
-      // 可能未释放内存
+      // 可能未释放内存，待优化
       $iframe.contentWindow.location.reload();
     }
     $iframe = null;
@@ -73,8 +73,8 @@ class MultiTab extends Component<any> {
     const { tabMenus } = this.props;
     if (targetKey === activeKey) {
       const index = this.findCurTagIndex(targetKey);
-      const activeKey = tabMenus[index - 1].path;
-      this.changeHandle(activeKey);
+      const nextActiveKey = tabMenus[index - 1].path;
+      this.changeHandle(nextActiveKey);
     }
     this.props.createTabMenu(targetKey, 'remove');
     this.props.createIframeMenu(targetKey, 'remove');
