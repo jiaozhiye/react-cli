@@ -2,13 +2,14 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-15 22:05:31
+ * @Last Modified time: 2021-07-17 07:39:49
  */
 import { uniqBy } from 'lodash-es';
 import {
   SIDE_MENU,
-  TAB_MENU,
   DICT_DATA,
+  TAB_MENU,
+  IFRAME_MENU,
   COMP_SIZE,
   LOCALE_LANG,
   THEME_COLOR,
@@ -26,6 +27,7 @@ type IState = {
   sideMenus: any[];
   tabMenus: any[];
   flattenMenus: any[];
+  iframeMenus: any[];
   dict: Record<string, Dictionary[] | number>;
 };
 
@@ -52,6 +54,7 @@ const initState: IState = {
   sideMenus: [], // 侧栏菜单数据
   tabMenus: [{ path: '/home', title: t('app.global.dashboard') }], // 顶部选项卡菜单数据
   flattenMenus: [], // 战平后的三级菜单列表
+  iframeMenus: [], // iframe 列表
   dict: {}, // 数据字典
 };
 
@@ -70,6 +73,16 @@ const setTabMenus = (state, payload, behavior) => {
       behavior === 'add'
         ? uniqBy([...state.tabMenus, payload], 'path')
         : state.tabMenus.filter((x) => x.path !== payload),
+  });
+};
+
+// 设置 iframe 导航
+const setIframeMenus = (state, payload, behavior) => {
+  return Object.assign({}, state, {
+    iframeMenus:
+      behavior === 'add'
+        ? uniqBy([...state.iframeMenus, payload], 'path')
+        : state.iframeMenus.filter((x) => x.path !== payload),
   });
 };
 
@@ -113,10 +126,12 @@ export const appReducer = (state = initState, action) => {
   switch (action.type) {
     case SIDE_MENU:
       return setSideMenus(state, action.payload);
-    case TAB_MENU:
-      return setTabMenus(state, action.payload, action.behavior);
     case DICT_DATA:
       return setDictData(state, action.payload);
+    case TAB_MENU:
+      return setTabMenus(state, action.payload, action.behavior);
+    case IFRAME_MENU:
+      return setIframeMenus(state, action.payload, action.behavior);
     case COMP_SIZE:
       return setComponentSize(state, action.payload);
     case LOCALE_LANG:

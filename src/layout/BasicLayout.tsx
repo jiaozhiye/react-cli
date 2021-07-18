@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-14 20:48:08
+ * @Last Modified time: 2021-07-17 07:41:46
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -33,6 +33,19 @@ class BasicLayout extends Component<any> {
     });
   };
 
+  createIframeView(route) {
+    const { iframeMenus } = this.props;
+    return iframeMenus.map((x) => (
+      <div
+        key={x.path}
+        className="iframe-wrapper"
+        style={{ display: route.path === x.path ? 'block' : 'none' }}
+      >
+        <iframe id={x.path} src={x.value} width="100%" height="100%" frameBorder="0" />
+      </div>
+    ));
+  }
+
   render(): React.ReactElement {
     const { routes } = this.props.route;
     const { pathname } = this.props.location;
@@ -60,6 +73,7 @@ class BasicLayout extends Component<any> {
           </Header>
           <Content className={classNames(!route.meta?.bgColor ? 'no-bg-color' : '')}>
             {renderRoutes(routes)}
+            {this.createIframeView(route)}
             <Watermark />
           </Content>
         </Layout>
@@ -68,4 +82,10 @@ class BasicLayout extends Component<any> {
   }
 }
 
-export default connect((state: any) => ({ size: state.app.size }), {})(BasicLayout);
+export default connect(
+  (state: any) => ({
+    size: state.app.size,
+    iframeMenus: state.app.iframeMenus,
+  }),
+  {}
+)(BasicLayout);

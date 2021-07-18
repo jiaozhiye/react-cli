@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 13:44:13
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-13 22:02:15
+ * @Last Modified time: 2021-07-17 07:23:28
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -65,7 +65,6 @@ class MultiTab extends Component<any> {
   doRemove(targetKey) {
     const { activeKey } = this.state;
     const { tabMenus } = this.props;
-
     if (targetKey !== activeKey) {
       this.props.createTabMenu(targetKey, 'remove');
     } else {

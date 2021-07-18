@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 12:43:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-15 21:04:03
+ * @Last Modified time: 2021-07-17 07:17:35
  */
 import { ComponentSize, Language, ThemeType } from '@/utils/types';
 import { t } from '@/locale';
@@ -33,7 +33,7 @@ export default {
   size: 'small', // 尺寸
   themeType: 'light', // 主题模式
   prefix: '/api', // ajax 请求前缀
-  useIframe: false, // 是否使用 iframe 承载路由页面
+  useIframe: true, // 是否使用 iframe 承载路由页面
   maxCacheNum: 10, // 路由组件最大缓存数量
   showBreadcrumb: false, // 是否显示面包屑
   showScreenFull: true, // 是否显示全屏按钮

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-13 21:54:22
+ * @Last Modified time: 2021-07-17 07:45:55
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -11,7 +11,7 @@ import { matchRoutes } from '@/router';
 import { debounce } from '@/utils';
 
 import { connect } from 'react-redux';
-import { createMenuList, createTabMenu } from '@/store/actions';
+import { createMenuList, createTabMenu, createIframeMenu } from '@/store/actions';
 
 import routes from '@/router/config';
 import config from '@/config';
@@ -44,6 +44,9 @@ class ProvideAuth extends Component<any> {
     const { route } = matchRoutes(routes, pathname).pop();
     if (whiteAuth.some((x) => pathname.startsWith(x))) return;
     this.props.createTabMenu({ path: pathname, title: route.meta.title }, 'add');
+    if (route.meta.iframe) {
+      this.props.createIframeMenu({ value: route.meta.iframe, key: pathname }, 'add');
+    }
   }
 
   isMatch(arr, path) {
@@ -80,5 +83,6 @@ export default connect(
   {
     createMenuList,
     createTabMenu,
+    createIframeMenu,
   }
 )(ProvideAuth);
