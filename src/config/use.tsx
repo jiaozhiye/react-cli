@@ -2,19 +2,26 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 18:07:19
+ * @Last Modified time: 2021-07-18 18:27:00
  */
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { notification, message, ConfigProvider } from 'antd';
 import '@/locale/setting';
 
-import { withRouter } from 'react-router-dom';
-import { notification, message, ConfigProvider } from 'antd';
-import { connect } from 'react-redux';
 import { createDictData } from '@/store/actions';
 import { isIframe } from '@/router/index';
 
 import zhCN from 'antd/lib/locale/zh_CN';
 import enGB from 'antd/lib/locale/en_GB';
+
+import 'antd/dist/antd.less';
+// import 'antd/dist/antd.dark.less'; // 引入官方提供的暗色 less 样式入口文件
+// import 'antd/dist/antd.compact.less'; // 引入官方提供的紧凑 less 样式入口文件
+import '@/assets/css/style.less';
+import '@/assets/css/antd-ui.less';
+import '@/assets/css/iconfont.less';
 
 const messages = {
   [`zh-cn`]: zhCN,

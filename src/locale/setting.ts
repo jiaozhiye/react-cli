@@ -1,8 +1,8 @@
 /*
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:07:39
- * @Last Modified by:   焦质晔
- * @Last Modified time: 2021-07-07 11:07:39
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2021-07-18 18:22:04
  */
 import { setTranslations, setLocale } from './i18n';
 
