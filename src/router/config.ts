@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:40:32
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-13 21:58:58
+ * @Last Modified time: 2021-07-18 15:09:17
  */
 import { lazy } from 'react';
 import { t } from '@/locale';
@@ -32,6 +32,10 @@ const routes = [
       component: x.component,
     })),
   {
+    path: '/iframe/*',
+    component: Nomatch,
+  },
+  {
     path: '/',
     meta: { title: t('app.global.home') },
     component: BasicLayout,
@@ -50,10 +54,11 @@ const routes = [
         .map((x) => x.routes)
         .flat()
         .map((x) => {
-          if (config.useIframe || x.iframeRoutePath) {
+          if (config.useIframe || x.iframePath) {
             return {
               path: x.path,
-              meta: { ...x.meta, iframe: x.iframeRoutePath || '/iframe' + x.path },
+              meta: { ...x.meta, iframe: x.iframePath || '/iframe' + x.path },
+              iframePath: x.iframePath || '/iframe' + x.path,
               component: BlankLayout,
             };
           }

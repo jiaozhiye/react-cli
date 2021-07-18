@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 14:15:47
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-06 14:16:27
+ * @Last Modified time: 2021-07-18 16:39:45
  */
 html,
 body {
@@ -64,4 +64,21 @@ ol {
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+}
+
+.iframe {
+  padding: 10px 10px 0;
+  box-sizing: border-box;
+}
+
+.fixed-footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 9;
+  border-top: 1px solid @borderColor;
+  padding: @modulePadding @modulePadding + 5px;
+  background: #fff;
+  text-align: right;
 }

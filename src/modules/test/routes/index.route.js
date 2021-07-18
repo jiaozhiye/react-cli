@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 21:38:08
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-17 07:33:54
+ * @Last Modified time: 2021-07-18 15:09:03
  */
 import { lazy } from 'react';
 
@@ -17,7 +17,7 @@ export default {
     {
       path: '/bjgl/cggl/rk',
       meta: { keepAlive: true },
-      iframeRoutePath: '/iframe/bjgl/cggl/dd',
+      iframePath: '/iframe/bjgl/cggl/dd',
     },
     {
       path: '/test',

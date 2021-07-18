@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 14:20:34
+ * @Last Modified time: 2021-07-18 15:10:11
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -39,14 +39,14 @@ class ProvideAuth extends Component<any> {
   addTabMenusHandle = debounce(this.addTabMenus);
 
   addTabMenus() {
-    const { pathname } = this.props.location;
+    const { pathname, search } = this.props.location;
     const { whiteAuth } = this.props;
     const { route } = matchRoutes(routes, pathname).pop();
     if (whiteAuth.some((x) => pathname.startsWith(x))) return;
     this.props.createTabMenu({ path: pathname, title: route.meta.title }, 'add');
     // iframe 模式
-    if (route.meta.iframe) {
-      this.props.createIframeMenu({ value: route.meta.iframe, key: pathname }, 'add');
+    if (route.iframePath) {
+      this.props.createIframeMenu({ key: pathname, value: route.iframePath + search }, 'add');
     }
   }
 

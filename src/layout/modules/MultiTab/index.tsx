@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 13:44:13
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-17 07:23:28
+ * @Last Modified time: 2021-07-18 16:06:59
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -41,6 +41,11 @@ class MultiTab extends Component<any> {
     const { activeKey } = this.state;
     const { search } = this.props.location;
     this.props.history.replace(`/redirect${activeKey}` + search);
+    let $iframe = document.getElementById(activeKey) as any;
+    if ($iframe) {
+      $iframe.contentWindow.location.reload();
+    }
+    $iframe = null;
   };
 
   closeTagHandle = (dir) => {
