@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-11-23 14:12:19
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 16:34:45
+ * @Last Modified time: 2021-07-18 16:42:03
  */
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -24,7 +24,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <UseConfig>{renderRoutes(routes)} </UseConfig>
+          <UseConfig>{renderRoutes(routes)}</UseConfig>
         </Router>
       </Provider>
     );

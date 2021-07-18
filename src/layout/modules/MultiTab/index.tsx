@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 13:44:13
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 16:06:59
+ * @Last Modified time: 2021-07-18 17:16:29
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import { t } from '@/locale';
 
 import { connect } from 'react-redux';
-import { createTabMenu } from '@/store/actions';
+import { createTabMenu, createIframeMenu } from '@/store/actions';
 
 import { Tabs } from 'antd';
 import './index.less';
@@ -43,6 +43,7 @@ class MultiTab extends Component<any> {
     this.props.history.replace(`/redirect${activeKey}` + search);
     let $iframe = document.getElementById(activeKey) as any;
     if ($iframe) {
+      // 可能未释放内存
       $iframe.contentWindow.location.reload();
     }
     $iframe = null;
@@ -70,14 +71,13 @@ class MultiTab extends Component<any> {
   doRemove(targetKey) {
     const { activeKey } = this.state;
     const { tabMenus } = this.props;
-    if (targetKey !== activeKey) {
-      this.props.createTabMenu(targetKey, 'remove');
-    } else {
+    if (targetKey === activeKey) {
       const index = this.findCurTagIndex(targetKey);
       const activeKey = tabMenus[index - 1].path;
-      this.props.createTabMenu(targetKey, 'remove');
       this.changeHandle(activeKey);
     }
+    this.props.createTabMenu(targetKey, 'remove');
+    this.props.createIframeMenu(targetKey, 'remove');
   }
 
   changeHandle = (activeKey) => {
@@ -148,5 +148,6 @@ export default connect(
   }),
   {
     createTabMenu,
+    createIframeMenu,
   }
 )(MultiTab);
