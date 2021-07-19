@@ -36,6 +36,7 @@ export default [
           {
             title: '备件清单列表',
             key: 'https://www.baidu.com/',
+            target: '_blank',
           },
         ],
       },

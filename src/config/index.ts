@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 12:43:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-17 07:17:35
+ * @Last Modified time: 2021-07-19 10:48:04
  */
 import { ComponentSize, Language, ThemeType } from '@/utils/types';
 import { t } from '@/locale';
