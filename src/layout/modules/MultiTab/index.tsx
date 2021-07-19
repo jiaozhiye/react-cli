@@ -73,6 +73,8 @@ class MultiTab extends Component<any> {
     }
     this.props.createTabMenu(targetKey, 'remove');
     this.props.createIframeMenu(targetKey, 'remove');
+    // 本地存储
+    localStorage.setItem('tab_menus', JSON.stringify(this.props.tabMenus));
   }
 
   changeHandle = (activeKey) => {

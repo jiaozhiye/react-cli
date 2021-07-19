@@ -9,6 +9,7 @@ import hoistStatics from 'hoist-non-react-statics';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createIframeMenu } from '@/store/actions';
+import store from '@/store';
 
 export default (WrappedComponent): any => {
   @withRouter
@@ -33,7 +34,10 @@ export default (WrappedComponent): any => {
       $iframe.parentNode.removeChild($iframe);
       $iframe = null;
       // 释放 iframe 内存 END
-      const { value } = this.props.iframeMenus.find((x) => x.key === pathname);
+      const {
+        app: { iframeMenus },
+      } = store.getState();
+      const { value } = iframeMenus.find((x) => x.key === pathname);
       this.props.createIframeMenu(pathname, 'remove');
       setTimeout(() => this.props.createIframeMenu({ key: pathname, value }, 'add'), 10);
     };
@@ -58,7 +62,8 @@ export default (WrappedComponent): any => {
 
   return connect(
     (state: any) => ({
-      iframeMenus: state.app.iframeMenus,
+      size: state.app.size,
+      lang: state.app.lang,
     }),
     { createIframeMenu }
   )(hoistStatics(C, WrappedComponent));

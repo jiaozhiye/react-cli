@@ -8,10 +8,9 @@ import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import { Spin } from 'antd';
 import { matchRoutes } from '@/router';
-import { debounce } from '@/utils';
 
 import { connect } from 'react-redux';
-import { createMenuList, createTabMenu, createIframeMenu } from '@/store/actions';
+import { createMenuList, createTabMenu, createIframeMenu, createSignOut } from '@/store/actions';
 
 import routes from '@/router/config';
 import config from '@/config';
@@ -26,30 +25,51 @@ class ProvideAuth extends Component<any> {
     if (this.state.menuLoaded) return;
     const bool: boolean = await this.props.createMenuList();
     if (bool) {
+      const tabMenus = this.getLocalTabMenus();
+      tabMenus.forEach((x) => {
+        this.props.createTabMenu({ path: x.path, title: x.title }, 'add');
+      });
+      this.addTabMenus();
       this.setState({ menuLoaded: bool });
     } else {
-      // 退出登录
+      this.props.createSignOut();
     }
   }
 
-  componentDidUpdate() {
-    this.addTabMenusHandle();
+  componentDidUpdate(prevProps) {
+    const { pathname: prevPathname } = prevProps.location;
+    const { pathname: nextPathname } = this.props.location;
+    if (prevPathname !== nextPathname) {
+      this.addTabMenus();
+    }
   }
 
-  addTabMenusHandle = debounce(this.addTabMenus);
+  getLocalTabMenus() {
+    const localTabNav = localStorage.getItem('tab_menus');
+    let result: any = [];
+    if (localTabNav) {
+      try {
+        result = JSON.parse(localTabNav);
+      } catch (e) {
+        // ...
+      }
+    }
+    return result.slice(1);
+  }
 
   addTabMenus() {
     const { pathname, search } = this.props.location;
-    const { whiteAuth, tabMenus } = this.props;
+    const { whiteAuth } = this.props;
     const { route } = matchRoutes(routes, pathname).pop();
     if (whiteAuth.some((x) => pathname.startsWith(x))) return;
-    if (tabMenus.some((x) => x.path === pathname)) return;
     // 选项卡菜单
     this.props.createTabMenu({ path: pathname, title: route.meta.title }, 'add');
     // iframe 模式
     if (route.iframePath) {
       this.props.createIframeMenu({ key: pathname, value: route.iframePath + search }, 'add');
     }
+    // 本地存储
+    localStorage.setItem('tab_menus', JSON.stringify(this.props.tabMenus));
   }
 
   isMatch(arr, path) {
@@ -88,5 +108,6 @@ export default connect(
     createMenuList,
     createTabMenu,
     createIframeMenu,
+    createSignOut,
   }
 )(ProvideAuth);
