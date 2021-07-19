@@ -27,3 +27,6 @@ export const THEME_COLOR = 'THEME_COLOR';
 
 // 主题模式
 export const THEME_TYPE = 'THEME_TYPE';
+
+// 退出登录
+export const SIGN_OUT = 'SIGN_OUT';

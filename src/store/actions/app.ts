@@ -13,8 +13,10 @@ import {
   LOCALE_LANG,
   THEME_COLOR,
   THEME_TYPE,
+  SIGN_OUT,
 } from '../types';
 import { getNavList, getAllDict } from '@/api/application';
+import { removeToken } from '@/utils/cookies';
 import { t } from '@/locale';
 import routes from '@/router/config';
 import localDict from '@/utils/localDict';
@@ -105,6 +107,20 @@ export const createDictData =
       type: DICT_DATA,
       payload: data,
     });
+  };
+
+// 退出登录
+export const createSignOut =
+  () =>
+  async (dispatch, getState): Promise<void> => {
+    removeToken();
+    dispatch({
+      type: SIGN_OUT,
+      payload: [],
+    });
+    // 刷新浏览器，释放内存
+    const { pathname, search } = window.location;
+    setTimeout(() => (window.location.href = '/login?redirect=' + pathname + search), 400);
   };
 
 // 设置顶部选项卡导航

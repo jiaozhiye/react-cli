@@ -14,6 +14,7 @@ import {
   LOCALE_LANG,
   THEME_COLOR,
   THEME_TYPE,
+  SIGN_OUT,
 } from '../types';
 import { t } from '@/locale';
 import config from '@/config';
@@ -28,6 +29,7 @@ type IState = {
   tabMenus: any[];
   flattenMenus: any[];
   iframeMenus: any[];
+  keepAliveList: any[];
   dict: Record<string, Dictionary[] | number>;
 };
 
@@ -55,6 +57,7 @@ const initState: IState = {
   tabMenus: [{ path: '/home', title: t('app.global.dashboard') }], // 顶部选项卡菜单数据
   flattenMenus: [], // 战平后的三级菜单列表
   iframeMenus: [], // iframe 列表
+  keepAliveList: [], // 路由组件缓存列表
   dict: {}, // 数据字典
 };
 
@@ -121,6 +124,13 @@ const setThemeType = (state, payload) => {
   });
 };
 
+// 退出登录
+const setSignOut = (state, payload) => {
+  return Object.assign({}, state, {
+    sideMenus: payload,
+  });
+};
+
 // 必须要给 state 参数默认赋值 initState
 export const appReducer = (state = initState, action) => {
   switch (action.type) {
@@ -140,6 +150,8 @@ export const appReducer = (state = initState, action) => {
       return setThemeColor(state, action.payload);
     case THEME_TYPE:
       return setThemeType(state, action.payload);
+    case SIGN_OUT:
+      return setSignOut(state, action.payload);
     default:
       return state;
   }
