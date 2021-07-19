@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 22:12:01
+ * @Last Modified time: 2021-07-19 11:52:49
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -75,7 +75,7 @@ class BasicLayout extends Component<any> {
             {renderRoutes(routes)}
             {this.createIframeView(route)}
           </Content>
-          <Watermark />
+          <Watermark collapsed={collapsed} />
         </Layout>
       </Layout>
     );
