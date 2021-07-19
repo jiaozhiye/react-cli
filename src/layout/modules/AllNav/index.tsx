@@ -20,7 +20,7 @@ class AllNav extends Component<any> {
   render(): React.ReactElement {
     return (
       <div className={classNames('app-all-nav')}>
-        <Menu mode="inline" theme="dark" selectedKeys={[]}>
+        <Menu mode="inline" theme="dark" selectable={false}>
           <Menu.Item key="all-nav" icon={<AppstoreFilled />} onClick={this.clickHandle}>
             {t('app.sidebar.allNavTitle')}
           </Menu.Item>

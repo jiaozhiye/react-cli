@@ -16,7 +16,7 @@ const SubMenu = Menu.SubMenu;
 
 import './index.less';
 
-const getIcon = (icon) => {
+const getIcon = (icon = '') => {
   if (!icon) return null;
   return (
     <span className="anticon">
@@ -25,73 +25,71 @@ const getIcon = (icon) => {
   );
 };
 
-const conversionPath = (path) => {
-  if (path && path.indexOf('http') === 0) {
+const conversionPath = (path = '') => {
+  if (path.startsWith('http')) {
     return path;
   }
-  return `/${path || ''}`.replace(/\/+/g, '/');
+  return `/${path}`.replace(/\/+/g, '/');
 };
 
 @withRouter
 class SideMenu extends Component<any> {
-  // 获得菜单子节点
-  getNavMenuItems = (menus) => {
-    if (!menus) return [];
-    return menus.filter((x) => !x.hideInMenu).map((x) => this.getSubMenuOrItem(x));
-  };
+  getOpenKeys(path) {
+    return ['1', '1-1']
+  }
 
-  // 获取 SubMenu or Item
-  getSubMenuOrItem = (item) => {
-    if (item.children && !item.hideChildrenInMenu) {
-      return (
-        <SubMenu
-          key={item.key}
-          title={
-            <>
-              {getIcon(item.icon)}
-              <span>{item.title}</span>
-            </>
-          }
-        >
-          {this.getNavMenuItems(item.children)}
-        </SubMenu>
-      );
-    }
-    return <Menu.Item key={item.key}>{this.getMenuItemPath(item)}</Menu.Item>;
-  };
-
-  // 判断是否是 http 链接 返回 Link 或 a
-  getMenuItemPath = (item) => {
-    const path = conversionPath(item.key);
-    const { target } = item;
-    // Is it a http link
-    if (/^https?:\/\//.test(path)) {
-      return (
-        <a href={path} target={target}>
-          {getIcon(item.icon)}
-          <span>{item.title}</span>
-        </a>
-      );
-    }
-    return (
-      <Link to={path} target={target} replace={path === this.props.location.pathname}>
-        {getIcon(item.icon)}
-        <span>{item.title}</span>
-      </Link>
-    );
-  };
+  createMenuTree(arr, depth = '') {
+    return arr
+      .filter((x) => !x.hideInMenu)
+      .map((item, index) => {
+        const { title, icon, target } = item;
+        const path: string = conversionPath(item.key);
+        // 判断是否为 http 链接
+        const httpLink = /^https?:\/\//.test(path);
+        const menuItem = !httpLink ? (
+          <Link to={path} target={target}>
+            {getIcon(icon)}
+            <span>{title}</span>
+          </Link>
+        ) : (
+          <a href={path} target={target || '_blank'}>
+            {getIcon(icon)}
+            <span>{title}</span>
+          </a>
+        );
+        const uniqueKey = depth + (index + 1);
+        if (Array.isArray(item.children) && !item.hideChildrenInMenu) {
+          return (
+            <SubMenu
+              key={uniqueKey}
+              title={
+                <>
+                  {getIcon(icon)}
+                  <span>{title}</span>
+                </>
+              }
+            >
+              {this.createMenuTree(item.children, `${uniqueKey}-`)}
+            </SubMenu>
+          );
+        }
+        return (
+          <Menu.Item key={path}>{menuItem}</Menu.Item>
+        );
+      });
+  }
 
   render(): React.ReactElement {
-    const { sideMenus } = this.props;
+    const { sideMenus, location: { pathname } } = this.props;
     return (
       <div className={classNames('app-side-menu')}>
         <Menu
           mode="inline"
           theme="dark"
-          // defaultOpenKeys={['/bjgl', '/bjgl/cggl']}
-          // defaultSelectedKeys={['/bjgl/cggl/dd']}
+          selectedKeys={[pathname]}
+          openKeys={this.getOpenKeys(pathname)}
         >
-          {this.getNavMenuItems(sideMenus)}
+          {this.createMenuTree(sideMenus)}
         </Menu>
       </div>
     );
