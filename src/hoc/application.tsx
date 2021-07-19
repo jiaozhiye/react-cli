@@ -38,7 +38,9 @@ export default (WrappedComponent): any => {
       setTimeout(() => this.props.createIframeMenu({ key: pathname, value }, 'add'), 10);
     };
 
-    openView = () => {};
+    openView = (fullpath) => {
+      this.props.history.push(fullpath);
+    };
 
     closeView = () => {};
 

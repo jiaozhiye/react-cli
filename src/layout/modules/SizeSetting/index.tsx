@@ -16,6 +16,11 @@ class SizeSetting extends Component<any> {
   sizeChangeHandle(size) {
     this.props.createComponentSize(size);
     localStorage.setItem('size', size);
+    this.props.iframeMenus.forEach((x) => {
+      const $iframe: HTMLIFrameElement = document.getElementById(x.key) as HTMLIFrameElement;
+      if (!$iframe) return;
+      $iframe.contentWindow?.postMessage({ type: 'size', data: size }, '*');
+    });
   }
 
   renderMenus() {
@@ -60,6 +65,12 @@ class SizeSetting extends Component<any> {
   }
 }
 
-export default connect((state: any) => ({ size: state.app.size }), {
-  createComponentSize,
-})(SizeSetting);
+export default connect(
+  (state: any) => ({
+    size: state.app.size,
+    iframeMenus: state.app.iframeMenus,
+  }),
+  {
+    createComponentSize,
+  }
+)(SizeSetting);

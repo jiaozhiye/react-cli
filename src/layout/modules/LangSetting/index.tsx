@@ -16,6 +16,11 @@ class LangSetting extends Component<any> {
   langChangeHandle(lang) {
     this.props.createLocaleLang(lang);
     changeLocale(lang);
+    this.props.iframeMenus.forEach((x) => {
+      const $iframe: HTMLIFrameElement = document.getElementById(x.key) as HTMLIFrameElement;
+      if (!$iframe) return;
+      $iframe.contentWindow?.postMessage({ type: 'lang', data: lang }, '*');
+    });
   }
 
   renderMenus() {
@@ -49,6 +54,12 @@ class LangSetting extends Component<any> {
   }
 }
 
-export default connect((state: any) => ({ lang: state.app.lang }), {
-  createLocaleLang,
-})(LangSetting);
+export default connect(
+  (state: any) => ({
+    lang: state.app.lang,
+    iframeMenus: state.app.iframeMenus,
+  }),
+  {
+    createLocaleLang,
+  }
+)(LangSetting);

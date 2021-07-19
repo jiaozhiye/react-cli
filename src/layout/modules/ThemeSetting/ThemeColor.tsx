@@ -15,6 +15,18 @@ import { generate } from '@ant-design/colors';
 
 import './index.less';
 
+export const getAntdSerials = (color) => {
+  const lightens = new Array(9).fill(null).map((t, i) => {
+    return client.varyColor.lighten(color, i / 10);
+  });
+  const darkens = new Array(6).fill(null).map((t, i) => {
+    return client.varyColor.darken(color, i / 10);
+  });
+  const colorPalettes = generate(color);
+  const rgb = client.varyColor.toNum3(color.replace('#', '')).join(',');
+  return lightens.concat(darkens).concat(colorPalettes).concat(rgb);
+};
+
 const Tag = ({ color, check, ...rest }) => (
   <div
     {...rest}
@@ -40,28 +52,20 @@ class ThemeColor extends Component<any> {
     ],
   };
 
-  getAntdSerials(color) {
-    const lightens = new Array(9).fill(null).map((t, i) => {
-      return client.varyColor.lighten(color, i / 10);
-    });
-    const darkens = new Array(6).fill(null).map((t, i) => {
-      return client.varyColor.darken(color, i / 10);
-    });
-    const colorPalettes = generate(color);
-    const rgb = client.varyColor.toNum3(color.replace('#', '')).join(',');
-    return lightens.concat(darkens).concat(colorPalettes).concat(rgb);
-  }
-
   themeColorChangeHandle(color) {
     const options = {
-      newColors: this.getAntdSerials(color),
-      // 当 router 不是 hash mode 时，它需要将 url 更改为绝对路径(以 / 开头)
+      newColors: getAntdSerials(color),
       changeUrl: (cssUrl) => `/${cssUrl}`,
       openLocalStorage: false,
     };
     client.changer.changeColor(options, Promise).then(() => {
       this.props.createThemeColor(color);
       localStorage.setItem('theme_color', color);
+    });
+    this.props.iframeMenus.forEach((x) => {
+      const $iframe: HTMLIFrameElement = document.getElementById(x.key) as HTMLIFrameElement;
+      if (!$iframe) return;
+      $iframe.contentWindow?.postMessage({ type: 'theme_color', data: color }, '*');
     });
   }
 
@@ -87,6 +91,12 @@ class ThemeColor extends Component<any> {
   }
 }
 
-export default connect((state: any) => ({ themeColor: state.app.themeColor }), {
-  createThemeColor,
-})(ThemeColor);
+export default connect(
+  (state: any) => ({
+    themeColor: state.app.themeColor,
+    iframeMenus: state.app.iframeMenus,
+  }),
+  {
+    createThemeColor,
+  }
+)(ThemeColor);

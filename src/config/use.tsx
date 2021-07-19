@@ -8,10 +8,18 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { notification, message, ConfigProvider } from 'antd';
+import client from 'webpack-custom-theme/client';
 import '@/locale/setting';
 
-import { createDictData } from '@/store/actions';
+import {
+  createDictData,
+  createThemeColor,
+  createLocaleLang,
+  createComponentSize,
+} from '@/store/actions';
 import { isIframe } from '@/router/index';
+import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
+import { changeLocale } from '@/locale';
 
 import zhCN from 'antd/lib/locale/zh_CN';
 import enGB from 'antd/lib/locale/en_GB';
@@ -41,6 +49,10 @@ message.config({
 class UseConfig extends Component<any> {
   componentDidMount() {
     this.getDictData();
+    const localTheme = localStorage.getItem('theme_color');
+    if (localTheme && localTheme !== this.props.theme_color) {
+      this.themeColorChangeHandle(localTheme);
+    }
     window.addEventListener('message', this.messageEventHandle, false);
     if (isIframe(this.props.location.pathname)) {
       document.addEventListener('click', this.clickEventHandle, false);
@@ -57,6 +69,18 @@ class UseConfig extends Component<any> {
     this.props.createDictData();
   }
 
+  themeColorChangeHandle(color) {
+    const options = {
+      newColors: getAntdSerials(color),
+      changeUrl: (cssUrl) => `/${cssUrl}`,
+      openLocalStorage: false,
+    };
+    client.changer.changeColor(options, Promise).then(() => {
+      this.props.createThemeColor(color);
+      localStorage.setItem('theme_color', color);
+    });
+  }
+
   createMouseEvent() {
     document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
     document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
@@ -71,6 +95,20 @@ class UseConfig extends Component<any> {
     if (typeof data !== 'object') return;
     if (data.type === 'outside_click') {
       this.createMouseEvent();
+    }
+    if (data.type === 'theme_color') {
+      this.themeColorChangeHandle(data.data);
+    }
+    if (data.type === 'theme_type') {
+      // ...
+    }
+    if (data.type === 'lang') {
+      this.props.createLocaleLang(data.data);
+      changeLocale(data.data);
+    }
+    if (data.type === 'size') {
+      this.props.createComponentSize(data.data);
+      localStorage.setItem('size', data.data);
     }
   };
 
@@ -92,8 +130,12 @@ export default connect(
   (state: any) => ({
     size: state.app.size,
     lang: state.app.lang,
+    theme_color: state.app.theme_color,
   }),
   {
     createDictData,
+    createThemeColor,
+    createLocaleLang,
+    createComponentSize,
   }
 )(UseConfig);
