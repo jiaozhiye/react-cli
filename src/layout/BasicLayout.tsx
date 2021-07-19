@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-19 11:52:49
+ * @Last Modified time: 2021-07-19 16:36:19
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -12,6 +12,8 @@ import { Layout } from 'antd';
 import { matchRoutes } from '@/router';
 import Watermark from './modules/Watermark';
 import Logo from './modules/Logo';
+import AllNav from './modules/AllNav';
+import StarNav from './modules/StarNav';
 import SideMenu from './modules/SideMenu';
 import MultiTab from './modules/MultiTab';
 import Actions from './modules/Actions';
@@ -60,7 +62,9 @@ class BasicLayout extends Component<any> {
       <Layout className={classNames(cls)}>
         <Sider trigger={null} collapsible collapsed={collapsed} collapsedWidth={60}>
           <Logo collapsed={collapsed} />
-          <SideMenu collapsed={collapsed} />
+          <AllNav />
+          <StarNav />
+          <SideMenu />
         </Sider>
         <Layout>
           <Header>
@@ -75,7 +79,7 @@ class BasicLayout extends Component<any> {
             {renderRoutes(routes)}
             {this.createIframeView(route)}
           </Content>
-          <Watermark collapsed={collapsed} />
+          <Watermark />
         </Layout>
       </Layout>
     );

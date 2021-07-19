@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-13 22:18:05
+ * @Last Modified time: 2021-07-19 16:35:58
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -34,14 +34,6 @@ const conversionPath = (path) => {
 
 @withRouter
 class SideMenu extends Component<any> {
-  static propTypes = {
-    collapsed: PropTypes.bool,
-  };
-
-  state = {
-    collapsed: false,
-  };
-
   // 获得菜单子节点
   getNavMenuItems = (menus) => {
     if (!menus) return [];
