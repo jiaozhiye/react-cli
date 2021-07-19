@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-14 16:53:42
+ * @Last Modified time: 2021-07-19 12:08:17
  */
 import React, { Component } from 'react';
 import { Menu, Dropdown } from 'antd';
@@ -10,6 +10,7 @@ import { Avatar } from 'antd';
 import { UserOutlined, SettingOutlined, ClearOutlined, LogoutOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';
+import { t } from '@/locale';
 
 import './index.less';
 
@@ -23,17 +24,17 @@ class UserCenter extends Component<any> {
     return (
       <Menu>
         <Menu.Item key="1" icon={<UserOutlined />}>
-          个人中心
+          {t('app.settings.usercenter')}
         </Menu.Item>
         <Menu.Item key="2" icon={<SettingOutlined />}>
-          个人设置
+          {t('app.settings.usersetting')}
         </Menu.Item>
         <Menu.Item key="3" icon={<ClearOutlined />}>
-          清理缓存
+          {t('app.settings.clearcache')}
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item key="4" icon={<LogoutOutlined />}>
-          退出登录
+          {t('app.settings.logout')}
         </Menu.Item>
       </Menu>
     );

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 13:18:02
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-15 20:56:21
+ * @Last Modified time: 2021-07-19 12:07:15
  */
 export default {
   name: 'en',
@@ -30,6 +30,7 @@ export default {
     },
     settings: {
       usercenter: '个人中心',
+      usersetting: '个人设置',
       clearcache: '清理缓存',
       logout: '退出登录',
     },

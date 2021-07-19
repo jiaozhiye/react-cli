@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 15:39:35
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-07 11:52:19
+ * @Last Modified time: 2021-07-19 13:13:20
  */
 import axios, {
   AxiosInstance,
@@ -14,6 +14,7 @@ import axios, {
 import qs from 'qs';
 import config from '@/config';
 import store from '@/store';
+import { createSignOut } from '@/store/actions';
 import { getToken } from '@/utils/cookies';
 import { Notification } from '@/utils';
 import { t } from '@/locale';
@@ -136,7 +137,7 @@ instance.interceptors.response.use((response) => {
   if (data.code !== 200) {
     // token 过期，需要重新登录
     if (data.code === 40105) {
-      // store.dispatch('app/createLogout');
+      store.dispatch(createSignOut() as any);
     }
     data.msg && Notification(data.msg, 'error', 10);
   }

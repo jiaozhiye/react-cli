@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 17:36:14
+ * @Last Modified time: 2021-07-19 13:19:34
  */
 import {
   SIDE_MENU,
@@ -112,7 +112,7 @@ export const createDictData =
 // 退出登录
 export const createSignOut =
   () =>
-  async (dispatch, getState): Promise<void> => {
+  (dispatch, getState): void => {
     removeToken();
     dispatch({
       type: SIGN_OUT,
