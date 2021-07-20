@@ -2,9 +2,10 @@
  * @Author: 焦质晔
  * @Date: 2021-07-19 15:55:42
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 14:55:04
+ * @Last Modified time: 2021-07-20 16:33:18
  */
 @textColor: rgba(255, 255, 255, 0.65);
+@lineColor: #6b6b6b;
 
 .app-all-nav {
   .nav-list-masker {
@@ -60,7 +61,7 @@
       margin: 50px 210px 20px 60px;
       .ant-select {
         .ant-select-selector {
-          border-color: @borderColor;
+          border: 1px solid @lineColor;
           background-color: transparent;
           .ant-select-selection-search > input {
             color: @textColor;
@@ -77,7 +78,7 @@
           .ant-select-selector {
             outline: none;
             box-shadow: none;
-            border-color: @borderColor;
+            border-color: @lineColor;
           }
         }
       }
@@ -102,7 +103,7 @@
           display: none;
         }
         .ant-tabs-content-holder {
-          border-right-color: #6b6b6b;
+          border-right-color: @lineColor;
           overflow-y: auto;
           &::-webkit-scrollbar {
             display: none;
@@ -121,7 +122,7 @@
           h4 {
             color: @textColor;
             line-height: 34px;
-            border-bottom: 1px solid #6b6b6b;
+            border-bottom: 1px solid @lineColor;
           }
           ul {
             padding: 0;
