@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 08:43:55
+ * @Last Modified time: 2021-07-20 13:21:36
  */
 import {
   SIDE_MENU,
@@ -135,6 +135,9 @@ export const createStarMenu =
       payload: data,
     });
   };
+
+// 设置收藏菜单
+export const setStarMenu = (payload) => ({ type: STAR_MENU, payload });
 
 // 退出登录
 export const createSignOut =
