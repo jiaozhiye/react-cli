@@ -66,7 +66,7 @@ class ThemeColor extends Component<any> {
       localStorage.setItem('theme_color', color);
     });
     this.props.iframeMenus.forEach((x) => {
-      const $iframe: HTMLIFrameElement = document.getElementById(x.key) as HTMLIFrameElement;
+      const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
       $iframe.contentWindow?.postMessage({ type: 'theme_color', data: color }, '*');
     });

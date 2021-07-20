@@ -78,7 +78,7 @@ const initState: IState = {
   sideMenus: [], // 侧栏菜单数据
   starMenus: [], // 收藏菜单
   tabMenus: [{ path: '/home', title: t('app.global.dashboard') }], // 顶部选项卡菜单数据
-  flattenMenus: [], // 战平后的三级菜单列表
+  flattenMenus: [], // 展平后的三级菜单列表
   iframeMenus: [], // iframe 列表
   keepAliveList: [], // 路由组件缓存列表
   dict: {}, // 数据字典

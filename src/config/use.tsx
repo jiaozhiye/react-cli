@@ -132,7 +132,7 @@ export default connect(
   (state: AppState) => ({
     size: state.app.size,
     lang: state.app.lang,
-    theme_color: state.app.themeColor,
+    themeColor: state.app.themeColor,
   }),
   {
     createDictData,
