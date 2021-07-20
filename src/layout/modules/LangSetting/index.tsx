@@ -9,6 +9,7 @@ import { Menu, Dropdown } from 'antd';
 import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';
 import { changeLocale } from '@/locale';
+import { AppState } from '@/store/reducers/app';
 
 import './index.less';
 
@@ -55,7 +56,7 @@ class LangSetting extends Component<any> {
 }
 
 export default connect(
-  (state: any) => ({
+  (state: AppState) => ({
     lang: state.app.lang,
     iframeMenus: state.app.iframeMenus,
   }),

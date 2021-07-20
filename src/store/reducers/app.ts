@@ -21,25 +21,45 @@ import { t } from '@/locale';
 import config from '@/config';
 import { ComponentSize, Dictionary, ThemeType } from '@/utils/types';
 
+export type ISideMenu = {
+  key: string;
+  title: string;
+  children?: Array<ISideMenu>
+}
+
+type ITabNav = {
+  path: string;
+  title: string;
+}
+
+type IKeepAlive = {
+  key: string;
+  value: string;
+}
+
 type IState = {
   size: ComponentSize;
   lang: string;
   themeType: ThemeType;
   themeColor: string;
-  sideMenus: any[];
-  starMenus: any[];
-  tabMenus: any[];
-  flattenMenus: any[];
-  iframeMenus: any[];
-  keepAliveList: any[];
+  sideMenus: ISideMenu[];
+  starMenus: ISideMenu[];
+  tabMenus: ITabNav[];
+  flattenMenus: Omit<ISideMenu, 'children'>[];
+  iframeMenus: IKeepAlive[];
+  keepAliveList: IKeepAlive[];
   dict: Record<string, Dictionary[] | number>;
 };
 
-const createFlattenMenus = (list: any[]) => {
-  const res: any[] = [];
+export type AppState = {
+  app: IState
+}
+
+const createFlattenMenus = <T extends ISideMenu>(list: T[]): T[] => {
+  const res: T[] = [];
   list.forEach((x) => {
     if (Array.isArray(x.children)) {
-      res.push(...createFlattenMenus(x.children));
+      res.push(...createFlattenMenus(x.children as T[]));
     } else {
       res.push(x);
     }
@@ -51,10 +71,10 @@ const createFlattenMenus = (list: any[]) => {
  * 初始化 state
  */
 const initState: IState = {
-  size: (localStorage.getItem('size') as ComponentSize) || config.size, // 组件尺寸
+  size: (localStorage.getItem('size') || config.size) as ComponentSize, // 组件尺寸
   lang: localStorage.getItem('lang') || config.lang, // 多语言
-  themeType: (localStorage.getItem('theme_type') as ThemeType) || config.themeType, // 主题模式
-  themeColor: localStorage.getItem('theme_color') || (process.env.THEME_COLOR as string), // 主题颜色
+  themeType: (localStorage.getItem('theme_type') || config.themeType) as ThemeType, // 主题模式
+  themeColor: localStorage.getItem('theme_color') || process.env.THEME_COLOR || '', // 主题颜色
   sideMenus: [], // 侧栏菜单数据
   starMenus: [], // 收藏菜单
   tabMenus: [{ path: '/home', title: t('app.global.dashboard') }], // 顶部选项卡菜单数据

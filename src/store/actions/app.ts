@@ -22,6 +22,7 @@ import { t } from '@/locale';
 import routes from '@/router/config';
 import localDict from '@/utils/localDict';
 import { Dictionary } from '@/utils/types';
+import { ISideMenu } from '@/store/reducers/app'
 
 // 设置导航菜单
 export const createMenuList =
@@ -35,7 +36,7 @@ export const createMenuList =
       return true;
     }
 
-    let data = [{ title: t('app.global.dashboard'), key: '/home', hideInMenu: true }];
+    let data: Array<ISideMenu & { hideInMenu: boolean }> = [{ title: t('app.global.dashboard'), key: '/home', hideInMenu: true }];
     if (process.env.MOCK_DATA === 'true') {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const res = require('@/mock/sideMenu').default;
@@ -118,7 +119,7 @@ export const createStarMenu =
       app: { flattenMenus },
     } = getState();
 
-    let data = [];
+    let data: ISideMenu[] = [];
     if (process.env.MOCK_DATA === 'true') {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const res = require('@/mock/starMenu').default;

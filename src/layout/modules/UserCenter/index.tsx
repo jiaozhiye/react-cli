@@ -11,6 +11,7 @@ import { UserOutlined, SettingOutlined, ClearOutlined, LogoutOutlined } from '@a
 import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';
 import { t } from '@/locale';
+import { AppState } from '@/store/reducers/app';
 
 import './index.less';
 
@@ -53,6 +54,6 @@ class UserCenter extends Component<any> {
   }
 }
 
-export default connect((state: any) => ({ lang: state.app.lang }), {
+export default connect((state: AppState) => ({ lang: state.app.lang }), {
   createLocaleLang,
 })(UserCenter);

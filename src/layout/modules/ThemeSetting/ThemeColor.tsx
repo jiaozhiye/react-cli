@@ -9,6 +9,8 @@ import { CheckOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { createThemeColor } from '@/store/actions';
 import { t } from '@/locale';
+import { AppState } from '@/store/reducers/app';
+
 // 自定义主题
 import client from 'webpack-custom-theme/client';
 import { generate } from '@ant-design/colors';
@@ -92,7 +94,7 @@ class ThemeColor extends Component<any> {
 }
 
 export default connect(
-  (state: any) => ({
+  (state: AppState) => ({
     themeColor: state.app.themeColor,
     iframeMenus: state.app.iframeMenus,
   }),

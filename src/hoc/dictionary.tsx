@@ -7,7 +7,9 @@
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import { connect } from 'react-redux';
+import { AppState } from '@/store/reducers/app';
 import { Dictionary, Nullable } from '@/utils/types';
+
 
 export default (WrappedComponent): any => {
   class C extends Component<any> {
@@ -73,7 +75,7 @@ export default (WrappedComponent): any => {
   }
 
   return connect(
-    (state: any) => ({
+    (state: AppState) => ({
       dict: state.app.dict,
     }),
     {}

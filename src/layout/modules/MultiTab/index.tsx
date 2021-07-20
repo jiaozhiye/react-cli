@@ -13,8 +13,10 @@ import { t } from '@/locale';
 
 import { connect } from 'react-redux';
 import { createTabMenu, createIframeMenu } from '@/store/actions';
+import { AppState } from '@/store/reducers/app';
 
 import { Tabs } from 'antd';
+
 import './index.less';
 
 const { TabPane } = Tabs;
@@ -140,7 +142,7 @@ class MultiTab extends Component<any> {
 }
 
 export default connect(
-  (state: any) => ({
+  (state: AppState) => ({
     tabMenus: state.app.tabMenus,
   }),
   {

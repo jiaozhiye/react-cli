@@ -6,7 +6,7 @@
  */
 const files = (require as any).context('../modules', true, /\.route\.js$/);
 
-let configRouters: Array<Record<string, any>> = [];
+let configRouters: Record<string, any>[] = [];
 
 files.keys().forEach((key: string): void => {
   configRouters = configRouters.concat(files(key).default);

@@ -13,6 +13,7 @@ import { t } from '@/locale';
 
 import { connect } from 'react-redux';
 import { createStarMenu } from '@/store/actions';
+import { AppState } from '@/store/reducers/app';
 
 import './index.less';
 
@@ -47,7 +48,7 @@ class StarNav extends Component<any> {
 }
 
 export default connect(
-  (state: any) => ({
+  (state: AppState) => ({
     starMenus: state.app.starMenus,
   }),
   {

@@ -18,8 +18,9 @@ import {
   createComponentSize,
 } from '@/store/actions';
 import { isIframe } from '@/router/index';
-import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
 import { changeLocale } from '@/locale';
+import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
+import { AppState } from '@/store/reducers/app'
 
 import zhCN from 'antd/lib/locale/zh_CN';
 import enGB from 'antd/lib/locale/en_GB';
@@ -50,7 +51,7 @@ class UseConfig extends Component<any> {
   componentDidMount() {
     this.getDictData();
     const localTheme = localStorage.getItem('theme_color');
-    if (localTheme && localTheme !== this.props.theme_color) {
+    if (localTheme && localTheme !== this.props.themeColor) {
       this.themeColorChangeHandle(localTheme);
     }
     window.addEventListener('message', this.messageEventHandle, false);
@@ -112,7 +113,7 @@ class UseConfig extends Component<any> {
     }
   };
 
-  render() {
+  render(): React.ReactElement {
     const { pathname } = this.props.location;
     return (
       <ConfigProvider locale={messages[this.props.lang]} componentSize={this.props.size}>
@@ -127,10 +128,10 @@ class UseConfig extends Component<any> {
 }
 
 export default connect(
-  (state: any) => ({
+  (state: AppState) => ({
     size: state.app.size,
     lang: state.app.lang,
-    theme_color: state.app.theme_color,
+    theme_color: state.app.themeColor,
   }),
   {
     createDictData,

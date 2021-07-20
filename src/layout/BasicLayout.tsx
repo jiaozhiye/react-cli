@@ -20,6 +20,7 @@ import MultiTab from './modules/MultiTab';
 import Actions from './modules/Actions';
 
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { AppState } from '@/store/reducers/app';
 
 import './index.less';
 
@@ -94,7 +95,7 @@ class BasicLayout extends Component<any> {
 }
 
 export default connect(
-  (state: any) => ({
+  (state: AppState) => ({
     size: state.app.size,
     iframeMenus: state.app.iframeMenus,
   }),

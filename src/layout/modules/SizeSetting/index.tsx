@@ -9,6 +9,7 @@ import { Menu, Dropdown } from 'antd';
 import { connect } from 'react-redux';
 import { createComponentSize } from '@/store/actions';
 import { t } from '@/locale';
+import { AppState } from '@/store/reducers/app';
 
 import './index.less';
 
@@ -66,7 +67,7 @@ class SizeSetting extends Component<any> {
 }
 
 export default connect(
-  (state: any) => ({
+  (state: AppState) => ({
     size: state.app.size,
     iframeMenus: state.app.iframeMenus,
   }),

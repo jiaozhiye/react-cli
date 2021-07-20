@@ -10,6 +10,7 @@ import { Spin } from 'antd';
 import { matchRoutes } from '@/router';
 import { nextTick, Message } from '@/utils';
 import { t } from '@/locale';
+import { AppState } from '@/store/reducers/app';
 
 import { connect } from 'react-redux';
 import { createMenuList, createTabMenu, createIframeMenu, createSignOut } from '@/store/actions';
@@ -90,7 +91,7 @@ class ProvideAuth extends Component<any> {
     return this.props.flattenMenus.findIndex((x) => x.key === path) !== -1;
   }
 
-  render() {
+  render(): React.ReactElement {
     const { route, whiteList, whiteAuth } = this.props;
     const { menuLoaded } = this.state;
     const { path } = this.props.route;
@@ -110,7 +111,7 @@ class ProvideAuth extends Component<any> {
 }
 
 export default connect(
-  (state: any) => ({
+  (state: AppState) => ({
     tabMenus: state.app.tabMenus,
     flattenMenus: state.app.flattenMenus,
   }),

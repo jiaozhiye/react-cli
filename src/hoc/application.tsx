@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createIframeMenu } from '@/store/actions';
 import store from '@/store';
+import { AppState } from '@/store/reducers/app';
 
 export default (WrappedComponent): any => {
   @withRouter
@@ -61,7 +62,7 @@ export default (WrappedComponent): any => {
   }
 
   return connect(
-    (state: any) => ({
+    (state: AppState) => ({
       size: state.app.size,
       lang: state.app.lang,
     }),

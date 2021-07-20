@@ -10,6 +10,7 @@ import { CheckOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { createThemeType } from '@/store/actions';
 import { t } from '@/locale';
+import { AppState } from '@/store/reducers/app';
 
 import './index.less';
 
@@ -49,6 +50,6 @@ class ThemeColor extends Component<any> {
   }
 }
 
-export default connect((state: any) => ({ themeType: state.app.themeType }), {
+export default connect((state: AppState) => ({ themeType: state.app.themeType }), {
   createThemeType,
 })(ThemeColor);

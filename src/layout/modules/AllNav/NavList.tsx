@@ -15,6 +15,7 @@ import { setStarMenu } from '@/store/actions';
 import { t } from '@/locale';
 import { sleep } from '@/utils';
 import { setStarMenuList } from '@/api/application';
+import { AppState } from '@/store/reducers/app';
 
 import { Select, Tabs } from 'antd';
 import { StarOutlined, StarFilled } from '@ant-design/icons';
@@ -145,7 +146,7 @@ class NavList extends Component<any> {
 }
 
 export default connect(
-  (state: any) => ({
+  (state: AppState) => ({
     sideMenus: state.app.sideMenus,
     starMenus: state.app.starMenus,
     flattenMenus: state.app.flattenMenus,

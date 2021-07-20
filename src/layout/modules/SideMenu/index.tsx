@@ -9,11 +9,13 @@ import { Link, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { connect } from 'react-redux';
+import { AppState } from '@/store/reducers/app';
 
 import { Menu } from 'antd';
-const SubMenu = Menu.SubMenu;
 
 import './index.less';
+
+const SubMenu = Menu.SubMenu;
 
 const getIcon = (icon = '') => {
   if (!icon) return null;
@@ -31,7 +33,7 @@ const conversionPath = (path = '') => {
   return `/${path}`.replace(/\/+/g, '/');
 };
 
-const deepGetPath = (arr: any[], val: string, depth = ''): string[] | undefined => {
+const deepGetPath = (arr, val, depth = '') => {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].key == val) {
       return [depth + (i + 1)];
@@ -111,4 +113,4 @@ class SideMenu extends Component<any> {
   }
 }
 
-export default connect((state: any) => ({ sideMenus: state.app.sideMenus }), {})(SideMenu);
+export default connect((state: AppState) => ({ sideMenus: state.app.sideMenus }), {})(SideMenu);
