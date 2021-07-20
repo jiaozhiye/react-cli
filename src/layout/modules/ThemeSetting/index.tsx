@@ -5,7 +5,8 @@
  * @Last Modified time: 2021-07-14 19:04:21
  */
 import React, { Component } from 'react';
-import { Menu, Dropdown, Switch } from 'antd';
+import classNames from 'classnames';
+import { Menu, Dropdown } from 'antd';
 
 import DarkTheme from './DarkTheme';
 import ThemeColor from './ThemeColor';
@@ -14,7 +15,6 @@ import './index.less';
 
 class ThemeSetting extends Component<any> {
   renderMenus() {
-    const { lang } = this.props;
     return (
       <Menu>
         <Menu.Item key="1">
@@ -28,7 +28,7 @@ class ThemeSetting extends Component<any> {
 
   render(): React.ReactElement {
     return (
-      <div className="app-theme-setting">
+      <div className={classNames('app-theme-setting')}>
         <Dropdown
           overlay={this.renderMenus()}
           overlayClassName="theme-setting-popper"
@@ -36,7 +36,7 @@ class ThemeSetting extends Component<any> {
           trigger={['click']}
         >
           <span>
-            <i className="iconfont icon-skin" />
+            <i className={classNames('iconfont', 'icon-skin')} />
           </span>
         </Dropdown>
       </div>
