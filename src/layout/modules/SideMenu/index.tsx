@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 08:54:48
+ * @Last Modified time: 2021-07-20 08:55:58
  */
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
@@ -102,7 +102,7 @@ class SideMenu extends Component<any> {
           mode="inline"
           theme="dark"
           selectedKeys={[pathname]}
-          openKeys={this.getOpenKeys(pathname)}
+          defaultOpenKeys={this.getOpenKeys(pathname)}
         >
           {this.createMenuTree(sideMenus)}
         </Menu>
