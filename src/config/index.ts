@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 12:43:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-19 10:48:04
+ * @Last Modified time: 2021-07-20 10:54:40
  */
 import { ComponentSize, Language, ThemeType } from '@/utils/types';
 import { t } from '@/locale';
@@ -15,6 +15,7 @@ type IConfig = {
   themeType: ThemeType;
   prefix: string;
   useIframe: boolean;
+  sideWidth: number[];
   maxCacheNum: number;
   showBreadcrumb: boolean;
   showScreenFull: boolean;
@@ -34,6 +35,7 @@ export default {
   themeType: 'light', // 主题模式
   prefix: '/api', // ajax 请求前缀
   useIframe: true, // 是否使用 iframe 承载路由页面
+  sideWidth: [200, 60], // 侧栏导航宽度
   maxCacheNum: 10, // 路由组件最大缓存数量
   showBreadcrumb: false, // 是否显示面包屑
   showScreenFull: true, // 是否显示全屏按钮

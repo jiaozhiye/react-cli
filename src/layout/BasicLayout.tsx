@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 08:31:31
+ * @Last Modified time: 2021-07-20 10:56:20
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { renderRoutes } from '../router';
 import { Layout } from 'antd';
 import { matchRoutes } from '@/router';
+import config from '@/config';
 import Watermark from './modules/Watermark';
 import Logo from './modules/Logo';
 import AllNav from './modules/AllNav';
@@ -60,9 +61,15 @@ class BasicLayout extends Component<any> {
     };
     return (
       <Layout className={classNames(cls)}>
-        <Sider trigger={null} collapsible collapsed={collapsed} collapsedWidth={60}>
+        <Sider
+          trigger={null}
+          collapsible
+          collapsed={collapsed}
+          width={config.sideWidth[0]}
+          collapsedWidth={config.sideWidth[1]}
+        >
           <Logo collapsed={collapsed} />
-          <AllNav />
+          <AllNav collapsed={collapsed} />
           <StarNav />
           <SideMenu />
         </Sider>

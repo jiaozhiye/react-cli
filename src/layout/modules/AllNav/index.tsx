@@ -2,29 +2,43 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-19 16:46:49
+ * @Last Modified time: 2021-07-20 11:02:03
  */
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Menu } from 'antd';
 import { AppstoreFilled } from '@ant-design/icons';
 import { t } from '@/locale';
 
+import NavList from './NavList';
+
 import './index.less';
 
 class AllNav extends Component<any> {
-  clickHandle = () => {
-    console.log(1234);
+  static propTypes = {
+    collapsed: PropTypes.bool,
+  };
+
+  state = {
+    visible: false,
+  };
+
+  visibleChange = () => {
+    this.setState({ visible: !this.state.visible });
   };
 
   render(): React.ReactElement {
+    const { collapsed } = this.props;
+    const { visible } = this.state;
     return (
       <div className={classNames('app-all-nav')}>
         <Menu mode="inline" theme="dark" selectable={false}>
-          <Menu.Item key="all-nav" icon={<AppstoreFilled />} onClick={this.clickHandle}>
+          <Menu.Item key="all-nav" icon={<AppstoreFilled />} onClick={this.visibleChange}>
             {t('app.sidebar.allNavTitle')}
           </Menu.Item>
         </Menu>
+        <NavList visible={visible} collapsed={collapsed} onChange={this.visibleChange} />
       </div>
     );
   }
