@@ -1,0 +1,28 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2021-07-20 15:00:53
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2021-07-20 15:04:15
+ */
+.app-nomatch {
+  display: flex;
+  align-items: center;
+  height: calc(100vh - 70px);
+  background: url(../../assets/img/not-found.svg) 30% 45% no-repeat;
+  .container {
+    flex: 1;
+    margin: 0;
+    margin-left: 54%;
+    h2 {
+      margin-bottom: 20px;
+      color: @textColor;
+      font-weight: 600;
+      font-size: 72px;
+    }
+    .text {
+      margin-bottom: 16px;
+      font-size: 20px;
+      color: @textColorSecondary;
+    }
+  }
+}

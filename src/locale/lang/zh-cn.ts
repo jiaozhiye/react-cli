@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 13:18:02
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-19 12:07:19
+ * @Last Modified time: 2021-07-20 14:58:18
  */
 export default {
   name: 'zh-cn',
@@ -82,7 +82,6 @@ export default {
       title: '提示信息',
       confirm: '确认进行此操作？',
       maxCache: '最多支持 {total} 个菜单项！',
-      maxStar: '最多只能收藏 {total} 个菜单！',
     },
     button: {
       confirm: '确定',

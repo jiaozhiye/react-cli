@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-19 12:08:17
+ * @Last Modified time: 2021-07-20 14:50:37
  */
 import React, { Component } from 'react';
 import { Menu, Dropdown } from 'antd';
@@ -20,7 +20,6 @@ class UserCenter extends Component<any> {
   };
 
   renderMenus() {
-    const { lang } = this.props;
     return (
       <Menu>
         <Menu.Item key="1" icon={<UserOutlined />}>
