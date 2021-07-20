@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-07 13:10:00
+ * @Last Modified time: 2021-07-20 15:41:19
  */
 'use strict';
 
@@ -57,7 +57,10 @@ exports.cssLoaders = function (options) {
     loader: 'css-loader',
     options: {
       importLoaders: 1 + 1,
-      esModule: false,
+      modules: {
+        auto: /\.module\.\w+$/,
+        localIdentName: '[local]--[hash:base64:5]',
+      },
       sourceMap: options.sourceMap,
     },
   };
