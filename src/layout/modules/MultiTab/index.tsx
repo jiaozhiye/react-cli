@@ -117,19 +117,19 @@ class MultiTab extends Component<any> {
             />
           ))}
         </Tabs>
-        <ContextMenu id={CTX_MENU_ID} className="ant-dropdown-menu">
-          <MenuItem className="ant-dropdown-menu-item" onClick={() => this.refreshTagHandle()}>
+        <ContextMenu id={CTX_MENU_ID} className={classNames('ant-dropdown-menu')}>
+          <MenuItem className={classNames('ant-dropdown-menu-item')} onClick={() => this.refreshTagHandle()}>
             {t('app.multiTab.refresh')}
           </MenuItem>
-          <MenuItem className="ant-dropdown-menu-item" onClick={() => this.closeTagHandle('right')}>
+          <MenuItem className={classNames('ant-dropdown-menu-item')} onClick={() => this.closeTagHandle('right')}>
             {t('app.multiTab.closeRight')}
           </MenuItem>
-          <MenuItem className="ant-dropdown-menu-item" onClick={() => this.closeTagHandle('left')}>
+          <MenuItem className={classNames('ant-dropdown-menu-item')} onClick={() => this.closeTagHandle('left')}>
             {t('app.multiTab.closeLeft')}
           </MenuItem>
           {tabMenus.length > 1 && (
             <MenuItem
-              className="ant-dropdown-menu-item"
+              className={classNames('ant-dropdown-menu-item')}
               onClick={() => this.closeTagHandle('other')}
             >
               {t('app.multiTab.closeOthers')}

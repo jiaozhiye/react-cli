@@ -5,6 +5,7 @@
  * @Last Modified time: 2021-07-15 21:01:22
  */
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { Menu, Dropdown } from 'antd';
 import { connect } from 'react-redux';
 import { createComponentSize } from '@/store/actions';
@@ -55,10 +56,10 @@ class SizeSetting extends Component<any> {
 
   render(): React.ReactElement {
     return (
-      <div className="app-size-setting">
+      <div className={classNames('app-size-setting')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
           <span>
-            <i className="iconfont icon-font-size" />
+            <i className={classNames('iconfont', 'icon-font-size')} />
           </span>
         </Dropdown>
       </div>

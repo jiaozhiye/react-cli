@@ -5,6 +5,7 @@
  * @Last Modified time: 2021-07-15 08:02:33
  */
 import React, { Component } from 'react';
+import classNames from 'classnames';
 
 import SizeSetting from '../SizeSetting';
 import LangSetting from '../LangSetting';
@@ -19,7 +20,7 @@ import './index.less';
 class Actions extends Component {
   render(): React.ReactElement {
     return (
-      <div className="app-actions">
+      <div className={classNames('app-actions')}>
         <ScreenFull />
         <HelperDoc />
         <SizeSetting />

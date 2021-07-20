@@ -23,15 +23,15 @@ class ThemeColor extends Component<any> {
   render(): React.ReactElement {
     const { themeType } = this.props;
     return (
-      <div className={'themeColor'}>
-        <h5 className="title">{t('app.theme.type')}</h5>
+      <div className={classNames('themeColor')}>
+        <h5 className={classNames('title')}>{t('app.theme.type')}</h5>
         <div style={{ display: 'flex' }}>
           <div
             className={classNames('color-type-item', 'item-light')}
             onClick={() => this.themeTypeChangeHandle('light')}
           >
             <CheckOutlined
-              className={'selectIcon'}
+              className={classNames('selectIcon')}
               style={{ display: themeType === 'light' ? '' : 'none' }}
             />
           </div>
@@ -40,7 +40,7 @@ class ThemeColor extends Component<any> {
             onClick={() => this.themeTypeChangeHandle('dark')}
           >
             <CheckOutlined
-              className={'selectIcon'}
+              className={classNames('selectIcon')}
               style={{ display: themeType === 'dark' ? '' : 'none' }}
             />
           </div>

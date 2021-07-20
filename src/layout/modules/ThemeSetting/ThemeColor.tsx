@@ -5,6 +5,7 @@
  * @Last Modified time: 2021-07-15 21:33:10
  */
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { CheckOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { createThemeColor } from '@/store/actions';
@@ -75,13 +76,13 @@ class ThemeColor extends Component<any> {
     const { themeColor } = this.props;
     const { colorList } = this.state;
     return (
-      <div className={'themeColor'}>
-        <h5 className="title">{t('app.theme.color')}</h5>
+      <div className={classNames('themeColor')}>
+        <h5 className={classNames('title')}>{t('app.theme.color')}</h5>
         <div>
           {colorList.map(({ color }) => (
             <Tag
               key={color.slice(1)}
-              className={'color-block'}
+              className={classNames('color-block')}
               color={color}
               check={themeColor === color}
               onClick={() => this.themeColorChangeHandle(color)}

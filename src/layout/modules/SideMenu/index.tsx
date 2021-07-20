@@ -20,7 +20,7 @@ const SubMenu = Menu.SubMenu;
 const getIcon = (icon = '') => {
   if (!icon) return null;
   return (
-    <span className="anticon">
+    <span className={classNames('anticon')}>
       <i className={classNames(`iconfont`, icon)} />
     </span>
   );

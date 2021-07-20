@@ -42,7 +42,7 @@ class BasicLayout extends Component<any> {
     return iframeMenus.map((x) => (
       <div
         key={x.key}
-        className="iframe-wrapper"
+        className={classNames('iframe-wrapper')}
         style={{ display: route.path === x.key ? 'block' : 'none' }}
       >
         <iframe id={x.key} src={x.value} width="100%" height="100%" frameBorder="0" />
@@ -77,7 +77,7 @@ class BasicLayout extends Component<any> {
         <Layout>
           <Header>
             {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-              className: 'trigger',
+              className: classNames('trigger'),
               onClick: this.toggle,
             })}
             <MultiTab />

@@ -5,6 +5,7 @@
  * @Last Modified time: 2021-07-15 08:04:38
  */
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { Menu, Dropdown } from 'antd';
 
 import './index.less';
@@ -21,10 +22,10 @@ class HelperDoc extends Component<any> {
 
   render(): React.ReactElement {
     return (
-      <div className="app-helper-doc">
+      <div className={classNames('app-helper-doc')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
           <span>
-            <i className="iconfont icon-question-circle" />
+            <i className={classNames('iconfont', 'icon-question-circle')} />
           </span>
         </Dropdown>
       </div>

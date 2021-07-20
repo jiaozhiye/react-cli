@@ -5,6 +5,7 @@
  * @Last Modified time: 2021-07-20 14:50:37
  */
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { Menu, Dropdown } from 'antd';
 import { Avatar } from 'antd';
 import { UserOutlined, SettingOutlined, ClearOutlined, LogoutOutlined } from '@ant-design/icons';
@@ -42,7 +43,7 @@ class UserCenter extends Component<any> {
 
   render(): React.ReactElement {
     return (
-      <div className="app-user-center">
+      <div className={classNames('app-user-center')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
           <span>
             <Avatar size={26} src={this.state.avatarImg} />

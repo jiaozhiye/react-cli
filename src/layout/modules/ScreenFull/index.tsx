@@ -50,8 +50,8 @@ class ScreenFull extends Component<any> {
   render(): React.ReactElement {
     const cls = [`iconfont`, this.state.isFullscreen ? `icon-fullscreen-exit` : `icon-fullscreen`];
     return (
-      <div className="app-screen-full" onClick={this.clickHandle}>
-        <span className="ant-dropdown-trigger">
+      <div className={classNames('app-screen-full')} onClick={this.clickHandle}>
+        <span className={classNames('ant-dropdown-trigger')}>
           <i className={classNames(cls)} />
         </span>
       </div>

@@ -5,6 +5,7 @@
  * @Last Modified time: 2021-07-18 18:27:00
  */
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { notification, message, ConfigProvider } from 'antd';
@@ -118,7 +119,7 @@ class UseConfig extends Component<any> {
     return (
       <ConfigProvider locale={messages[this.props.lang]} componentSize={this.props.size}>
         {isIframe(pathname) ? (
-          <section className="iframe">{this.props.children}</section>
+          <section className={classNames('iframe')}>{this.props.children}</section>
         ) : (
           this.props.children
         )}

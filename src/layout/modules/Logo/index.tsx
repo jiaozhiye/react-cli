@@ -6,8 +6,8 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 import logo1 from './assets/logo1.svg';
 import logo2 from './assets/logo2.svg';
@@ -22,8 +22,8 @@ class Logo extends Component<any> {
   render(): React.ReactElement {
     const { collapsed } = this.props;
     return (
-      <div className="app-logo">
-        <Link to="/home" className="link">
+      <div className={classNames('app-logo')}>
+        <Link to="/home" className={classNames('link')}>
           <img
             className={classNames('logo', !collapsed ? 'logo1' : 'logo2')}
             src={!collapsed ? logo1 : logo2}

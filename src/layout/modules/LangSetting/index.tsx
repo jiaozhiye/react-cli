@@ -5,6 +5,7 @@
  * @Last Modified time: 2021-07-15 08:24:36
  */
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { Menu, Dropdown } from 'antd';
 import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';
@@ -44,10 +45,10 @@ class LangSetting extends Component<any> {
 
   render(): React.ReactElement {
     return (
-      <div className="app-lang-setting">
+      <div className={classNames('app-lang-setting')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
           <span>
-            <i className="iconfont icon-earth" />
+            <i className={classNames('iconfont', 'icon-earth')} />
           </span>
         </Dropdown>
       </div>

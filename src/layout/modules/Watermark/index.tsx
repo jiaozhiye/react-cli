@@ -5,6 +5,7 @@
  * @Last Modified time: 2021-07-19 15:50:41
  */
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import appTool from '@/hoc/application';
 
 import './index.less';
@@ -19,7 +20,7 @@ enum distance {
 class Watermark extends Component<any> {
   render(): React.ReactElement {
     const { size } = this.props;
-    return <div className="app-watermark" style={{ top: `${distance[size]}px` }} />;
+    return <div className={classNames('app-watermark')} style={{ top: `${distance[size]}px` }} />;
   }
 }
 

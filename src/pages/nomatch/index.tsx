@@ -16,7 +16,7 @@ class Nomatch extends Component {
       <div className={classNames('app-nomatch')}>
         <div className={classNames('container')}>
           <h2>404</h2>
-          <div className="text">{t('app.global.noMatch')}</div>
+          <div className={classNames('text')}>{t('app.global.noMatch')}</div>
         </div>
       </div>
     );

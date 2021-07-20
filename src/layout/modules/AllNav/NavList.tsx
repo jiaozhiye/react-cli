@@ -86,8 +86,8 @@ class NavList extends Component<any> {
           className={classNames('nav-list-container', visible ? 'show' : '')}
           style={{ left: !collapsed ? `${config.sideWidth[0]}px` : `${config.sideWidth[1]}px` }}
         >
-          <div className="wrapper">
-            <div className="search">
+          <div className={classNames('wrapper')}>
+            <div className={classNames('search')}>
               <Select
                 value={searchValue}
                 size="middle"
@@ -107,7 +107,7 @@ class NavList extends Component<any> {
                 ))}
               </Select>
             </div>
-            <div className="main">
+            <div className={classNames('main')}>
               <Tabs tabBarGutter={0} tabPosition="right" tabBarStyle={{ width: '150px' }}>
                 {sideMenus.map((item, index) => (
                   <TabPane key={index} tab={item.title}>
@@ -121,7 +121,7 @@ class NavList extends Component<any> {
                               return (
                                 <li key={i}>
                                   {React.createElement(actived ? StarFilled : StarOutlined, {
-                                    className: 'icon',
+                                    className: classNames('icon'),
                                     onClick: () => this.starChange(actived, x.key, x.title),
                                   })}
                                   <Link to={x.key} target={x.target} onClick={this.clickHandle}>

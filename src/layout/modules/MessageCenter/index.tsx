@@ -5,6 +5,7 @@
  * @Last Modified time: 2021-07-14 16:58:22
  */
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { Menu, Dropdown } from 'antd';
 
 import './index.less';
@@ -21,10 +22,10 @@ class MessageCenter extends Component<any> {
 
   render(): React.ReactElement {
     return (
-      <div className="app-theme-setting">
+      <div className={classNames('app-theme-setting')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
           <span>
-            <i className="iconfont icon-bell" />
+            <i className={classNames('iconfont', 'icon-bell')} />
           </span>
         </Dropdown>
       </div>
