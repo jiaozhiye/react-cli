@@ -2,12 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 17:09:20
+ * @Last Modified time: 2021-07-20 08:46:16
  */
 import { uniqBy } from 'lodash-es';
 import {
   SIDE_MENU,
   DICT_DATA,
+  STAR_MENU,
   TAB_MENU,
   IFRAME_MENU,
   COMP_SIZE,
@@ -26,6 +27,7 @@ type IState = {
   themeType: ThemeType;
   themeColor: string;
   sideMenus: any[];
+  starMenus: any[];
   tabMenus: any[];
   flattenMenus: any[];
   iframeMenus: any[];
@@ -54,6 +56,7 @@ const initState: IState = {
   themeType: (localStorage.getItem('theme_type') as ThemeType) || config.themeType, // 主题模式
   themeColor: localStorage.getItem('theme_color') || (process.env.THEME_COLOR as string), // 主题颜色
   sideMenus: [], // 侧栏菜单数据
+  starMenus: [], // 收藏菜单
   tabMenus: [{ path: '/home', title: t('app.global.dashboard') }], // 顶部选项卡菜单数据
   flattenMenus: [], // 战平后的三级菜单列表
   iframeMenus: [], // iframe 列表
@@ -93,6 +96,13 @@ const setIframeMenus = (state, payload, behavior) => {
 const setDictData = (state, payload) => {
   return Object.assign({}, state, {
     dict: payload,
+  });
+};
+
+// 设置搜藏菜单
+const setStarMenus = (state, payload) => {
+  return Object.assign({}, state, {
+    starMenus: payload,
   });
 };
 
@@ -138,6 +148,8 @@ export const appReducer = (state = initState, action) => {
       return setSideMenus(state, action.payload);
     case DICT_DATA:
       return setDictData(state, action.payload);
+    case STAR_MENU:
+      return setStarMenus(state, action.payload);
     case TAB_MENU:
       return setTabMenus(state, action.payload, action.behavior);
     case IFRAME_MENU:

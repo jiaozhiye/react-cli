@@ -2,11 +2,12 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-19 13:19:34
+ * @Last Modified time: 2021-07-20 08:43:55
  */
 import {
   SIDE_MENU,
   DICT_DATA,
+  STAR_MENU,
   TAB_MENU,
   IFRAME_MENU,
   COMP_SIZE,
@@ -15,7 +16,7 @@ import {
   THEME_TYPE,
   SIGN_OUT,
 } from '../types';
-import { getNavList, getAllDict } from '@/api/application';
+import { getMenuList, getDictList, getStarMenuList } from '@/api/application';
 import { removeToken } from '@/utils/cookies';
 import { t } from '@/locale';
 import routes from '@/router/config';
@@ -41,7 +42,7 @@ export const createMenuList =
       data = res;
     } else {
       try {
-        const res: any = await getNavList({});
+        const res: any = await getMenuList({});
         if (res.code === 200) {
           data = Array.isArray(res.data) && res.data.length ? res.data : data;
         }
@@ -90,7 +91,7 @@ export const createDictData =
     if (process.env.MOCK_DATA === 'true') {
       data = { _t: +new Date(), ...localDict };
     } else {
-      const res: any = await getAllDict({});
+      const res: any = await getDictList({});
       if (res.code === 200) {
         // 数据字典规则：如果有重复的 Code，服务端覆盖客户端
         data = {
@@ -105,6 +106,32 @@ export const createDictData =
 
     dispatch({
       type: DICT_DATA,
+      payload: data,
+    });
+  };
+
+// 获取收藏菜单
+export const createStarMenu =
+  () =>
+  async (dispatch, getState): Promise<void> => {
+    const {
+      app: { flattenMenus },
+    } = getState();
+
+    let data = [];
+    if (process.env.MOCK_DATA === 'true') {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      const res = require('@/mock/starMenu').default;
+      data = res;
+    } else {
+      const res: any = await getStarMenuList({});
+      if (res.code === 200) {
+        data = res.data?.filter((x) => flattenMenus.some((k) => k.key === x.key)) ?? [];
+      }
+    }
+
+    dispatch({
+      type: STAR_MENU,
       payload: data,
     });
   };

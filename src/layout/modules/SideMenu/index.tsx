@@ -2,10 +2,9 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-19 16:35:58
+ * @Last Modified time: 2021-07-20 08:54:48
  */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Link, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 
@@ -32,10 +31,25 @@ const conversionPath = (path = '') => {
   return `/${path}`.replace(/\/+/g, '/');
 };
 
+const deepGetPath = (arr: any[], val: string, depth = ''): string[] | undefined => {
+  for (let i = 0; i < arr.length; i++) {
+    if (arr[i].key == val) {
+      return [depth + (i + 1)];
+    }
+    if (Array.isArray(arr[i].children)) {
+      const temp = deepGetPath(arr[i].children, val, `${depth + (i + 1)}-`);
+      if (temp) {
+        return [depth + (i + 1), temp].flat();
+      }
+    }
+  }
+};
+
 @withRouter
 class SideMenu extends Component<any> {
   getOpenKeys(path) {
-    return ['1', '1-1']
+    const allOpenKeys = deepGetPath(this.props.sideMenus, path) || [];
+    return allOpenKeys.slice(0, -1);
   }
 
   createMenuTree(arr, depth = '') {
@@ -73,14 +87,15 @@ class SideMenu extends Component<any> {
             </SubMenu>
           );
         }
-        return (
-          <Menu.Item key={path}>{menuItem}</Menu.Item>
-        );
+        return <Menu.Item key={path}>{menuItem}</Menu.Item>;
       });
   }
 
   render(): React.ReactElement {
-    const { sideMenus, location: { pathname } } = this.props;
+    const {
+      sideMenus,
+      location: { pathname },
+    } = this.props;
     return (
       <div className={classNames('app-side-menu')}>
         <Menu
