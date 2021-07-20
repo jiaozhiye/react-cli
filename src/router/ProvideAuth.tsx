@@ -2,13 +2,14 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-19 11:07:42
+ * @Last Modified time: 2021-07-20 14:46:19
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import { Spin } from 'antd';
 import { matchRoutes } from '@/router';
-import { nextTick } from '@/utils';
+import { nextTick, Message } from '@/utils';
+import { t } from '@/locale';
 
 import { connect } from 'react-redux';
 import { createMenuList, createTabMenu, createIframeMenu, createSignOut } from '@/store/actions';
@@ -61,9 +62,14 @@ class ProvideAuth extends Component<any> {
   }
 
   addTabMenus() {
+    const { tabMenus } = this.props;
     const { pathname, search } = this.props.location;
     const { route } = matchRoutes(routes, pathname).pop();
     if (!route.meta?.title) return;
+    // 最大数量判断
+    if (tabMenus.length > config.maxCacheNum) {
+      return Message(t('app.information.maxCache', { total: config.maxCacheNum }), 'warning');
+    }
     // 选项卡菜单
     this.props.createTabMenu({ path: pathname, title: route.meta.title }, 'add');
     // iframe 模式

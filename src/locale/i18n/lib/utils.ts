@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 10:12:36
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-07 10:32:21
+ * @Last Modified time: 2021-07-20 14:45:30
  */
 import React from 'react';
 
@@ -10,7 +10,7 @@ export const replace = (translation, replacements) => {
   if (typeof translation === 'string') {
     let result = translation;
     Object.keys(replacements).forEach((replacement) => {
-      result = result.split(`%{${replacement}}`).join(replacements[replacement] ?? '');
+      result = result.split(`{${replacement}}`).join(replacements[replacement] ?? '');
     });
     return result;
   }
