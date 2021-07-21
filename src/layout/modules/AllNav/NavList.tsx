@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 08:26:41
+ * @Last Modified time: 2021-07-21 09:31:09
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -24,6 +24,10 @@ import './index.less';
 
 const { Option } = Select;
 const { TabPane } = Tabs;
+
+const isHttpLink = (path = '') => {
+  return /^https?:\/\//.test(path);
+};
 
 @appTool
 class NavList extends Component<any> {
@@ -55,7 +59,7 @@ class NavList extends Component<any> {
 
   onChange = async (val) => {
     this.setState({ searchValue: val });
-    this.props.openView(val);
+    !isHttpLink(val) ? this.props.openView(val) : window.open(val);
     await sleep(200);
     this.props.onChange();
   };
@@ -74,6 +78,18 @@ class NavList extends Component<any> {
   async saveStarMenu() {
     if (process.env.MOCK_DATA === 'true') return;
     await setStarMenuList({ starMenus: this.props.starMenus });
+  }
+
+  renderLinkItem(item) {
+    return !isHttpLink(item.key) ? (
+      <Link to={item.key} target={item.target} onClick={this.clickHandle}>
+        <span>{item.title}</span>
+      </Link>
+    ) : (
+      <a href={item.key} target={item.target || '_blank'} onClick={this.clickHandle}>
+        <span>{item.title}</span>
+      </a>
+    );
   }
 
   render(): React.ReactElement {
@@ -128,9 +144,7 @@ class NavList extends Component<any> {
                                     className: classNames('icon'),
                                     onClick: () => this.starChange(actived, x.key, x.title),
                                   })}
-                                  <Link to={x.key} target={x.target} onClick={this.clickHandle}>
-                                    <span>{x.title}</span>
-                                  </Link>
+                                  {this.renderLinkItem(x)}
                                 </li>
                               );
                             })}

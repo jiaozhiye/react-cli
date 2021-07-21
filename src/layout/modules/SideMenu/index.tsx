@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 08:55:58
+ * @Last Modified time: 2021-07-21 09:27:32
  */
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
@@ -24,6 +24,10 @@ const getIcon = (icon = '') => {
       <i className={classNames(`iconfont`, icon)} />
     </span>
   );
+};
+
+const isHttpLink = (path = '') => {
+  return /^https?:\/\//.test(path);
 };
 
 const conversionPath = (path = '') => {
@@ -61,8 +65,7 @@ class SideMenu extends Component<any> {
         const { title, icon, target } = item;
         const path: string = conversionPath(item.key);
         // 判断是否为 http 链接
-        const httpLink = /^https?:\/\//.test(path);
-        const menuItem = !httpLink ? (
+        const menuItem = !isHttpLink(path) ? (
           <Link to={path} target={target}>
             {getIcon(icon)}
             <span>{title}</span>
