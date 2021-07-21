@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 13:44:13
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 12:11:29
+ * @Last Modified time: 2021-07-21 08:31:17
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -41,11 +41,6 @@ class MultiTab extends Component<any> {
     return tabMenus.findIndex((x) => x.path === activeKey);
   }
 
-  refreshTagHandle = () => {
-    const { activeKey } = this.state;
-    this.props.refreshView(activeKey);
-  };
-
   closeTagHandle = (dir) => {
     const { tabMenus } = this.props;
     const index = this.findCurTagIndex(this.state.activeKey);
@@ -78,6 +73,11 @@ class MultiTab extends Component<any> {
     // 本地存储
     localStorage.setItem('tab_menus', JSON.stringify(this.props.tabMenus));
   }
+
+  refreshTagHandle = () => {
+    const { activeKey } = this.state;
+    this.props.refreshView(activeKey);
+  };
 
   changeHandle = (activeKey) => {
     this.props.history.push(activeKey);
@@ -118,13 +118,22 @@ class MultiTab extends Component<any> {
           ))}
         </Tabs>
         <ContextMenu id={CTX_MENU_ID} className={classNames('ant-dropdown-menu')}>
-          <MenuItem className={classNames('ant-dropdown-menu-item')} onClick={() => this.refreshTagHandle()}>
+          <MenuItem
+            className={classNames('ant-dropdown-menu-item')}
+            onClick={() => this.refreshTagHandle()}
+          >
             {t('app.multiTab.refresh')}
           </MenuItem>
-          <MenuItem className={classNames('ant-dropdown-menu-item')} onClick={() => this.closeTagHandle('right')}>
+          <MenuItem
+            className={classNames('ant-dropdown-menu-item')}
+            onClick={() => this.closeTagHandle('right')}
+          >
             {t('app.multiTab.closeRight')}
           </MenuItem>
-          <MenuItem className={classNames('ant-dropdown-menu-item')} onClick={() => this.closeTagHandle('left')}>
+          <MenuItem
+            className={classNames('ant-dropdown-menu-item')}
+            onClick={() => this.closeTagHandle('left')}
+          >
             {t('app.multiTab.closeLeft')}
           </MenuItem>
           {tabMenus.length > 1 && (

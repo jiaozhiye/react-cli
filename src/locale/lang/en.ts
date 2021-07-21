@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 13:18:02
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 14:58:02
+ * @Last Modified time: 2021-07-21 08:26:09
  */
 export default {
   name: 'en',
@@ -19,7 +19,6 @@ export default {
     sidebar: {
       allNavTitle: 'All Nav',
       allNavPlaceholder: '请输入菜单名称/拼音头',
-      usedNav: '常用导航',
       starNav: '我的收藏',
     },
     multiTab: {

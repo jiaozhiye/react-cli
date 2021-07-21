@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 13:58:49
+ * @Last Modified time: 2021-07-21 08:26:41
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -13,7 +13,7 @@ import appTool from '@/hoc/application';
 import { connect } from 'react-redux';
 import { setStarMenu } from '@/store/actions';
 import { t } from '@/locale';
-import { sleep } from '@/utils';
+import { sleep, Message } from '@/utils';
 import { setStarMenuList } from '@/api/application';
 import { AppState } from '@/store/reducers/app';
 
@@ -63,6 +63,10 @@ class NavList extends Component<any> {
   starChange = (active, key, title) => {
     const { starMenus } = this.props;
     const result = active ? starMenus.filter((x) => x.key !== key) : [...starMenus, { key, title }];
+    // 最大数量判断
+    if (result.length > config.maxCacheNum) {
+      return Message(t('app.information.maxCache', { total: config.maxCacheNum }), 'warning');
+    }
     this.props.setStarMenu(result);
     this.saveStarMenu();
   };
