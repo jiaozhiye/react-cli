@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 14:46:19
+ * @Last Modified time: 2021-07-21 09:38:19
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -96,7 +96,7 @@ class ProvideAuth extends Component<any> {
     const { menuLoaded } = this.state;
     const { path } = this.props.route;
 
-    document.title = `${config.systemName}-${route.meta?.title}` || config.systemName;
+    document.title = `${config.systemName}-${route.meta?.title || '404'}` || config.systemName;
 
     if (!menuLoaded && !this.isMatch(whiteList, path)) {
       return <Spin />;
