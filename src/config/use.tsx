@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 18:27:00
+ * @Last Modified time: 2021-07-21 08:38:40
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -21,7 +21,7 @@ import {
 import { isIframe } from '@/router/index';
 import { changeLocale } from '@/locale';
 import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
-import { AppState } from '@/store/reducers/app'
+import { AppState } from '@/store/reducers/app';
 
 import zhCN from 'antd/lib/locale/zh_CN';
 import enGB from 'antd/lib/locale/en_GB';

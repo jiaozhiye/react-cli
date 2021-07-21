@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 08:46:16
+ * @Last Modified time: 2021-07-21 08:39:20
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -73,8 +73,8 @@ const createFlattenMenus = <T extends ISideMenu>(list: T[]): T[] => {
 const initState: IState = {
   size: (localStorage.getItem('size') || config.size) as ComponentSize, // 组件尺寸
   lang: localStorage.getItem('lang') || config.lang, // 多语言
-  themeType: (localStorage.getItem('theme_type') || config.themeType) as ThemeType, // 主题模式
-  themeColor: localStorage.getItem('theme_color') || process.env.THEME_COLOR || '', // 主题颜色
+  themeType: config.themeType, // 主题模式
+  themeColor: process.env.THEME_COLOR || '', // 主题颜色
   sideMenus: [], // 侧栏菜单数据
   starMenus: [], // 收藏菜单
   tabMenus: [{ path: '/home', title: t('app.global.dashboard') }], // 顶部选项卡菜单数据
