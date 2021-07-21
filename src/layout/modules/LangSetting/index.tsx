@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-15 08:24:36
+ * @Last Modified time: 2021-07-21 09:36:00
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -11,9 +11,11 @@ import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';
 import { changeLocale } from '@/locale';
 import { AppState } from '@/store/reducers/app';
+import appTool from '@/hoc/application';
 
 import './index.less';
 
+@appTool
 class LangSetting extends Component<any> {
   langChangeHandle(lang) {
     this.props.createLocaleLang(lang);
@@ -23,6 +25,8 @@ class LangSetting extends Component<any> {
       if (!$iframe) return;
       $iframe.contentWindow?.postMessage({ type: 'lang', data: lang }, '*');
     });
+    // 刷新页面
+    this.props.refreshView(this.props.location.pathname);
   }
 
   renderMenus() {
