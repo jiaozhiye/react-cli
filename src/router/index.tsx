@@ -2,13 +2,14 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:02:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-12 11:26:38
+ * @Last Modified time: 2021-07-21 14:03:16
  */
 import React, { Suspense } from 'react';
 import { Router, Switch, Route, Redirect, matchPath } from 'react-router-dom';
 import { getToken } from '@/utils/cookies';
 
-import ProvideAuth from './ProvideAuth';
+import ErrorBoundary from '@/pages/error';
+import PrivateRoute from './PrivateRoute';
 
 // 访问白名单
 const whiteList: string[] = ['/login', '/public', '/wechat'];
@@ -54,15 +55,19 @@ export const renderRoutes = (routes: any[] = [], extraProps = {}, switchProps = 
                 }
                 // 鉴权
                 return (
-                  <ProvideAuth
+                  <PrivateRoute
                     route={route}
                     whiteList={whiteList}
                     whiteAuth={whiteAuth}
                     render-props={() => {
-                      return route.render ? (
-                        route.render({ ...props, ...extraProps, route })
-                      ) : (
-                        <route.component {...props} {...extraProps} route={route} />
+                      return (
+                        <ErrorBoundary>
+                          {route.render ? (
+                            route.render({ ...props, ...extraProps, route })
+                          ) : (
+                            <route.component {...props} {...extraProps} route={route} />
+                          )}
+                        </ErrorBoundary>
                       );
                     }}
                   />

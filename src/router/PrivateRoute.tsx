@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 09:38:19
+ * @Last Modified time: 2021-07-21 13:18:30
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -19,7 +19,7 @@ import routes from '@/router/config';
 import config from '@/config';
 
 @withRouter
-class ProvideAuth extends Component<any> {
+class PrivateRoute extends Component<any> {
   state = {
     menuLoaded: !!this.props.flattenMenus.length,
   };
@@ -121,4 +121,4 @@ export default connect(
     createIframeMenu,
     createSignOut,
   }
-)(ProvideAuth);
+)(PrivateRoute);
