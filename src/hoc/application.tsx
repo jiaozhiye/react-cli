@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-18 21:49:34
+ * @Last Modified time: 2021-07-21 14:49:46
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -13,7 +13,7 @@ import store from '@/store';
 import { AppState } from '@/store/reducers/app';
 import { Nullable } from '@/utils/types';
 
-export default (WrappedComponent): any => {
+export default (WrappedComponent: React.ComponentType<any>): any => {
   @withRouter
   class C extends Component<any> {
     static displayName = `AppTool(${WrappedComponent.displayName || WrappedComponent.name})`;
@@ -21,7 +21,9 @@ export default (WrappedComponent): any => {
     refreshView = (pathname: string): void => {
       const { search } = this.props.location;
       this.props.history.replace(`/redirect${pathname}` + search);
-      let $iframe: Nullable<HTMLIFrameElement> = document.getElementById(pathname) as HTMLIFrameElement;
+      let $iframe: Nullable<HTMLIFrameElement> = document.getElementById(
+        pathname
+      ) as HTMLIFrameElement;
       if (!$iframe) return;
       // 未释放内存，待优化
       // $iframe.contentWindow.location.reload();
@@ -41,7 +43,10 @@ export default (WrappedComponent): any => {
       } = store.getState();
       const target = iframeMenus.find((x) => x.key === pathname);
       this.props.createIframeMenu(pathname, 'remove');
-      setTimeout(() => this.props.createIframeMenu({ key: pathname, value: target?.value }, 'add'), 10);
+      setTimeout(
+        () => this.props.createIframeMenu({ key: pathname, value: target?.value }, 'add'),
+        10
+      );
     };
 
     openView = (fullpath: string): void => {
