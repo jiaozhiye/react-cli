@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 11:02:03
+ * @Last Modified time: 2021-07-21 16:55:29
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -28,6 +28,10 @@ class AllNav extends Component<any> {
     this.setState({ visible: !this.state.visible });
   };
 
+  closeHandle = () => {
+    this.setState({ visible: false });
+  };
+
   render(): React.ReactElement {
     const { collapsed } = this.props;
     const { visible } = this.state;
@@ -38,7 +42,7 @@ class AllNav extends Component<any> {
             {t('app.sidebar.allNavTitle')}
           </Menu.Item>
         </Menu>
-        <NavList visible={visible} collapsed={collapsed} onChange={this.visibleChange} />
+        <NavList visible={visible} collapsed={collapsed} onChange={this.closeHandle} />
       </div>
     );
   }

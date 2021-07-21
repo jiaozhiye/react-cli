@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 09:31:09
+ * @Last Modified time: 2021-07-21 16:15:31
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -57,7 +57,7 @@ class NavList extends Component<any> {
     this.props.onChange();
   };
 
-  onChange = async (val) => {
+  onSelectChange = async (val) => {
     this.setState({ searchValue: val });
     !isHttpLink(val) ? this.props.openView(val) : window.open(val);
     await sleep(200);
@@ -118,7 +118,7 @@ class NavList extends Component<any> {
                 filterOption={(input, option: any) =>
                   option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
                 }
-                onChange={this.onChange}
+                onChange={this.onSelectChange}
               >
                 {flattenMenus.map((x) => (
                   <Option key={x.key} value={x.key}>
