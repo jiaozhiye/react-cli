@@ -10,7 +10,7 @@ import { Spin } from 'antd';
 import { matchRoutes } from '@/router';
 import { nextTick, Message } from '@/utils';
 import { t } from '@/locale';
-import { AppState } from '@/store/reducers/app';
+import { AppState, ITabNav } from '@/store/reducers/app';
 
 import { connect } from 'react-redux';
 import { createMenuList, createTabMenu, createIframeMenu, createSignOut } from '@/store/actions';
@@ -51,11 +51,11 @@ class ProvideAuth extends Component<any> {
 
   getLocalTabMenus() {
     const localTabNav = localStorage.getItem('tab_menus');
-    let result: any = [];
+    let result: ITabNav[] = [];
     if (localTabNav) {
       try {
         result = JSON.parse(localTabNav);
-      } catch (e) {
+      } catch (err) {
         // ...
       }
     }

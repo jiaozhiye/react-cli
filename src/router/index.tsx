@@ -34,7 +34,7 @@ export const renderRoutes = (routes: any[] = [], extraProps = {}, switchProps = 
   return (
     <Suspense fallback={null}>
       <Switch {...switchProps}>
-        {routes.map((route: any, index) => (
+        {routes.map((route, index) => (
           <Route
             key={route.key || index}
             path={route.path}

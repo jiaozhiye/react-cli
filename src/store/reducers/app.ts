@@ -24,18 +24,18 @@ import { ComponentSize, Dictionary, ThemeType } from '@/utils/types';
 export type ISideMenu = {
   key: string;
   title: string;
-  children?: Array<ISideMenu>
-}
+  children?: Array<ISideMenu>;
+};
 
-type ITabNav = {
+export type ITabNav = {
   path: string;
   title: string;
-}
+};
 
-type IKeepAlive = {
+export type ICacheMenu = {
   key: string;
   value: string;
-}
+};
 
 type IState = {
   size: ComponentSize;
@@ -46,14 +46,14 @@ type IState = {
   starMenus: ISideMenu[];
   tabMenus: ITabNav[];
   flattenMenus: Omit<ISideMenu, 'children'>[];
-  iframeMenus: IKeepAlive[];
-  keepAliveList: IKeepAlive[];
+  iframeMenus: ICacheMenu[];
+  keepAliveList: ICacheMenu[];
   dict: Record<string, Dictionary[] | number>;
 };
 
 export type AppState = {
-  app: IState
-}
+  app: IState;
+};
 
 const createFlattenMenus = <T extends ISideMenu>(list: T[]): T[] => {
   const res: T[] = [];
