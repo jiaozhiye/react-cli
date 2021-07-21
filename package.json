@@ -37,7 +37,6 @@
     "lodash-es": "^4.17.21",
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
-    "omit.js": "^2.0.2",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-contextmenu": "^2.14.0",
