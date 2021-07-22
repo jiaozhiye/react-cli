@@ -8,8 +8,8 @@ import React, { Suspense } from 'react';
 import { Router, Switch, Route, Redirect, matchPath } from 'react-router-dom';
 import { getToken } from '@/utils/cookies';
 
-import ErrorBoundary from '@/pages/error';
-import PrivateRoute from './PrivateRoute';
+import PrivateRoute from '@/router/PrivateRoute';
+import ErrorBoundary from '@/pages/errorBoundary';
 
 // 访问白名单
 const whiteList: string[] = ['/login', '/public', '/wechat'];
