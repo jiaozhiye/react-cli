@@ -29,6 +29,18 @@ const isHttpLink = (path = '') => {
   return /^https?:\/\//.test(path);
 };
 
+const reduxConnect: any = connect;
+
+@reduxConnect(
+  (state: AppState) => ({
+    sideMenus: state.app.sideMenus,
+    starMenus: state.app.starMenus,
+    flattenMenus: state.app.flattenMenus,
+  }),
+  {
+    setStarMenu,
+  }
+)
 @appTool
 class NavList extends Component<any> {
   static propTypes = {
@@ -93,7 +105,7 @@ class NavList extends Component<any> {
   }
 
   render(): React.ReactElement {
-    const { visible, collapsed, flattenMenus, sideMenus, starMenus } = this.props;
+    const { forwardedRef, visible, collapsed, flattenMenus, sideMenus, starMenus } = this.props;
     const { searchValue } = this.state;
     return (
       <>
@@ -103,6 +115,7 @@ class NavList extends Component<any> {
           onClick={this.clickHandle}
         />
         <div
+          ref={forwardedRef}
           className={classNames('nav-list-container', visible ? 'show' : '')}
           style={{ left: !collapsed ? `${config.sideWidth[0]}px` : `${config.sideWidth[1]}px` }}
         >
@@ -163,13 +176,4 @@ class NavList extends Component<any> {
   }
 }
 
-export default connect(
-  (state: AppState) => ({
-    sideMenus: state.app.sideMenus,
-    starMenus: state.app.starMenus,
-    flattenMenus: state.app.flattenMenus,
-  }),
-  {
-    setStarMenu,
-  }
-)(NavList);
+export default React.forwardRef((props: any, ref) => <NavList {...props} forwardedRef={ref} />);

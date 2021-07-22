@@ -6,6 +6,7 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import addEventListener from 'add-dom-event-listener';
 import classNames from 'classnames';
 import { Menu } from 'antd';
 import { AppstoreFilled } from '@ant-design/icons';
@@ -20,9 +21,26 @@ class AllNav extends Component<any> {
     collapsed: PropTypes.bool,
   };
 
+  private event;
+
+  private navListRef = React.createRef();
+
   state = {
     visible: false,
   };
+
+  componentDidMount() {
+    this.event = addEventListener(document.querySelector('.ant-layout-sider'), 'click', (ev) => {
+      const $$allNavMenu = document.getElementById('all-nav');
+      const $$allNavModal = this.navListRef.current;
+      if (ev.nativeEvent.path.some((x) => x === $$allNavMenu || x === $$allNavModal)) return;
+      this.closeHandle();
+    });
+  }
+
+  componentWillUnmount() {
+    this.event.remove();
+  }
 
   visibleChange = () => {
     this.setState({ visible: !this.state.visible });
@@ -38,11 +56,21 @@ class AllNav extends Component<any> {
     return (
       <div className={classNames('app-all-nav')}>
         <Menu mode="inline" theme="dark" selectable={false}>
-          <Menu.Item key="all-nav" icon={<AppstoreFilled />} onClick={this.visibleChange}>
+          <Menu.Item
+            key="all-nav"
+            id="all-nav"
+            icon={<AppstoreFilled />}
+            onClick={this.visibleChange}
+          >
             {t('app.sidebar.allNavTitle')}
           </Menu.Item>
         </Menu>
-        <NavList visible={visible} collapsed={collapsed} onChange={this.closeHandle} />
+        <NavList
+          ref={this.navListRef}
+          visible={visible}
+          collapsed={collapsed}
+          onChange={this.closeHandle}
+        />
       </div>
     );
   }

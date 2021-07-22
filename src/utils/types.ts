@@ -4,9 +4,13 @@
  * @Last Modified by: 焦质晔
  * @Last Modified time: 2021-07-14 20:26:02
  */
+import type React from 'react';
+
 export type Nullable<T> = T | null;
 
 export type ValueOf<T> = T[keyof T];
+
+export type JSXElement = React.ReactElement | JSX.Element;
 
 export type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends Record<string, unknown> ? DeepPartial<T[P]> : T[P];

@@ -8,6 +8,8 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { t } from '@/locale';
 
+import './index.less';
+
 interface IState {
   hasError: boolean;
 }
