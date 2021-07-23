@@ -43,7 +43,7 @@ class BasicLayout extends Component<any> {
     return iframeMenus.map((x) => (
       <div
         key={x.key}
-        className={classNames('iframe-wrapper')}
+        className={classNames('app-iframe-container')}
         style={{ display: route.path === x.key ? 'block' : 'none' }}
       >
         <iframe id={x.key} src={x.value} width="100%" height="100%" frameBorder="0" />

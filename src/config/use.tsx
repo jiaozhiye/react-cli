@@ -119,7 +119,7 @@ class UseConfig extends Component<any> {
     return (
       <ConfigProvider locale={messages[this.props.lang]} componentSize={this.props.size}>
         {isIframe(pathname) ? (
-          <section className={classNames('iframe')}>{this.props.children}</section>
+          <section className={classNames('app-iframe')}>{this.props.children}</section>
         ) : (
           this.props.children
         )}
