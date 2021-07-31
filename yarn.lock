@@ -6988,7 +6988,7 @@ webpack-dev-middleware@^4.1.0:
     range-parser "^1.2.1"
     schema-utils "^3.0.0"
 
-webpack-dev-server@^4.0.0-beta.3:
+webpack-dev-server@4.0.0-beta.3:
   version "4.0.0-beta.3"
   resolved "https://registry.nlark.com/webpack-dev-server/download/webpack-dev-server-4.0.0-beta.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fwebpack-dev-server%2Fdownload%2Fwebpack-dev-server-4.0.0-beta.3.tgz#57368679f7f1fdd7ec8d9dd287275117271164f0"
   integrity sha1-VzaGeffx/dfsjZ3ShydRFycRZPA=
