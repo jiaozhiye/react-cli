@@ -17,15 +17,17 @@
     "lint-fix": "eslint --fix ./src --ext .js,.ts,.jsx,.tsx",
     "prettier": "prettier -c --write '**/*'"
   },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
-    "src/*.{js,ts,jsx,tsx}": [
-      "npm run prettier",
-      "npm run lint",
+    "src/**/*.{js,ts,jsx,tsx,vue}": [
+      "npm run lint-fix",
       "git add"
-    ]
+    ],
+    "src/**/*.{less}": "prettier --write"
   },
   "dependencies": {
     "add-dom-event-listener": "^1.1.0",
