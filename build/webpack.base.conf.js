@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-15 18:09:36
+ * @Last Modified time: 2021-08-20 08:22:29
  */
 'use strict';
 
@@ -73,7 +73,7 @@ module.exports = {
       },
       // do not base64-inline SVG
       {
-        test: /\.(svg)(\?.*)?$/,
+        test: /\.(svg)(\?.*)?$/i,
         type: 'asset/resource',
         generator: {
           filename: utils.assetsPath('img/[contenthash:8][ext][query]'),
@@ -81,11 +81,11 @@ module.exports = {
       },
       // images
       {
-        test: /\.(png|jpe?g|gif|webp)(\?.*)?$/,
+        test: /\.(png|jpe?g|gif|webp)(\?.*)?$/i,
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 1024 * 1024, // 小于 1M 表现形式为 baser64；大于 2M 文件会被生成到输出到目标目录
+            maxSize: 1024 * 1024, // 小于 1M 表现形式为 baser64；大于 1M 文件会被生成到输出到目标目录
           },
         },
         generator: {
@@ -94,7 +94,7 @@ module.exports = {
       },
       // fonts
       {
-        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/i,
         type: 'asset',
         parser: {
           dataUrlCondition: {
@@ -107,7 +107,7 @@ module.exports = {
       },
       // media
       {
-        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+        test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i,
         type: 'asset',
         parser: {
           dataUrlCondition: {
