@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-05 14:15:56
+ * @Last Modified time: 2021-08-21 21:51:58
  */
 'use strict';
 
@@ -36,11 +36,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       disableDotRule: true,
       rewrites: [{ from: /.*/, to: '/index.html' }],
     },
-    public: config.dev.assetsPublicPath,
     static: [
       {
         directory: utils.resolve(config.dev.assetsSubDirectory),
-        publicPath: config.dev.assetsPublicPath + config.dev.assetsSubDirectory,
+        publicPath: config.dev.assetsPublicPath,
         serveIndex: true,
         watch: true,
       },
@@ -82,9 +81,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 });
 
 if (config.dev.useEslint) {
-  devWebpackConfig.plugins.push(
-    new ESLintPlugin({ extensions: ['.ts', '.tsx', '.js', '.jsx'] })
-  );
+  devWebpackConfig.plugins.push(new ESLintPlugin({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }));
 }
 
 module.exports = devWebpackConfig;
