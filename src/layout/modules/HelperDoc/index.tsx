@@ -6,6 +6,7 @@
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { t } from '@/locale';
 import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 
 import { QuestionCircleOutlined } from '@/icons';
@@ -16,8 +17,8 @@ class HelperDoc extends Component<any> {
   renderMenus() {
     return (
       <Menu>
-        <Menu.Item key="1">帮助文档</Menu.Item>
-        <Menu.Item key="2">使用手册</Menu.Item>
+        <Menu.Item key="1">{t('app.helperDoc.helpDoc')}</Menu.Item>
+        <Menu.Item key="2">{t('app.helperDoc.useManual')}</Menu.Item>
       </Menu>
     );
   }

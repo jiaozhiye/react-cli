@@ -1258,13 +1258,13 @@
   resolved "https://registry.npmmirror.com/@humanwhocodes/object-schema/download/@humanwhocodes/object-schema-1.2.1.tgz?cache=0&sync_timestamp=1635879707386&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40humanwhocodes%2Fobject-schema%2Fdownload%2F%40humanwhocodes%2Fobject-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha1-tSBSnsIdjllFoYUd/Rwy6U45/0U=
 
-"@jiaozhiye/qm-design-react@^1.0.0-beta.2":
-  version "1.0.0-beta.2"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/download/@jiaozhiye/qm-design-react-1.0.0-beta.2.tgz#c56713be0888c60b642a59cf024f0e32b75c9e87"
-  integrity sha512-YtiGyMB0HgWYWzP0APhg5CpEAFiP6uyeBZU1lzJlie6ygnionnuakyuZ1F+qumDREzXYnTivo2GHKXFFOJHu6w==
+"@jiaozhiye/qm-design-react@^1.0.0-beta.6":
+  version "1.0.0-beta.6"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/download/@jiaozhiye/qm-design-react-1.0.0-beta.6.tgz#1243988486a14e4bbf461a09eb89daf4498acf4b"
+  integrity sha512-0VZ7m1HaYJ2Q6VyRYKi73UqkAO73JSwZD6qb1RD1LQzQrLC6ZsSTpABw4uLqCdNRGq3MiUEkF60QDtm9q4R8hw==
   dependencies:
     add-dom-event-listener "^1.1.0"
-    antd "^4.18.2"
+    antd "^4.18.3"
     axios "^0.24.0"
     classnames "^2.3.1"
     cropperjs "^1.5.12"
@@ -1903,7 +1903,7 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-antd@^4.18.2:
+antd@^4.18.3:
   version "4.18.3"
   resolved "https://registry.npmmirror.com/antd/download/antd-4.18.3.tgz#cb70fe419d2c2cdfe28f6b6dc25ef4fb7f2dff2c"
   integrity sha512-EoCMY8pFKX9IVAc0Bdi3DWR03IIOHa6mTZALOGjrKbPm3kbrcvoBTCNXq4BMeVA1dZbMeoBw46peeJLyMp2avw==

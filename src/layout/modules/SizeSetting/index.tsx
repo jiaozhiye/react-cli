@@ -11,11 +11,13 @@ import { connect } from 'react-redux';
 import { createComponentSize } from '@/store/actions';
 import { t } from '@/locale';
 import { AppState } from '@/store/reducers/app';
+import { appTool } from '@/hoc';
 
 import { FontSizeOutlined } from '@/icons';
 
 import './index.less';
 
+@appTool
 class SizeSetting extends Component<any> {
   sizeChangeHandle(size) {
     this.props.createComponentSize(size);
@@ -25,6 +27,8 @@ class SizeSetting extends Component<any> {
       if (!$iframe) return;
       $iframe.contentWindow?.postMessage({ type: 'size', data: size }, '*');
     });
+    // 刷新页面
+    this.props.refreshView(this.props.location.pathname);
   }
 
   renderMenus() {

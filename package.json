@@ -30,9 +30,8 @@
     "src/**/*.{less}": "prettier --write"
   },
   "dependencies": {
-    "@jiaozhiye/qm-design-react": "^1.0.0-beta.2",
+    "@jiaozhiye/qm-design-react": "^1.0.0-beta.6",
     "add-dom-event-listener": "^1.1.0",
-    "antd": "^4.18.2",
     "axios": "^0.24.0",
     "dayjs": "1.10.6",
     "hoist-non-react-statics": "^3.3.2",
