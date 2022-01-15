@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 12:32:00
+ * @Last Modified time: 2022-01-15 13:26:23
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -28,6 +28,113 @@ const Demo = (props) => {
         label: '条件1',
         tooltip: 'Label 描述信息',
         fieldName: 'a',
+      },
+      {
+        type: 'SEARCH_HELPER',
+        label: '条件2',
+        fieldName: 'b',
+        searchHelper: {
+          uniqueKey: 'SPA1001_SH_01',
+          filters: [
+            {
+              type: 'INPUT',
+              label: '条件1',
+              fieldName: 'a1',
+            },
+            {
+              type: 'INPUT',
+              label: '条件2',
+              fieldName: 'a2',
+            },
+            {
+              type: 'INPUT',
+              label: '条件3',
+              fieldName: 'a3',
+            },
+            {
+              type: 'INPUT',
+              label: '条件4',
+              fieldName: 'a4',
+            },
+          ],
+          table: {
+            columns: [
+              {
+                title: '创建时间',
+                dataIndex: 'date',
+              },
+              {
+                title: '姓名',
+                dataIndex: 'person.name',
+              },
+            ],
+            rowKey: (record) => record.id,
+            fetch: {
+              api: getTableData,
+              params: {},
+              dataKey: 'records',
+            },
+          },
+          filterAliasMap: () => {
+            return ['a1'];
+          },
+          fieldAliasMap: () => {
+            return { b: 'date', code: 'id', c: 'date' };
+          },
+          extraAliasMap: () => {
+            return {b: 'date', c: 'date'}
+          }
+        },
+        extra: {
+          labelWidth: 80,
+        },
+      },
+      {
+        type: 'INPUT',
+        label: '条件3',
+        fieldName: 'c',
+        extra: {
+          labelWidth: 80,
+        },
+      },
+      {
+        type: 'SELECT',
+        label: '条件4',
+        fieldName: 'd',
+        request: {
+          fetchApi: getSelectData,
+          params: {},
+          dataKey: 'records',
+          valueKey: 'value',
+          textKey: 'text',
+        },
+      },
+      {
+        type: 'MULTIPLE_TREE_SELECT',
+        label: '条件5',
+        fieldName: 'e',
+        request: {
+          fetchApi: getTreeData,
+          params: {},
+          dataKey: 'records',
+        },
+      },
+      {
+        type: 'REGION_SELECT',
+        label: '条件6',
+        fieldName: 'f',
+        request: {
+          fetchApi: getSelectData,
+          params: {},
+          dataKey: 'records',
+          valueKey: 'value',
+          textKey: 'text',
+        },
+      },
+      {
+        type: 'CITY_SELECT',
+        label: '条件7',
+        fieldName: 'g',
       },
     ]
   }
@@ -302,7 +409,9 @@ const Demo = (props) => {
     <QmForm uniqueKey="SPA1001"
     formType="search"
     items={filterList}
-    fieldsChange={(items) => setFilterList(items)} />
+    fieldsChange={(items) => setFilterList(items)} onFinish={values => {
+      console.log(11, values)
+    }} />
     <QmTable uniqueKey="SPA1001" height={'auto'} rowKey={(row) => row.id} columns={columns} fetch={{
       api: getTableData,
       dataKey: 'records',

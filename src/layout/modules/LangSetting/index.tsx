@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 09:36:00
+ * @Last Modified time: 2022-01-15 12:45:18
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';
 import { changeLocale } from '@/locale';
 import { AppState } from '@/store/reducers/app';
-import appTool from '@/hoc/application';
+import { appTool } from '@/hoc';
 
 import './index.less';
 

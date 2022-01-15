@@ -2,14 +2,14 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 16:15:31
+ * @Last Modified time: 2022-01-15 12:44:47
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import config from '@/config';
-import appTool from '@/hoc/application';
+import { appTool } from '@/hoc';
 import { connect } from 'react-redux';
 import { setStarMenu } from '@/store/actions';
 import { t } from '@/locale';

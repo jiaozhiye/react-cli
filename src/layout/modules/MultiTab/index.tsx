@@ -2,13 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 13:44:13
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 08:31:17
+ * @Last Modified time: 2022-01-15 12:45:21
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import classNames from 'classnames';
-import appTool from '@/hoc/application';
+import { appTool } from '@/hoc';
 import { t } from '@/locale';
 
 import { connect } from 'react-redux';

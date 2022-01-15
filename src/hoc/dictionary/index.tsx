@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 14:49:49
+ * @Last Modified time: 2022-01-15 12:43:26
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -12,7 +12,7 @@ import { Dictionary, Nullable } from '@/utils/types';
 
 export default (WrappedComponent: React.ComponentType<any>): any => {
   class C extends Component<any> {
-    static displayName = `Dict(${WrappedComponent.displayName || WrappedComponent.name})`;
+    static displayName = `DictTool(${WrappedComponent.displayName || WrappedComponent.name})`;
 
     /**
      * @description 创建数据字典列表，支持过滤

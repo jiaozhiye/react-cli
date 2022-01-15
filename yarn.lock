@@ -1258,10 +1258,10 @@
   resolved "https://registry.npmmirror.com/@humanwhocodes/object-schema/download/@humanwhocodes/object-schema-1.2.1.tgz?cache=0&sync_timestamp=1635879707386&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40humanwhocodes%2Fobject-schema%2Fdownload%2F%40humanwhocodes%2Fobject-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha1-tSBSnsIdjllFoYUd/Rwy6U45/0U=
 
-"@jiaozhiye/qm-design-react@^1.0.0-beta.1":
-  version "1.0.0-beta.1"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/download/@jiaozhiye/qm-design-react-1.0.0-beta.1.tgz#5cf777219172c6618d45d05310102890823a0a2f"
-  integrity sha512-VwDCUPBJ9NVd1ZWtGfc6daeoK0ZGHJ9gPeMNBMUNsY8QUkLNETM4CTR+/MskcaGTtuVYpqqooY2KlEtHRlpNxw==
+"@jiaozhiye/qm-design-react@^1.0.0-beta.2":
+  version "1.0.0-beta.2"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/download/@jiaozhiye/qm-design-react-1.0.0-beta.2.tgz#c56713be0888c60b642a59cf024f0e32b75c9e87"
+  integrity sha512-YtiGyMB0HgWYWzP0APhg5CpEAFiP6uyeBZU1lzJlie6ygnionnuakyuZ1F+qumDREzXYnTivo2GHKXFFOJHu6w==
   dependencies:
     add-dom-event-listener "^1.1.0"
     antd "^4.18.2"
@@ -2856,7 +2856,7 @@ dayjs@1.x:
   resolved "https://registry.nlark.com/dayjs/download/dayjs-1.10.5.tgz?cache=0&sync_timestamp=1622012271727&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdayjs%2Fdownload%2Fdayjs-1.10.5.tgz#5600df4548fc2453b3f163ebb2abbe965ccfb986"
   integrity sha1-VgDfRUj8JFOz8WPrsqu+llzPuYY=
 
-dayjs@^1.10.6, dayjs@^1.8.34:
+dayjs@^1.8.34:
   version "1.10.7"
   resolved "https://registry.npmmirror.com/dayjs/download/dayjs-1.10.7.tgz#2cf5f91add28116748440866a0a1d26f3a6ce468"
   integrity sha512-P6twpd70BcPK34K26uJ1KT3wlhpuOAPoMwJzpsIWUxHZ7wpmbdZL/hQqBDfz7hGurYSa5PhzdhDHtt319hL3ig==
