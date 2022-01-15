@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-08-21 21:51:58
+ * @Last Modified time: 2022-01-15 10:48:49
  */
 'use strict';
 
@@ -25,7 +25,6 @@ const PORT = process.env.PORT || config.dev.port;
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   mode: 'development',
-  target: 'web', // webpack5.x 加上之后热更新才有效果
   module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: false }),
   },
@@ -34,7 +33,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     /* 当使用 HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html */
     historyApiFallback: {
       disableDotRule: true,
-      rewrites: [{ from: /.*/, to: '/index.html' }],
+      rewrites: [{ from: /.*/, to: utils.grayPath() + 'index.html' }],
     },
     static: [
       {
@@ -70,13 +69,14 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         THEME_COLOR: config.primaryColor,
       },
     }),
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../static'),
-        to: config.dev.assetsSubDirectory,
-        ignore: ['.*'],
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../static'),
+          to: config.dev.assetsSubDirectory,
+        },
+      ],
+    }),
   ],
 });
 

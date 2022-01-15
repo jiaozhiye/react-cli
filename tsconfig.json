@@ -11,16 +11,17 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "jsx": "react",
+    "jsx": "preserve",
     "allowJs": true,
     "sourceMap": true,
     "allowSyntheticDefaultImports": true,
-    "types": ["react/next", "react-dom/next"],
+    "baseUrl": ".",
+    "outDir": "/",
     "paths": {
       "@/*": ["src/*"]
     },
     "lib": ["ESNext", "DOM", "DOM.Iterable"]
   },
   "include": ["./src"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist", "**/*.js"]
 }

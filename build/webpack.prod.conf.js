@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-05 14:15:56
+ * @Last Modified time: 2022-01-15 10:50:19
  */
 'use strict';
 
@@ -28,6 +28,11 @@ const webpackConfig = merge(baseWebpackConfig, {
   output: {
     filename: utils.assetsPath('js/[name].[contenthash:8].js'),
     chunkFilename: utils.assetsPath('js/[name].[contenthash:8].js'),
+  },
+  cache: {
+    type: 'filesystem',
+    allowCollectingMemory: true,
+    cacheDirectory: utils.resolve('.build_cache'),
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   module: {
@@ -113,13 +118,14 @@ const webpackConfig = merge(baseWebpackConfig, {
       path: utils.resolve('.env.prod'),
     }),
     // copy custom static assets
-    new CopyWebpackPlugin([
-      {
-        from: path.resolve(__dirname, '../static'),
-        to: config.build.assetsSubDirectory,
-        ignore: ['.*'],
-      },
-    ]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../static'),
+          to: config.build.assetsSubDirectory,
+        },
+      ],
+    }),
     // clear dist resource before build
     new CleanWebpackPlugin(),
   ],

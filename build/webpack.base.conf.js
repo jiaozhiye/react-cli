@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-08-20 08:22:29
+ * @Last Modified time: 2022-01-15 10:46:28
  */
 'use strict';
 
@@ -45,11 +45,6 @@ module.exports = {
       '@': utils.resolve('src'),
       '@test': utils.resolve('src/modules/test'),
       '@framework': utils.resolve('src/modules/framework'),
-    },
-    fallback: {
-      crypto: false,
-      stream: false,
-      buffer: false,
     },
   },
   experiments: {
@@ -98,7 +93,7 @@ module.exports = {
         type: 'asset',
         parser: {
           dataUrlCondition: {
-            maxSize: 1024 * 1024,
+            maxSize: 1024 * 10, // 10K
           },
         },
         generator: {
@@ -108,12 +103,7 @@ module.exports = {
       // media
       {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/i,
-        type: 'asset',
-        parser: {
-          dataUrlCondition: {
-            maxSize: 1024 * 1024,
-          },
-        },
+        type: 'asset/resource',
         generator: {
           filename: utils.assetsPath('media/[contenthash:8][ext][query]'),
         },

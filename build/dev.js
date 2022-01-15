@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-05-28 13:53:48
+ * @Last Modified time: 2022-01-15 10:42:17
  */
 'use strict';
 
@@ -16,8 +16,8 @@ const PORT = process.env.PORT || config.dev.port;
 
 const compiler = Webpack(webpackConfig);
 const devServerOptions = Object.assign({}, webpackConfig.devServer);
-const server = new WebpackDevServer(compiler, devServerOptions);
+const server = new WebpackDevServer(devServerOptions, compiler);
 
-server.listen(PORT, HOST, () => {
+server.startCallback(() => {
   console.log(`Starting server on http://${HOST}:${PORT}/`);
 });
