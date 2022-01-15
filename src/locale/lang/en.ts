@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 13:18:02
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 08:26:09
+ * @Last Modified time: 2022-01-15 14:30:41
  */
 export default {
   name: 'en',
