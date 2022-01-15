@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 13:26:23
+ * @Last Modified time: 2022-01-15 13:52:24
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -21,6 +21,7 @@ import {
 } from '@test/api/demo';
 
 const Demo = (props) => {
+  const tableRef = React.useRef(null);
   const createFilterList = () => {
     return [
       {
@@ -82,8 +83,8 @@ const Demo = (props) => {
             return { b: 'date', code: 'id', c: 'date' };
           },
           extraAliasMap: () => {
-            return {b: 'date', c: 'date'}
-          }
+            return { b: 'date', c: 'date' };
+          },
         },
         extra: {
           labelWidth: 80,
@@ -136,8 +137,8 @@ const Demo = (props) => {
         label: '条件7',
         fieldName: 'g',
       },
-    ]
-  }
+    ];
+  };
   const createTableColumns = () => {
     return [
       {
@@ -400,23 +401,50 @@ const Demo = (props) => {
           };
         },
       },
-    ]
-  }
+    ];
+  };
   const [filterList, setFilterList] = React.useState(createFilterList());
   const [columns, setColumns] = React.useState(createTableColumns());
+  const [fetchParams, setFetchParams] = React.useState({});
 
-  return <>
-    <QmForm uniqueKey="SPA1001"
-    formType="search"
-    items={filterList}
-    fieldsChange={(items) => setFilterList(items)} onFinish={values => {
-      console.log(11, values)
-    }} />
-    <QmTable uniqueKey="SPA1001" height={'auto'} rowKey={(row) => row.id} columns={columns} fetch={{
-      api: getTableData,
-      dataKey: 'records',
-    }} columnsChange={(columns => setColumns(columns))} />
-  </>
-}
+  return (
+    <>
+      <QmForm
+        uniqueKey="SPA1001"
+        formType="search"
+        items={filterList}
+        fieldsChange={(items) => setFilterList(items)}
+        onFinish={(values) => setFetchParams(values)}
+        onCollapse={() => tableRef.current.CALCULATE_HEIGHT()}
+      />
+      <QmTable
+        ref={tableRef}
+        uniqueKey="SPA1001"
+        height={'auto'}
+        rowKey={(row) => row.id}
+        columns={columns}
+        fetch={{
+          api: getTableData,
+          params: fetchParams,
+          dataKey: 'records',
+        }}
+        rowSelection={{
+          type: 'checkbox',
+          selectedRowKeys: [],
+          fetchAllRowKeys: {
+            api: getTableKeys,
+            dataKey: 'recordKeys',
+          },
+          onChange: (val, rows) => {
+            // ...
+          },
+        }}
+        exportExcel={{ fileName: '导出文件.xlsx' }}
+        tablePrint={{}}
+        columnsChange={(columns) => setColumns(columns)}
+      />
+    </>
+  );
+};
 
 export default Demo;
