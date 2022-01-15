@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 15:39:35
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 15:19:57
+ * @Last Modified time: 2022-01-15 15:52:03
  */
 import axios, {
   AxiosInstance,
@@ -16,8 +16,8 @@ import store from '@/store';
 import { createSignOut } from '@/store/actions';
 import { getToken } from '@/utils/cookies';
 import { Notification } from '@/utils';
-import { isGray } from '@/router';
 import { t } from '@/locale';
+import config from '@/config';
 
 type IRequestConfig = AxiosRequestConfig & {
   cancelable?: boolean;
@@ -34,6 +34,11 @@ type IRequestHeader = {
   lang: string;
   userAgent: string;
   gray?: string;
+};
+
+// 灰度判断
+export const isGray = (): boolean => {
+  return config.baseUrl.startsWith('/gray');
 };
 
 // 自定义扩展 header 请求头
