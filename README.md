@@ -45,7 +45,7 @@ $ npm run build
 
 ```bash
 # config/index.js
-primaryColor: '#409eff'
+primaryColor: '#1890ff'
 ```
 
 ## 目录结构

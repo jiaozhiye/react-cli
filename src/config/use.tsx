@@ -23,10 +23,11 @@ import { changeLocale } from '@/locale';
 import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
 import { AppState } from '@/store/reducers/app';
 
-import 'antd/dist/antd.less';
+import '@/assets/css/reset.less';
+import '@/assets/css/style.less';
+import '@jiaozhiye/qm-design-react/lib/style/index.less';
 // import 'antd/dist/antd.dark.less'; // 引入官方提供的暗色 less 样式入口文件
 // import 'antd/dist/antd.compact.less'; // 引入官方提供的紧凑 less 样式入口文件
-import '@/assets/css/style.less';
 import '@/assets/css/antd-ui.less';
 import '@/assets/css/iconfont.less';
 
@@ -42,7 +43,6 @@ message.config({
 @withRouter
 class UseConfig extends Component<any> {
   componentDidMount() {
-    console.log(1234, this.props.themeColor);
     this.getDictData();
     const localTheme = localStorage.getItem('theme_color');
     if (localTheme && localTheme !== this.props.themeColor) {

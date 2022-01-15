@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 21:35:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-06-22 14:57:35
+ * @Last Modified time: 2022-01-15 12:18:11
  */
 import axios from '@/api/fetch';
 import SERVER from '../server';
@@ -25,3 +25,18 @@ export const getTreeData = (params) =>
 
 export const getRegionData = (params) =>
   axios.get(`http://127.0.0.1:3000/api/design/getRegionData`, { params });
+
+export const getTableKeys = (params) =>
+  axios.get(`http://127.0.0.1:3000/api/design/getTableKeys`, { params });
+
+export const removeRecord = (params) =>
+  axios.get(`http://127.0.0.1:3000/api/design/getTableData`, { params });
+
+export const getRecordById = (params) =>
+  axios.get(`http://127.0.0.1:3000/api/design/getTableData`, { params });
+
+export const addRecord = (params) =>
+  axios.get(`http://127.0.0.1:3000/api/design/getTableData`, { params });
+
+export const saveRecord = (params) =>
+  axios.get(`http://127.0.0.1:3000/api/design/getTableData`, { params });

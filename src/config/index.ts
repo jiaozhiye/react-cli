@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 12:43:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 10:54:40
+ * @Last Modified time: 2022-01-15 12:30:36
  */
 import { ComponentSize, Language, ThemeType } from '@/utils/types';
 import { t } from '@/locale';
@@ -31,7 +31,7 @@ export default {
   systemName: t('app.global.title'),
   baseUrl: process.env.ENV_CONFIG === 'gray' ? '/gray' : '/',
   lang: 'zh-cn', // 语言
-  size: 'small', // 尺寸
+  size: 'middle', // 尺寸
   themeType: 'light', // 主题模式
   prefix: '/api', // ajax 请求前缀
   useIframe: true, // 是否使用 iframe 承载路由页面
