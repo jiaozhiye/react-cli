@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-15 21:01:22
+ * @Last Modified time: 2022-01-15 14:12:33
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -11,6 +11,8 @@ import { connect } from 'react-redux';
 import { createComponentSize } from '@/store/actions';
 import { t } from '@/locale';
 import { AppState } from '@/store/reducers/app';
+
+import { FontSizeOutlined } from '@/icons';
 
 import './index.less';
 
@@ -59,7 +61,7 @@ class SizeSetting extends Component<any> {
       <div className={classNames('app-size-setting')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
           <span>
-            <i className={classNames('iconfont', 'icon-font-size')} />
+            <FontSizeOutlined className={`icon`} />
           </span>
         </Dropdown>
       </div>

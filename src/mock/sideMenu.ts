@@ -2,13 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-05-27 17:52:51
+ * @Last Modified time: 2022-01-15 14:15:49
  */
 export default [
   {
     title: '备件管理',
     key: '/bjgl',
-    icon: 'icon-shop',
+    icon: 'icon-flag-fill',
     children: [
       {
         title: '采购管理',
@@ -45,7 +45,7 @@ export default [
   {
     title: '销售管理',
     key: '/xsgl',
-    icon: 'icon-barchart',
+    icon: 'icon-flag-fill',
     children: [
       {
         title: '线索管理',
@@ -110,7 +110,7 @@ export default [
   {
     title: '客服管理',
     key: '/kfgl',
-    icon: 'icon-customerservice',
+    icon: 'icon-flag-fill',
     children: [
       {
         title: '回访',

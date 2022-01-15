@@ -2,11 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-14 16:58:22
+ * @Last Modified time: 2022-01-15 14:11:36
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
+
+import { BellOutlined } from '@/icons';
 
 import './index.less';
 
@@ -22,10 +24,10 @@ class MessageCenter extends Component<any> {
 
   render(): React.ReactElement {
     return (
-      <div className={classNames('app-theme-setting')}>
+      <div className={classNames('app-message-center')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
           <span>
-            <i className={classNames('iconfont', 'icon-bell')} />
+            <BellOutlined className={`icon`} />
           </span>
         </Dropdown>
       </div>

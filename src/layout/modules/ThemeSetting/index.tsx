@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-14 19:04:21
+ * @Last Modified time: 2022-01-15 14:13:24
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -10,6 +10,8 @@ import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 
 import DarkTheme from './DarkTheme';
 import ThemeColor from './ThemeColor';
+
+import { SkinOutlined } from '@/icons';
 
 import './index.less';
 
@@ -36,7 +38,7 @@ class ThemeSetting extends Component<any> {
           trigger={['click']}
         >
           <span>
-            <i className={classNames('iconfont', 'icon-skin')} />
+            <SkinOutlined className={`icon`} />
           </span>
         </Dropdown>
       </div>

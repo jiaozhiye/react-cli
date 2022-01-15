@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 12:45:18
+ * @Last Modified time: 2022-01-15 14:07:07
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -12,6 +12,8 @@ import { createLocaleLang } from '@/store/actions';
 import { changeLocale } from '@/locale';
 import { AppState } from '@/store/reducers/app';
 import { appTool } from '@/hoc';
+
+import { TranslationOutlined } from '@/icons';
 
 import './index.less';
 
@@ -52,7 +54,7 @@ class LangSetting extends Component<any> {
       <div className={classNames('app-lang-setting')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
           <span>
-            <i className={classNames('iconfont', 'icon-earth')} />
+            <TranslationOutlined className={`icon`} />
           </span>
         </Dropdown>
       </div>
