@@ -4,11 +4,13 @@
  * @Last Modified by: 焦质晔
  * @Last Modified time: 2022-01-15 13:52:24
  */
-import React, { Component } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { QmForm, QmTable } from '@jiaozhiye/qm-design-react';
 
 import css from './index.module.less';
+
+import tableData from '@/mock/tableData';
 
 import {
   getTableData,
