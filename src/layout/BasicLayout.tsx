@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { renderRoutes } from '../router';
-import { Layout } from 'antd';
+import { Layout } from '@jiaozhiye/qm-design-react';
 import { matchRoutes } from '@/router';
 import config from '@/config';
 

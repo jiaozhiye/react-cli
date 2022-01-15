@@ -17,7 +17,7 @@ import { sleep, Message } from '@/utils';
 import { setStarMenuList } from '@/api/application';
 import { AppState } from '@/store/reducers/app';
 
-import { Select, Tabs } from 'antd';
+import { Select, Tabs } from '@jiaozhiye/qm-design-react';
 import { StarOutlined, StarFilled } from '@ant-design/icons';
 
 import './index.less';

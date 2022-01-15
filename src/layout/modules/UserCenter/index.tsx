@@ -6,8 +6,8 @@
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Menu, Dropdown } from 'antd';
-import { Avatar } from 'antd';
+import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
+import { Avatar } from '@jiaozhiye/qm-design-react';
 import { UserOutlined, SettingOutlined, ClearOutlined, LogoutOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';

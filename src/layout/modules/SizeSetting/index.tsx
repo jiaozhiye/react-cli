@@ -6,7 +6,7 @@
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Menu, Dropdown } from 'antd';
+import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 import { connect } from 'react-redux';
 import { createComponentSize } from '@/store/actions';
 import { t } from '@/locale';

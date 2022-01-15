@@ -5,7 +5,7 @@
  * @Last Modified time: 2021-07-07 12:40:26
  */
 import React from 'react';
-import { message, notification, Modal } from 'antd';
+import { message, notification, Modal } from '@jiaozhiye/qm-design-react';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { debounce, throttle, round } from 'lodash-es';
 import { t } from '@/locale';

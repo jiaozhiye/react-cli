@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { notification, message, ConfigProvider } from 'antd';
+import { notification, message, QmConfigProvider } from '@jiaozhiye/qm-design-react';
 import client from 'webpack-custom-theme/client';
 import '@/locale/setting';
 
@@ -23,20 +23,12 @@ import { changeLocale } from '@/locale';
 import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
 import { AppState } from '@/store/reducers/app';
 
-import zhCN from 'antd/lib/locale/zh_CN';
-import enGB from 'antd/lib/locale/en_GB';
-
 import 'antd/dist/antd.less';
 // import 'antd/dist/antd.dark.less'; // 引入官方提供的暗色 less 样式入口文件
 // import 'antd/dist/antd.compact.less'; // 引入官方提供的紧凑 less 样式入口文件
 import '@/assets/css/style.less';
 import '@/assets/css/antd-ui.less';
 import '@/assets/css/iconfont.less';
-
-const messages = {
-  [`zh-cn`]: zhCN,
-  [`en`]: enGB,
-};
 
 notification.config({
   duration: 4.5,
@@ -50,6 +42,7 @@ message.config({
 @withRouter
 class UseConfig extends Component<any> {
   componentDidMount() {
+    console.log(1234, this.props.themeColor);
     this.getDictData();
     const localTheme = localStorage.getItem('theme_color');
     if (localTheme && localTheme !== this.props.themeColor) {
@@ -117,13 +110,13 @@ class UseConfig extends Component<any> {
   render(): React.ReactElement {
     const { pathname } = this.props.location;
     return (
-      <ConfigProvider locale={messages[this.props.lang]} componentSize={this.props.size}>
+      <QmConfigProvider locale={this.props.lang} size={this.props.size}>
         {isIframe(pathname) ? (
           <section className={classNames('app-iframe')}>{this.props.children}</section>
         ) : (
           this.props.children
         )}
-      </ConfigProvider>
+      </QmConfigProvider>
     );
   }
 }

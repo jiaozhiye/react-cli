@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
-import { Menu } from 'antd';
+import { Menu } from '@jiaozhiye/qm-design-react';
 import { StarFilled } from '@ant-design/icons';
 import { t } from '@/locale';
 

@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { AppState } from '@/store/reducers/app';
 
-import { Menu } from 'antd';
+import { Menu } from '@jiaozhiye/qm-design-react';
 
 import './index.less';
 

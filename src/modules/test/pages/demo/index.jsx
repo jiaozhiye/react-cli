@@ -6,7 +6,7 @@
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Input, DatePicker } from 'antd';
+import { Input, DatePicker } from '@jiaozhiye/qm-design-react';
 
 import css from './index.module.less';
 

@@ -5,7 +5,7 @@
  * @Last Modified time: 2021-07-20 16:34:16
  */
 import React, { Component } from 'react';
-import { Spin } from 'antd';
+import { Spin } from '@jiaozhiye/qm-design-react';
 
 import './index.less';
 

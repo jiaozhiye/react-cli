@@ -6,7 +6,7 @@
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
-import { Spin } from 'antd';
+import { Spin } from '@jiaozhiye/qm-design-react';
 import { matchRoutes } from '@/router';
 import { nextTick, Message } from '@/utils';
 import { t } from '@/locale';
