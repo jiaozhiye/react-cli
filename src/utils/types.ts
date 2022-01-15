@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 14:26:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-14 20:26:02
+ * @Last Modified time: 2022-01-15 14:52:20
  */
 import type React from 'react';
 
@@ -27,6 +27,12 @@ export type ComponentSize = 'large' | 'middle' | 'small';
 export type Language = 'en' | 'zh-cn';
 
 export type ThemeType = 'light' | 'dark';
+
+export type Device = 'desktop' | 'mobile';
+
+export type TimeoutHandle = ReturnType<typeof setTimeout>;
+
+export type IntervalHandle = ReturnType<typeof setInterval>;
 
 export type Dictionary = {
   text: string;

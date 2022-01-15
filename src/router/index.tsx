@@ -2,11 +2,12 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:02:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 14:03:16
+ * @Last Modified time: 2022-01-15 15:19:00
  */
 import React, { Suspense } from 'react';
 import { Router, Switch, Route, Redirect, matchPath } from 'react-router-dom';
 import { getToken } from '@/utils/cookies';
+import config from '../config';
 
 import PrivateRoute from '@/router/PrivateRoute';
 import ErrorBoundary from '@/pages/errorBoundary';
@@ -24,6 +25,11 @@ export const isLogin = (): boolean => {
   } else {
     return !!getToken();
   }
+};
+
+// 灰度判断
+export const isGray = (): boolean => {
+  return config.baseUrl.startsWith('/gray');
 };
 
 // iframe 判断

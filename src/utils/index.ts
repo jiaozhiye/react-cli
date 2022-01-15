@@ -2,12 +2,12 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 14:22:31
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-07 12:40:26
+ * @Last Modified time: 2022-01-15 14:51:32
  */
 import React from 'react';
 import { message, notification, Modal } from '@jiaozhiye/qm-design-react';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { debounce, throttle, round } from 'lodash-es';
+import { debounce, throttle, round, cloneDeep, merge } from 'lodash-es';
 import { t } from '@/locale';
 import { AnyFunction } from './types';
 
@@ -55,7 +55,7 @@ export const errorCapture = async (asyncFn: AnyFunction<any>, ...params: any[]):
 };
 
 // 函数的 防抖 和 节流，使用 lodash 工具函数
-export { debounce, throttle, round };
+export { debounce, throttle, round, cloneDeep, merge };
 
 /**
  * @description 判断表单控件的值是否为空
@@ -158,4 +158,21 @@ export const Confirm = async (msg = ''): Promise<void> => {
       },
     });
   });
+};
+
+/**
+ * @description 操作面板关闭前的提示
+ * @param {boolean} allowClose 是否允许关闭
+ * @returns Promise
+ */
+export const confirmBeforeClose = async (allowClose: boolean): Promise<void> => {
+  if (!allowClose) {
+    try {
+      await Confirm(t('app.global.leaveText'));
+      return Promise.resolve();
+    } catch (err) {
+      return Promise.reject();
+    }
+  }
+  return Promise.resolve();
 };

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 15:39:35
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-19 13:13:20
+ * @Last Modified time: 2022-01-15 15:19:57
  */
 import axios, {
   AxiosInstance,
@@ -12,11 +12,11 @@ import axios, {
   Canceler,
 } from 'axios';
 import qs from 'qs';
-import config from '@/config';
 import store from '@/store';
 import { createSignOut } from '@/store/actions';
 import { getToken } from '@/utils/cookies';
 import { Notification } from '@/utils';
+import { isGray } from '@/router';
 import { t } from '@/locale';
 
 type IRequestConfig = AxiosRequestConfig & {
@@ -31,18 +31,18 @@ type IAxiosInstance = AxiosInstance & {
 
 type IRequestHeader = {
   jwt: string;
-  Authorization: string;
   lang: string;
   userAgent: string;
+  gray?: string;
 };
 
 // 自定义扩展 header 请求头
 const getConfigHeaders = (): IRequestHeader => {
   return {
     jwt: getToken(), // token
-    Authorization: getToken(), // token
     lang: localStorage.getItem('lang') || 'zh-cn', // 多语言
     userAgent: 'pc', // 设备
+    gray: isGray() ? '1' : '0', // 灰度
   };
 };
 
@@ -88,9 +88,19 @@ const removeLockingRequest = (config: IRequestConfig): void => {
   }
 };
 
+const getErrorText = (code?: number): string => {
+  const statusCode = [
+    200, 201, 202, 204, 400, 401, 403, 404, 406, 410, 412, 422, 500, 502, 503, 504,
+  ];
+  if (!statusCode.includes(code as number)) {
+    return '';
+  }
+  return t(`app.fetch.errorCode.${code}`);
+};
+
 // 创建 axios 实例
 const instance: IAxiosInstance = axios.create({
-  baseURL: config.baseUrl,
+  baseURL: '/',
   timeout: 1000 * 20,
   withCredentials: false, // 跨域请求是否携带 cookie
   paramsSerializer: (params): string => {
@@ -103,7 +113,7 @@ const instance: IAxiosInstance = axios.create({
 const errorHandler = (error: AxiosError): Promise<AxiosError> => {
   const { isAxiosError, config = {}, response = {} } = error;
   const { status, statusText = '' } = response as AxiosResponse;
-  const errortext = t('app.fetch.errorCode')[status] || statusText || t('app.fetch.errorText');
+  const errortext = getErrorText(status) || statusText || t('app.fetch.errorText');
   removePendingRequest(config);
   removeLockingRequest(config);
   isAxiosError && Notification(errortext, 'error', 10);
@@ -129,14 +139,18 @@ instance.interceptors.request.use((config: IRequestConfig) => {
 }, errorHandler);
 
 // 响应拦截
-instance.interceptors.response.use((response) => {
+instance.interceptors.response.use((response: AxiosResponse) => {
   const { config, data } = response;
   removePendingRequest(config);
   removeLockingRequest(config);
+  // 文件流，直接过
+  if (config.responseType === 'blob') {
+    return response;
+  }
   // 请求异常提示信息
   if (data.code !== 200) {
     // token 过期，需要重新登录
-    if (data.code === 40105) {
+    if (data.code === 40105 || data.code === 40108) {
       store.dispatch(createSignOut() as any);
     }
     data.msg && Notification(data.msg, 'error', 10);

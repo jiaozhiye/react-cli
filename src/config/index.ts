@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 12:43:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 12:30:36
+ * @Last Modified time: 2022-01-15 15:10:43
  */
 import { ComponentSize, Language, ThemeType } from '@/utils/types';
 import { t } from '@/locale';
@@ -24,6 +24,7 @@ type IConfig = {
   showSizeSelect: boolean;
   showHelperDoc: boolean;
   showNotification: boolean;
+  openWatermark: boolean;
   openBuryPoint: boolean;
 };
 
@@ -44,5 +45,6 @@ export default {
   showSizeSelect: true, // 是否显示尺寸选择
   showHelperDoc: true, // 是否显示帮助
   showNotification: true, // 是否显示通知
+  openWatermark: true, // 是否开启水印功能
   openBuryPoint: false, // 是否开启埋点
 } as IConfig;

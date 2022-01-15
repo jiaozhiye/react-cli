@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 14:01:41
+ * @Last Modified time: 2022-01-15 15:11:08
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -88,7 +88,7 @@ class BasicLayout extends Component<any> {
             {renderRoutes(routes)}
             {this.createIframeView(route)}
           </Content>
-          <Watermark />
+          {config.openWatermark && <Watermark />}
         </Layout>
       </Layout>
     );
