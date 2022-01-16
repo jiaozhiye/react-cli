@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 14:17:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-16 11:46:11
+ * @Last Modified time: 2022-01-16 18:13:23
  */
 .app-layout {
   height: 100%;
@@ -41,6 +41,26 @@
     .app-logo {
       height: 48px;
     }
+    .app-all-nav {
+      .ant-menu-item {
+        height: 28px;
+        line-height: 28px;
+      }
+    }
+    .app-star-nav {
+      .ant-menu-submenu-title,
+      .ant-menu-item {
+        height: 28px;
+        line-height: 28px;
+      }
+    }
+    .app-side-menu {
+      .ant-menu-submenu-title,
+      .ant-menu-item {
+        height: 28px;
+        line-height: 28px;
+      }
+    }
   }
   .ant-layout {
     position: relative;
@@ -71,6 +91,7 @@
   }
   // 52  48  44
   &__sm {
+    @item-height: 24px;
     .ant-layout-header {
       height: 44px;
     }
@@ -78,15 +99,56 @@
       .app-logo {
         height: 44px;
       }
+      .app-all-nav {
+        .ant-menu-item {
+          height: @item-height;
+          line-height: @item-height;
+        }
+      }
+      .app-star-nav {
+        .ant-menu-submenu-title,
+        .ant-menu-item {
+          height: @item-height;
+          line-height: @item-height;
+        }
+      }
+      .app-side-menu {
+        .ant-menu-submenu-title,
+        .ant-menu-item {
+          height: @item-height;
+          line-height: @item-height;
+        }
+      }
     }
   }
   &__lg {
+    @item-height: 32px;
     .ant-layout-header {
       height: 52px;
     }
     .ant-layout-sider {
       .app-logo {
         height: 52px;
+      }
+      .app-all-nav {
+        .ant-menu-item {
+          height: @item-height;
+          line-height: @item-height;
+        }
+      }
+      .app-star-nav {
+        .ant-menu-submenu-title,
+        .ant-menu-item {
+          height: @item-height;
+          line-height: @item-height;
+        }
+      }
+      .app-side-menu {
+        .ant-menu-submenu-title,
+        .ant-menu-item {
+          height: @item-height;
+          line-height: @item-height;
+        }
       }
     }
   }
