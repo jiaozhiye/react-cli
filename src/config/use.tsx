@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-16 18:33:52
+ * @Last Modified time: 2022-01-16 18:42:05
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -43,25 +43,20 @@ message.config({
 @withRouter
 class UseConfig extends Component<any> {
   componentDidMount() {
-    this.getDictData();
     const localTheme = localStorage.getItem('theme_color');
     if (localTheme && localTheme !== this.props.themeColor) {
       this.themeColorChangeHandle(localTheme);
     }
-    window.addEventListener('message', this.messageEventHandle, false);
     if (isIframe(this.props.location.pathname)) {
+      this.props.createDictData();
       document.addEventListener('click', this.clickEventHandle, false);
     }
+    window.addEventListener('message', this.messageEventHandle, false);
   }
 
   componentWillUnmount() {
     window.removeEventListener('message', this.messageEventHandle);
     document.removeEventListener('click', this.clickEventHandle);
-  }
-
-  getDictData() {
-    if (!isIframe(this.props.location.pathname)) return;
-    this.props.createDictData();
   }
 
   themeColorChangeHandle(color) {
@@ -109,6 +104,7 @@ class UseConfig extends Component<any> {
 
   render(): React.ReactElement {
     const { pathname } = this.props.location;
+
     return (
       <QmConfigProvider locale={this.props.lang} size={this.props.size}>
         {isIframe(pathname) ? (
