@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-16 10:01:59
+ * @Last Modified time: 2022-01-16 18:24:50
  */
 'use strict';
 const path = require('path');
@@ -18,7 +18,8 @@ module.exports = {
   dev: {
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: `//${HOST}:${PORT}/`,
+    assetsPublicPath:
+      process.env.ENV_CONFIG === 'gray' ? `//${HOST}:${PORT}/gray/` : `//${HOST}:${PORT}/`,
 
     // 请求代理配置 -> can be modified
     proxyTable: {

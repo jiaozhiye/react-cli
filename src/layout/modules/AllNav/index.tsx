@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 16:55:29
+ * @Last Modified time: 2022-01-16 18:20:00
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -53,8 +53,12 @@ class AllNav extends Component<any> {
   render(): React.ReactElement {
     const { collapsed } = this.props;
     const { visible } = this.state;
+    const cls = {
+      [`app-all-nav`]: true,
+      selected: visible,
+    };
     return (
-      <div className={classNames('app-all-nav')}>
+      <div className={classNames(cls)}>
         <Menu mode="inline" theme="dark" selectable={false}>
           <Menu.Item
             key="all-nav"
