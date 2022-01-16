@@ -2,21 +2,19 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 12:29:01
+ * @Last Modified time: 2022-01-16 10:01:59
  */
 'use strict';
 const path = require('path');
-const subEnv = require('../config/sub.env');
+const appConf = require('./app.conf');
+const envConf = require('./env.conf');
 
 // 配置常量
 const HOST = 'localhost';
 const PORT = 9020;
 
 module.exports = {
-  moduleName: 'app', // 模块名
-
-  primaryColor: '#1890ff', // 主题色
-
+  ...appConf,
   dev: {
     // Paths
     assetsSubDirectory: 'static',
@@ -56,8 +54,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath:
-      process.env.ENV_CONFIG === 'gray' ? `${subEnv.host}/gray/` : `${subEnv.host}/`,
+    assetsPublicPath: `${envConf.host}/`,
 
     // Source Maps
     productionSourceMap: false,

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 10:46:28
+ * @Last Modified time: 2022-01-16 10:04:56
  */
 'use strict';
 
@@ -10,7 +10,7 @@ const path = require('path');
 const utils = require('./utils');
 const webpack = require('webpack');
 const config = require('../config');
-const subEnv = require('../config/sub.env');
+const envConf = require('../config/env.conf');
 const createThemeColorPlugin = require('./theme.plugin');
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
 
@@ -18,10 +18,10 @@ const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlug
 const createModuleRemotes = () => {
   const result = {};
   // 规则：子模块: 子模块@域名:端口号/remoteEntry.js
-  // dms: `dms@${subEnv.dms}/remoteEntry.js`
-  Object.keys(subEnv).forEach((key) => {
+  // dms: `dms@${envConf.dms}/remoteEntry.js`
+  Object.keys(envConf).forEach((key) => {
     if (key === 'host') return;
-    result[key] = `${key}@${subEnv[key]}/remoteEntry.js`;
+    result[key] = `${key}@${envConf[key]}/remoteEntry.js`;
   });
   return result;
 };
@@ -118,7 +118,7 @@ module.exports = {
     }),
     createThemeColorPlugin(),
     new ModuleFederationPlugin({
-      name: config.moduleName,
+      name: config.name,
       remotes: createModuleRemotes(),
       shared: ['react', 'react-dom'],
     }),

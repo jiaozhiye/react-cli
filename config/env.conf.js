@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2020-12-03 09:16:26
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-06-30 10:31:25
+ * @Last Modified time: 2021-12-09 15:01:46
  */
 const config = {
   dev: {
@@ -29,8 +29,13 @@ const config = {
   },
   prod: {
     host: '',
-    dms: '//localhost:9021',
-    tds: '//localhost:9022',
+    dms: 'http://dms.faw.com',
+    tds: 'http://tds.faw.com',
+  },
+  gray: {
+    host: '/gray',
+    dms: 'http://dms.faw.com/gray',
+    tds: 'http://tds.faw.com/gray',
   },
 };
 

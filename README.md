@@ -39,7 +39,9 @@ $ npm run build
 | dms    | DMS 子应用 | localhost | 9021   |
 | tds    | TDS 子应用 | localhost | 9022   |
 
-注意：架构 维护 config/sub.env.js 文件(子应用注册)
+1. 架构维护 config/app.conf.js => 定义当前应用
+2. 架构维护 config/env.conf.js => 注册子应用
+3. 架构维护 src/api/fetch.ts => 设置 header 请求头
 
 ## 自定义主题
 
