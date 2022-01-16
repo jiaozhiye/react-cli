@@ -7,11 +7,14 @@
 import { createStore, applyMiddleware, compose, Store } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import { reducers } from './reducers';
-import { AppState } from './reducers/app';
+import type { AppState } from './reducers/app';
 
 // 引入 redux devtools
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store: Store<AppState> = createStore(reducers, composeEnhancers(applyMiddleware(thunkMiddleware)));
+const store: Store<AppState> = createStore(
+  reducers,
+  composeEnhancers(applyMiddleware(thunkMiddleware))
+);
 
 export default store;

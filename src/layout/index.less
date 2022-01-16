@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 14:17:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 09:39:42
+ * @Last Modified time: 2022-01-16 11:46:11
  */
 .app-layout {
   height: 100%;
@@ -33,6 +33,7 @@
   .ant-layout-sider {
     position: relative;
     z-index: 1;
+    transition: width 0.2s, min-width 0.2s, max-width 0.2s;
     .ant-layout-sider-children {
       display: flex;
       flex-direction: column;
@@ -55,6 +56,18 @@
         height: calc(100% + @moduleMargin);
       }
     }
+  }
+  &.is-mobile > .ant-layout-sider {
+    position: fixed;
+    height: 100%;
+    z-index: 10;
+    transition: transform 0.3s ease;
+  }
+  &.show-sidebar > .ant-layout-sider {
+    transform: translate3d(0, 0, 0);
+  }
+  &.hide-sidebar > .ant-layout-sider {
+    transform: translate3d(-200px, 0, 0);
   }
   // 52  48  44
   &__sm {

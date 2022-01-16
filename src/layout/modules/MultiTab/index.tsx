@@ -13,7 +13,7 @@ import { t } from '@/locale';
 
 import { connect } from 'react-redux';
 import { createTabMenu, createIframeMenu } from '@/store/actions';
-import { AppState } from '@/store/reducers/app';
+import type { AppState } from '@/store/reducers/app';
 
 import { Tabs } from '@jiaozhiye/qm-design-react';
 

@@ -21,7 +21,7 @@ import {
 import { isIframe } from '@/router/index';
 import { changeLocale } from '@/locale';
 import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
-import { AppState } from '@/store/reducers/app';
+import type { AppState } from '@/store/reducers/app';
 
 import '@/assets/css/reset.less';
 import '@/assets/css/style.less';

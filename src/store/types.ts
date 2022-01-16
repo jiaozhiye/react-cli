@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:48:42
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 08:41:50
+ * @Last Modified time: 2022-01-16 10:37:27
  */
 // 系统导航菜单
 export const SIDE_MENU = 'SIDE_MENU';
@@ -30,6 +30,9 @@ export const THEME_COLOR = 'THEME_COLOR';
 
 // 主题模式
 export const THEME_TYPE = 'THEME_TYPE';
+
+// 设备类型
+export const DEVICE = 'DEVICE';
 
 // 退出登录
 export const SIGN_OUT = 'SIGN_OUT';

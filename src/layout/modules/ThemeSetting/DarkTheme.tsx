@@ -10,7 +10,7 @@ import { CheckOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { createThemeType } from '@/store/actions';
 import { t } from '@/locale';
-import { AppState } from '@/store/reducers/app';
+import type { AppState } from '@/store/reducers/app';
 
 import './index.less';
 

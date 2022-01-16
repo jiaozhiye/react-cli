@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-16 10:23:53
+ * @Last Modified time: 2022-01-16 10:37:49
  */
 import {
   SIDE_MENU,
@@ -15,6 +15,7 @@ import {
   THEME_COLOR,
   THEME_TYPE,
   SIGN_OUT,
+  DEVICE,
 } from '../types';
 import { getMenuList, getDictList, getStarMenuList } from '@/api/application';
 import { getToken, removeToken } from '@/utils/cookies';
@@ -174,3 +175,6 @@ export const createThemeColor = (payload) => ({ type: THEME_COLOR, payload });
 
 // 设置主题模式
 export const createThemeType = (payload) => ({ type: THEME_TYPE, payload });
+
+// 设置主题模式
+export const createDeviceType = (payload) => ({ type: DEVICE, payload });

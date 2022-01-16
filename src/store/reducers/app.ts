@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 08:39:20
+ * @Last Modified time: 2022-01-16 10:36:50
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -16,10 +16,11 @@ import {
   THEME_COLOR,
   THEME_TYPE,
   SIGN_OUT,
+  DEVICE,
 } from '../types';
 import { t } from '@/locale';
 import config from '@/config';
-import { ComponentSize, Dictionary, ThemeType } from '@/utils/types';
+import { ComponentSize, Device, Dictionary, ThemeType } from '@/utils/types';
 
 export type ISideMenu = {
   key: string;
@@ -40,6 +41,7 @@ export type ICacheMenu = {
 type IState = {
   size: ComponentSize;
   lang: string;
+  device: Device;
   themeType: ThemeType;
   themeColor: string;
   sideMenus: ISideMenu[];
@@ -73,6 +75,7 @@ const createFlattenMenus = <T extends ISideMenu>(list: T[]): T[] => {
 const initState: IState = {
   size: (localStorage.getItem('size') || config.size) as ComponentSize, // 组件尺寸
   lang: localStorage.getItem('lang') || config.lang, // 多语言
+  device: 'desktop', // 设备类型
   themeType: config.themeType, // 主题模式
   themeColor: process.env.THEME_COLOR || '', // 主题颜色
   sideMenus: [], // 侧栏菜单数据
@@ -154,6 +157,13 @@ const setThemeType = (state, payload) => {
   });
 };
 
+// 设置设备类型
+const setDeviceType = (state, payload) => {
+  return Object.assign({}, state, {
+    device: payload,
+  });
+};
+
 // 退出登录
 const setSignOut = (state, payload) => {
   return Object.assign({}, state, {
@@ -182,6 +192,8 @@ export const appReducer = (state = initState, action) => {
       return setThemeColor(state, action.payload);
     case THEME_TYPE:
       return setThemeType(state, action.payload);
+    case DEVICE:
+      return setDeviceType(state, action.payload);
     case SIGN_OUT:
       return setSignOut(state, action.payload);
     default:

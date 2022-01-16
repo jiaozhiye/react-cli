@@ -10,7 +10,7 @@ import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 import { connect } from 'react-redux';
 import { createComponentSize } from '@/store/actions';
 import { t } from '@/locale';
-import { AppState } from '@/store/reducers/app';
+import type { AppState } from '@/store/reducers/app';
 import { appTool } from '@/hoc';
 
 import { FontSizeOutlined } from '@/icons';

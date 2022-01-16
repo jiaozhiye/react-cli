@@ -9,7 +9,7 @@ import { Link, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { connect } from 'react-redux';
-import { AppState } from '@/store/reducers/app';
+import type { AppState } from '@/store/reducers/app';
 
 import { Menu } from '@jiaozhiye/qm-design-react';
 

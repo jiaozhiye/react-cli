@@ -10,7 +10,7 @@ import { CheckOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { createThemeColor } from '@/store/actions';
 import { t } from '@/locale';
-import { AppState } from '@/store/reducers/app';
+import type { AppState } from '@/store/reducers/app';
 
 // 自定义主题
 import client from 'webpack-custom-theme/client';

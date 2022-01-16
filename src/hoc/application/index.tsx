@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createIframeMenu } from '@/store/actions';
 import store from '@/store';
-import { AppState } from '@/store/reducers/app';
+import type { AppState } from '@/store/reducers/app';
 import { Nullable } from '@/utils/types';
 
 export default (WrappedComponent: React.ComponentType<any>): any => {

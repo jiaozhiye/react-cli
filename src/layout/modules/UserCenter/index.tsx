@@ -12,7 +12,7 @@ import { UserOutlined, SettingOutlined, ClearOutlined, LogoutOutlined } from '@a
 import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';
 import { t } from '@/locale';
-import { AppState } from '@/store/reducers/app';
+import type { AppState } from '@/store/reducers/app';
 
 import './index.less';
 
