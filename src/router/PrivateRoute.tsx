@@ -96,7 +96,7 @@ class PrivateRoute extends Component<any> {
     const { menuLoaded } = this.state;
     const { path } = this.props.route;
 
-    document.title = `${config.systemName}-${route.meta?.title || '404'}` || config.systemName;
+    document.title = `${config.title}-${route.meta?.title || '404'}` || config.title;
 
     if (!menuLoaded && !this.isMatch(whiteList, path)) {
       return <Spin />;

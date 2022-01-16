@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 13:21:36
+ * @Last Modified time: 2022-01-16 10:23:53
  */
 import {
   SIDE_MENU,
@@ -17,12 +17,16 @@ import {
   SIGN_OUT,
 } from '../types';
 import { getMenuList, getDictList, getStarMenuList } from '@/api/application';
-import { removeToken } from '@/utils/cookies';
+import { getToken, removeToken } from '@/utils/cookies';
 import { t } from '@/locale';
 import routes from '@/router/config';
 import localDict from '@/utils/localDict';
 import { Dictionary } from '@/utils/types';
-import { ISideMenu } from '@/store/reducers/app'
+import { ISideMenu } from '@/store/reducers/app';
+
+const defaultMenuList: Array<ISideMenu & { hideInMenu: boolean }> = [
+  { title: t('app.global.dashboard'), key: '/home', hideInMenu: true },
+];
 
 // 设置导航菜单
 export const createMenuList =
@@ -36,7 +40,7 @@ export const createMenuList =
       return true;
     }
 
-    let data: Array<ISideMenu & { hideInMenu: boolean }> = [{ title: t('app.global.dashboard'), key: '/home', hideInMenu: true }];
+    let data: Array<ISideMenu & { hideInMenu: boolean }> = [];
     if (process.env.MOCK_DATA === 'true') {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const res = require('@/mock/sideMenu').default;
@@ -45,7 +49,7 @@ export const createMenuList =
       try {
         const res: any = await getMenuList({});
         if (res.code === 200) {
-          data = Array.isArray(res.data) && res.data.length ? res.data : data;
+          data = Array.isArray(res.data) && res.data.length ? res.data : defaultMenuList;
         }
       } catch (err) {
         return false;
@@ -84,19 +88,18 @@ export const createDictData =
       return;
     }
 
-    // 每隔 24h 获取一次数据字典
-    const lastTime: number = JSON.parse(localStorage.getItem('dict') as string)?._t ?? 0;
-    if (+new Date() - lastTime < 24 * 3600 * 1000) return;
+    const lastToken = JSON.parse(localStorage.getItem('dict') as string)?._t ?? '';
+    if (getToken() === lastToken) return;
     // 数据
-    let data: Record<string, Array<Dictionary> | number> = {};
+    let data: Record<string, Array<Dictionary> | string> = {};
     if (process.env.MOCK_DATA === 'true') {
-      data = { _t: +new Date(), ...localDict };
+      data = { _t: getToken(), ...localDict };
     } else {
       const res: any = await getDictList({});
       if (res.code === 200) {
         // 数据字典规则：如果有重复的 Code，服务端覆盖客户端
         data = {
-          _t: +new Date(),
+          _t: getToken(),
           ...localDict,
           ...res.data.dict,
         };

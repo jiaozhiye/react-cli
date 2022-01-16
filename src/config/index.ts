@@ -2,13 +2,15 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 12:43:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 15:10:43
+ * @Last Modified time: 2022-01-16 10:13:16
  */
-import { ComponentSize, Language, ThemeType } from '@/utils/types';
+import config from '../../config/app.conf';
 import { t } from '@/locale';
+import type { ComponentSize, Language, ThemeType } from '@/utils/types';
 
 type IConfig = {
-  systemName: string;
+  system: string;
+  title: string;
   baseUrl: string;
   lang: Language;
   size: ComponentSize;
@@ -29,7 +31,8 @@ type IConfig = {
 };
 
 export default {
-  systemName: t('app.global.title'),
+  system: config.name,
+  title: t('app.global.title'),
   baseUrl: process.env.ENV_CONFIG === 'gray' ? '/gray' : '/',
   lang: 'zh-cn', // 语言
   size: 'middle', // 尺寸
