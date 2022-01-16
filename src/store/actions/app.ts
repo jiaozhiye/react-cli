@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-16 10:37:49
+ * @Last Modified time: 2022-01-16 18:46:24
  */
 import {
   SIDE_MENU,
@@ -176,5 +176,5 @@ export const createThemeColor = (payload) => ({ type: THEME_COLOR, payload });
 // 设置主题模式
 export const createThemeType = (payload) => ({ type: THEME_TYPE, payload });
 
-// 设置主题模式
+// 设置设备类型
 export const createDeviceType = (payload) => ({ type: DEVICE, payload });
