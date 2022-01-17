@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 12:43:26
+ * @Last Modified time: 2022-01-17 11:21:10
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -13,6 +13,17 @@ import { Dictionary, Nullable } from '@/utils/types';
 export default (WrappedComponent: React.ComponentType<any>): any => {
   class C extends Component<any> {
     static displayName = `DictTool(${WrappedComponent.displayName || WrappedComponent.name})`;
+
+    /**
+     * @description 获取本地存储的数据字典
+     * @param
+     * @returns {object}
+     */
+    getLocalDict = (): Record<string, Dictionary[]> => {
+      return Object.keys(this.props.dict).length
+        ? this.props.dict
+        : JSON.parse(localStorage.getItem('dict') as string) || {};
+    };
 
     /**
      * @description 创建数据字典列表，支持过滤
@@ -27,12 +38,11 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       showStoped = false
     ): Dictionary[] => {
       const vals: string[] = Array.isArray(excludes) ? excludes : [excludes];
+      const dict = this.getLocalDict();
       let res: Dictionary[] = [];
-      if (Array.isArray(this.props.dict[code])) {
+      if (Array.isArray(dict[code])) {
         // 过滤已停用的数据字典项
-        res = !showStoped
-          ? this.props.dict[code].filter((x) => (x as any).stoped !== '1')
-          : this.props.dict[code];
+        res = !showStoped ? dict[code].filter((x) => (x as any).stoped !== '1') : dict[code];
         res = res.map((x) => ({ text: x.text, value: x.value }));
         res = res.filter((x) => !vals.includes(x.value.toString()));
       }
@@ -51,11 +61,12 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       if (!code) {
         return res;
       }
-      if (Array.isArray(this.props.dict[code])) {
+      const dict = this.getLocalDict();
+      if (Array.isArray(dict[code])) {
         // 过滤已停用的数据字典项
         const dicts: Dictionary[] = !showStoped
-          ? this.props.dict[code].filter((x) => (x as any).stoped !== '1')
-          : this.props.dict[code];
+          ? dict[code].filter((x) => (x as any).stoped !== '1')
+          : dict[code];
         const target: Nullable<Dictionary> = dicts.find((x) => x.value == val) || null;
         res = target ? target.text : val.toString();
       }
