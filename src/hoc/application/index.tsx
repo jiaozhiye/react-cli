@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 12:40:49
+ * @Last Modified time: 2022-01-17 13:58:40
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -43,10 +43,9 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       } = store.getState();
       const target = iframeMenus.find((x) => x.key === pathname);
       this.props.createIframeMenu(pathname, 'remove');
-      setTimeout(
-        () => this.props.createIframeMenu({ key: pathname, value: target?.value }, 'add'),
-        10
-      );
+      setTimeout(() => {
+        this.props.createIframeMenu({ key: pathname, value: target?.value }, 'add');
+      }, 10);
     };
 
     openView = (fullpath: string): void => {
