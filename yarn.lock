@@ -1258,10 +1258,10 @@
   resolved "https://registry.npmmirror.com/@humanwhocodes/object-schema/download/@humanwhocodes/object-schema-1.2.1.tgz?cache=0&sync_timestamp=1635879707386&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2F%40humanwhocodes%2Fobject-schema%2Fdownload%2F%40humanwhocodes%2Fobject-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha1-tSBSnsIdjllFoYUd/Rwy6U45/0U=
 
-"@jiaozhiye/qm-design-react@^1.0.0-beta.11":
-  version "1.0.0-beta.11"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/download/@jiaozhiye/qm-design-react-1.0.0-beta.11.tgz#c22bc5bcd276380f88b6791f26c6467b74b2cf3c"
-  integrity sha512-3pgdw1srZT9dXVQqC6uxTJrBw2Q6/CboVJfbx/dG+7IBKYET0I9tTpW+4rIkQQNrPkg2eQoTRrdJySX2wL1kww==
+"@jiaozhiye/qm-design-react@^1.0.0-beta.12":
+  version "1.0.0-beta.12"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/download/@jiaozhiye/qm-design-react-1.0.0-beta.12.tgz#520f45d039f503ec29c40c7d039835eb96015b22"
+  integrity sha512-vDpmisdvuGWFpPcT1fIRxi1WcSsKduyafd84CgqAfgoyWv1R9aVldQOezW7ipAI8yH+ewL81jDDbSKSrM11QHA==
   dependencies:
     add-dom-event-listener "^1.1.0"
     antd "^4.18.4"
