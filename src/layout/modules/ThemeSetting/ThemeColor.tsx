@@ -99,6 +99,7 @@ export default connect(
   (state: AppState) => ({
     themeColor: state.app.themeColor,
     iframeMenus: state.app.iframeMenus,
+    lang: state.app.lang,
   }),
   {
     createThemeColor,

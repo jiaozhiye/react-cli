@@ -50,6 +50,7 @@ class StarNav extends Component<any> {
 export default connect(
   (state: AppState) => ({
     starMenus: state.app.starMenus,
+    lang: state.app.lang,
   }),
   {
     createStarMenu,

@@ -67,8 +67,8 @@ export default {
       weChat: 'WeChat login',
     },
     theme: {
-      color: '主题颜色',
-      type: '主题模式',
+      color: 'Theme color',
+      type: 'Theme type',
     },
     fetch: {
       errorCode: {
