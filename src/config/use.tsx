@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-16 18:42:05
+ * @Last Modified time: 2022-02-11 10:23:11
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -21,6 +21,7 @@ import {
 import { isIframe } from '@/router/index';
 import { changeLocale } from '@/locale';
 import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
+import config from '@/config/envMaps';
 import type { AppState } from '@/store/reducers/app';
 
 import '@/assets/css/reset.less';
@@ -78,7 +79,7 @@ class UseConfig extends Component<any> {
   }
 
   clickEventHandle = () => {
-    window.parent.postMessage({ type: 'outside_click', data: '' }, '*');
+    window.parent.postMessage({ type: 'outside_click', data: '' }, config.domain);
   };
 
   messageEventHandle = ({ data }) => {

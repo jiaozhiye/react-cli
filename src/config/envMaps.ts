@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 21:03:36
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-16 09:59:40
+ * @Last Modified time: 2022-02-11 10:20:46
  */
 import envConf from '../../config/env.conf';
 
@@ -12,7 +12,7 @@ const env: string = process.env.ENV_CONFIG || 'prod';
 
 const config: IEnvCongig = {
   dev: {
-    domain: '',
+    domain: '/',
   },
   tst: {
     domain: '',

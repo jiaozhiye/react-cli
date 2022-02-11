@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 14:07:07
+ * @Last Modified time: 2022-02-11 10:22:20
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -12,6 +12,7 @@ import { createLocaleLang } from '@/store/actions';
 import { changeLocale } from '@/locale';
 import type { AppState } from '@/store/reducers/app';
 import { appTool } from '@/hoc';
+import config from '@/config/envMaps';
 
 import { TranslationOutlined } from '@/icons';
 
@@ -25,7 +26,7 @@ class LangSetting extends Component<any> {
     this.props.iframeMenus.forEach((x) => {
       const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
-      $iframe.contentWindow?.postMessage({ type: 'lang', data: lang }, '*');
+      $iframe.contentWindow?.postMessage({ type: 'lang', data: lang }, config.domain);
     });
     // 刷新页面
     this.props.refreshView(this.props.location.pathname);
