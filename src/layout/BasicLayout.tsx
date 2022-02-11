@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-16 11:33:49
+ * @Last Modified time: 2022-02-11 09:52:52
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -30,8 +30,6 @@ import './index.less';
 const { Header, Sider, Content } = Layout;
 
 const MOBILE_WIDTH = 992;
-const DEFAULT_WIDTH = 200;
-const FOLD_WIDTH = 60;
 
 type IState = {
   collapsed: boolean;
@@ -53,9 +51,9 @@ class BasicLayout extends Component<any> {
 
   get asideWidth() {
     if (this.isMobile) {
-      return DEFAULT_WIDTH;
+      return config.sideWidth[0];
     }
-    return !this.state.collapsed ? DEFAULT_WIDTH : FOLD_WIDTH;
+    return !this.state.collapsed ? config.sideWidth[0] : config.sideWidth[1];
   }
 
   componentDidMount() {
