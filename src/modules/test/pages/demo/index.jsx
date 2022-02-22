@@ -2,13 +2,14 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 13:52:24
+ * @Last Modified time: 2022-02-22 12:49:29
  */
 import React from 'react';
 import classNames from 'classnames';
+import { useLocale } from '@/hooks';
 import { QmForm, QmTable } from '@jiaozhiye/qm-design-react';
-
 import css from './index.module.less';
+import './lang';
 
 import tableData from '@/mock/tableData';
 
@@ -24,11 +25,12 @@ import {
 
 const Demo = (props) => {
   const tableRef = React.useRef(null);
+  const { t } = useLocale();
   const createFilterList = () => {
     return [
       {
         type: 'INPUT',
-        label: '条件1',
+        label: t('demo.label1'),
         tooltip: 'Label 描述信息',
         fieldName: 'a',
       },
