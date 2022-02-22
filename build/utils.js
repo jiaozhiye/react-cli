@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 10:44:09
+ * @Last Modified time: 2022-02-22 12:12:39
  */
 'use strict';
 
@@ -151,5 +151,14 @@ exports.jsLoaders = function () {
 };
 
 exports.tsLoaders = function () {
-  return [...exports.jsLoaders(), { loader: 'ts-loader' }];
+  return [
+    ...exports.jsLoaders(),
+    {
+      loader: 'ts-loader',
+      options: {
+        transpileOnly: true,
+        happyPackMode: true,
+      },
+    },
+  ];
 };

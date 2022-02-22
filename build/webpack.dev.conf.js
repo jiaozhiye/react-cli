@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 10:48:49
+ * @Last Modified time: 2022-02-22 11:14:38
  */
 'use strict';
 
@@ -38,15 +38,18 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     static: [
       {
         directory: utils.resolve(config.dev.assetsSubDirectory),
-        publicPath: config.dev.assetsPublicPath,
-        serveIndex: true,
+        publicPath: [config.dev.assetsPublicPath],
         watch: true,
       },
     ],
     client: {
-      overlay: false,
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
       progress: true,
     },
+    compress: true,
     host: HOST,
     port: PORT,
     hot: true, // 热加载
