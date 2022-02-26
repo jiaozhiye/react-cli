@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-16 10:04:56
+ * @Last Modified time: 2022-02-26 09:05:36
  */
 'use strict';
 
@@ -41,11 +41,7 @@ module.exports = {
   resolve: {
     // 配置解析规则
     extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
-    alias: {
-      '@': utils.resolve('src'),
-      '@test': utils.resolve('src/modules/test'),
-      '@framework': utils.resolve('src/modules/framework'),
-    },
+    alias: config.pathAlias,
   },
   experiments: {
     topLevelAwait: true,

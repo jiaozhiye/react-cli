@@ -2,12 +2,16 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-16 18:24:50
+ * @Last Modified time: 2022-02-26 09:25:25
  */
 'use strict';
 const path = require('path');
 const appConf = require('./app.conf');
 const envConf = require('./env.conf');
+
+function resolve(dir) {
+  return path.resolve(__dirname, '..', dir);
+}
 
 // 配置常量
 const HOST = 'localhost';
@@ -15,6 +19,14 @@ const PORT = 9020;
 
 module.exports = {
   ...appConf,
+
+  // 模块路径别名
+  pathAlias: {
+    '@': resolve('src'),
+    '@test': resolve('src/modules/test'),
+    '@framework': resolve('src/modules/framework'),
+  },
+
   dev: {
     // Paths
     assetsSubDirectory: 'static',
@@ -50,10 +62,10 @@ module.exports = {
 
   build: {
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    index: resolve('dist/index.html'),
 
     // Paths
-    assetsRoot: path.resolve(__dirname, '../dist'),
+    assetsRoot: resolve('dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: `${envConf.host}/`,
 
