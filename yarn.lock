@@ -1100,14 +1100,15 @@
   resolved "https://registry.npmmirror.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@jiaozhiye/qm-design-react@^1.0.0-beta.13":
-  version "1.0.0-beta.13"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.0.0-beta.13.tgz#ef8b725e739488266427aef8346c57ee524ebb96"
-  integrity sha512-Phnr4K3MPOVHVWZPODBRnZiQTmq0X0qvPv8qBtYaOpHIxNM3R29SNdkdIo0W8OHjwUPy67VAyeDNXPp4tCICYQ==
+"@jiaozhiye/qm-design-react@^1.0.0-beta.14":
+  version "1.0.0-beta.14"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.0.0-beta.14.tgz#9a7d88c689f5849d09b300b48249fb92c3efc288"
+  integrity sha512-D8qmjZiplrcvoLYr7bDUZkEVpF1FJSo08ssrU2cAo0D/pRbV0obM9hnQ/I7StJOrJFSZpbSANPgbBWzrCqFa3g==
   dependencies:
     add-dom-event-listener "^1.1.0"
-    antd "^4.18.4"
+    antd "^4.18.8"
     axios "^0.24.0"
+    china-area-data "^5.0.1"
     classnames "^2.3.1"
     cropperjs "^1.5.12"
     dayjs "1.10.6"
@@ -1729,7 +1730,7 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-antd@^4.18.4:
+antd@^4.18.8:
   version "4.18.8"
   resolved "https://registry.npmmirror.com/antd/-/antd-4.18.8.tgz#abd7a54790311c7ced41123cf9f96e47582c629b"
   integrity sha512-eT701hvqy3m7y06pfx6j0onsXOslym7+iNrTHH8cytzQd1Bbefc6Jm7deRnOqjEkSeZM5iJlw2SpBn1+0Cu+Ig==
@@ -2176,6 +2177,11 @@ charcodes@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmmirror.com/charcodes/-/charcodes-0.2.0.tgz#5208d327e6cc05f99eb80ffc814707572d1f14e4"
   integrity sha512-Y4kiDb+AM4Ecy58YkuZrrSRJBDQdQ2L+NyS1vHHFtNtUjgutcZfx3yp1dAONI/oPaPmyGfCLx5CxL+zauIMyKQ==
+
+china-area-data@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.npmmirror.com/china-area-data/-/china-area-data-5.0.1.tgz#7943b83a0619f033bb5893da80cb46e52e44be66"
+  integrity sha512-BQDPpiv5Nn+018ekcJK2oSD9PAD+E1bvXB0wgabc//dFVS/KvRqCgg0QOEUt3vBkx9XzB5a9BmkJCEZDBxVjVw==
 
 chokidar@^3.5.3:
   version "3.5.3"
