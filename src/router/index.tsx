@@ -76,6 +76,7 @@ export const renderRoutes = (routes: any[] = [], extraProps = {}, switchProps = 
                 if (path !== whiteList[0]) {
                   return <Redirect to={whiteList[0]} />;
                 }
+                return <route.component {...props} />;
               }
             }}
           />
