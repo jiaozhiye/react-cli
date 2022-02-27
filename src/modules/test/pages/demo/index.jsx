@@ -141,6 +141,66 @@ const Demo = (props) => {
         label: '条件7',
         fieldName: 'g',
       },
+      {
+        type: 'IMMEDIATE',
+        label: '条件8',
+        fieldName: 'h',
+        request: {
+          fetchApi: getTableData,
+          params: {
+            currentPage: 1,
+            pageSize: 10,
+          },
+          dataKey: 'records',
+        },
+        options: {
+          columns: [
+            { dataIndex: 'id', title: '', hidden: true },
+            { dataIndex: 'person.name', title: '姓名' },
+            { dataIndex: 'price', title: '价格' },
+          ],
+          fieldAliasMap: () => {
+            return { h: 'date', c: 'date' };
+          },
+        },
+      },
+      {
+        type: 'MULTIPLE_CASCADER',
+        label: '条件9',
+        fieldName: 'j',
+        options: {
+          itemList: [
+            {
+              text: '浙江省',
+              value: '330000',
+              children: [
+                {
+                  text: '杭州市',
+                  value: '330100',
+                  children: [
+                    { text: '清河区', value: '330201' },
+                    { text: '银河区', value: '330202' },
+                  ],
+                },
+              ],
+            },
+            {
+              text: '江苏省',
+              value: '320000',
+              children: [
+                {
+                  text: '苏州市',
+                  value: '320101',
+                  children: [
+                    { text: '沧浪区', value: '320502' },
+                    { text: '和平区', value: '330203' },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      },
     ];
   };
   const createTableColumns = () => {
