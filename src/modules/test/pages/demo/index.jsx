@@ -155,12 +155,11 @@ const Demo = (props) => {
         },
         options: {
           columns: [
-            { dataIndex: 'id', title: '', hidden: true },
             { dataIndex: 'person.name', title: '姓名' },
             { dataIndex: 'price', title: '价格' },
           ],
           fieldAliasMap: () => {
-            return { h: 'date', c: 'date' };
+            return { h: 'date', c: 'date', id: 'id' };
           },
         },
       },
