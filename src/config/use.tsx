@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-11 10:23:11
+ * @Last Modified time: 2022-03-04 08:57:55
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -24,11 +24,11 @@ import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
 import config from '@/config/envMaps';
 import type { AppState } from '@/store/reducers/app';
 
-import '@/assets/css/reset.less';
-import '@/assets/css/style.less';
 import '@jiaozhiye/qm-design-react/lib/style/index.less';
 // import 'antd/dist/antd.dark.less'; // 引入官方提供的暗色 less 样式入口文件
 // import 'antd/dist/antd.compact.less'; // 引入官方提供的紧凑 less 样式入口文件
+import '@/assets/css/reset.less';
+import '@/assets/css/style.less';
 import '@/assets/css/antd-ui.less';
 import '@/assets/css/iconfont.less';
 

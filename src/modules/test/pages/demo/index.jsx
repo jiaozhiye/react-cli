@@ -2,12 +2,12 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-22 12:49:29
+ * @Last Modified time: 2022-03-04 15:10:29
  */
 import React from 'react';
 import classNames from 'classnames';
 import { useLocale } from '@/hooks';
-import { QmForm, QmTable } from '@jiaozhiye/qm-design-react';
+import { QmForm, QmTable, QmButton } from '@jiaozhiye/qm-design-react';
 import css from './index.module.less';
 import './lang';
 
@@ -15,6 +15,7 @@ import tableData from '@/mock/tableData';
 
 import {
   getTableData,
+  getTableData2,
   getSummationData,
   removeRecord,
   getSelectData,
@@ -212,8 +213,8 @@ const Demo = (props) => {
         render: (text, row) => {
           return (
             <div>
-              <el-button type="text">编辑</el-button>
-              <el-button type="text">查看</el-button>
+              <QmButton type="text">编辑</QmButton>
+              <QmButton type="text">查看</QmButton>
             </div>
           );
         },
@@ -224,7 +225,6 @@ const Demo = (props) => {
         dataIndex: 'pageIndex',
         printFixed: true,
         width: 80,
-        sorter: true,
         render: (text) => {
           return text + 1;
         },
@@ -464,6 +464,54 @@ const Demo = (props) => {
           };
         },
       },
+      // {
+      //   title: '备注说明',
+      //   dataIndex: 'remark',
+      //   with: 200,
+      //   sorter: true,
+      //   filter: {
+      //     type: 'text',
+      //   },
+      // },
+      // {
+      //   title: 'CPU利用率',
+      //   dataIndex: 'cpuUsed',
+      //   with: 200,
+      //   sorter: true,
+      //   summation: {
+      //     dataKey: 'cpuUsed',
+      //   },
+      //   groupSummary: {},
+      //   filter: {
+      //     type: 'number',
+      //   },
+      // },
+      // {
+      //   title: 'MEM利用率',
+      //   dataIndex: 'memUsed',
+      //   with: 200,
+      //   sorter: true,
+      //   filter: {
+      //     type: 'number',
+      //   },
+      //   groupSummary: {},
+      //   summation: {
+      //     dataKey: 'memUsed',
+      //   },
+      // },
+      // {
+      //   title: '状态',
+      //   dataIndex: 'status',
+      //   with: 200,
+      //   sorter: true,
+      //   filter: {
+      //     type: 'radio',
+      //   },
+      //   dictItems: [
+      //     { text: '已完成', value: 1 },
+      //     { text: '进行中', value: 2 },
+      //   ],
+      // },
     ];
   };
   const [filterList, setFilterList] = React.useState(createFilterList());
