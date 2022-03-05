@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 14:50:37
+ * @Last Modified time: 2022-03-05 19:16:05
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -10,7 +10,7 @@ import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 import { Avatar } from '@jiaozhiye/qm-design-react';
 import { UserOutlined, SettingOutlined, ClearOutlined, LogoutOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
-import { createLocaleLang } from '@/store/actions';
+import { createLocaleLang, createSignOut } from '@/store/actions';
 import { t } from '@/locale';
 import type { AppState } from '@/store/reducers/app';
 
@@ -19,6 +19,11 @@ import './index.less';
 class UserCenter extends Component<any> {
   state = {
     avatarImg: require('@/assets/img/avatar.jpg'),
+  };
+
+  doLogout = () => {
+    // 需要走后台接口
+    this.props.createSignOut();
   };
 
   renderMenus() {
@@ -34,7 +39,7 @@ class UserCenter extends Component<any> {
           {t('app.settings.clearcache')}
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="4" icon={<LogoutOutlined />}>
+        <Menu.Item key="4" icon={<LogoutOutlined />} onClick={this.doLogout}>
           {t('app.settings.logout')}
         </Menu.Item>
       </Menu>
@@ -57,4 +62,5 @@ class UserCenter extends Component<any> {
 
 export default connect((state: AppState) => ({ lang: state.app.lang }), {
   createLocaleLang,
+  createSignOut,
 })(UserCenter);

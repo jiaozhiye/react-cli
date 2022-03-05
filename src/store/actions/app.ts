@@ -152,7 +152,7 @@ export const createSignOut =
     removeToken();
     dispatch({
       type: SIGN_OUT,
-      payload: [],
+      payload: {},
     });
     // 刷新浏览器，释放内存
     const { pathname, search } = window.location;

@@ -177,7 +177,7 @@ const setSignIn = (state, payload) => {
 // 退出登录
 const setSignOut = (state, payload) => {
   return Object.assign({}, state, {
-    sideMenus: payload,
+    loginInfo: payload,
   });
 };
 
