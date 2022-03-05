@@ -17,7 +17,7 @@ import { sleep, Message } from '@/utils';
 import { setStarMenuList } from '@/api/application';
 import type { AppState } from '@/store/reducers/app';
 
-import { Select, Tabs } from '@jiaozhiye/qm-design-react';
+import { Select, Tabs, pinyin } from '@jiaozhiye/qm-design-react';
 import { StarOutlined, StarFilled } from '@ant-design/icons';
 
 import './index.less';
@@ -128,9 +128,20 @@ class NavList extends Component<any> {
                 style={{ width: '100%' }}
                 showSearch
                 optionFilterProp="children"
-                filterOption={(input, option: any) =>
-                  option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-                }
+                filterOption={(input, option: any) => {
+                  const pyt: string = pinyin
+                    .parse(option.children)
+                    .map((v) => {
+                      if (v.type === 2) {
+                        return v.target.toLowerCase().slice(0, 1);
+                      }
+                      return v.target;
+                    })
+                    .join('');
+                  return (
+                    `${option.children}|${pyt}`.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                  );
+                }}
                 onChange={this.onSelectChange}
               >
                 {flattenMenus.map((x) => (
