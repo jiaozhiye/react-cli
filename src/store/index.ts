@@ -5,6 +5,7 @@
  * @Last Modified time: 2021-07-06 18:15:43
  */
 import { createStore, applyMiddleware, compose, Store } from 'redux';
+import { useSelector, useDispatch } from 'react-redux';
 import thunkMiddleware from 'redux-thunk';
 import { reducers } from './reducers';
 import type { AppState } from './reducers/app';
@@ -18,3 +19,4 @@ const store: Store<AppState> = createStore(
 );
 
 export default store;
+export { useSelector, useDispatch };

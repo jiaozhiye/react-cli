@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-17 11:16:20
+ * @Last Modified time: 2022-03-05 17:41:49
  */
 import {
   SIDE_MENU,
@@ -14,6 +14,7 @@ import {
   LOCALE_LANG,
   THEME_COLOR,
   THEME_TYPE,
+  SIGN_IN,
   SIGN_OUT,
   DEVICE,
 } from '../types';
@@ -157,6 +158,9 @@ export const createSignOut =
     const { pathname, search } = window.location;
     setTimeout(() => (window.location.href = '/login?redirect=' + pathname + search), 400);
   };
+
+// 登录
+export const createSignIn = (payload) => ({ type: SIGN_IN, payload });
 
 // 设置顶部选项卡导航
 export const createTabMenu = (payload, behavior) => ({ type: TAB_MENU, payload, behavior });

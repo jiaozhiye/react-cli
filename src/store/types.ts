@@ -34,5 +34,8 @@ export const THEME_TYPE = 'THEME_TYPE';
 // 设备类型
 export const DEVICE = 'DEVICE';
 
+// 登录
+export const SIGN_IN = 'SIGN_IN';
+
 // 退出登录
 export const SIGN_OUT = 'SIGN_OUT';

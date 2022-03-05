@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-16 10:36:50
+ * @Last Modified time: 2022-03-05 17:42:15
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -15,6 +15,7 @@ import {
   LOCALE_LANG,
   THEME_COLOR,
   THEME_TYPE,
+  SIGN_IN,
   SIGN_OUT,
   DEVICE,
 } from '../types';
@@ -51,6 +52,7 @@ type IState = {
   iframeMenus: ICacheMenu[];
   keepAliveList: ICacheMenu[];
   dict: Record<string, Dictionary[] | number>;
+  loginInfo: Record<string, string>;
 };
 
 export type AppState = {
@@ -85,6 +87,7 @@ const initState: IState = {
   iframeMenus: [], // iframe 列表
   keepAliveList: [], // 路由组件缓存列表
   dict: {}, // 数据字典
+  loginInfo: {}, // 用户登录信息
 };
 
 // 设置导航菜单
@@ -164,6 +167,13 @@ const setDeviceType = (state, payload) => {
   });
 };
 
+// 登录
+const setSignIn = (state, payload) => {
+  return Object.assign({}, state, {
+    loginInfo: payload,
+  });
+};
+
 // 退出登录
 const setSignOut = (state, payload) => {
   return Object.assign({}, state, {
@@ -194,6 +204,8 @@ export const appReducer = (state = initState, action) => {
       return setThemeType(state, action.payload);
     case DEVICE:
       return setDeviceType(state, action.payload);
+    case SIGN_IN:
+      return setSignIn(state, action.payload);
     case SIGN_OUT:
       return setSignOut(state, action.payload);
     default:
