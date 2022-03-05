@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-04 14:13:36
+ * @Last Modified time: 2022-03-04 16:47:10
  */
 import React from 'react';
 
@@ -171,7 +171,7 @@ const FormDemo = (props) => {
             },
           },
           fieldAliasMap: () => {
-            return { valueKey: 'date', textKey: 'date' };
+            return { valueKey: 'id', textKey: 'date' };
           },
         },
       },
