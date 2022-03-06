@@ -12,6 +12,10 @@
     width: calc(100% + 17px) !important;
     overflow-y: scroll;
     overflow-x: hidden;
+    .ant-menu-item {
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
     &::-webkit-scrollbar {
       width: 17px;
       height: 17px;
@@ -19,5 +23,11 @@
   }
   .anticon {
     vertical-align: 0;
+    line-height: inherit !important;
+  }
+}
+.ant-menu-submenu-popup {
+  .ant-menu-submenu-selected {
+    color: #fff !important;
   }
 }
