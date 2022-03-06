@@ -125,7 +125,7 @@ class BasicLayout extends Component<any> {
         >
           <Logo collapsed={_collapsed} />
           <AllNav collapsed={_collapsed} />
-          <StarNav />
+          {config.showStarNav && <StarNav />}
           <SideMenu />
         </Sider>
         <Layout>

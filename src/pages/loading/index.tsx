@@ -5,13 +5,14 @@
  * @Last Modified time: 2021-07-20 16:34:16
  */
 import React, { Component } from 'react';
+import classNames from 'classnames';
 import { Spin } from '@jiaozhiye/qm-design-react';
 
 import './index.less';
 
 class Loading extends Component {
   render(): React.ReactElement {
-    return <Spin />;
+    return <Spin size="large" className={classNames('app-loading')} />;
   }
 }
 

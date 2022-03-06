@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-05 17:41:49
+ * @Last Modified time: 2022-03-05 19:15:12
  */
 import {
   SIDE_MENU,
@@ -42,7 +42,9 @@ export const createMenuList =
       return true;
     }
 
-    let data: Array<ISideMenu & { hideInMenu: boolean }> = [];
+    let status = true;
+    let data: Array<ISideMenu & { hideInMenu: boolean }> = defaultMenuList;
+
     if (process.env.MOCK_DATA === 'true') {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const res = require('@/mock/sideMenu').default;
@@ -51,10 +53,14 @@ export const createMenuList =
       try {
         const res: any = await getMenuList({});
         if (res.code === 200) {
-          data = Array.isArray(res.data) && res.data.length ? res.data : defaultMenuList;
+          if (Array.isArray(res.data) && res.data?.length) {
+            data = res.data;
+          }
+        } else {
+          status = false;
         }
       } catch (err) {
-        return false;
+        status = false;
       }
     }
 
@@ -75,7 +81,7 @@ export const createMenuList =
       }
     });
 
-    return true;
+    return status;
   };
 
 // 设置数据字典

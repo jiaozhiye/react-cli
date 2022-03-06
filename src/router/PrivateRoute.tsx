@@ -6,39 +6,39 @@
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
-import { Spin } from '@jiaozhiye/qm-design-react';
 import { matchRoutes } from '@/router';
 import { nextTick, Message } from '@/utils';
 import { t } from '@/locale';
 import { AppState, ITabNav } from '@/store/reducers/app';
 
 import { connect } from 'react-redux';
-import { createMenuList, createTabMenu, createIframeMenu, createSignOut } from '@/store/actions';
+import { createMenuList, createTabMenu, createIframeMenu } from '@/store/actions';
 
 import routes from '@/router/config';
 import config from '@/config';
 
+import Loading from '@/pages/loading';
+
 @withRouter
 class PrivateRoute extends Component<any> {
-  state = {
-    menuLoaded: !!this.props.flattenMenus.length,
-  };
+  get menuLoaded() {
+    return !!this.props.flattenMenus.length;
+  }
 
   async componentDidMount() {
-    if (this.state.menuLoaded) return;
+    // const { path } = this.props.route;
+    if (this.menuLoaded) return;
     const bool: boolean = await this.props.createMenuList();
-    if (bool) {
-      const tabMenus = this.getLocalTabMenus();
-      tabMenus.forEach((x) => {
-        if (this.props.flattenMenus.some((k) => k.key === x.path)) {
-          this.props.createTabMenu({ path: x.path, title: x.title }, 'add');
-        }
-      });
-      this.addTabMenus();
-      this.setState({ menuLoaded: bool });
-    } else {
-      this.props.createSignOut();
+    if (!bool) {
+      console.error('应用菜单加载失败，请检查菜单接口！');
     }
+    const tabMenus = this.getLocalTabMenus();
+    tabMenus.forEach((x) => {
+      if (this.props.flattenMenus.some((k) => k.key === x.path)) {
+        this.props.createTabMenu({ path: x.path, title: x.title }, 'add');
+      }
+    });
+    this.addTabMenus();
   }
 
   componentDidUpdate(prevProps) {
@@ -93,13 +93,12 @@ class PrivateRoute extends Component<any> {
 
   render(): React.ReactElement {
     const { route, whiteList, whiteAuth } = this.props;
-    const { menuLoaded } = this.state;
     const { path } = this.props.route;
 
     document.title = `${config.title}-${route.meta?.title || '404'}` || config.title;
 
-    if (!menuLoaded && !this.isMatch(whiteList, path)) {
-      return <Spin />;
+    if (!this.menuLoaded && !this.isMatch(whiteList, path)) {
+      return <Loading />;
     }
 
     if (this.isMatch([...whiteList, ...whiteAuth], path) || this.isAuth(path)) {
@@ -119,6 +118,5 @@ export default connect(
     createMenuList,
     createTabMenu,
     createIframeMenu,
-    createSignOut,
   }
 )(PrivateRoute);
