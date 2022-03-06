@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 09:27:32
+ * @Last Modified time: 2022-03-06 23:29:01
  */
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
@@ -81,6 +81,7 @@ class SideMenu extends Component<any> {
           return (
             <SubMenu
               key={uniqueKey}
+              popupClassName={`ant-submenu-popup-dark`}
               title={
                 <>
                   {getIcon(icon)}

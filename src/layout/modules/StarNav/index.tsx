@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-20 12:22:13
+ * @Last Modified time: 2022-03-06 23:29:24
  */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -38,7 +38,12 @@ class StarNav extends Component<any> {
     return (
       <div className={classNames('app-star-nav')}>
         <Menu mode="inline" theme="dark">
-          <SubMenu key="star-nav" icon={<StarFilled />} title={t('app.sidebar.starNav')}>
+          <SubMenu
+            key="star-nav"
+            popupClassName={`ant-submenu-popup-dark`}
+            icon={<StarFilled />}
+            title={t('app.sidebar.starNav')}
+          >
             {this.createMenuItems()}
           </SubMenu>
         </Menu>
