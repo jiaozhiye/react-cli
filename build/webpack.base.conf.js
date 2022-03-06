@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-26 09:05:36
+ * @Last Modified time: 2022-03-06 22:30:02
  */
 'use strict';
 
@@ -27,6 +27,7 @@ const createModuleRemotes = () => {
 };
 
 module.exports = {
+  target: ['browserslist'],
   entry: {
     app: utils.resolve('src/index.ts'),
   },
