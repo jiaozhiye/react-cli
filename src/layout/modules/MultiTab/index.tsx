@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import classNames from 'classnames';
+import { nextTick } from '@/utils';
 import { appTool } from '@/hoc';
 import { t } from '@/locale';
 
@@ -63,15 +64,18 @@ class MultiTab extends Component<any> {
   doRemove(targetKey) {
     const { activeKey } = this.state;
     const { tabMenus } = this.props;
+    this.props.createTabMenu(targetKey, 'remove');
+    this.props.createIframeMenu(targetKey, 'remove');
     if (targetKey === activeKey) {
       const index = this.findCurTagIndex(targetKey);
       const nextActiveKey = tabMenus[index - 1].path;
       this.changeHandle(nextActiveKey);
+    } else {
+      // 本地存储
+      nextTick(() => {
+        localStorage.setItem('tab_menus', JSON.stringify(this.props.tabMenus));
+      });
     }
-    this.props.createTabMenu(targetKey, 'remove');
-    this.props.createIframeMenu(targetKey, 'remove');
-    // 本地存储
-    localStorage.setItem('tab_menus', JSON.stringify(this.props.tabMenus));
   }
 
   refreshTagHandle = () => {
