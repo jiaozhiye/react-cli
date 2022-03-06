@@ -1,8 +1,8 @@
 /*
  * @Author: 焦质晔
  * @Date: 2021-07-20 16:35:57
- * @Last Modified by:   焦质晔
- * @Last Modified time: 2021-07-20 16:35:57
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2022-03-05 19:07:31
  */
 .lgin_wrapper {
   width: 100%;
@@ -14,6 +14,12 @@
     flex: 1;
     background: url(./assets/login_left_bg.jpg) no-repeat;
     background-size: cover;
+    position: relative;
+    .logo {
+      position: absolute;
+      left: 60px;
+      top: 40px;
+    }
   }
   .right {
     width: 32%;
@@ -28,13 +34,17 @@
     .container {
       padding-top: 10vh;
       .login_form {
-        :global(.ant-input) {
+        :global(.ant-input),
+        :global(.ant-input-password) {
           border-left-color: transparent;
           border-top-color: transparent;
           border-right-color: transparent;
           &:focus {
             box-shadow: none;
           }
+        }
+        :global(.ant-input-affix-wrapper-focused) {
+          box-shadow: none;
         }
         .forget_pwd {
           text-align: right;

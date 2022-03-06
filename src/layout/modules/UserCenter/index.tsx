@@ -21,6 +21,10 @@ class UserCenter extends Component<any> {
     avatarImg: require('@/assets/img/avatar.jpg'),
   };
 
+  doClearCache = () => {
+    window.history.go(0);
+  };
+
   doLogout = () => {
     // 需要走后台接口
     this.props.createSignOut();
@@ -35,7 +39,7 @@ class UserCenter extends Component<any> {
         <Menu.Item key="2" icon={<SettingOutlined />}>
           {t('app.settings.usersetting')}
         </Menu.Item>
-        <Menu.Item key="3" icon={<ClearOutlined />}>
+        <Menu.Item key="3" icon={<ClearOutlined />} onClick={this.doClearCache}>
           {t('app.settings.clearcache')}
         </Menu.Item>
         <Menu.Divider />

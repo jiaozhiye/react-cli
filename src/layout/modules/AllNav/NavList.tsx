@@ -84,13 +84,7 @@ class NavList extends Component<any> {
       return Message(t('app.information.maxCache', { total: config.maxCacheNum }), 'warning');
     }
     this.props.setStarMenu(result);
-    this.saveStarMenu();
   };
-
-  async saveStarMenu() {
-    if (process.env.MOCK_DATA === 'true') return;
-    await setStarMenuList({ starMenus: this.props.starMenus });
-  }
 
   renderLinkItem(item) {
     return !isHttpLink(item.key) ? (

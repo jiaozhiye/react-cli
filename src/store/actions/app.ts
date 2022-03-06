@@ -18,13 +18,15 @@ import {
   SIGN_OUT,
   DEVICE,
 } from '../types';
-import { getMenuList, getDictList, getStarMenuList } from '@/api/application';
+import { getMenuList, getDictList, getStarMenuList, setStarMenuList } from '@/api/application';
 import { getToken, removeToken } from '@/utils/cookies';
 import { t } from '@/locale';
 import routes from '@/router/config';
 import localDict from '@/utils/localDict';
-import { Dictionary } from '@/utils/types';
-import { ISideMenu } from '@/store/reducers/app';
+import config from '@/config';
+
+import type { Dictionary } from '@/utils/types';
+import type { ISideMenu } from '@/store/reducers/app';
 
 const defaultMenuList: Array<ISideMenu & { hideInMenu: boolean }> = [
   { title: t('app.global.dashboard'), key: '/home', hideInMenu: true },
@@ -149,7 +151,17 @@ export const createStarMenu =
   };
 
 // 设置收藏菜单
-export const setStarMenu = (payload) => ({ type: STAR_MENU, payload });
+export const setStarMenu =
+  (data: ISideMenu[]) =>
+  async (dispatch, getState): Promise<void> => {
+    if (config.showStarNav && process.env.MOCK_DATA === 'false') {
+      await setStarMenuList({ starMenus: data });
+    }
+    dispatch({
+      type: STAR_MENU,
+      payload: data,
+    });
+  };
 
 // 退出登录
 export const createSignOut =

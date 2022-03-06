@@ -43,7 +43,7 @@ export default {
   sideWidth: [200, 60], // 侧栏导航宽度
   maxCacheNum: 10, // 路由组件最大缓存数量
   showBreadcrumb: false, // 是否显示面包屑
-  showStarNav: false, // 是否显示收藏导航
+  showStarNav: true, // 是否显示收藏导航
   showScreenFull: true, // 是否显示全屏按钮
   showCustomTheme: true, // 是否显示自定义主题
   showLangSelect: true, // 是否显示多语言
