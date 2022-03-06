@@ -14,7 +14,6 @@ import { connect } from 'react-redux';
 import { setStarMenu } from '@/store/actions';
 import { t } from '@/locale';
 import { sleep, Message } from '@/utils';
-import { setStarMenuList } from '@/api/application';
 import type { AppState } from '@/store/reducers/app';
 
 import { Select, Tabs, pinyin } from '@jiaozhiye/qm-design-react';

@@ -9,10 +9,9 @@ import { withRouter, Redirect } from 'react-router-dom';
 import { matchRoutes } from '@/router';
 import { nextTick, Message } from '@/utils';
 import { t } from '@/locale';
-import { AppState, ITabNav } from '@/store/reducers/app';
-
 import { connect } from 'react-redux';
 import { createMenuList, createTabMenu, createIframeMenu } from '@/store/actions';
+import type { AppState, ITabNav } from '@/store/reducers/app';
 
 import routes from '@/router/config';
 import config from '@/config';

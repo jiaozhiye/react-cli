@@ -10,9 +10,9 @@ import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';
 import { changeLocale } from '@/locale';
-import type { AppState } from '@/store/reducers/app';
 import { appTool } from '@/hoc';
 import config from '@/config/envMaps';
+import type { AppState } from '@/store/reducers/app';
 
 import { TranslationOutlined } from '@/icons';
 

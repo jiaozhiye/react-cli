@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { createIframeMenu } from '@/store/actions';
 import store from '@/store';
 import type { AppState } from '@/store/reducers/app';
-import { Nullable } from '@/utils/types';
+import type { Nullable } from '@/utils/types';
 
 export default (WrappedComponent: React.ComponentType<any>): any => {
   @withRouter

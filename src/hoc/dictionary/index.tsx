@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import { connect } from 'react-redux';
 import type { AppState } from '@/store/reducers/app';
-import { Dictionary, Nullable } from '@/utils/types';
+import type { Dictionary, Nullable } from '@/utils/types';
 
 export default (WrappedComponent: React.ComponentType<any>): any => {
   class C extends Component<any> {

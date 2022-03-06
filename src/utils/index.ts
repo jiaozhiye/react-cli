@@ -9,7 +9,7 @@ import { message, notification, Modal } from '@jiaozhiye/qm-design-react';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { debounce, throttle, round, cloneDeep, merge } from 'lodash-es';
 import { t } from '@/locale';
-import { AnyFunction } from './types';
+import type { AnyFunction } from './types';
 
 /**
  * @description 判断对象属性是否为自身属性

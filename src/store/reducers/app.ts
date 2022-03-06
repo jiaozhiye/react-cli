@@ -21,7 +21,7 @@ import {
 } from '../types';
 import { t } from '@/locale';
 import config from '@/config';
-import { ComponentSize, Device, Dictionary, ThemeType } from '@/utils/types';
+import type { ComponentSize, Device, Dictionary, ThemeType } from '@/utils/types';
 
 export type ISideMenu = {
   key: string;
