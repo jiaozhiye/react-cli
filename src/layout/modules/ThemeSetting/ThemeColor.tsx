@@ -6,7 +6,7 @@
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { CheckOutlined } from '@ant-design/icons';
+import { CheckOutlined } from '@/icons';
 import { connect } from 'react-redux';
 import { createThemeColor } from '@/store/actions';
 import { t } from '@/locale';

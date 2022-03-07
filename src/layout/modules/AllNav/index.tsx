@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import addEventListener from 'add-dom-event-listener';
 import classNames from 'classnames';
 import { Menu } from '@jiaozhiye/qm-design-react';
-import { AppstoreFilled } from '@ant-design/icons';
+import { AppstoreFilled } from '@/icons';
 import { t } from '@/locale';
 
 import NavList from './NavList';

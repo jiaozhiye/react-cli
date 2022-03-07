@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Menu } from '@jiaozhiye/qm-design-react';
-import { StarFilled } from '@ant-design/icons';
+import { StarFilled } from '@/icons';
 import { t } from '@/locale';
 
 import { connect } from 'react-redux';

@@ -6,6 +6,7 @@
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import config from '@/config';
 
 import SizeSetting from '../SizeSetting';
 import LangSetting from '../LangSetting';
@@ -21,12 +22,12 @@ class Actions extends Component {
   render(): React.ReactElement {
     return (
       <div className={classNames('app-actions')}>
-        <ScreenFull />
-        <HelperDoc />
-        <SizeSetting />
-        <LangSetting />
-        <ThemeSetting />
-        <MessageCenter />
+        {config.showScreenFull && <ScreenFull />}
+        {config.showHelperDoc && <HelperDoc />}
+        {config.showSizeSelect && <SizeSetting />}
+        {config.showLangSelect && <LangSetting />}
+        {config.showCustomTheme && <ThemeSetting />}
+        {config.showNotification && <MessageCenter />}
         <UserCenter />
       </div>
     );

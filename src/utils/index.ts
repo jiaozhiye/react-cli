@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import { message, notification, Modal } from '@jiaozhiye/qm-design-react';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
+import { ExclamationCircleOutlined } from '@/icons';
 import { debounce, throttle, round, cloneDeep, merge } from 'lodash-es';
 import { t } from '@/locale';
 import type { AnyFunction } from './types';

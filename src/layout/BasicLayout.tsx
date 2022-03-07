@@ -23,7 +23,7 @@ import SideMenu from './modules/SideMenu';
 import MultiTab from './modules/MultiTab';
 import Actions from './modules/Actions';
 
-import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@/icons';
 
 import './index.less';
 
