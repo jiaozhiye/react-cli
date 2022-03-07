@@ -53,7 +53,7 @@ class ThemeColor extends Component<any> {
       { color: '#52C41A' },
       { color: '#1890FF' },
       { color: '#2F54EB' },
-      { color: '#722ED1' },
+      { color: '#2A5CA5' },
     ],
   };
 
