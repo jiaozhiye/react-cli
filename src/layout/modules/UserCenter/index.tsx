@@ -56,7 +56,6 @@ class UserCenter extends Component<any> {
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
           <span>
             <Avatar size={26} src={this.state.avatarImg} />
-            <span style={{ marginLeft: '5px' }}>管理员</span>
           </span>
         </Dropdown>
       </div>
