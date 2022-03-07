@@ -12,7 +12,7 @@ import PrivateRoute from '@/router/PrivateRoute';
 import ErrorBoundary from '@/pages/errorBoundary';
 
 // 访问白名单
-const whiteList: string[] = ['/login', '/public', '/wechat'];
+const whiteList: string[] = ['/login', '/public'];
 
 // 权限白名单
 const whiteAuth: string[] = ['/home', '/iframe', '/redirect', '/404', '/large-screen', '/test'];

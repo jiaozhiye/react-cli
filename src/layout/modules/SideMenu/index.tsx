@@ -17,7 +17,7 @@ import './index.less';
 
 const SubMenu = Menu.SubMenu;
 
-const getIcon = (icon = '') => {
+const getIcon = (icon: string) => {
   if (!icon) return null;
   return (
     <span className={classNames('anticon')}>
@@ -26,11 +26,11 @@ const getIcon = (icon = '') => {
   );
 };
 
-const isHttpLink = (path = '') => {
+const isHttpLink = (path: string) => {
   return /^https?:\/\//.test(path);
 };
 
-const conversionPath = (path = '') => {
+const conversionPath = (path: string) => {
   if (path.startsWith('http')) {
     return path;
   }
@@ -63,7 +63,7 @@ class SideMenu extends Component<any> {
       .filter((x) => !x.hideInMenu)
       .map((item, index) => {
         const { title, icon, target } = item;
-        const path: string = conversionPath(item.key);
+        const path: string = conversionPath(item.key || '');
         // 判断是否为 http 链接
         const menuItem = !isHttpLink(path) ? (
           <Link to={path} target={target}>

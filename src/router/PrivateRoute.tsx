@@ -2,11 +2,11 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-21 13:18:30
+ * @Last Modified time: 2022-03-07 13:02:50
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
-import { matchRoutes } from '@/router';
+import { matchRoutes, isIframe } from '@/router';
 import { nextTick, Message } from '@/utils';
 import { t } from '@/locale';
 import { connect } from 'react-redux';
@@ -20,20 +20,19 @@ import Loading from '@/pages/loading';
 
 @withRouter
 class PrivateRoute extends Component<any> {
-  get menuLoaded() {
-    return !!this.props.flattenMenus.length;
-  }
-
   async componentDidMount() {
-    // const { path } = this.props.route;
-    if (this.menuLoaded) return;
-    const bool: boolean = await this.props.createMenuList();
-    if (!bool) {
-      console.error('应用菜单加载失败，请检查菜单接口！');
+    const {
+      route: { path: pathname },
+      flattenMenus,
+    } = this.props;
+    if (pathname !== '/' || isIframe(pathname) || !!flattenMenus.length) return;
+    const isLoaded: boolean = await this.props.createMenuList();
+    if (!isLoaded) {
+      return console.error('应用菜单加载失败，请检查菜单接口！');
     }
     const tabMenus = this.getLocalTabMenus();
     tabMenus.forEach((x) => {
-      if (this.props.flattenMenus.some((k) => k.key === x.path)) {
+      if (flattenMenus.some((k) => k.key === x.path)) {
         this.props.createTabMenu({ path: x.path, title: x.title }, 'add');
       }
     });
@@ -91,12 +90,12 @@ class PrivateRoute extends Component<any> {
   }
 
   render(): React.ReactElement {
-    const { route, whiteList, whiteAuth } = this.props;
+    const { route, whiteList, whiteAuth, flattenMenus } = this.props;
     const { path } = this.props.route;
 
     document.title = `${config.title}-${route.meta?.title || '404'}` || config.title;
 
-    if (!this.menuLoaded && !this.isMatch(whiteList, path)) {
+    if (!flattenMenus.length && !this.isMatch(whiteAuth, path)) {
       return <Loading />;
     }
 

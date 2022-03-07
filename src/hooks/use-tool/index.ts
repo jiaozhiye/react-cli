@@ -17,5 +17,5 @@ export default function useTool() {
 
   const reloadView = () => {};
 
-  return { openView, reloadView };
+  return { openView, reloadView, location };
 }

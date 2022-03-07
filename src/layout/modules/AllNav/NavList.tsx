@@ -87,7 +87,7 @@ class NavList extends Component<any> {
 
   renderLinkItem(item) {
     return !isHttpLink(item.key) ? (
-      <Link to={item.key} target={item.target} onClick={this.clickHandle}>
+      <Link to={item.key || ''} target={item.target} onClick={this.clickHandle}>
         <span>{item.title}</span>
       </Link>
     ) : (

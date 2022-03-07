@@ -18,7 +18,7 @@ import {
   createLocaleLang,
   createComponentSize,
 } from '@/store/actions';
-import { isIframe } from '@/router/index';
+import { isIframe } from '@/router';
 import { changeLocale } from '@/locale';
 import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
 import config from '@/config/envMaps';
