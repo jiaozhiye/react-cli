@@ -12,7 +12,7 @@ const env: string = process.env.ENV_CONFIG || 'prod';
 
 const config: IEnvCongig = {
   dev: {
-    domain: '/',
+    domain: '*',
   },
   tst: {
     domain: '',
