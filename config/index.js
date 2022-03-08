@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-03 17:00:11
+ * @Last Modified time: 2022-03-08 08:34:52
  */
 'use strict';
 const path = require('path');
@@ -74,7 +74,7 @@ module.exports = {
     devtool: 'source-map',
 
     // Gzip
-    productionGzip: false,
+    productionGzip: true,
     productionGzipExtensions: ['js', 'css'],
   },
 };
