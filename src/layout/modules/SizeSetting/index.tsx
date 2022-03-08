@@ -26,7 +26,7 @@ class SizeSetting extends Component<any> {
     this.props.iframeMenus.forEach((x) => {
       const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
-      $iframe.contentWindow?.postMessage({ type: 'size', data: size }, config.domain);
+      $iframe.contentWindow?.postMessage({ type: 'size', data: size }, '*');
     });
     // 刷新页面
     this.props.refreshView(this.props.location.pathname);

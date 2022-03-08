@@ -79,7 +79,7 @@ class UseConfig extends Component<any> {
   }
 
   clickEventHandle = () => {
-    window.parent.postMessage({ type: 'outside_click', data: '' }, config.domain);
+    window.parent.postMessage({ type: 'outside_click', data: '' }, '*');
   };
 
   messageEventHandle = ({ data }) => {

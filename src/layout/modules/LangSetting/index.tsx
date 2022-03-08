@@ -26,7 +26,7 @@ class LangSetting extends Component<any> {
     this.props.iframeMenus.forEach((x) => {
       const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
-      $iframe.contentWindow?.postMessage({ type: 'lang', data: lang }, config.domain);
+      $iframe.contentWindow?.postMessage({ type: 'lang', data: lang }, '*');
     });
     // 刷新页面
     this.props.refreshView(this.props.location.pathname);
