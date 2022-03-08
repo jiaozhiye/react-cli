@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-05 19:15:12
+ * @Last Modified time: 2022-03-08 09:10:28
  */
 import {
   SIDE_MENU,
@@ -111,7 +111,7 @@ export const createDictData =
         data = {
           _t: getToken(),
           ...localDict,
-          ...res.data.dict,
+          ...res.data,
         };
       }
     }
