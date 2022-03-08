@@ -15,7 +15,7 @@ const Login = () => {
   const formRef = React.useRef();
 
   return (
-    <div className={classNames(css.lgin_wrapper)}>
+    <div className={classNames(css.login_wrapper)}>
       <div className={classNames(css.left)}>
         <div className={classNames(css.logo)}>
           <svg
