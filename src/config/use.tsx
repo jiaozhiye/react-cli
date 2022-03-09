@@ -107,7 +107,11 @@ class UseConfig extends Component<any> {
     const { pathname } = this.props.location;
 
     return (
-      <QmConfigProvider locale={this.props.lang} size={this.props.size}>
+      <QmConfigProvider
+        locale={this.props.lang}
+        size={this.props.size}
+        global={{ autoInsertSpaceInButton: false }}
+      >
         {isIframe(pathname) ? (
           <section className={classNames('app-iframe')}>{this.props.children}</section>
         ) : (
