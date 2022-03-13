@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2022-03-13 17:06:35
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 20:18:43
+ * @Last Modified time: 2022-03-13 23:35:54
  */
 import React from 'react';
 import classNames from 'classnames';
@@ -10,7 +10,7 @@ import { dictTool } from '@/hoc';
 import { Message } from '@/utils';
 import { getRecordById, getTableData, addRecord, saveRecord } from '@test/api/spa1002';
 
-import { QmForm, QmButton, QmSpace } from '@jiaozhiye/qm-design-react';
+import { QmForm, QmButton, QmAnchor, QmSpace } from '@jiaozhiye/qm-design-react';
 
 import css from './index.module.less';
 
@@ -152,15 +152,22 @@ class FormEdit extends React.Component {
     const formType = type !== 'show' ? 'default' : 'onlyShow';
     return (
       <>
-        <QmForm
-          ref={(ref) => (this.formRef = ref)}
-          uniqueKey="SPA1002_FormEdit"
-          items={formList}
-          labelWidth={90}
-          formType={formType}
-          fieldsChange={(items) => this.setState({ formList: items })}
-          onValuesChange={this.valuesChangeHandle}
-        />
+        <QmAnchor style={{ height: `calc(100% - 10px)` }}>
+          <QmAnchor.Item label="基础信息" showDivider>
+            <QmForm
+              ref={(ref) => (this.formRef = ref)}
+              uniqueKey="SPA1002_FormEdit"
+              items={formList}
+              labelWidth={80}
+              formType={formType}
+              fieldsChange={(items) => this.setState({ formList: items })}
+              onValuesChange={this.valuesChangeHandle}
+            />
+          </QmAnchor.Item>
+          <QmAnchor.Item label="数据列表" showDivider>
+            <div style={{ height: '500px' }}>asdasd</div>
+          </QmAnchor.Item>
+        </QmAnchor>
         <QmSpace className={`fixed-footer`}>
           <QmButton onClick={() => this.cancelHandle()}>关闭</QmButton>
           {formType !== 'onlyShow' && (
