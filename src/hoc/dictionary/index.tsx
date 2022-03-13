@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-17 11:21:10
+ * @Last Modified time: 2022-03-13 21:07:42
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -74,8 +74,10 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     };
 
     render() {
+      const { forwardedRef } = this.props;
       return (
         <WrappedComponent
+          ref={forwardedRef}
           {...this.props}
           createDictList={this.createDictList}
           createDictText={this.createDictText}
@@ -84,10 +86,18 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     }
   }
 
-  return connect(
-    (state: AppState) => ({
-      dict: state.app.dict,
-    }),
-    {}
-  )(hoistStatics(C, WrappedComponent));
+  const Forward = React.forwardRef((props, ref) => {
+    const H = connect(
+      (state: AppState) => ({
+        dict: state.app.dict,
+        forwardedRef: ref,
+        ...props,
+      }),
+      {}
+    )(hoistStatics(C, WrappedComponent));
+    return <H />;
+  });
+  Forward.displayName = 'Forward';
+
+  return Forward;
 };

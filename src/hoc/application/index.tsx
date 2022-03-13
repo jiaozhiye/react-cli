@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-17 13:58:40
+ * @Last Modified time: 2022-03-13 21:13:13
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -55,8 +55,10 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     closeView = (fullpath: string): void => {};
 
     render() {
+      const { forwardedRef } = this.props;
       return (
         <WrappedComponent
+          ref={forwardedRef}
           {...this.props}
           refreshView={this.refreshView}
           openView={this.openView}
@@ -66,11 +68,19 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     }
   }
 
-  return connect(
-    (state: AppState) => ({
-      size: state.app.size,
-      lang: state.app.lang,
-    }),
-    { createIframeMenu }
-  )(hoistStatics(C, WrappedComponent));
+  const Forward = React.forwardRef((props, ref) => {
+    const H = connect(
+      (state: AppState) => ({
+        size: state.app.size,
+        lang: state.app.lang,
+        forwardedRef: ref,
+        ...props,
+      }),
+      { createIframeMenu }
+    )(hoistStatics(C, WrappedComponent));
+    return <H />;
+  });
+  Forward.displayName = 'Forward';
+
+  return Forward;
 };
