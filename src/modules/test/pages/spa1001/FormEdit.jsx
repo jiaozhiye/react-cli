@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2022-03-13 17:06:35
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 18:25:08
+ * @Last Modified time: 2022-03-13 19:43:33
  */
 import React from 'react';
 import classNames from 'classnames';
@@ -93,6 +93,11 @@ class FormEdit extends React.Component {
         type: 'RANGE_DATE',
         label: '条件4',
         fieldName: 'e1|e2',
+      },
+      {
+        type: 'CITY_SELECT',
+        label: '条件5',
+        fieldName: 'f',
       },
     ];
   }

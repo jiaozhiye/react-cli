@@ -2,12 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 18:25:08
+ * @Last Modified time: 2022-03-13 20:11:43
  */
 import React from 'react';
 import classNames from 'classnames';
-import { confirmBeforeClose } from '@/utils';
+import { confirmBeforeClose, Notification, Message } from '@/utils';
 import { dictTool } from '@/hoc';
+import { removeRecord } from '@test/api/spa1001';
 
 import { QmForm, QmTable, QmButton, QmDrawer } from '@jiaozhiye/qm-design-react';
 import { PlusOutlined, DeleteOutlined } from '@/icons';
@@ -28,17 +29,19 @@ import {
 @dictTool
 class Spa1001 extends React.Component {
   state = {
-    filters: this.createFilterList(),
-    columns: this.createTableColumns(),
-    fetchParams: {},
-    visible: false,
+    filters: this.createFilterList(), // 表单项
+    columns: this.createTableColumns(), // 表格列
+    fetchParams: {}, // 查询接口的参数
+    visible: false, // 抽屉的显隐状态
     actions: {
       type: '',
       title: '',
       recordId: '',
     },
+    selectedKeys: [], // 选中数据 rowKey 列表
   };
 
+  // 创建筛选器列表
   createFilterList() {
     return [
       {
@@ -179,6 +182,7 @@ class Spa1001 extends React.Component {
     ];
   }
 
+  // 创建表格列
   createTableColumns() {
     return [
       {
@@ -320,10 +324,12 @@ class Spa1001 extends React.Component {
     ];
   }
 
-  setFetchParams = (params) => {
+  // 执行表格查询
+  fetchHandle = (params) => {
     this.setState((prev) => ({ fetchParams: Object.assign({}, prev.fetchParams, params) }));
   };
 
+  // 新增、编辑、查看 方法
   clickHandle = (type, recordId) => {
     const conf = {
       add: '新增',
@@ -336,6 +342,21 @@ class Spa1001 extends React.Component {
     this.setState({ visible: true });
   };
 
+  // 删除表格数据
+  removeHandle = async () => {
+    const { selectedKeys } = this.state;
+    if (!selectedKeys.length) {
+      return Notification(`请选择数据！`, 'warning');
+    }
+    const res = await removeRecord({ ids: selectedKeys.join(',') });
+    if (res.code === 200) {
+      Message('删除成功', 'success');
+      this.setState({ selectedKeys: [] });
+      this.fetchHandle();
+    }
+  };
+
+  // 表单数据变更，关闭抽屉时的提示
   doCloseHandle = async () => {
     const allowClose = !this.formEditRef.getValueChange();
     try {
@@ -355,7 +376,7 @@ class Spa1001 extends React.Component {
           formType="search"
           items={filters}
           fieldsChange={(items) => this.setState({ filters: items })}
-          onFinish={(values) => this.setFetchParams(values)}
+          onFinish={(values) => this.fetchHandle(values)}
           onCollapse={() => this.tableRef.CALCULATE_HEIGHT()}
         />
         <QmTable
@@ -383,7 +404,7 @@ class Spa1001 extends React.Component {
               dataKey: 'recordKeys',
             },
             onChange: (val, rows) => {
-              // ...
+              this.setState({ selectedKeys: val });
             },
           }}
           exportExcel={{ fileName: '导出文件.xlsx' }}
@@ -392,7 +413,7 @@ class Spa1001 extends React.Component {
           <QmButton type="primary" icon={<PlusOutlined />} onClick={() => this.clickHandle('add')}>
             新建
           </QmButton>
-          <QmButton type="danger" icon={<DeleteOutlined />}>
+          <QmButton type="danger" icon={<DeleteOutlined />} confirm={{}} click={this.removeHandle}>
             删除
           </QmButton>
         </QmTable>
@@ -409,7 +430,7 @@ class Spa1001 extends React.Component {
             type={actions.type}
             recordId={actions.recordId}
             onClose={(reload) => {
-              reload && this.setFetchParams();
+              reload && this.fetchHandle();
               this.doCloseHandle();
             }}
           />

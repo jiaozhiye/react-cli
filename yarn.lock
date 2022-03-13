@@ -1100,10 +1100,10 @@
   resolved "https://registry.npmmirror.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@jiaozhiye/qm-design-react@^1.0.0-beta.29":
-  version "1.0.0-beta.29"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.0.0-beta.29.tgz#8f75914a65559bcdcaa44c24444616e09b01efdf"
-  integrity sha512-78ziexDgNq1FzjXIBtA8c+ftcOpfb3hVmVLQ8zyWhlu4ia9vbUfnQ/lQ6wj/O657uQ+lSCHwzyBiL1m5QEZxwQ==
+"@jiaozhiye/qm-design-react@^1.0.0-beta.31":
+  version "1.0.0-beta.31"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.0.0-beta.31.tgz#8debdd3806bbb51e58d579b4af4c1889364fb6ac"
+  integrity sha512-YdM5CbfECHp6HrLaQTzedjgvHxml0hZ49DYiRR1oJia6H6y6sFoHxpML0qaaSdR8bd9COQ42xWLR4zK4Hpjfkg==
   dependencies:
     add-dom-event-listener "^1.1.0"
     antd "^4.18.8"
@@ -1111,7 +1111,7 @@
     china-area-data "^5.0.1"
     classnames "^2.3.1"
     cropperjs "^1.5.12"
-    dayjs "1.10.6"
+    dayjs "^1.10.8"
     exceljs "^4.3.0"
     localforage "^1.10.0"
     lodash-es "^4.17.21"
@@ -2631,11 +2631,6 @@ date-fns@2.x:
   version "2.28.0"
   resolved "https://registry.npmmirror.com/date-fns/-/date-fns-2.28.0.tgz#9570d656f5fc13143e50c975a3b6bbeb46cd08b2"
   integrity sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
-
-dayjs@1.10.6:
-  version "1.10.6"
-  resolved "https://registry.npmmirror.com/dayjs/-/dayjs-1.10.6.tgz#288b2aa82f2d8418a6c9d4df5898c0737ad02a63"
-  integrity sha512-AztC/IOW4L1Q41A86phW5Thhcrco3xuAA+YX/BLpLWWjRcTj5TOt/QImBLmCKlrF7u7k47arTnOyL6GnbG8Hvw==
 
 dayjs@1.x, dayjs@^1.8.34:
   version "1.10.7"
