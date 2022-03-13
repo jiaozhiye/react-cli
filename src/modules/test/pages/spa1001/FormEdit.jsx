@@ -1,0 +1,123 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2022-03-13 17:06:35
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2022-03-13 18:01:12
+ */
+import React from 'react';
+import { Message } from '@/utils';
+import { getRecordById, addRecord, saveRecord } from '@test/api/spa1001';
+import { QmForm, QmButton, QmSpace } from '@jiaozhiye/qm-design-react';
+
+class FormEdit extends React.Component {
+  state = {
+    formList: this.createFormList(),
+  };
+
+  componentDidMount() {
+    if (this.props.type !== 'add') {
+      this.setFormInitValue();
+    }
+  }
+
+  createFormList() {
+    return [
+      {
+        type: 'INPUT',
+        label: '条件1',
+        tooltip: 'Label 描述信息',
+        fieldName: 'a',
+      },
+      {
+        type: 'INPUT_NUMBER',
+        label: '条件2',
+        fieldName: 'b',
+        options: {
+          formatter: (value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
+          parser: (value) => value.replace(/\$\s?|(,*)/g, ''),
+        },
+      },
+      {
+        type: 'DATE',
+        label: '条件2',
+        fieldName: 'c',
+      },
+      {
+        type: 'RANGE_DATE',
+        label: '条件4',
+        fieldName: 'd1|d2',
+      },
+    ];
+  }
+
+  setFormInitValue = async () => {
+    const { drawerRef, recordId } = this.props;
+    drawerRef.START_LOADING();
+    try {
+      const res = await getRecordById({ id: recordId });
+      if (res.code === 200) {
+        this.formRef.SET_FIELDS_VALUE({ a: 'hello' });
+      }
+    } catch (err) {
+      // ...
+    }
+    drawerRef.STOP_LOADING();
+  };
+
+  valuesChangeHandle = () => {
+    this.formChanged = true; // 标记表单的变化
+  };
+
+  getValueChange = () => {
+    return this.formChanged;
+  };
+
+  cancelHandle = (reload) => {
+    this.props.onClose(reload);
+  };
+
+  saveHandle = async () => {
+    const [err, data] = await this.formRef.GET_FORM_DATA();
+    if (err) return;
+    const { type, recordId } = this.props;
+    if (type === 'add') {
+      const res = await addRecord(data);
+      Message('新增成功！', 'success');
+    }
+    if (type === 'edit') {
+      const res = await saveRecord({ id: recordId, ...data });
+      Message('编辑成功！', 'success');
+    }
+    this.formChanged = false;
+    this.cancelHandle(true);
+  };
+
+  render() {
+    const { type } = this.props;
+    const { formList } = this.state;
+    const formType = type !== 'show' ? 'default' : 'onlyShow';
+    return (
+      <>
+        <QmForm
+          ref={(ref) => (this.formRef = ref)}
+          uniqueKey="SPA1001_FormEdit"
+          items={formList}
+          labelWidth={90}
+          formType={formType}
+          fieldsChange={(items) => this.setState({ formList: items })}
+          onValuesChange={this.valuesChangeHandle}
+        />
+        <QmSpace className={`fixed-footer`}>
+          <QmButton onClick={() => this.cancelHandle()}>关闭</QmButton>
+          {formType !== 'onlyShow' && (
+            <QmButton type="primary" onClick={() => this.saveHandle()}>
+              确定
+            </QmButton>
+          )}
+        </QmSpace>
+      </>
+    );
+  }
+}
+
+export default FormEdit;

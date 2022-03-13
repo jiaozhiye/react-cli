@@ -2,13 +2,16 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 16:52:00
+ * @Last Modified time: 2022-03-13 18:08:03
  */
 import React from 'react';
 import classNames from 'classnames';
 import { dictTool } from '@/hoc';
 
-import { QmForm, QmTable, QmButton } from '@jiaozhiye/qm-design-react';
+import { QmForm, QmTable, QmButton, QmDrawer } from '@jiaozhiye/qm-design-react';
+import { PlusOutlined, DeleteOutlined } from '@/icons';
+
+import FormEdit from './FormEdit';
 
 import css from './index.module.less';
 
@@ -27,6 +30,12 @@ class Spa1001 extends React.Component {
     filters: this.createFilterList(),
     columns: this.createTableColumns(),
     fetchParams: {},
+    visible: false,
+    actions: {
+      type: '',
+      title: '',
+      recordId: '',
+    },
   };
 
   createFilterList() {
@@ -307,11 +316,23 @@ class Spa1001 extends React.Component {
   }
 
   setFetchParams = (params) => {
-    this.setState({ fetchParams: params });
+    this.setState((prev) => ({ fetchParams: Object.assign({}, prev.fetchParams, params) }));
+  };
+
+  clickHandle = (type, record) => {
+    const conf = {
+      add: '新增',
+      edit: '编辑',
+      show: '查看',
+    };
+    this.setState({
+      actions: Object.assign({}, { title: conf[type], recordId: record?.id, type }),
+    });
+    this.setState({ visible: true });
   };
 
   render() {
-    const { filters, columns, fetchParams } = this.state;
+    const { filters, columns, fetchParams, visible, actions } = this.state;
     return (
       <>
         <QmForm
@@ -352,7 +373,34 @@ class Spa1001 extends React.Component {
           }}
           exportExcel={{ fileName: '导出文件.xlsx' }}
           columnsChange={(columns) => this.setState({ columns })}
-        />
+        >
+          <QmButton type="primary" icon={<PlusOutlined />} onClick={() => this.clickHandle('add')}>
+            新建
+          </QmButton>
+          <QmButton type="danger" icon={<DeleteOutlined />}>
+            删除
+          </QmButton>
+        </QmTable>
+        <QmDrawer
+          ref={(ref) => (this.drawerRef = ref)}
+          visible={visible}
+          title={actions.title}
+          bodyStyle={{ paddingBottom: 52 }}
+          onClose={() => this.setState({ visible: false })}
+        >
+          <FormEdit
+            ref={(ref) => (this.formEditRef = ref)}
+            drawerRef={this.drawerRef}
+            type={actions.type}
+            recordId={actions.recordId}
+            onClose={(reload) => {
+              if (reload) {
+                this.setFetchParams();
+              }
+              this.setState({ visible: false });
+            }}
+          />
+        </QmDrawer>
       </>
     );
   }
