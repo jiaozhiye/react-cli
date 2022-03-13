@@ -2,13 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2022-03-13 17:06:35
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 20:15:16
+ * @Last Modified time: 2022-03-13 20:18:43
  */
 import React from 'react';
 import classNames from 'classnames';
 import { dictTool } from '@/hoc';
 import { Message } from '@/utils';
-import { getRecordById, getTableData, addRecord, saveRecord } from '@test/api/spa1001';
+import { getRecordById, getTableData, addRecord, saveRecord } from '@test/api/spa1002';
 
 import { QmForm, QmButton, QmSpace } from '@jiaozhiye/qm-design-react';
 
@@ -154,7 +154,7 @@ class FormEdit extends React.Component {
       <>
         <QmForm
           ref={(ref) => (this.formRef = ref)}
-          uniqueKey="SPA1001_FormEdit"
+          uniqueKey="SPA1002_FormEdit"
           items={formList}
           labelWidth={90}
           formType={formType}

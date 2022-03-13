@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 21:38:08
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 16:20:01
+ * @Last Modified time: 2022-03-13 20:19:16
  */
 import { lazy } from 'react';
 
@@ -22,7 +22,7 @@ export default {
     {
       path: '/bjgl/cggl/tk',
       meta: { keepAlive: true },
-      iframePath: '/iframe/bjgl/cggl/dd',
+      component: lazy(() => import(/* webpackChunkName: "test/spa1002" */ '@test/pages/spa1002')),
     },
     {
       path: '/test',

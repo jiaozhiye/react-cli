@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 20:18:30
+ * @Last Modified time: 2022-03-13 20:18:17
  */
 import React from 'react';
 import classNames from 'classnames';
@@ -24,10 +24,10 @@ import {
   getStreetData,
   getTableKeys,
   removeRecord,
-} from '@test/api/spa1001';
+} from '@test/api/spa1002';
 
 @dictTool
-class Spa1001 extends React.Component {
+class Spa1002 extends React.Component {
   state = {
     filters: this.createFilterList(), // 表单项
     columns: this.createTableColumns(), // 表格列
@@ -55,7 +55,7 @@ class Spa1001 extends React.Component {
         label: '条件2',
         fieldName: 'b',
         searchHelper: {
-          uniqueKey: 'SPA1001_SH_01',
+          uniqueKey: 'SPA1002_SH_01',
           filters: [
             {
               type: 'INPUT',
@@ -372,7 +372,7 @@ class Spa1001 extends React.Component {
     return (
       <>
         <QmForm
-          uniqueKey="SPA1001"
+          uniqueKey="SPA1002"
           formType="search"
           items={filters}
           fieldsChange={(items) => this.setState({ filters: items })}
@@ -381,7 +381,7 @@ class Spa1001 extends React.Component {
         />
         <QmTable
           ref={(ref) => (this.tableRef = ref)}
-          uniqueKey="SPA1001"
+          uniqueKey="SPA1002"
           height={'auto'}
           rowKey={(row) => row.id}
           columns={columns}
@@ -440,4 +440,4 @@ class Spa1001 extends React.Component {
   }
 }
 
-export default Spa1001;
+export default Spa1002;
