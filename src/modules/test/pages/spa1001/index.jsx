@@ -2,10 +2,11 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 18:08:03
+ * @Last Modified time: 2022-03-13 18:12:34
  */
 import React from 'react';
 import classNames from 'classnames';
+import { confirmBeforeClose } from '@/utils';
 import { dictTool } from '@/hoc';
 
 import { QmForm, QmTable, QmButton, QmDrawer } from '@jiaozhiye/qm-design-react';
@@ -188,8 +189,12 @@ class Spa1001 extends React.Component {
         render: (text, row) => {
           return (
             <div>
-              <QmButton type="text">编辑</QmButton>
-              <QmButton type="text">查看</QmButton>
+              <QmButton type="text" onClick={() => this.clickHandle('edit', row.id)}>
+                编辑
+              </QmButton>
+              <QmButton type="text" onClick={() => this.clickHandle('show', row.id)}>
+                查看
+              </QmButton>
             </div>
           );
         },
@@ -319,16 +324,26 @@ class Spa1001 extends React.Component {
     this.setState((prev) => ({ fetchParams: Object.assign({}, prev.fetchParams, params) }));
   };
 
-  clickHandle = (type, record) => {
+  clickHandle = (type, recordId) => {
     const conf = {
       add: '新增',
       edit: '编辑',
       show: '查看',
     };
     this.setState({
-      actions: Object.assign({}, { title: conf[type], recordId: record?.id, type }),
+      actions: Object.assign({}, { title: conf[type], recordId, type }),
     });
     this.setState({ visible: true });
+  };
+
+  doCloseHandle = async () => {
+    const allowClose = !this.formEditRef.getValueChange();
+    try {
+      await confirmBeforeClose(allowClose);
+      this.setState({ visible: false });
+    } catch (err) {
+      // ..
+    }
   };
 
   render() {
@@ -386,7 +401,7 @@ class Spa1001 extends React.Component {
           visible={visible}
           title={actions.title}
           bodyStyle={{ paddingBottom: 52 }}
-          onClose={() => this.setState({ visible: false })}
+          onClose={() => this.doCloseHandle()}
         >
           <FormEdit
             ref={(ref) => (this.formEditRef = ref)}
@@ -394,10 +409,8 @@ class Spa1001 extends React.Component {
             type={actions.type}
             recordId={actions.recordId}
             onClose={(reload) => {
-              if (reload) {
-                this.setFetchParams();
-              }
-              this.setState({ visible: false });
+              reload && this.setFetchParams();
+              this.doCloseHandle();
             }}
           />
         </QmDrawer>

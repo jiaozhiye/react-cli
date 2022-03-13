@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import { Message } from '@/utils';
-import { getRecordById, addRecord, saveRecord } from '@test/api/spa1001';
+import { getRecordById, getTableData, addRecord, saveRecord } from '@test/api/spa1001';
 import { QmForm, QmButton, QmSpace } from '@jiaozhiye/qm-design-react';
 
 class FormEdit extends React.Component {
@@ -29,9 +29,52 @@ class FormEdit extends React.Component {
         fieldName: 'a',
       },
       {
-        type: 'INPUT_NUMBER',
+        type: 'SEARCH_HELPER',
         label: '条件2',
         fieldName: 'b',
+        searchHelper: {
+          filters: [
+            {
+              type: 'INPUT',
+              label: '条件1',
+              fieldName: 'a1',
+            },
+            {
+              type: 'INPUT',
+              label: '条件2',
+              fieldName: 'a2',
+            },
+          ],
+          table: {
+            columns: [
+              {
+                title: '创建时间',
+                dataIndex: 'date',
+              },
+              {
+                title: '姓名',
+                dataIndex: 'person.name',
+              },
+            ],
+            rowKey: (record) => record.id,
+            fetch: {
+              api: getTableData,
+              params: {},
+              dataKey: 'records',
+            },
+          },
+          filterAliasMap: () => {
+            return ['a1'];
+          },
+          fieldAliasMap: () => {
+            return { b: 'date', code: 'id' };
+          },
+        },
+      },
+      {
+        type: 'INPUT_NUMBER',
+        label: '条件2',
+        fieldName: 'c',
         options: {
           formatter: (value) => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ','),
           parser: (value) => value.replace(/\$\s?|(,*)/g, ''),
@@ -40,12 +83,12 @@ class FormEdit extends React.Component {
       {
         type: 'DATE',
         label: '条件2',
-        fieldName: 'c',
+        fieldName: 'd',
       },
       {
         type: 'RANGE_DATE',
         label: '条件4',
-        fieldName: 'd1|d2',
+        fieldName: 'e1|e2',
       },
     ];
   }
