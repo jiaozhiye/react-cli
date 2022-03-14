@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 20:18:17
+ * @Last Modified time: 2022-03-14 17:40:05
  */
 import React from 'react';
 import classNames from 'classnames';
@@ -32,14 +32,26 @@ class Spa1002 extends React.Component {
     filters: this.createFilterList(), // 表单项
     columns: this.createTableColumns(), // 表格列
     fetchParams: {}, // 查询接口的参数
+    // 列选中配置
+    selection: {
+      type: 'checkbox',
+      fetchAllRowKeys: {
+        api: getTableKeys,
+        dataKey: 'recordKeys',
+      },
+      onChange: (val, rows) => {
+        this.selectedKeys = val;
+      },
+    },
     visible: false, // 抽屉的显隐状态
     actions: {
       type: '',
       title: '',
       recordId: '',
     },
-    selectedKeys: [], // 选中数据 rowKey 列表
   };
+
+  selectedKeys = []; // 选中数据 rowKey 列表
 
   // 创建筛选器列表
   createFilterList() {
@@ -344,14 +356,15 @@ class Spa1002 extends React.Component {
 
   // 删除表格数据
   removeHandle = async () => {
-    const { selectedKeys } = this.state;
-    if (!selectedKeys.length) {
+    if (!this.selectedKeys.length) {
       return Notification(`请选择数据！`, 'warning');
     }
-    const res = await removeRecord({ ids: selectedKeys.join(',') });
+    const res = await removeRecord({ ids: this.selectedKeys.join(',') });
     if (res.code === 200) {
       Message('删除成功', 'success');
-      this.setState({ selectedKeys: [] });
+      this.setState((prev) => ({
+        selection: Object.assign({}, prev.selection, { selectedRowKeys: [] }), // 清空列选中
+      }));
       this.fetchHandle();
     }
   };
@@ -368,7 +381,7 @@ class Spa1002 extends React.Component {
   };
 
   render() {
-    const { filters, columns, fetchParams, visible, actions } = this.state;
+    const { filters, columns, fetchParams, selection, visible, actions } = this.state;
     return (
       <>
         <QmForm
@@ -397,16 +410,7 @@ class Spa1002 extends React.Component {
               dataKey: 'summation',
             },
           }}
-          rowSelection={{
-            type: 'checkbox',
-            fetchAllRowKeys: {
-              api: getTableKeys,
-              dataKey: 'recordKeys',
-            },
-            onChange: (val, rows) => {
-              this.setState({ selectedKeys: val });
-            },
-          }}
+          rowSelection={selection}
           exportExcel={{ fileName: '导出文件.xlsx' }}
           columnsChange={(columns) => this.setState({ columns })}
         >
