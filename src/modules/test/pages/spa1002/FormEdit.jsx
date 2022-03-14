@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2022-03-13 17:06:35
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-14 13:52:33
+ * @Last Modified time: 2022-03-14 21:03:48
  */
 import React from 'react';
 import classNames from 'classnames';
@@ -327,7 +327,9 @@ class FormEdit extends React.Component {
       const res = await saveRecord({ id: recordId, ...data });
       Message('编辑成功！', 'success');
     }
+    // 重置 表单、表格 变更状态
     this.formChanged = false;
+    this.tableRef.CLEAR_LOG();
     this.cancelHandle(true);
   };
 
