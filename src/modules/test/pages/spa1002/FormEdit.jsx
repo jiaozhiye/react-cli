@@ -2,23 +2,29 @@
  * @Author: 焦质晔
  * @Date: 2022-03-13 17:06:35
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 23:35:54
+ * @Last Modified time: 2022-03-14 13:52:33
  */
 import React from 'react';
 import classNames from 'classnames';
 import { dictTool } from '@/hoc';
-import { Message } from '@/utils';
+import { Message, createUidKey } from '@/utils';
 import { getRecordById, getTableData, addRecord, saveRecord } from '@test/api/spa1002';
 
-import { QmForm, QmButton, QmAnchor, QmSpace } from '@jiaozhiye/qm-design-react';
+import { QmForm, QmTable, QmButton, QmAnchor, QmSpace } from '@jiaozhiye/qm-design-react';
+import { PlusOutlined } from '@/icons';
 
 import css from './index.module.less';
 
 @dictTool
 class FormEdit extends React.Component {
   state = {
-    formList: this.createFormList(),
+    formList: this.createFormList(), // 表单
+    columns: this.createTableColumns(),
+    tableList: [], // 表格数据
   };
+
+  // 仅用于保存编辑后的表格数据
+  tableListTemp = [];
 
   componentDidMount() {
     if (this.props.type !== 'add') {
@@ -104,6 +110,177 @@ class FormEdit extends React.Component {
     ];
   }
 
+  createTableColumns() {
+    return [
+      {
+        title: '操作',
+        dataIndex: '__action__', // 操作列的 dataIndex 的值不能改
+        fixed: 'left',
+        width: 80,
+        render: (text, row) => {
+          return (
+            <div>
+              <QmButton type="text" onClick={() => this.tableRef.REMOVE_RECORDS(row.id)}>
+                移除
+              </QmButton>
+            </div>
+          );
+        },
+      },
+      {
+        title: '序号',
+        dataIndex: 'index',
+        width: 80,
+        render: (text) => {
+          return text + 1;
+        },
+      },
+      {
+        title: '创建时间',
+        dataIndex: 'date',
+        width: 200,
+        sorter: true,
+        filter: {
+          type: 'date',
+        },
+        editRender: (row) => {
+          return {
+            type: 'datetime',
+            editable: true,
+          };
+        },
+      },
+      {
+        title: '姓名',
+        dataIndex: 'name',
+        width: 200,
+        required: true,
+        sorter: true,
+        filter: {
+          type: 'text',
+        },
+        editRender: (row) => {
+          const obj = {
+            type: 'search-helper',
+            editable: true,
+            helper: {
+              filters: [
+                {
+                  type: 'INPUT',
+                  label: '条件1',
+                  fieldName: 'a1',
+                },
+              ],
+              table: {
+                columns: [
+                  {
+                    title: '创建时间',
+                    dataIndex: 'date',
+                    filter: {
+                      type: 'date',
+                    },
+                  },
+                  {
+                    title: '姓名',
+                    dataIndex: 'person.name',
+                  },
+                ],
+                fetch: {
+                  api: getTableData,
+                  params: {},
+                  dataKey: 'records',
+                },
+              },
+              fieldAliasMap: () => {
+                return { name: 'date', age: 'date' };
+              },
+              filterAliasMap: () => {
+                return ['a1'];
+              },
+            },
+            rules: [{ required: true, message: '姓名不能为空' }],
+          };
+          return obj;
+        },
+      },
+      {
+        title: '性别',
+        dataIndex: 'sex',
+        width: 100,
+        dictItems: this.props.createDictList('sex'),
+      },
+      {
+        title: '年龄',
+        dataIndex: 'age',
+        width: 100,
+        sorter: true,
+        filter: {
+          type: 'number',
+        },
+      },
+      {
+        title: '数量',
+        dataIndex: 'num',
+        width: 150,
+        align: 'right',
+        required: true,
+        sorter: true,
+        filter: {
+          type: 'number',
+        },
+        editRender: (row) => {
+          return {
+            type: 'number',
+            editable: true,
+            extra: {
+              max: 1000,
+            },
+            rules: [{ required: true, message: '数量不能为空' }],
+          };
+        },
+      },
+      {
+        title: '是否选择',
+        dataIndex: 'choice',
+        align: 'center',
+        width: 100,
+        editRender: (row) => {
+          return {
+            type: 'checkbox',
+            editable: true,
+            extra: {
+              trueValue: 1,
+              falseValue: 0,
+            },
+          };
+        },
+        dictItems: [
+          { text: '选中', value: 1 },
+          { text: '非选中', value: 0 },
+        ],
+      },
+      {
+        title: '状态',
+        dataIndex: 'state',
+        width: 150,
+        filter: {
+          type: 'radio',
+        },
+        editRender: (row) => {
+          return {
+            type: 'select',
+            editable: true,
+          };
+        },
+        dictItems: [
+          { text: '已完成', value: 1 },
+          { text: '进行中', value: 2 },
+          { text: '未完成', value: 3 },
+        ],
+      },
+    ];
+  }
+
   setFormInitValue = async () => {
     const { drawerRef, recordId } = this.props;
     drawerRef.START_LOADING();
@@ -111,6 +288,7 @@ class FormEdit extends React.Component {
       const res = await getRecordById({ id: recordId });
       if (res.code === 200) {
         this.formRef.SET_FIELDS_VALUE({ a: 'hello' });
+        this.setState({ tableList: [{ id: '1' }] });
       }
     } catch (err) {
       // ...
@@ -133,6 +311,11 @@ class FormEdit extends React.Component {
   saveHandle = async () => {
     const [err, data] = await this.formRef.GET_FORM_DATA();
     if (err) return;
+    const { required } = this.tableRef.FORM_VALIDATE();
+    if (required.length) {
+      return Message('表格必填字段不能为空！', 'warning');
+    }
+    console.log('表格数据:', this.tableListTemp);
     const { type, recordId } = this.props;
     if (type === 'add') {
       const res = await addRecord(data);
@@ -146,9 +329,13 @@ class FormEdit extends React.Component {
     this.cancelHandle(true);
   };
 
+  insertHandle = () => {
+    this.tableRef.INSERT_RECORDS({ id: createUidKey() });
+  };
+
   render() {
     const { type } = this.props;
-    const { formList } = this.state;
+    const { formList, tableList, columns } = this.state;
     const formType = type !== 'show' ? 'default' : 'onlyShow';
     return (
       <>
@@ -165,7 +352,21 @@ class FormEdit extends React.Component {
             />
           </QmAnchor.Item>
           <QmAnchor.Item label="数据列表" showDivider>
-            <div style={{ height: '500px' }}>asdasd</div>
+            <QmTable
+              ref={(ref) => (this.tableRef = ref)}
+              height={300}
+              rowKey={(row) => row.id}
+              columns={columns}
+              dataSource={tableList}
+              columnsChange={(columns) => this.setState({ columns })}
+              onDataChange={(list) => {
+                this.tableListTemp = list;
+              }}
+            >
+              <QmButton type="primary" icon={<PlusOutlined />} onClick={() => this.insertHandle()}>
+                新建
+              </QmButton>
+            </QmTable>
           </QmAnchor.Item>
         </QmAnchor>
         <QmSpace className={`fixed-footer`}>
