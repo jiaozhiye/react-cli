@@ -10,10 +10,20 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createIframeMenu } from '@/store/actions';
 import store from '@/store';
+
 import type { AppState } from '@/store/reducers/app';
 import type { Nullable } from '@/utils/types';
 
+const reduxConnect: any = connect;
+
 export default (WrappedComponent: React.ComponentType<any>): any => {
+  @reduxConnect(
+    (state: AppState) => ({
+      size: state.app.size,
+      lang: state.app.lang,
+    }),
+    { createIframeMenu }
+  )
   @withRouter
   class C extends Component<any> {
     static displayName = `AppTool(${WrappedComponent.displayName || WrappedComponent.name})`;
@@ -68,19 +78,5 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     }
   }
 
-  const Forward = React.forwardRef((props, ref) => {
-    const H = connect(
-      (state: AppState) => ({
-        size: state.app.size,
-        lang: state.app.lang,
-        forwardedRef: ref,
-        ...props,
-      }),
-      { createIframeMenu }
-    )(hoistStatics(C, WrappedComponent));
-    return <H />;
-  });
-  Forward.displayName = 'Forward';
-
-  return Forward;
+  return React.forwardRef((props: any, ref) => <C {...props} forwardedRef={ref} />);
 };

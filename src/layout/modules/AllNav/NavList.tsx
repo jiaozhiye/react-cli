@@ -103,14 +103,18 @@ class NavList extends Component<any> {
     return (
       <>
         <div
-          className={classNames('nav-list-masker', visible ? 'show' : '')}
+          className={classNames('nav-list-masker', { show: visible })}
           style={{ left: !collapsed ? `${config.sideWidth[0]}px` : `${config.sideWidth[1]}px` }}
-          onClick={this.clickHandle}
+          onClick={(ev) => {
+            ev.stopPropagation();
+            this.clickHandle();
+          }}
         />
         <div
           ref={forwardedRef}
-          className={classNames('nav-list-container', visible ? 'show' : '')}
+          className={classNames('nav-list-container', { show: visible })}
           style={{ left: !collapsed ? `${config.sideWidth[0]}px` : `${config.sideWidth[1]}px` }}
+          onClick={(ev) => ev.stopPropagation()}
         >
           <div className={classNames('wrapper')}>
             <div className={classNames('search')}>

@@ -29,20 +29,21 @@ class AllNav extends Component<any> {
     visible: false,
   };
 
-  componentDidMount() {
-    this.event = addEventListener(document.querySelector('.ant-layout-sider'), 'click', (ev) => {
-      const $$allNavMenu = document.getElementById('all-nav');
-      const $$allNavModal = this.navListRef.current;
-      if (ev.nativeEvent.path.some((x) => x === $$allNavMenu || x === $$allNavModal)) return;
-      this.closeHandle();
-    });
-  }
+  // componentDidMount() {
+  //   this.event = addEventListener(document.querySelector('.ant-layout-sider'), 'click', (ev) => {
+  //     const $$allNavMenu = document.getElementById('all-nav');
+  //     const $$allNavModal = this.navListRef.current;
+  //     if (ev.nativeEvent.path.some((x) => x === $$allNavMenu || x === $$allNavModal)) return;
+  //     this.closeHandle();
+  //   });
+  // }
 
-  componentWillUnmount() {
-    this.event.remove();
-  }
+  // componentWillUnmount() {
+  //   this.event.remove();
+  // }
 
-  visibleChange = () => {
+  visibleChange = (ev) => {
+    ev.domEvent.stopPropagation();
     this.setState({ visible: !this.state.visible });
   };
 

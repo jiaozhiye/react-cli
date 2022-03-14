@@ -7,10 +7,19 @@
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import { connect } from 'react-redux';
+
 import type { AppState } from '@/store/reducers/app';
 import type { Dictionary, Nullable } from '@/utils/types';
 
+const reduxConnect: any = connect;
+
 export default (WrappedComponent: React.ComponentType<any>): any => {
+  @reduxConnect(
+    (state: AppState) => ({
+      dict: state.app.dict,
+    }),
+    {}
+  )
   class C extends Component<any> {
     static displayName = `DictTool(${WrappedComponent.displayName || WrappedComponent.name})`;
 
@@ -86,18 +95,5 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     }
   }
 
-  const Forward = React.forwardRef((props, ref) => {
-    const H = connect(
-      (state: AppState) => ({
-        dict: state.app.dict,
-        forwardedRef: ref,
-        ...props,
-      }),
-      {}
-    )(hoistStatics(C, WrappedComponent));
-    return <H />;
-  });
-  Forward.displayName = 'Forward';
-
-  return Forward;
+  return React.forwardRef((props: any, ref) => <C {...props} forwardedRef={ref} />);
 };
