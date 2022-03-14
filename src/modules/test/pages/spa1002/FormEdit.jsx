@@ -18,7 +18,7 @@ import css from './index.module.less';
 @dictTool
 class FormEdit extends React.Component {
   state = {
-    formList: this.createFormList(), // 表单
+    formList: this.createFormList(),
     columns: this.createTableColumns(),
     tableList: [], // 表格数据
   };
@@ -281,6 +281,7 @@ class FormEdit extends React.Component {
     ];
   }
 
+  // 表单数据的回显
   setFormInitValue = async () => {
     const { drawerRef, recordId } = this.props;
     drawerRef.START_LOADING();
@@ -301,7 +302,8 @@ class FormEdit extends React.Component {
   };
 
   getValueChange = () => {
-    return this.formChanged;
+    const { inserted, updated, removed } = this.tableRef.GET_LOG(); // 标记表格的变化
+    return this.formChanged || inserted.length || updated.length || removed.length;
   };
 
   cancelHandle = (reload) => {
@@ -311,7 +313,7 @@ class FormEdit extends React.Component {
   saveHandle = async () => {
     const [err, data] = await this.formRef.GET_FORM_DATA();
     if (err) return;
-    const { required } = this.tableRef.FORM_VALIDATE();
+    const { required } = this.tableRef.FIELD_VALIDATE();
     if (required.length) {
       return Message('表格必填字段不能为空！', 'warning');
     }
