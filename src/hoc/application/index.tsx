@@ -9,6 +9,9 @@ import hoistStatics from 'hoist-non-react-statics';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createIframeMenu } from '@/store/actions';
+import { OUTSIDE_CLICK } from '@/store/types';
+import client from 'webpack-custom-theme/client';
+import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
 import store from '@/store';
 
 import type { AppState } from '@/store/reducers/app';
@@ -62,6 +65,28 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       this.props.history.push(fullpath);
     };
 
+    emitOutsideClick = () => {
+      window.parent.postMessage({ type: OUTSIDE_CLICK, data: '' }, '*');
+    };
+
+    dispatchMouseClick = () => {
+      document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
+      document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
+      document.body.click();
+    };
+
+    createThemeColor = (color: string) => {
+      const options = {
+        newColors: getAntdSerials(color),
+        changeUrl: (cssUrl) => `/${cssUrl}`,
+        openLocalStorage: false,
+      };
+      client.changer.changeColor(options, Promise).then(() => {
+        this.props.createThemeColor(color);
+        localStorage.setItem('theme_color', color);
+      });
+    };
+
     render() {
       const { forwardedRef } = this.props;
       return (
@@ -70,6 +95,9 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           {...this.props}
           refreshView={this.refreshView}
           openView={this.openView}
+          emitOutsideClick={this.emitOutsideClick}
+          dispatchMouseClick={this.dispatchMouseClick}
+          createThemeColor={this.createThemeColor}
         />
       );
     }

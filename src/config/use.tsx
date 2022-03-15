@@ -8,11 +8,8 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as types from '@/store/types';
 import { notification, message, QmConfigProvider } from '@jiaozhiye/qm-design-react';
-import client from 'webpack-custom-theme/client';
 import '@/locale/setting';
-
 import {
   createDictData,
   createThemeColor,
@@ -21,7 +18,8 @@ import {
 } from '@/store/actions';
 import { isIframe } from '@/router';
 import { changeLocale } from '@/locale';
-import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
+import { application } from '@/hoc';
+import * as types from '@/store/types';
 import type { AppState } from '@/store/reducers/app';
 
 import '@jiaozhiye/qm-design-react/lib/style/index.less';
@@ -41,12 +39,13 @@ message.config({
   maxCount: 3,
 });
 
+@application
 @withRouter
 class UseConfig extends Component<any> {
   componentDidMount() {
     const localTheme = localStorage.getItem('theme_color');
     if (localTheme && localTheme !== this.props.themeColor) {
-      this.themeColorChangeHandle(localTheme);
+      this.props.createThemeColor(localTheme);
     }
     if (isIframe(this.props.location.pathname)) {
       this.props.createDictData();
@@ -60,26 +59,12 @@ class UseConfig extends Component<any> {
     document.removeEventListener('click', this.clickEventHandle);
   }
 
-  themeColorChangeHandle(color) {
-    const options = {
-      newColors: getAntdSerials(color),
-      changeUrl: (cssUrl) => `/${cssUrl}`,
-      openLocalStorage: false,
-    };
-    client.changer.changeColor(options, Promise).then(() => {
-      this.props.createThemeColor(color);
-      localStorage.setItem('theme_color', color);
-    });
-  }
-
   clickEventHandle = () => {
-    window.parent.postMessage({ type: types.OUTSIDE_CLICK, data: '' }, '*');
+    this.props.emitOutsideClick();
   };
 
   createMouseEvent() {
-    document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
-    document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
-    document.body.click();
+    this.props.dispatchMouseClick();
   }
 
   messageEventHandle = ({ data }) => {
@@ -88,7 +73,7 @@ class UseConfig extends Component<any> {
       this.createMouseEvent();
     }
     if (data.type === types.THEME_COLOR) {
-      this.themeColorChangeHandle(data.data);
+      this.props.createThemeColor(data.data);
     }
     if (data.type === types.THEME_TYPE) {
       // ...
@@ -104,11 +89,13 @@ class UseConfig extends Component<any> {
     if (data.type === types.OPEN_VIEW) {
       this.props.history.push(data.data);
     }
+    if (data.type === types.REFRESH_VIEW) {
+      this.props.refreshView({ path: this.props.location.pathname });
+    }
   };
 
   render(): React.ReactElement {
     const { pathname } = this.props.location;
-
     return (
       <QmConfigProvider
         locale={this.props.lang}

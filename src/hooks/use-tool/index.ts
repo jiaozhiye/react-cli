@@ -6,7 +6,7 @@
  */
 import * as React from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
-import { OPEN_VIEW } from '@/store/types';
+import { OPEN_VIEW, REFRESH_VIEW } from '@/store/types';
 
 export default function useTool() {
   const history = useHistory();
@@ -18,7 +18,9 @@ export default function useTool() {
 
   const closeView = (fullpath: string) => {};
 
-  const reloadView = () => {};
+  const reloadView = () => {
+    window.parent.postMessage({ type: REFRESH_VIEW, data: '' }, '*');
+  };
 
   return { openView, closeView, reloadView, location };
 }
