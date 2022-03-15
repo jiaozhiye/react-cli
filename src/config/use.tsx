@@ -63,14 +63,10 @@ class UseConfig extends Component<any> {
     this.props.emitOutsideClick();
   };
 
-  createMouseEvent() {
-    this.props.dispatchMouseClick();
-  }
-
   messageEventHandle = ({ data }) => {
     if (typeof data !== 'object') return;
     if (data.type === types.OUTSIDE_CLICK) {
-      this.createMouseEvent();
+      this.props.dispatchMouseClick();
     }
     if (data.type === types.THEME_COLOR) {
       this.props.createThemeColor(data.data);
