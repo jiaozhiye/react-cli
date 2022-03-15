@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { createComponentSize } from '@/store/actions';
 import { t } from '@/locale';
 import { appTool } from '@/hoc';
-import config from '@/config/envMaps';
+import { COMP_SIZE } from '@/store/types';
 import type { AppState } from '@/store/reducers/app';
 
 import { FontSizeOutlined } from '@/icons';
@@ -26,7 +26,7 @@ class SizeSetting extends Component<any> {
     this.props.iframeMenus.forEach((x) => {
       const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
-      $iframe.contentWindow?.postMessage({ type: 'size', data: size }, '*');
+      $iframe.contentWindow?.postMessage({ type: COMP_SIZE, data: size }, '*');
     });
     // 刷新页面
     this.props.refreshView(this.props.location.pathname);

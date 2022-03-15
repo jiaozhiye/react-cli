@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import * as types from '@/store/types';
 import { notification, message, QmConfigProvider } from '@jiaozhiye/qm-design-react';
 import client from 'webpack-custom-theme/client';
 import '@/locale/setting';
@@ -21,7 +22,6 @@ import {
 import { isIframe } from '@/router';
 import { changeLocale } from '@/locale';
 import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
-import config from '@/config/envMaps';
 import type { AppState } from '@/store/reducers/app';
 
 import '@jiaozhiye/qm-design-react/lib/style/index.less';
@@ -79,25 +79,25 @@ class UseConfig extends Component<any> {
   }
 
   clickEventHandle = () => {
-    window.parent.postMessage({ type: 'outside_click', data: '' }, '*');
+    window.parent.postMessage({ type: types.OUTSIDE_CLICK, data: '' }, '*');
   };
 
   messageEventHandle = ({ data }) => {
     if (typeof data !== 'object') return;
-    if (data.type === 'outside_click') {
+    if (data.type === types.OUTSIDE_CLICK) {
       this.createMouseEvent();
     }
-    if (data.type === 'theme_color') {
+    if (data.type === types.THEME_COLOR) {
       this.themeColorChangeHandle(data.data);
     }
-    if (data.type === 'theme_type') {
+    if (data.type === types.THEME_TYPE) {
       // ...
     }
-    if (data.type === 'lang') {
+    if (data.type === types.LOCALE_LANG) {
       this.props.createLocaleLang(data.data);
       changeLocale(data.data);
     }
-    if (data.type === 'size') {
+    if (data.type === types.COMP_SIZE) {
       this.props.createComponentSize(data.data);
       localStorage.setItem('size', data.data);
     }

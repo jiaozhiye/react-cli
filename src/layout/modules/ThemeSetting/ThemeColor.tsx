@@ -10,7 +10,7 @@ import { CheckOutlined } from '@/icons';
 import { connect } from 'react-redux';
 import { createThemeColor } from '@/store/actions';
 import { t } from '@/locale';
-import config from '@/config/envMaps';
+import { THEME_COLOR } from '@/store/types';
 import type { AppState } from '@/store/reducers/app';
 
 // 自定义主题
@@ -70,7 +70,7 @@ class ThemeColor extends Component<any> {
     this.props.iframeMenus.forEach((x) => {
       const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
-      $iframe.contentWindow?.postMessage({ type: 'theme_color', data: color }, '*');
+      $iframe.contentWindow?.postMessage({ type: THEME_COLOR, data: color }, '*');
     });
   }
 

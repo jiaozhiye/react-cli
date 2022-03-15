@@ -34,6 +34,9 @@ export const THEME_TYPE = 'THEME_TYPE';
 // 设备类型
 export const DEVICE = 'DEVICE';
 
+// 外部单击
+export const OUTSIDE_CLICK = 'OUTSIDE_CLICK';
+
 // 登录
 export const SIGN_IN = 'SIGN_IN';
 

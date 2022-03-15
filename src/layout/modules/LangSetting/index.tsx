@@ -11,7 +11,7 @@ import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';
 import { changeLocale } from '@/locale';
 import { appTool } from '@/hoc';
-import config from '@/config/envMaps';
+import { LOCALE_LANG } from '@/store/types';
 import type { AppState } from '@/store/reducers/app';
 
 import { TranslationOutlined } from '@/icons';
@@ -26,7 +26,7 @@ class LangSetting extends Component<any> {
     this.props.iframeMenus.forEach((x) => {
       const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
-      $iframe.contentWindow?.postMessage({ type: 'lang', data: lang }, '*');
+      $iframe.contentWindow?.postMessage({ type: LOCALE_LANG, data: lang }, '*');
     });
     // 刷新页面
     this.props.refreshView(this.props.location.pathname);
