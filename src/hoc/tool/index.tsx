@@ -9,6 +9,7 @@ import hoistStatics from 'hoist-non-react-statics';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createIframeMenu } from '@/store/actions';
+import { OPEN_VIEW, REFRESH_VIEW } from '@/store/types';
 
 import type { AppState } from '@/store/reducers/app';
 
@@ -26,11 +27,15 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
   class C extends Component<any> {
     static displayName = `Tool(${WrappedComponent.displayName || WrappedComponent.name})`;
 
-    openView = (fullpath: string) => {};
+    openView = (fullpath: string) => {
+      window.parent.postMessage({ type: OPEN_VIEW, data: fullpath }, '*');
+    };
 
     closeView = (fullpath: string) => {};
 
-    reloadView = () => {};
+    reloadView = () => {
+      window.parent.postMessage({ type: REFRESH_VIEW, data: '' }, '*');
+    };
 
     render() {
       const { forwardedRef } = this.props;

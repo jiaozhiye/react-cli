@@ -90,7 +90,7 @@ class UseConfig extends Component<any> {
       this.props.history.push(data.data);
     }
     if (data.type === types.REFRESH_VIEW) {
-      this.props.refreshView({ path: this.props.location.pathname });
+      this.props.refreshView(this.props.location.pathname);
     }
   };
 

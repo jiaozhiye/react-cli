@@ -22,5 +22,5 @@ export default function useTool() {
     window.parent.postMessage({ type: REFRESH_VIEW, data: '' }, '*');
   };
 
-  return { openView, closeView, reloadView, location };
+  return { openView, closeView, reloadView };
 }
