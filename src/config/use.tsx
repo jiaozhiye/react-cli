@@ -72,15 +72,15 @@ class UseConfig extends Component<any> {
     });
   }
 
+  clickEventHandle = () => {
+    window.parent.postMessage({ type: types.OUTSIDE_CLICK, data: '' }, '*');
+  };
+
   createMouseEvent() {
     document.dispatchEvent(new MouseEvent('mousedown', { bubbles: true }));
     document.dispatchEvent(new MouseEvent('mouseup', { bubbles: true }));
     document.body.click();
   }
-
-  clickEventHandle = () => {
-    window.parent.postMessage({ type: types.OUTSIDE_CLICK, data: '' }, '*');
-  };
 
   messageEventHandle = ({ data }) => {
     if (typeof data !== 'object') return;
@@ -100,6 +100,9 @@ class UseConfig extends Component<any> {
     if (data.type === types.COMP_SIZE) {
       this.props.createComponentSize(data.data);
       localStorage.setItem('size', data.data);
+    }
+    if (data.type === types.OPEN_VIEW) {
+      this.props.history.push(data.data);
     }
   };
 

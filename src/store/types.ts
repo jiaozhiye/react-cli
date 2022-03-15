@@ -42,3 +42,6 @@ export const SIGN_IN = 'SIGN_IN';
 
 // 退出登录
 export const SIGN_OUT = 'SIGN_OUT';
+
+//
+export const OPEN_VIEW = 'OPEN_VIEW';
