@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-14 17:36:51
+ * @Last Modified time: 2022-03-15 11:42:36
  */
 import React from 'react';
 import classNames from 'classnames';
@@ -28,6 +28,8 @@ import {
 
 @dictTool
 class Spa1001 extends React.Component {
+  static displayName = 'Spa1001'; // 用例号 - 用于页面缓存
+
   state = {
     filters: this.createFilterList(), // 表单项
     columns: this.createTableColumns(), // 表格列
