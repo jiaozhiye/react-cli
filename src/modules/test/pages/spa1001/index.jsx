@@ -7,7 +7,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { confirmBeforeClose, Notification, Message } from '@/utils';
-import { dictTool } from '@/hoc';
+import { dict } from '@/hoc';
 
 import { QmForm, QmTable, QmButton, QmDrawer } from '@jiaozhiye/qm-design-react';
 import { PlusOutlined, DeleteOutlined } from '@/icons';
@@ -26,7 +26,7 @@ import {
   removeRecord,
 } from '@test/api/spa1001';
 
-@dictTool
+@dict
 class Spa1001 extends React.Component {
   static displayName = 'Spa1001'; // 用例号 - 用于页面缓存
 

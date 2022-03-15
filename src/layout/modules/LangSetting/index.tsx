@@ -10,7 +10,7 @@ import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';
 import { changeLocale } from '@/locale';
-import { appTool } from '@/hoc';
+import { application } from '@/hoc';
 import { LOCALE_LANG } from '@/store/types';
 import type { AppState } from '@/store/reducers/app';
 
@@ -18,7 +18,7 @@ import { TranslationOutlined } from '@/icons';
 
 import './index.less';
 
-@appTool
+@application
 class LangSetting extends Component<any> {
   langChangeHandle(lang) {
     this.props.createLocaleLang(lang);

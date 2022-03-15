@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import classNames from 'classnames';
-import { dictTool } from '@/hoc';
+import { dict } from '@/hoc';
 import { Message, createUidKey } from '@/utils';
 import { getRecordById, getTableData, addRecord, saveRecord } from '@test/api/spa1002';
 
@@ -15,7 +15,7 @@ import { PlusOutlined } from '@/icons';
 
 import css from './index.module.less';
 
-@dictTool
+@dict
 class FormEdit extends React.Component {
   state = {
     formList: this.createFormList(),

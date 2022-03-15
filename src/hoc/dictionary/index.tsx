@@ -21,7 +21,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     {}
   )
   class C extends Component<any> {
-    static displayName = `DictTool(${WrappedComponent.displayName || WrappedComponent.name})`;
+    static displayName = `Dict(${WrappedComponent.displayName || WrappedComponent.name})`;
 
     /**
      * @description 获取本地存储的数据字典

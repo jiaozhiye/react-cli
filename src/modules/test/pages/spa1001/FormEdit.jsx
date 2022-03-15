@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import classNames from 'classnames';
-import { dictTool } from '@/hoc';
+import { dict } from '@/hoc';
 import { Message } from '@/utils';
 import { getRecordById, getTableData, addRecord, saveRecord } from '@test/api/spa1001';
 
@@ -14,7 +14,7 @@ import { QmForm, QmButton, QmSpace } from '@jiaozhiye/qm-design-react';
 
 import css from './index.module.less';
 
-@dictTool
+@dict
 class FormEdit extends React.Component {
   state = {
     formList: this.createFormList(),

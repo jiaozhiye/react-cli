@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import config from '@/config';
-import { appTool } from '@/hoc';
+import { application } from '@/hoc';
 import { connect } from 'react-redux';
 import { setStarMenu } from '@/store/actions';
 import { t } from '@/locale';
@@ -40,7 +40,7 @@ const reduxConnect: any = connect;
     setStarMenu,
   }
 )
-@appTool
+@application
 class NavList extends Component<any> {
   static propTypes = {
     visible: PropTypes.bool,

@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { t } from '@/locale';
 import { useWatermark } from './useWatermark';
-import { appTool } from '@/hoc';
+import { application } from '@/hoc';
 import dayjs from 'dayjs';
 
 import './index.less';
@@ -19,7 +19,7 @@ enum distance {
   small = 44,
 }
 
-@appTool
+@application
 class Watermark extends Component<any> {
   public watermarkRef = React.createRef<HTMLDivElement>();
 

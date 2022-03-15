@@ -26,9 +26,9 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
   )
   @withRouter
   class C extends Component<any> {
-    static displayName = `AppTool(${WrappedComponent.displayName || WrappedComponent.name})`;
+    static displayName = `App(${WrappedComponent.displayName || WrappedComponent.name})`;
 
-    refreshView = (pathname: string): void => {
+    refreshView = (pathname: string) => {
       const { search } = this.props.location;
       this.props.history.replace(`/redirect${pathname}` + search);
       let $iframe: Nullable<HTMLIFrameElement> = document.getElementById(
@@ -58,11 +58,9 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       }, 10);
     };
 
-    openView = (fullpath: string): void => {
+    openView = (fullpath: string) => {
       this.props.history.push(fullpath);
     };
-
-    closeView = (fullpath: string): void => {};
 
     render() {
       const { forwardedRef } = this.props;
@@ -72,7 +70,6 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           {...this.props}
           refreshView={this.refreshView}
           openView={this.openView}
-          closeView={this.closeView}
         />
       );
     }

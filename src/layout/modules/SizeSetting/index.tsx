@@ -10,7 +10,7 @@ import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 import { connect } from 'react-redux';
 import { createComponentSize } from '@/store/actions';
 import { t } from '@/locale';
-import { appTool } from '@/hoc';
+import { application } from '@/hoc';
 import { COMP_SIZE } from '@/store/types';
 import type { AppState } from '@/store/reducers/app';
 
@@ -18,7 +18,7 @@ import { FontSizeOutlined } from '@/icons';
 
 import './index.less';
 
-@appTool
+@application
 class SizeSetting extends Component<any> {
   sizeChangeHandle(size) {
     this.props.createComponentSize(size);

@@ -9,7 +9,7 @@ import { withRouter } from 'react-router-dom';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import classNames from 'classnames';
 import { nextTick } from '@/utils';
-import { appTool } from '@/hoc';
+import { application } from '@/hoc';
 import { t } from '@/locale';
 
 import { connect } from 'react-redux';
@@ -24,7 +24,7 @@ const { TabPane } = Tabs;
 
 const CTX_MENU_ID = 'SIMPLE';
 
-@appTool
+@application
 @withRouter
 class MultiTab extends Component<any> {
   state = {

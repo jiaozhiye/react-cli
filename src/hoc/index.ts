@@ -4,5 +4,6 @@
  * @Last Modified by: 焦质晔
  * @Last Modified time: 2022-01-15 12:45:05
  */
-export { default as appTool } from './application';
-export { default as dictTool } from './dictionary';
+export { default as application } from './application';
+export { default as dict } from './dictionary';
+export { default as tool } from './tool';
