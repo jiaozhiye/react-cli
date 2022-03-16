@@ -88,6 +88,10 @@ class UseConfig extends Component<any> {
     if (data.type === types.REFRESH_VIEW) {
       this.props.refreshView(this.props.location.pathname);
     }
+    if (data.type === types.SIGN_OUT) {
+      const { pathname, search } = this.props.location;
+      window.location.href = '/login?redirect=' + pathname + search;
+    }
   };
 
   render(): React.ReactElement {

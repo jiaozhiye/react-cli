@@ -173,8 +173,7 @@ export const createSignOut =
       payload: {},
     });
     // 刷新浏览器，释放内存
-    const { pathname, search } = window.location;
-    setTimeout(() => (window.location.href = '/login?redirect=' + pathname + search), 400);
+    setTimeout(() => window.parent.postMessage({ type: SIGN_OUT, data: '' }, '*'), 400);
   };
 
 // 登录
