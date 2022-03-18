@@ -5,12 +5,10 @@
  * @Last Modified time: 2022-01-16 10:13:16
  */
 import config from '../../config/app.conf';
-import { t } from '@/locale';
 import type { ComponentSize, Language, ThemeType } from '@/utils/types';
 
 type IConfig = {
   system: string;
-  title: string;
   baseUrl: string;
   lang: Language;
   size: ComponentSize;
@@ -33,7 +31,6 @@ type IConfig = {
 
 export default {
   system: config.name,
-  title: t('app.global.title'),
   baseUrl: process.env.ENV_CONFIG === 'gray' ? '/gray' : '/',
   lang: 'zh-cn', // 语言
   size: 'middle', // 尺寸

@@ -8,7 +8,7 @@ export default {
   name: 'en',
   app: {
     global: {
-      title: 'Faw-vw MEP System',
+      title: 'Cloud Platform',
       home: 'Home Page',
       dashboard: 'Dashboard',
       emptyText: 'No Data',

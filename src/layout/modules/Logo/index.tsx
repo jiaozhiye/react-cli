@@ -7,10 +7,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { t } from '@/locale';
 import { Link } from 'react-router-dom';
 
-import logo1 from './assets/logo1.svg';
-import logo2 from './assets/logo2.svg';
+import logo from './assets/logo.png';
 
 import './index.less';
 
@@ -24,10 +24,8 @@ class Logo extends Component<any> {
     return (
       <div className={classNames('app-logo')}>
         <Link to="/home" className={classNames('link')}>
-          <img
-            className={classNames('logo', !collapsed ? 'logo1' : 'logo2')}
-            src={!collapsed ? logo1 : logo2}
-          />
+          <img className={classNames('logo')} src={logo} />
+          {!collapsed && <span className={`title`}>{t('app.global.title')}</span>}
         </Link>
       </div>
     );

@@ -8,7 +8,7 @@ export default {
   name: 'zh-cn',
   app: {
     global: {
-      title: '大众MEP系统',
+      title: '自主云原生平台',
       home: '首页',
       dashboard: '概览',
       emptyText: '暂无数据',

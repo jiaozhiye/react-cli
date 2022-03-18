@@ -93,7 +93,8 @@ class PrivateRoute extends Component<any> {
     const { route, whiteList, whiteAuth, flattenMenus } = this.props;
     const { path } = this.props.route;
 
-    document.title = `${config.title}-${route.meta?.title || '404'}` || config.title;
+    document.title =
+      `${t('app.global.title')}-${route.meta?.title || '404'}` || t('app.global.title');
 
     if (!flattenMenus.length && !this.isMatch(whiteAuth, path)) {
       return <Loading />;
