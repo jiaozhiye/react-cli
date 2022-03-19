@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-11 10:21:46
+ * @Last Modified time: 2022-03-19 15:40:48
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { createThemeColor } from '@/store/actions';
 import { t } from '@/locale';
 import { THEME_COLOR } from '@/store/types';
+import config from '@/config';
 import type { AppState } from '@/store/reducers/app';
 
 // 自定义主题
@@ -60,7 +61,8 @@ class ThemeColor extends Component<any> {
   themeColorChangeHandle(color) {
     const options = {
       newColors: getAntdSerials(color),
-      changeUrl: (cssUrl) => `/${cssUrl}`,
+      changeUrl: (cssUrl) =>
+        `${process.env.NODE_ENV === 'development' ? '' : config.baseRoute}/${cssUrl}`,
       openLocalStorage: false,
     };
     client.changer.changeColor(options, Promise).then(() => {

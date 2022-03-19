@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-19 15:13:36
+ * @Last Modified time: 2022-03-19 15:40:27
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -79,7 +79,8 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     createThemeColor = (color: string) => {
       const options = {
         newColors: getAntdSerials(color),
-        changeUrl: (cssUrl) => `${config.baseRoute}/${cssUrl}`,
+        changeUrl: (cssUrl) =>
+          `${process.env.NODE_ENV === 'development' ? '' : config.baseRoute}/${cssUrl}`,
         openLocalStorage: false,
       };
       client.changer.changeColor(options, Promise).then(() => {
