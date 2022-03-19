@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-07 13:02:50
+ * @Last Modified time: 2022-03-19 14:47:00
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -73,7 +73,10 @@ class PrivateRoute extends Component<any> {
     this.props.createTabMenu({ path: pathname, title: route.meta.title }, 'add');
     // iframe 模式
     if (route.iframePath) {
-      this.props.createIframeMenu({ key: pathname, value: route.iframePath + search }, 'add');
+      this.props.createIframeMenu(
+        { key: pathname, value: config.baseRoute + route.iframePath + search },
+        'add'
+      );
     }
     // 本地存储
     nextTick(() => {

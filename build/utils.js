@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-26 09:25:52
+ * @Last Modified time: 2022-03-19 14:29:48
  */
 'use strict';
 
@@ -45,10 +45,6 @@ exports.assetsPath = function (dir) {
       ? config.build.assetsSubDirectory
       : config.dev.assetsSubDirectory;
   return path.posix.join(assetsSubDirectory, dir);
-};
-
-exports.grayPath = function () {
-  return process.env.ENV_CONFIG === 'gray' ? '/gray/' : '/';
 };
 
 exports.deepRequire = mapDir;

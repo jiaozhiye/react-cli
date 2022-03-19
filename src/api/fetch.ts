@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 15:39:35
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 15:52:03
+ * @Last Modified time: 2022-03-19 15:10:02
  */
 import axios, {
   AxiosInstance,
@@ -37,8 +37,8 @@ type IRequestHeader = {
 };
 
 // 灰度判断
-export const isGray = (): boolean => {
-  return config.baseUrl.startsWith('/gray');
+const isGray = (): boolean => {
+  return process.env.ENV_CONFIG === 'gray';
 };
 
 // 自定义扩展 header 请求头

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-22 11:14:38
+ * @Last Modified time: 2022-03-19 14:29:01
  */
 'use strict';
 
@@ -33,7 +33,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     /* 当使用 HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html */
     historyApiFallback: {
       disableDotRule: true,
-      rewrites: [{ from: /.*/, to: utils.grayPath() + 'index.html' }],
+      rewrites: [{ from: /.*/, to: '/index.html' }],
     },
     static: [
       {

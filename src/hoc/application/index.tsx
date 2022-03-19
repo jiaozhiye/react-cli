@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 21:13:13
+ * @Last Modified time: 2022-03-19 15:13:36
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -13,6 +13,7 @@ import { OUTSIDE_CLICK } from '@/store/types';
 import client from 'webpack-custom-theme/client';
 import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
 import store from '@/store';
+import config from '@/config';
 
 import type { AppState } from '@/store/reducers/app';
 import type { Nullable } from '@/utils/types';
@@ -78,7 +79,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     createThemeColor = (color: string) => {
       const options = {
         newColors: getAntdSerials(color),
-        changeUrl: (cssUrl) => `/${cssUrl}`,
+        changeUrl: (cssUrl) => `${config.baseRoute}/${cssUrl}`,
         openLocalStorage: false,
       };
       client.changer.changeColor(options, Promise).then(() => {
