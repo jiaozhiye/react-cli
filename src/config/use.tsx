@@ -20,6 +20,7 @@ import { isIframe } from '@/router';
 import { changeLocale } from '@/locale';
 import { application } from '@/hoc';
 import * as types from '@/store/types';
+import config from '@/config';
 import type { AppState } from '@/store/reducers/app';
 
 import '@jiaozhiye/qm-design-react/lib/style/index.less';
@@ -90,7 +91,7 @@ class UseConfig extends Component<any> {
     }
     if (data.type === types.SIGN_OUT) {
       const { pathname } = this.props.location;
-      window.location.href = '/login?redirect=' + pathname;
+      window.location.href = `${config.baseRoute}/login?redirect=` + pathname;
     }
   };
 
