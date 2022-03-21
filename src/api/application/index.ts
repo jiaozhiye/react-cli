@@ -17,7 +17,8 @@ export const getDictList = (params) =>
   axios.post(`${prefix}/sys/sysLogin/user/getDictionary`, params);
 
 // 获取功能按钮权限
-export const getAuthList = (params) => axios.post(`${prefix}/sys/sysLogin/user/getAuths`, params);
+export const getAuthList = (params) =>
+  axios.post(`${prefix}/qfc-base-auth/auth/permissionbutton/list`, params);
 
 // 获取收藏导航
 export const getStarMenuList = (params) =>
