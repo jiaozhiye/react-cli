@@ -6,4 +6,5 @@
  */
 export { default as application } from './application';
 export { default as dict } from './dictionary';
+export { default as auth } from './authority';
 export { default as tool } from './tool';

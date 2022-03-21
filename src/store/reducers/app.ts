@@ -8,6 +8,7 @@ import { uniqBy } from 'lodash-es';
 import {
   SIDE_MENU,
   DICT_DATA,
+  AUTH_DATA,
   STAR_MENU,
   TAB_MENU,
   IFRAME_MENU,
@@ -51,7 +52,8 @@ type IState = {
   flattenMenus: Omit<ISideMenu, 'children'>[];
   iframeMenus: ICacheMenu[];
   keepAliveList: ICacheMenu[];
-  dict: Record<string, Dictionary[] | number>;
+  dict: Record<string, Dictionary[]>;
+  auth: Record<string, string[]>;
   loginInfo: Record<string, string>;
 };
 
@@ -87,6 +89,7 @@ const initState: IState = {
   iframeMenus: [], // iframe 列表
   keepAliveList: [], // 路由组件缓存列表
   dict: {}, // 数据字典
+  auth: {}, // 按钮权限
   loginInfo: {}, // 用户登录信息
 };
 
@@ -122,6 +125,13 @@ const setIframeMenus = (state, payload, behavior) => {
 const setDictData = (state, payload) => {
   return Object.assign({}, state, {
     dict: payload,
+  });
+};
+
+// 设置数据字典
+const setAuthData = (state, payload) => {
+  return Object.assign({}, state, {
+    auth: payload,
   });
 };
 
@@ -188,6 +198,8 @@ export const appReducer = (state = initState, action) => {
       return setSideMenus(state, action.payload);
     case DICT_DATA:
       return setDictData(state, action.payload);
+    case AUTH_DATA:
+      return setAuthData(state, action.payload);
     case STAR_MENU:
       return setStarMenus(state, action.payload);
     case TAB_MENU:

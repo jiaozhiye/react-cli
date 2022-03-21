@@ -7,6 +7,7 @@
 import {
   SIDE_MENU,
   DICT_DATA,
+  AUTH_DATA,
   STAR_MENU,
   TAB_MENU,
   IFRAME_MENU,
@@ -18,7 +19,13 @@ import {
   SIGN_OUT,
   DEVICE,
 } from '../types';
-import { getMenuList, getDictList, getStarMenuList, setStarMenuList } from '@/api/application';
+import {
+  getMenuList,
+  getDictList,
+  getAuthList,
+  getStarMenuList,
+  setStarMenuList,
+} from '@/api/application';
 import { getToken, removeToken } from '@/utils/cookies';
 import { t } from '@/locale';
 import routes from '@/router/config';
@@ -120,6 +127,43 @@ export const createDictData =
 
     dispatch({
       type: DICT_DATA,
+      payload: data,
+    });
+  };
+
+// 设置功能权限
+export const createAuthData =
+  () =>
+  async (dispatch, getState): Promise<void> => {
+    const {
+      app: { auth },
+    } = getState();
+
+    if (Object.keys(auth).length) {
+      return;
+    }
+
+    const lastToken = JSON.parse(localStorage.getItem('auth') as string)?._t ?? '';
+    if (getToken() === lastToken) return;
+    // 数据
+    let data: Record<string, string[] | string> = {};
+    if (process.env.MOCK_DATA === 'true') {
+      data = { _t: getToken() };
+    } else {
+      const res: any = await getAuthList({});
+      if (res.code === 200) {
+        // 数据字典规则：如果有重复的 Code，服务端覆盖客户端
+        data = {
+          _t: getToken(),
+          ...res.data,
+        };
+      }
+    }
+    // 数据字典本地存储
+    localStorage.setItem('auth', JSON.stringify(data));
+
+    dispatch({
+      type: AUTH_DATA,
       payload: data,
     });
   };

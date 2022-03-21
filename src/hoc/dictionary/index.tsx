@@ -23,11 +23,6 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
   class C extends Component<any> {
     static displayName = `Dict(${WrappedComponent.displayName || WrappedComponent.name})`;
 
-    /**
-     * @description 获取本地存储的数据字典
-     * @param
-     * @returns {object}
-     */
     getLocalDict = (): Record<string, Dictionary[]> => {
       return Object.keys(this.props.dict).length
         ? this.props.dict

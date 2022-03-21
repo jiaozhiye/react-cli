@@ -7,6 +7,7 @@
 export { default as useForceUpdate } from './use-force-update';
 export { default as useUpdateEffect } from './use-update-effect';
 export { default as useDictionary } from './use-dictionary';
+export { default as useAuthority } from './use-authority';
 export { default as useLocale } from './use-locale';
 export { default as useSize } from './use-size';
 export { default as useTool } from './use-tool';

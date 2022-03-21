@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-04 08:57:55
+ * @Last Modified time: 2022-03-21 18:01:46
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -12,6 +12,7 @@ import { notification, message, QmConfigProvider } from '@jiaozhiye/qm-design-re
 import '@/locale/setting';
 import {
   createDictData,
+  createAuthData,
   createThemeColor,
   createLocaleLang,
   createComponentSize,
@@ -50,6 +51,7 @@ class UseConfig extends Component<any> {
     }
     if (isIframe(this.props.location.pathname)) {
       this.props.createDictData();
+      this.props.createAuthData();
       document.addEventListener('click', this.clickEventHandle, false);
     }
     window.addEventListener('message', this.messageEventHandle, false);
@@ -121,6 +123,7 @@ export default connect(
   }),
   {
     createDictData,
+    createAuthData,
     createThemeColor,
     createLocaleLang,
     createComponentSize,
