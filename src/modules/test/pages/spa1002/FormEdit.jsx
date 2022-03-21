@@ -222,7 +222,6 @@ class FormEdit extends React.Component {
         title: '数量',
         dataIndex: 'num',
         width: 150,
-        align: 'right',
         required: true,
         sorter: true,
         filter: {
@@ -242,7 +241,6 @@ class FormEdit extends React.Component {
       {
         title: '是否选择',
         dataIndex: 'choice',
-        align: 'center',
         width: 100,
         editRender: (row) => {
           return {

@@ -24,7 +24,7 @@ const config: IEnvCongig = {
     domain: '',
   },
   prod: {
-    domain: 'faw.com',
+    domain: '',
   },
   gray: {
     domain: '', // 与 prod 生产环境一致

@@ -293,7 +293,6 @@ class Spa1001 extends React.Component {
       {
         title: '是否选择',
         dataIndex: 'choice',
-        align: 'center',
         width: 150,
         dictItems: [
           { text: '选中', value: 1 },
