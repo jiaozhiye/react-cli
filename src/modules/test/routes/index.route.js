@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 21:38:08
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 20:19:16
+ * @Last Modified time: 2022-03-22 13:32:25
  */
 import { lazy } from 'react';
 
@@ -29,6 +29,11 @@ export default {
       meta: { title: '测试页面', keepAlive: true },
       component: lazy(() => import(/* webpackChunkName: "test/demo" */ '@test/pages/demo')),
     },
+    // {
+    //   path: '/a/b/c',
+    //   meta: { keepAlive: true, noAuth: true, title: '白名单用例' },
+    //   component: lazy(() => import(/* webpackChunkName: "test/spa1001" */ '@test/pages/spa1001')),
+    // },
   ],
   public: [],
 };

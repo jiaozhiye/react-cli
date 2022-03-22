@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-19 14:47:00
+ * @Last Modified time: 2022-03-22 13:25:21
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -89,7 +89,10 @@ class PrivateRoute extends Component<any> {
   }
 
   isAuth(path) {
-    return this.props.flattenMenus.findIndex((x) => x.key === path) !== -1;
+    return (
+      this.props.route.meta?.noAuth ||
+      this.props.flattenMenus.findIndex((x) => x.key === path) !== -1
+    );
   }
 
   render(): React.ReactElement {
