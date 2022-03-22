@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-22 13:25:21
+ * @Last Modified time: 2022-03-22 21:39:22
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -30,9 +30,8 @@ class PrivateRoute extends Component<any> {
     if (!isLoaded) {
       return console.error('应用菜单加载失败，请检查菜单接口！');
     }
-    const tabMenus = this.getLocalTabMenus();
-    tabMenus.forEach((x) => {
-      if (flattenMenus.some((k) => k.key === x.path)) {
+    this.getLocalTabMenus().forEach((x) => {
+      if (this.props.flattenMenus.some((k) => k.key === x.path)) {
         this.props.createTabMenu({ path: x.path, title: x.title }, 'add');
       }
     });
@@ -64,6 +63,7 @@ class PrivateRoute extends Component<any> {
     const { tabMenus } = this.props;
     const { pathname, search } = this.props.location;
     const { route } = matchRoutes(routes, pathname).pop();
+    // title 非空判断 - 重要
     if (!route.meta?.title) return;
     // 最大数量判断
     if (tabMenus.length > config.maxCacheNum) {
