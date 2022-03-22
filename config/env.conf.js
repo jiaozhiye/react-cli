@@ -2,15 +2,15 @@
  * @Author: 焦质晔
  * @Date: 2020-12-03 09:16:26
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-12-09 15:01:46
+ * @Last Modified time: 2022-03-22 20:15:15
  */
 const config = {
   dev: {
-    // 当前应用
-    host: '//localhost:9020',
-    // 格式：子模块: 域名+端口号
-    dms: '//localhost:9021',
-    tds: '//localhost:9022',
+    // 主机应用
+    host: '',
+    // 子应用
+    dms: '',
+    tds: '',
   },
   tst: {
     host: '',
@@ -29,13 +29,13 @@ const config = {
   },
   prod: {
     host: '',
-    dms: 'http://dms.faw.com',
-    tds: 'http://tds.faw.com',
+    dms: 'https://dms.faw.cn',
+    tds: 'https://tds.faw.cn',
   },
   gray: {
     host: '/gray',
-    dms: 'http://dms.faw.com/gray',
-    tds: 'http://tds.faw.com/gray',
+    dms: 'https://dms.faw.cn/gray',
+    tds: 'https://tds.faw.cn/gray',
   },
 };
 

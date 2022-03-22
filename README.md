@@ -33,11 +33,11 @@ $ npm run build
 
 ### 主机应用充当路由注册中心和分发调度的角色，来调用各子应用页面
 
-| 应用名 | 说明       | 域名      | 端口号 |
-| ------ | ---------- | --------- | ------ |
-| app    | 主机应用   | localhost | 9020   |
-| dms    | DMS 子应用 | localhost | 9021   |
-| tds    | TDS 子应用 | localhost | 9022   |
+| 应用名 | 说明           | 域名               |
+| ------ | -------------- | ------------------ |
+| app    | 主机应用(中台) | https://www.faw.cn |
+| dms    | DMS 子应用     | https://dms.faw.cn |
+| tds    | TDS 子应用     | https://tds.faw.cn |
 
 1. 架构维护 config/app.conf.js => 定义当前应用
 2. 架构维护 config/env.conf.js => 注册子应用
