@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:40:32
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-19 11:01:00
+ * @Last Modified time: 2022-03-23 15:42:31
  */
 import { lazy } from 'react';
 import { t } from '@/locale';
@@ -79,5 +79,21 @@ const routes = [
     ],
   },
 ];
+
+export const getLocalRoutes = () => {
+  const localRoutes = localStorage.getItem('sub_routes');
+  let result: any[] = [];
+  if (localRoutes) {
+    try {
+      result = JSON.parse(localRoutes).map((x) => ({
+        ...x,
+        component: BlankLayout,
+      }));
+    } catch (err) {
+      // ...
+    }
+  }
+  return result;
+};
 
 export default routes;

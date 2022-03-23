@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-08 09:10:28
+ * @Last Modified time: 2022-03-23 15:54:00
  */
 import {
   SIDE_MENU,
@@ -28,7 +28,7 @@ import {
 } from '@/api/application';
 import { getToken, removeToken } from '@/utils/cookies';
 import { t } from '@/locale';
-import routes from '@/router/config';
+import routes, { getLocalRoutes } from '@/router/config';
 import localDict from '@/utils/localDict';
 import config from '@/config';
 
@@ -83,10 +83,12 @@ export const createMenuList =
       app: { flattenMenus },
     } = getState();
     const { routes: mRoutes } = routes.find((k) => k.path === '/');
+    // 不可破坏 routes 引用
+    mRoutes.splice(2, 0, ...getLocalRoutes());
     flattenMenus.forEach((x) => {
-      const item = mRoutes.find((k) => k.path === x.key);
-      if (item) {
-        item.meta = Object.assign({}, item.meta, { title: x.title });
+      const route = mRoutes.find((k) => k.path === x.key);
+      if (route) {
+        route.meta = Object.assign({}, route.meta, { title: x.title });
       }
     });
 
@@ -159,7 +161,7 @@ export const createAuthData =
         };
       }
     }
-    // 数据字典本地存储
+    // 权限本地存储
     localStorage.setItem('auth', JSON.stringify(data));
 
     dispatch({

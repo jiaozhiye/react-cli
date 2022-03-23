@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-22 21:39:22
+ * @Last Modified time: 2022-03-23 15:42:57
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -13,7 +13,6 @@ import { connect } from 'react-redux';
 import { createMenuList, createTabMenu, createIframeMenu } from '@/store/actions';
 import type { AppState, ITabNav } from '@/store/reducers/app';
 
-import routes from '@/router/config';
 import config from '@/config';
 
 import Loading from '@/pages/loading';
@@ -62,7 +61,7 @@ class PrivateRoute extends Component<any> {
   addTabMenus() {
     const { tabMenus } = this.props;
     const { pathname, search } = this.props.location;
-    const { route } = matchRoutes(routes, pathname).pop();
+    const { route } = matchRoutes(this.props.route.routes, pathname).pop();
     // title 非空判断 - 重要
     if (!route.meta?.title) return;
     // 最大数量判断
