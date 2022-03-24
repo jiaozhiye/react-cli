@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:40:32
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-23 15:42:31
+ * @Last Modified time: 2022-03-24 21:00:41
  */
 import { lazy } from 'react';
 import { t } from '@/locale';
@@ -15,6 +15,24 @@ const BasicLayout = lazy(() => import('@/layout/BasicLayout'));
 const BlankLayout = lazy(() => import('@/layout/BlankLayout'));
 const Nomatch = lazy(() => import('@/pages/nomatch'));
 const Redirect = lazy(() => import('@/pages/redirect'));
+
+export const getLocalRoutes = () => {
+  let result: any[] = [];
+  if (config.system === 'app') {
+    const localRoutes = localStorage.getItem('sub_routes');
+    if (localRoutes) {
+      try {
+        result = JSON.parse(localRoutes).map((x) => ({
+          ...x,
+          component: BlankLayout,
+        }));
+      } catch (err) {
+        // ...
+      }
+    }
+  }
+  return result;
+};
 
 const routes = [
   {
@@ -64,6 +82,7 @@ const routes = [
           }
           return x;
         }),
+      ...getLocalRoutes(),
       {
         path: '/redirect/:path(.*)',
         component: Redirect,
@@ -79,21 +98,5 @@ const routes = [
     ],
   },
 ];
-
-export const getLocalRoutes = () => {
-  const localRoutes = localStorage.getItem('sub_routes');
-  let result: any[] = [];
-  if (localRoutes) {
-    try {
-      result = JSON.parse(localRoutes).map((x) => ({
-        ...x,
-        component: BlankLayout,
-      }));
-    } catch (err) {
-      // ...
-    }
-  }
-  return result;
-};
 
 export default routes;

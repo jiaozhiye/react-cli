@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-24 19:44:11
+ * @Last Modified time: 2022-03-24 21:02:27
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -76,8 +76,13 @@ const createFlattenMenus = <T extends ISideMenu>(list: T[]): T[] => {
 
 const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
   const { routes: mRoutes } = routes.find((k) => k.path === '/');
-  // 不可破坏 routes 引用
-  mRoutes.splice(2, 0, ...getLocalRoutes());
+  if (config.system === 'app') {
+    const valueTemp: any[] = uniqBy([...getLocalRoutes(), ...mRoutes.slice(2)], 'path');
+    mRoutes.length = 2;
+    for (let i = 2, len = valueTemp.length; i < len; i++) {
+      mRoutes[i] = valueTemp[i]; // 不可破坏 routes 引用
+    }
+  }
   list.forEach((x) => {
     const route = mRoutes.find((k) => k.path === x.key);
     if (route) {
