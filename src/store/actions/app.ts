@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-23 15:54:00
+ * @Last Modified time: 2022-03-24 19:49:30
  */
 import {
   SIDE_MENU,
@@ -28,7 +28,6 @@ import {
 } from '@/api/application';
 import { getToken, removeToken } from '@/utils/cookies';
 import { t } from '@/locale';
-import routes, { getLocalRoutes } from '@/router/config';
 import localDict from '@/utils/localDict';
 import config from '@/config';
 
@@ -76,20 +75,6 @@ export const createMenuList =
     dispatch({
       type: SIDE_MENU,
       payload: data,
-    });
-
-    // 设置路由 meta 信息
-    const {
-      app: { flattenMenus },
-    } = getState();
-    const { routes: mRoutes } = routes.find((k) => k.path === '/');
-    // 不可破坏 routes 引用
-    mRoutes.splice(2, 0, ...getLocalRoutes());
-    flattenMenus.forEach((x) => {
-      const route = mRoutes.find((k) => k.path === x.key);
-      if (route) {
-        route.meta = Object.assign({}, route.meta, { title: x.title });
-      }
     });
 
     return status;

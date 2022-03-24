@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-05 17:42:15
+ * @Last Modified time: 2022-03-24 19:44:11
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -22,6 +22,7 @@ import {
 } from '../types';
 import { t } from '@/locale';
 import config from '@/config';
+import routes, { getLocalRoutes } from '@/router/config';
 import type { ComponentSize, Device, Dictionary, ThemeType } from '@/utils/types';
 
 export type ISideMenu = {
@@ -73,6 +74,18 @@ const createFlattenMenus = <T extends ISideMenu>(list: T[]): T[] => {
   return res;
 };
 
+const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
+  const { routes: mRoutes } = routes.find((k) => k.path === '/');
+  // 不可破坏 routes 引用
+  mRoutes.splice(2, 0, ...getLocalRoutes());
+  list.forEach((x) => {
+    const route = mRoutes.find((k) => k.path === x.key);
+    if (route) {
+      route.meta = Object.assign({}, route.meta, { title: x.title });
+    }
+  });
+};
+
 /**
  * 初始化 state
  */
@@ -95,9 +108,11 @@ const initState: IState = {
 
 // 设置导航菜单
 const setSideMenus = (state, payload) => {
+  const flattenMenus = createFlattenMenus(payload);
+  setRouteMeta(flattenMenus);
   return Object.assign({}, state, {
     sideMenus: payload,
-    flattenMenus: createFlattenMenus(payload),
+    flattenMenus,
   });
 };
 
