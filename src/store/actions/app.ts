@@ -107,7 +107,7 @@ export const createDictData =
       return;
     }
 
-    const lastToken = JSON.parse(localStorage.getItem('dict') as string)?._t ?? '';
+    const lastToken = JSON.parse(localStorage.getItem('dict') as string)?._t;
     if (getToken() === lastToken) return;
     // 数据
     let data: Record<string, Array<Dictionary> | string> = {};
@@ -145,7 +145,7 @@ export const createAuthData =
       return;
     }
 
-    const lastToken = JSON.parse(localStorage.getItem('auth') as string)?._t ?? '';
+    const lastToken = JSON.parse(localStorage.getItem('auth') as string)?._t;
     if (getToken() === lastToken) return;
     // 数据
     let data: Record<string, string[] | string> = {};

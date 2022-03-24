@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-11 09:52:52
+ * @Last Modified time: 2022-03-24 15:11:59
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { renderRoutes } from '../router';
 import { Layout } from '@jiaozhiye/qm-design-react';
 import { matchRoutes } from '@/router';
-import { createDeviceType } from '@/store/actions';
+import { createDictData, createAuthData, createDeviceType } from '@/store/actions';
 import config from '@/config';
 import type { AppState } from '@/store/reducers/app';
 
@@ -57,6 +57,8 @@ class BasicLayout extends Component<any> {
   }
 
   componentDidMount() {
+    this.props.createDictData();
+    this.props.createAuthData();
     window.addEventListener('resize', this.resizeHandler, false);
   }
 
@@ -155,6 +157,8 @@ export default connect(
     iframeMenus: state.app.iframeMenus,
   }),
   {
+    createDictData,
+    createAuthData,
     createDeviceType,
   }
 )(BasicLayout);

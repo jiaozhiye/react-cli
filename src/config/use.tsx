@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-24 14:44:34
+ * @Last Modified time: 2022-03-24 15:11:23
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -10,13 +10,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { notification, message, QmConfigProvider } from '@jiaozhiye/qm-design-react';
 import '@/locale/setting';
-import {
-  createDictData,
-  createAuthData,
-  createThemeColor,
-  createLocaleLang,
-  createComponentSize,
-} from '@/store/actions';
+import { createThemeColor, createLocaleLang, createComponentSize } from '@/store/actions';
 import { isIframe } from '@/router';
 import { changeLocale } from '@/locale';
 import { application } from '@/hoc';
@@ -51,10 +45,7 @@ class UseConfig extends Component<any> {
     if (localTheme && localTheme !== this.props.themeColor) {
       this.props.createThemeColor(localTheme);
     }
-    if (!isIframe(this.props.location.pathname)) {
-      this.props.createDictData();
-      this.props.createAuthData();
-    } else {
+    if (isIframe(this.props.location.pathname)) {
       document.addEventListener('click', this.clickEventHandle, false);
     }
     window.addEventListener('message', this.messageEventHandle, false);
@@ -130,8 +121,6 @@ export default connect(
     themeColor: state.app.themeColor,
   }),
   {
-    createDictData,
-    createAuthData,
     createThemeColor,
     createLocaleLang,
     createComponentSize,
