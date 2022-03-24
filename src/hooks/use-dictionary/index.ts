@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2022-01-17 10:58:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-17 11:17:47
+ * @Last Modified time: 2022-03-24 13:25:02
  */
 import * as React from 'react';
 import store from '@/store';
@@ -14,7 +14,7 @@ export default function useDictionary() {
   const getLocalDict = (): Record<string, Dictionary[]> => {
     return Object.keys(app.dict).length
       ? app.dict
-      : JSON.parse(localStorage.getItem('dict') as string) || {};
+      : JSON.parse(window.parent.localStorage.getItem('dict') as string) || {};
   };
 
   /**

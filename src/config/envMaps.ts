@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 21:03:36
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-11 10:20:46
+ * @Last Modified time: 2022-03-24 14:52:35
  */
 import envConf from '../../config/env.conf';
 
@@ -12,7 +12,7 @@ const env: string = process.env.ENV_CONFIG || 'prod';
 
 const config: IEnvCongig = {
   dev: {
-    domain: '',
+    domain: '', // 用例不跨域，无需设置
   },
   tst: {
     domain: '',
@@ -24,10 +24,10 @@ const config: IEnvCongig = {
     domain: '',
   },
   prod: {
-    domain: '',
+    domain: 'faw.cn',
   },
   gray: {
-    domain: '', // 与 prod 生产环境一致
+    domain: '',
   },
 };
 

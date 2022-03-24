@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2022-01-17 10:58:59
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-21 18:13:18
+ * @Last Modified time: 2022-03-24 13:24:57
  */
 import * as React from 'react';
 import store from '@/store';
@@ -13,7 +13,7 @@ export default function useAuthority() {
   const getLocalAuth = (): Record<string, string[]> => {
     return Object.keys(app.auth).length
       ? app.auth
-      : JSON.parse(localStorage.getItem('auth') as string) || {};
+      : JSON.parse(window.parent.localStorage.getItem('auth') as string) || {};
   };
 
   /**

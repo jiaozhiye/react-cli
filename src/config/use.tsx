@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-21 18:01:46
+ * @Last Modified time: 2022-03-24 14:44:34
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -22,6 +22,7 @@ import { changeLocale } from '@/locale';
 import { application } from '@/hoc';
 import * as types from '@/store/types';
 import config from '@/config';
+import env from '@/config/envMaps';
 import type { AppState } from '@/store/reducers/app';
 
 import '@jiaozhiye/qm-design-react/lib/style/index.less';
@@ -45,13 +46,15 @@ message.config({
 @withRouter
 class UseConfig extends Component<any> {
   componentDidMount() {
+    this.setDocumentDomain();
     const localTheme = localStorage.getItem('theme_color');
     if (localTheme && localTheme !== this.props.themeColor) {
       this.props.createThemeColor(localTheme);
     }
-    if (isIframe(this.props.location.pathname)) {
+    if (!isIframe(this.props.location.pathname)) {
       this.props.createDictData();
       this.props.createAuthData();
+    } else {
       document.addEventListener('click', this.clickEventHandle, false);
     }
     window.addEventListener('message', this.messageEventHandle, false);
@@ -65,6 +68,11 @@ class UseConfig extends Component<any> {
   clickEventHandle = () => {
     this.props.emitOutsideClick();
   };
+
+  setDocumentDomain() {
+    if (!env.domain) return;
+    document.domain = env.domain;
+  }
 
   messageEventHandle = ({ data }) => {
     if (typeof data !== 'object') return;

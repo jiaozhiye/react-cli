@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-21 18:11:33
+ * @Last Modified time: 2022-03-24 13:24:43
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -25,7 +25,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     getLocalAuth = (): Record<string, string[]> => {
       return Object.keys(this.props.auth).length
         ? this.props.auth
-        : JSON.parse(localStorage.getItem('auth') as string) || {};
+        : JSON.parse(window.parent.localStorage.getItem('auth') as string) || {};
     };
 
     /**

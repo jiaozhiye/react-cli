@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 21:07:42
+ * @Last Modified time: 2022-03-24 13:21:26
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -26,7 +26,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     getLocalDict = (): Record<string, Dictionary[]> => {
       return Object.keys(this.props.dict).length
         ? this.props.dict
-        : JSON.parse(localStorage.getItem('dict') as string) || {};
+        : JSON.parse(window.parent.localStorage.getItem('dict') as string) || {};
     };
 
     /**

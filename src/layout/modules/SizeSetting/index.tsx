@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-11 10:15:02
+ * @Last Modified time: 2022-03-24 14:39:06
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -29,7 +29,7 @@ class SizeSetting extends Component<any> {
       $iframe.contentWindow?.postMessage({ type: COMP_SIZE, data: size }, '*');
     });
     // 刷新页面
-    this.props.refreshView(this.props.location.pathname);
+    setTimeout(() => this.props.refreshView(this.props.location.pathname));
   }
 
   renderMenus() {
