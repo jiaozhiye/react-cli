@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-24 21:02:27
+ * @Last Modified time: 2022-03-25 19:12:46
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -79,8 +79,8 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
   if (config.system === 'app') {
     const valueTemp: any[] = uniqBy([...getLocalRoutes(), ...mRoutes.slice(2)], 'path');
     mRoutes.length = 2;
-    for (let i = 2, len = valueTemp.length; i < len; i++) {
-      mRoutes[i] = valueTemp[i]; // 不可破坏 routes 引用
+    for (let i = 0, len = valueTemp.length; i < len; i++) {
+      mRoutes[i + 2] = valueTemp[i]; // 不可破坏 routes 引用
     }
   }
   list.forEach((x) => {

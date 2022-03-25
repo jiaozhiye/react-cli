@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2022-03-13 17:06:35
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-14 21:03:48
+ * @Last Modified time: 2022-03-25 19:00:16
  */
 import React from 'react';
 import classNames from 'classnames';
@@ -311,7 +311,7 @@ class FormEdit extends React.Component {
   saveHandle = async () => {
     const [err, data] = await this.formRef.GET_FORM_DATA();
     if (err) return;
-    const { required } = this.tableRef.FIELD_VALIDATE();
+    const { required } = this.tableRef.VALIDATE_FIELDS();
     if (required.length) {
       return Message('表格必填字段不能为空！', 'warning');
     }
