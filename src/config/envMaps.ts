@@ -4,11 +4,13 @@
  * @Last Modified by: 焦质晔
  * @Last Modified time: 2022-03-24 14:52:35
  */
-import envConf from '../../config/env.conf';
+type IConfig = {
+  domain: string;
+};
 
-type IEnvCongig = Record<'dev' | 'tst' | 'uat' | 'pre' | 'prod' | 'gray', Record<string, string>>;
+type IEnvCongig = Record<'dev' | 'tst' | 'uat' | 'pre' | 'prod' | 'gray', IConfig>;
 
-const env: string = process.env.ENV_CONFIG || 'prod';
+const env = process.env.ENV_CONFIG || 'prod';
 
 const config: IEnvCongig = {
   dev: {
@@ -31,4 +33,4 @@ const config: IEnvCongig = {
   },
 };
 
-export default Object.assign({}, config[env], envConf);
+export default Object.assign({}, config[env]) as IConfig;
