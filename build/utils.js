@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-19 14:29:48
+ * @Last Modified time: 2022-03-25 20:19:53
  */
 'use strict';
 
@@ -104,7 +104,8 @@ exports.cssLoaders = function (options) {
       lessOptions: {
         modifyVars: {
           // 修改 antd 主题色
-          'primary-color': config.primaryColor,
+          '@primary-color': config.primaryColor,
+          '@--primary-color': config.primaryColor,
         },
         javascriptEnabled: true,
       },
