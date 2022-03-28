@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-19 14:33:41
+ * @Last Modified time: 2022-03-28 18:39:16
  */
 'use strict';
 const path = require('path');
@@ -66,7 +66,7 @@ module.exports = {
     // Paths
     assetsRoot: resolve('dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: `${envConf.host}/`,
+    assetsPublicPath: `${envConf.publicPath}/`.replace(/\/+/g, '/'),
 
     // Source Maps
     productionSourceMap: false,

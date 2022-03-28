@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-06 22:30:02
+ * @Last Modified time: 2022-03-28 18:38:46
  */
 'use strict';
 
@@ -20,7 +20,7 @@ const createModuleRemotes = () => {
   // 规则：子模块: 子模块@域名:端口号/remoteEntry.js
   // dms: `dms@${envConf.dms}/remoteEntry.js`
   Object.keys(envConf).forEach((key) => {
-    if (key === 'host') return;
+    if (key === 'publicPath') return;
     result[key] = `${key}@${envConf[key]}/remoteEntry.js`;
   });
   return result;

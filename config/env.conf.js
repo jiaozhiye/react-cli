@@ -2,38 +2,38 @@
  * @Author: 焦质晔
  * @Date: 2020-12-03 09:16:26
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-22 20:15:15
+ * @Last Modified time: 2022-03-28 18:38:57
  */
 const config = {
   dev: {
     // 主机应用
-    host: '',
+    publicPath: '/',
     // 子应用
     dms: '',
     tds: '',
   },
   tst: {
-    host: '',
+    publicPath: '/',
     dms: '',
     tds: '',
   },
   uat: {
-    host: '',
+    publicPath: '/',
     dms: '',
     tds: '',
   },
   pre: {
-    host: '',
+    publicPath: '/',
     dms: '',
     tds: '',
   },
   prod: {
-    host: '',
+    publicPath: '/',
     dms: 'https://dms.faw.cn',
     tds: 'https://tds.faw.cn',
   },
   gray: {
-    host: '/gray',
+    publicPath: '/gray/',
     dms: 'https://dms.faw.cn/gray',
     tds: 'https://tds.faw.cn/gray',
   },
