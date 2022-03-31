@@ -1100,13 +1100,13 @@
   resolved "https://registry.npmmirror.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@jiaozhiye/qm-design-react@^1.0.0-beta.41":
-  version "1.0.0-beta.41"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.0.0-beta.41.tgz#b232c468fe8b28c3212ebe70ebfe1bd709d5bb77"
-  integrity sha512-34ZWaRiGc+F6/Hdf8sJmH/ZfJT1xKZxACxoaznR5xF6eh34/f5TTL8Z0pZ+Pu3NimjJ2Wk9TPDdhZSYrQZ61uA==
+"@jiaozhiye/qm-design-react@^1.0.0-beta.43":
+  version "1.0.0-beta.43"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.0.0-beta.43.tgz#4337eca99d1be4b9a61d5c45efffb40b3bd61708"
+  integrity sha512-hNya7P3qQfsVR4zWaDTddN5MBb8zd21DJGaSIauw04TfTwQ7YibtfPhGXHgIM4gK4s9vOhOUWySlMoyQVJ6qGA==
   dependencies:
     add-dom-event-listener "^1.1.0"
-    antd "^4.19.2"
+    antd "^4.19.4"
     axios "^0.24.0"
     china-area-data "^5.0.1"
     classnames "^2.3.1"
@@ -1731,10 +1731,10 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-antd@^4.19.2:
-  version "4.19.2"
-  resolved "https://registry.npmmirror.com/antd/-/antd-4.19.2.tgz#5438478aedf61bf670784611cba077387ff0f1b3"
-  integrity sha512-qXM6d6hFsT5rZJB4TRTHl32dixu1IHmPD0QLzG5YuUpzecv6QoTr1ZMp2/I1MMCb1+n99yQ5gFx7U677AbL5hw==
+antd@^4.19.4:
+  version "4.19.4"
+  resolved "https://registry.npmmirror.com/antd/-/antd-4.19.4.tgz#d0f33e277af7c1bd3b188e9a25c12c044f85bb71"
+  integrity sha512-1nwQPtOsEOE0ZdCnYATPE1UFW/hVq4OP7gZZa0QcalYB4TN0FbXJS5sxn2rTF/IjO2fKv/5VtkbiD+LyoFkZKA==
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/icons" "^4.7.0"

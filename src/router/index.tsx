@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:02:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-28 20:53:57
+ * @Last Modified time: 2022-03-31 20:55:44
  */
 import React, { Suspense } from 'react';
 import { Router, Switch, Route, Redirect, matchPath } from 'react-router-dom';
@@ -37,7 +37,7 @@ export const renderRoutes = (routes: any[] = [], extraProps = {}, switchProps = 
       <Switch {...switchProps}>
         {routes.map((route, index) => (
           <Route
-            key={route.key || index}
+            key={index}
             path={route.path}
             exact={route.exact}
             strict={route.strict}
