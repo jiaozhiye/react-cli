@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 14:26:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 14:52:20
+ * @Last Modified time: 2022-04-01 12:13:51
  */
 import type React from 'react';
 
@@ -33,6 +33,12 @@ export type Device = 'desktop' | 'mobile';
 export type TimeoutHandle = ReturnType<typeof setTimeout>;
 
 export type IntervalHandle = ReturnType<typeof setInterval>;
+
+export enum SizeHeight {
+  large = 40,
+  middle = 32,
+  small = 24,
+}
 
 export type Dictionary = {
   text: string;

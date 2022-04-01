@@ -2,14 +2,15 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-25 19:01:42
+ * @Last Modified time: 2022-04-01 12:57:44
  */
 import React from 'react';
 import classNames from 'classnames';
 import { confirmBeforeClose, Notification, Message } from '@/utils';
-import { dict } from '@/hoc';
+import { SizeHeight } from '@/utils/types';
+import { dict, tool } from '@/hoc';
 
-import { QmForm, QmTable, QmButton, QmDrawer } from '@jiaozhiye/qm-design-react';
+import { QmForm, QmTable, QmButton, QmDrawer, QmSplit } from '@jiaozhiye/qm-design-react';
 import { PlusOutlined, DeleteOutlined } from '@/icons';
 
 import FormEdit from './FormEdit';
@@ -18,14 +19,15 @@ import css from './index.module.less';
 
 import {
   getTableData,
-  getSummationData,
   getSelectData,
   getTreeData,
   getStreetData,
   getTableKeys,
   removeRecord,
+  getSubTableData,
 } from '@test/api/spa1002';
 
+@tool
 @dict
 class Spa1002 extends React.Component {
   static displayName = 'Spa1002'; // 用例号 - 用于页面缓存
@@ -34,6 +36,10 @@ class Spa1002 extends React.Component {
     filters: this.createFilterList(), // 表单项
     columns: this.createTableColumns(), // 表格列
     fetchParams: {}, // 查询接口的参数
+    tableHeight: 316, // 主表格高度
+    subList: [], // 子表数据
+    subColumns: this.createSubTableColumns(), // 子表格列
+    subLoading: false, // 子表 loading 效果
     visible: false, // 抽屉的显隐状态
     actions: {
       type: '',
@@ -270,10 +276,119 @@ class Spa1002 extends React.Component {
         dataIndex: 'num',
         width: 150,
         sorter: true,
-        summation: {
-          dataKey: 'num',
-          unit: '个',
+        groupSummary: {},
+        filter: {
+          type: 'number',
         },
+      },
+      {
+        title: '是否选择',
+        dataIndex: 'choice',
+        width: 150,
+        dictItems: [
+          { text: '选中', value: 1 },
+          { text: '非选中', value: 0 },
+        ],
+      },
+      {
+        title: '状态',
+        dataIndex: 'state',
+        width: 150,
+        filter: {
+          type: 'radio',
+        },
+        dictItems: [
+          { text: '已完成', value: 1 },
+          { text: '进行中', value: 2 },
+          { text: '未完成', value: 3 },
+        ],
+      },
+      {
+        title: '业余爱好',
+        dataIndex: 'hobby',
+        width: 150,
+        filter: {
+          type: 'checkbox',
+        },
+        dictItems: [
+          { text: '篮球', value: 1 },
+          { text: '足球', value: 2 },
+          { text: '乒乓球', value: 3 },
+          { text: '游泳', value: 4 },
+        ],
+      },
+      {
+        title: '地址',
+        dataIndex: 'address',
+        width: 200,
+        filter: {
+          type: 'textarea',
+        },
+      },
+    ];
+  }
+
+  // 创建子表格列
+  createSubTableColumns() {
+    return [
+      {
+        title: '序号',
+        description: '数据索引',
+        dataIndex: 'pageIndex',
+        width: 80,
+        render: (text) => {
+          return text + 1;
+        },
+      },
+      {
+        title: '创建时间',
+        dataIndex: 'date',
+        width: 220,
+        sorter: true,
+        filter: {
+          type: 'date',
+        },
+      },
+      {
+        title: '姓名',
+        dataIndex: 'person.name',
+        width: 100,
+        sorter: true,
+        filter: {
+          type: 'text',
+        },
+      },
+      {
+        title: '性别',
+        dataIndex: 'person.sex',
+        width: 100,
+        dictItems: this.props.createDictList('sex'),
+      },
+      {
+        title: '年龄',
+        dataIndex: 'person.age',
+        width: 100,
+        sorter: true,
+        filter: {
+          type: 'number',
+        },
+      },
+      {
+        title: '价格',
+        dataIndex: 'price',
+        width: 150,
+        precision: 2,
+        groupSummary: {},
+        sorter: true,
+        filter: {
+          type: 'number',
+        },
+      },
+      {
+        title: '数量',
+        dataIndex: 'num',
+        width: 150,
+        sorter: true,
         groupSummary: {},
         filter: {
           type: 'number',
@@ -368,8 +483,36 @@ class Spa1002 extends React.Component {
     }
   };
 
+  // 动态计算主表高度
+  dragHandle = (value) => {
+    this.setState({ tableHeight: value - (SizeHeight[this.props.size] + 10) * 2 - 6 });
+  };
+
+  // 获取子表数据
+  getSubTableList = async (id) => {
+    if (!id) {
+      return this.setState({ subList: [] });
+    }
+    this.setState({ subLoading: true });
+    const res = await getSubTableData({ id });
+    if (res.code === 200) {
+      this.setState({ subList: res.data || [] });
+    }
+    this.setState({ subLoading: false });
+  };
+
   render() {
-    const { filters, columns, fetchParams, visible, actions } = this.state;
+    const {
+      filters,
+      columns,
+      tableHeight,
+      fetchParams,
+      subList,
+      subColumns,
+      subLoading,
+      visible,
+      actions,
+    } = this.state;
     return (
       <>
         <QmForm
@@ -380,44 +523,65 @@ class Spa1002 extends React.Component {
           onFinish={(values) => this.fetchHandle(values)}
           onCollapse={() => this.tableRef.CALCULATE_HEIGHT()}
         />
-        <QmTable
-          ref={(ref) => (this.tableRef = ref)}
-          uniqueKey="SPA1002"
-          height={'auto'}
-          rowKey={(row) => row.id}
-          columns={columns}
-          fetch={{
-            api: getTableData,
-            params: fetchParams,
-            dataKey: 'records',
-          }}
-          summation={{
-            fetch: {
-              api: getSummationData,
-              params: fetchParams,
-              dataKey: 'summation',
-            },
-          }}
-          rowSelection={{
-            type: 'checkbox',
-            fetchAllRowKeys: {
-              api: getTableKeys,
-              dataKey: 'recordKeys',
-            },
-            onChange: (val, rows) => {
-              this.selectedKeys = val;
-            },
-          }}
-          exportExcel={{ fileName: '导出文件.xlsx' }}
-          columnsChange={(columns) => this.setState({ columns })}
-        >
-          <QmButton type="primary" icon={<PlusOutlined />} onClick={() => this.clickHandle('add')}>
-            新建
-          </QmButton>
-          <QmButton type="danger" icon={<DeleteOutlined />} confirm={{}} click={this.removeHandle}>
-            删除
-          </QmButton>
-        </QmTable>
+        <QmSplit direction="vertical" onDrag={this.dragHandle}>
+          <QmSplit.Pane>
+            <QmTable
+              ref={(ref) => (this.tableRef = ref)}
+              uniqueKey="SPA1002"
+              height={tableHeight}
+              rowKey={(row) => row.id}
+              columns={columns}
+              fetch={{
+                api: getTableData,
+                params: fetchParams,
+                dataKey: 'records',
+              }}
+              rowSelection={{
+                type: 'radio',
+                fetchAllRowKeys: {
+                  api: getTableKeys,
+                  dataKey: 'recordKeys',
+                },
+                onChange: (val, rows) => {
+                  this.selectedKeys = val;
+                  this.getSubTableList(val[0]);
+                },
+              }}
+              exportExcel={{ fileName: '导出文件.xlsx' }}
+              columnsChange={(columns) => this.setState({ columns })}
+            >
+              <QmButton
+                type="primary"
+                icon={<PlusOutlined />}
+                onClick={() => this.clickHandle('add')}
+              >
+                新建
+              </QmButton>
+              <QmButton
+                type="danger"
+                icon={<DeleteOutlined />}
+                confirm={{}}
+                click={this.removeHandle}
+              >
+                删除
+              </QmButton>
+            </QmTable>
+          </QmSplit.Pane>
+          <QmSplit.Pane>
+            <div style={{ marginBottom: 10 }}>
+              <QmTable
+                uniqueKey="SPA1002_sub"
+                height={300}
+                rowKey={(row) => row.id}
+                dataSource={subList}
+                columns={subColumns}
+                loading={subLoading}
+                showFullScreen={false}
+                columnsChange={(columns) => this.setState({ subColumns: columns })}
+              />
+            </div>
+          </QmSplit.Pane>
+        </QmSplit>
         <QmDrawer
           ref={(ref) => (this.drawerRef = ref)}
           visible={visible}

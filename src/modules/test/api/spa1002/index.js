@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 21:35:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 20:01:04
+ * @Last Modified time: 2022-04-01 12:50:18
  */
 import axios from '@/api/fetch';
 import SERVER from '../server';
@@ -36,3 +36,6 @@ export const saveRecord = (params) =>
 
 export const removeRecord = (params) =>
   axios.post(`http://127.0.0.1:3000/api/design/getTableData`, params);
+
+export const getSubTableData = (params) =>
+  axios.get(`http://127.0.0.1:3000/api/design/getSubTableData`, params);
