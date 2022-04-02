@@ -46,6 +46,7 @@ const routes = [
     .flat()
     .map((x) => ({
       path: '/iframe' + x.path,
+      meta: x.meta,
       props: x.props,
       component: x.component,
     })),

@@ -6,6 +6,7 @@
  */
 import React, { Suspense } from 'react';
 import { Router, Switch, Route, Redirect, matchPath } from 'react-router-dom';
+import { t } from '@/locale';
 import { getToken } from '@/utils/cookies';
 
 import PrivateRoute from '@/router/PrivateRoute';
@@ -43,7 +44,7 @@ export const renderRoutes = (routes: any[] = [], extraProps = {}, switchProps = 
             strict={route.strict}
             render={(props) => {
               const { path, redirect } = route;
-              // 已登录
+              document.title = `${t('app.global.title')}-${route.meta?.title || '404'}`;
               if (isLogin()) {
                 // 跳转首页
                 if (path === whiteList[0]) {

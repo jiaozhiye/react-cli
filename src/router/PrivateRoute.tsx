@@ -99,11 +99,8 @@ class PrivateRoute extends Component<any> {
   }
 
   render(): React.ReactElement {
-    const { route, whiteList, whiteAuth } = this.props;
+    const { whiteList, whiteAuth } = this.props;
     const { path } = this.props.route;
-
-    document.title =
-      `${t('app.global.title')}-${route.meta?.title || '404'}` || t('app.global.title');
 
     if (this.isMatch([...whiteList, ...whiteAuth], path) || this.isAuth(path)) {
       return this.props[`render-props`]();
