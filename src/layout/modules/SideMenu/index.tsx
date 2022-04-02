@@ -105,6 +105,7 @@ class SideMenu extends Component<any> {
     return (
       <div className={classNames('app-side-menu')}>
         <Menu
+          key={sideMenus.length}
           mode="inline"
           theme="dark"
           selectedKeys={[pathname]}
