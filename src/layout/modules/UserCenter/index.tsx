@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-05 19:16:05
+ * @Last Modified time: 2022-04-05 11:22:32
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -12,6 +12,7 @@ import { UserOutlined, SettingOutlined, ClearOutlined, LogoutOutlined } from '@/
 import { connect } from 'react-redux';
 import { createLocaleLang, createSignOut } from '@/store/actions';
 import { t } from '@/locale';
+import { getUserName } from '@/utils/cookies';
 import type { AppState } from '@/store/reducers/app';
 
 import './index.less';
@@ -33,17 +34,21 @@ class UserCenter extends Component<any> {
   renderMenus() {
     return (
       <Menu>
-        <Menu.Item key="1" icon={<UserOutlined />}>
+        <Menu.Item key="1" style={{ pointerEvents: 'none' }}>
+          {getUserName() || t('app.settings.admin')}
+        </Menu.Item>
+        <Menu.Divider />
+        <Menu.Item key="2" icon={<UserOutlined />}>
           {t('app.settings.usercenter')}
         </Menu.Item>
-        <Menu.Item key="2" icon={<SettingOutlined />}>
+        <Menu.Item key="3" icon={<SettingOutlined />}>
           {t('app.settings.usersetting')}
         </Menu.Item>
-        <Menu.Item key="3" icon={<ClearOutlined />} onClick={this.doClearCache}>
+        <Menu.Item key="4" icon={<ClearOutlined />} onClick={this.doClearCache}>
           {t('app.settings.clearcache')}
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="4" icon={<LogoutOutlined />} onClick={this.doLogout}>
+        <Menu.Item key="5" icon={<LogoutOutlined />} onClick={this.doLogout}>
           {t('app.settings.logout')}
         </Menu.Item>
       </Menu>
