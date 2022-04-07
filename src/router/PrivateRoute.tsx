@@ -6,7 +6,7 @@
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
-import { matchRoutes, isIframe } from '@/router';
+import { matchRoutes } from '@/router';
 import { nextTick, Message } from '@/utils';
 import { t } from '@/locale';
 import { connect } from 'react-redux';
@@ -28,7 +28,7 @@ class PrivateRoute extends Component<any> {
     const {
       route: { path: pathname },
     } = this.props;
-    if (pathname !== '/' || isIframe(pathname) || !this.loading) return;
+    if (pathname !== '/' || !this.loading) return;
     const isLoaded: boolean = await this.props.createMenuList();
     if (!isLoaded) {
       return console.error('应用菜单加载失败，请检查菜单接口！');
