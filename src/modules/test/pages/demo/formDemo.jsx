@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-04 16:47:10
+ * @Last Modified time: 2022-04-07 21:21:38
  */
 import React from 'react';
 
@@ -172,6 +172,108 @@ const FormDemo = (props) => {
           },
           fieldAliasMap: () => {
             return { valueKey: 'id', textKey: 'date' };
+          },
+        },
+      },
+      {
+        type: 'TREE_TABLE_HELPER',
+        label: '左树右表',
+        fieldName: 'd1',
+        searchHelper: {
+          filters: [
+            {
+              type: 'INPUT',
+              label: '条件1',
+              fieldName: 'a1',
+            },
+            {
+              type: 'INPUT',
+              label: '条件2',
+              fieldName: 'a2',
+            },
+          ],
+          table: {
+            columns: [
+              {
+                title: '创建时间',
+                dataIndex: 'date',
+              },
+              {
+                title: '姓名',
+                dataIndex: 'person.name',
+              },
+            ],
+            fetch: {
+              api: getTableData,
+              params: {},
+              dataKey: 'records',
+            },
+          },
+          tree: {
+            tableParamsMap: () => {
+              return { a1: 'text', a2: 'value' };
+            },
+            fetch: {
+              api: getTreeData,
+              params: {},
+              dataKey: 'records',
+              valueKey: 'value',
+              textKey: 'text',
+            },
+          },
+          fieldAliasMap: () => {
+            return { d1: 'date', d1code: 'id' };
+          },
+        },
+      },
+      {
+        type: 'MULTIPLE_TREE_TABLE_HELPER',
+        label: '左树右表多选',
+        fieldName: 'd2',
+        searchHelper: {
+          filters: [
+            {
+              type: 'INPUT',
+              label: '条件1',
+              fieldName: 'a1',
+            },
+            {
+              type: 'INPUT',
+              label: '条件2',
+              fieldName: 'a2',
+            },
+          ],
+          table: {
+            columns: [
+              {
+                title: '创建时间',
+                dataIndex: 'date',
+              },
+              {
+                title: '姓名',
+                dataIndex: 'person.name',
+              },
+            ],
+            fetch: {
+              api: getTableData,
+              params: {},
+              dataKey: 'records',
+            },
+          },
+          tree: {
+            tableParamsMap: () => {
+              return { a1: 'text', a2: 'value' };
+            },
+            fetch: {
+              api: getTreeData,
+              params: {},
+              dataKey: 'records',
+              valueKey: 'value',
+              textKey: 'text',
+            },
+          },
+          fieldAliasMap: () => {
+            return { valueKey: 'date', textKey: 'date' };
           },
         },
       },
