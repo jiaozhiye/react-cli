@@ -17,7 +17,6 @@ import { createSignOut } from '@/store/actions';
 import { getToken } from '@/utils/cookies';
 import { Notification } from '@/utils';
 import { t } from '@/locale';
-import config from '@/config';
 
 type IRequestConfig = AxiosRequestConfig & {
   cancelable?: boolean;
