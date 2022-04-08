@@ -165,7 +165,7 @@ class FormEdit extends React.Component {
         <QmSpace className={`fixed-footer`}>
           <QmButton onClick={() => this.cancelHandle()}>关闭</QmButton>
           {formType !== 'onlyShow' && (
-            <QmButton type="primary" onClick={() => this.saveHandle()}>
+            <QmButton type="primary" click={() => this.saveHandle()}>
               确定
             </QmButton>
           )}
