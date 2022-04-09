@@ -6,14 +6,13 @@
  */
 import * as React from 'react';
 import store from '@/store';
+import { getParentLocal } from '@/utils';
 
 export default function useAuthority() {
   const { app } = store.getState();
 
   const getLocalAuth = (): Record<string, string[]> => {
-    return Object.keys(app.auth).length
-      ? app.auth
-      : JSON.parse(window.parent.localStorage.getItem('auth') as string) || {};
+    return Object.keys(app.auth).length ? app.auth : getParentLocal('auth');
   };
 
   /**

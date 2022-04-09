@@ -8,7 +8,6 @@ import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { createIframeMenu } from '@/store/actions';
 import { OPEN_VIEW, REFRESH_VIEW } from '@/store/types';
 
 import type { AppState } from '@/store/reducers/app';
@@ -21,7 +20,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       size: state.app.size,
       lang: state.app.lang,
     }),
-    { createIframeMenu }
+    {}
   )
   @withRouter
   class C extends Component<any> {

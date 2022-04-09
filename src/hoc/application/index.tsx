@@ -67,6 +67,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     };
 
     emitOutsideClick = () => {
+      if (window.parent === window) return;
       window.parent.postMessage({ type: OUTSIDE_CLICK, data: '' }, '*');
     };
 

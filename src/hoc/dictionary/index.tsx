@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import { connect } from 'react-redux';
+import { getParentLocal } from '@/utils';
 
 import type { AppState } from '@/store/reducers/app';
 import type { Dictionary, Nullable } from '@/utils/types';
@@ -24,9 +25,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     static displayName = `Dict(${WrappedComponent.displayName || WrappedComponent.name})`;
 
     getLocalDict = (): Record<string, Dictionary[]> => {
-      return Object.keys(this.props.dict).length
-        ? this.props.dict
-        : JSON.parse(window.parent.localStorage.getItem('dict') as string) || {};
+      return Object.keys(this.props.dict).length ? this.props.dict : getParentLocal('dict');
     };
 
     /**

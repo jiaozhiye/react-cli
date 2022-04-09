@@ -76,7 +76,7 @@ const routes = [
           if (config.useIframe || x.iframePath) {
             return {
               path: x.path,
-              meta: { ...x.meta, iframe: x.iframePath || '/iframe' + x.path },
+              meta: x.meta,
               iframePath: x.iframePath || '/iframe' + x.path,
               component: BlankLayout,
             };

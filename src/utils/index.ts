@@ -81,6 +81,21 @@ export const createUidKey = (key = ''): string => {
 };
 
 /**
+ * @description 获取父窗口的本地存储
+ * @param {string} key 本地存储的 key 值
+ * @returns {object} 本地存储的 value 值
+ */
+export const getParentLocal = (key: string): Record<string, any> => {
+  try {
+    const val = window.parent.localStorage.getItem(key) || '{}';
+    return JSON.parse(val);
+  } catch (err) {
+    console.error('iframe is cross-origin, please set document domain!');
+  }
+  return {};
+};
+
+/**
  * @description 动态加载 js 文件
  * @param {string} url js 文件地址
  * @param {func} callback 回调函数

@@ -6,15 +6,15 @@
  */
 import * as React from 'react';
 import store from '@/store';
+import { getParentLocal } from '@/utils';
+
 import type { Dictionary, Nullable } from '@/utils/types';
 
 export default function useDictionary() {
   const { app } = store.getState();
 
   const getLocalDict = (): Record<string, Dictionary[]> => {
-    return Object.keys(app.dict).length
-      ? app.dict
-      : JSON.parse(window.parent.localStorage.getItem('dict') as string) || {};
+    return Object.keys(app.dict).length ? app.dict : getParentLocal('dict');
   };
 
   /**

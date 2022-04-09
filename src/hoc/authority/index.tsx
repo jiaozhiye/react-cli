@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import { connect } from 'react-redux';
+import { getParentLocal } from '@/utils';
 
 import type { AppState } from '@/store/reducers/app';
 
@@ -23,9 +24,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     static displayName = `Auth(${WrappedComponent.displayName || WrappedComponent.name})`;
 
     getLocalAuth = (): Record<string, string[]> => {
-      return Object.keys(this.props.auth).length
-        ? this.props.auth
-        : JSON.parse(window.parent.localStorage.getItem('auth') as string) || {};
+      return Object.keys(this.props.auth).length ? this.props.auth : getParentLocal('auth');
     };
 
     /**
