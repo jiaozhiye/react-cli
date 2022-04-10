@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 10:50:19
+ * @Last Modified time: 2022-04-10 20:04:19
  */
 'use strict';
 
@@ -97,9 +97,6 @@ const webpackConfig = merge(baseWebpackConfig, {
     new MiniCssExtractPlugin({
       filename: utils.assetsPath('css/[name].[contenthash:8].css'),
       chunkFilename: utils.assetsPath('css/[name].[contenthash:8].css'),
-    }),
-    new webpack.ids.HashedModuleIdsPlugin({
-      hashDigest: 'hex',
     }),
     new HtmlWebpackPlugin({
       filename: config.build.index,
