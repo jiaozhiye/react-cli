@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-28 18:38:46
+ * @Last Modified time: 2022-04-10 22:45:38
  */
 'use strict';
 
@@ -114,10 +114,10 @@ module.exports = {
       'process.env.THEME_COLOR': JSON.stringify(config.primaryColor),
     }),
     createThemeColorPlugin(),
-    new ModuleFederationPlugin({
-      name: config.name,
-      remotes: createModuleRemotes(),
-      shared: ['react', 'react-dom'],
-    }),
+    // new ModuleFederationPlugin({
+    //   name: config.name,
+    //   remotes: createModuleRemotes(),
+    //   shared: ['react', 'react-dom'],
+    // }),
   ],
 };
