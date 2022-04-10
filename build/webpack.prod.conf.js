@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-10 20:04:19
+ * @Last Modified time: 2022-04-10 22:40:56
  */
 'use strict';
 
@@ -43,8 +43,6 @@ const webpackConfig = merge(baseWebpackConfig, {
     }),
   },
   optimization: {
-    moduleIds: 'named',
-    chunkIds: 'named',
     minimize: true,
     minimizer: [
       new TerserPlugin({
@@ -86,8 +84,9 @@ const webpackConfig = merge(baseWebpackConfig, {
         libs: {
           name: 'chunk-libs',
           test: (module) => {
-            return /echarts|exceljs/.test(module.context);
+            return /echarts|exceljs|china-area-data/.test(module.context);
           },
+          chunks: 'all',
           priority: 10,
         },
       },
