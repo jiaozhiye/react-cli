@@ -107,6 +107,21 @@ class FormEdit extends React.Component {
         label: '条件5',
         fieldName: 'f',
       },
+      {
+        type: 'CHECKBOX',
+        fieldName: 'g',
+        label: '条件6',
+        options: {
+          trueValue: '1',
+          falseValue: '0',
+        },
+        onChange: (val) => {
+          this.setState((prev) => {
+            prev.formList.find((x) => x.fieldName === 'f').disabled = val === '1';
+            return { formList: prev.formList };
+          });
+        },
+      },
     ];
   }
 
