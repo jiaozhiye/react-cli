@@ -249,7 +249,21 @@ class FormEdit extends React.Component {
             extra: {
               max: 1000,
             },
-            rules: [{ required: true, message: '数量不能为空' }],
+            rules: [
+              {
+                required: true,
+                message: '数量不能为空',
+              },
+              {
+                validator: (value) => {
+                  if (value < 10) {
+                    return false;
+                  }
+                  return true;
+                },
+                message: '值不能小于10',
+              },
+            ],
           };
         },
       },
@@ -283,6 +297,11 @@ class FormEdit extends React.Component {
           return {
             type: 'select',
             editable: true,
+            onChange: () => {
+              this.setState((prev) => {
+                return { columns: [...prev.columns] };
+              });
+            },
           };
         },
         dictItems: [
@@ -291,8 +310,42 @@ class FormEdit extends React.Component {
           { text: '未完成', value: 3 },
         ],
       },
+      {
+        title: '分类',
+        dataIndex: 'type',
+        width: 150,
+        filter: {
+          type: 'radio',
+        },
+        editRender: (row) => {
+          return {
+            type: 'select',
+            editable: true,
+            items: this.createSelectOptions(row.state),
+          };
+        },
+      },
     ];
   }
+
+  createSelectOptions = (val) => {
+    switch (val) {
+      case 1:
+        return this.props.createDictList('sex');
+      case 2:
+        return [
+          { text: '选项1', value: '0' },
+          { text: '选项2', value: '1' },
+        ];
+      case 3:
+        return [
+          { text: '选项3', value: '2' },
+          { text: '选项4', value: '3' },
+        ];
+      default:
+        return [];
+    }
+  };
 
   // 表单数据的回显
   setFormInitValue = async () => {
