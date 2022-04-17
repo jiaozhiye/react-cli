@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-10 22:45:38
+ * @Last Modified time: 2022-04-17 09:39:34
  */
 'use strict';
 
@@ -38,6 +38,14 @@ module.exports = {
       process.env.NODE_ENV === 'production'
         ? config.build.assetsPublicPath
         : config.dev.assetsPublicPath,
+    // for qiankun
+    ...(config.name !== 'app'
+      ? {
+          library: `${config.name}-[name]`,
+          libraryTarget: 'umd',
+          chunkLoadingGlobal: `webpackJsonp_${config.name}`,
+        }
+      : null),
   },
   resolve: {
     // 配置解析规则

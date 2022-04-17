@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-07 10:10:52
+ * @Last Modified time: 2022-04-17 09:41:09
  */
 'use strict';
 
@@ -37,6 +37,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     },
     headers: {
       'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Headers': '*',
     },
     static: [
       {
@@ -69,7 +71,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       filename: 'index.html',
       template: 'public/index.html',
       favicon: 'public/favicon.ico',
-      inject: true,
+      // inject: true,
+      inject: 'body', // for qiankun
       templateParameters: {
         BASE_URL: config.dev.assetsPublicPath + config.dev.assetsSubDirectory,
         THEME_COLOR: config.primaryColor,

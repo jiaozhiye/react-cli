@@ -2,36 +2,35 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 14:15:49
+ * @Last Modified time: 2022-04-17 09:57:34
  */
 export default [
   {
     title: '备件管理',
-    key: '/bjgl',
+    key: '',
     icon: 'icon-flag-fill',
     children: [
       {
         title: '采购管理',
-        key: '/bjgl/cggl',
+        key: '',
         children: [
           {
             title: '备件采购订单',
-            key: '/bjgl/cggl/dd',
-            permission: ['save', 'update'],
+            key: '/spa1001',
           },
           {
             title: '备件采购入库',
-            key: '/bjgl/cggl/rk',
+            key: '/spa1002',
           },
           {
             title: '备件采购退库',
-            key: '/bjgl/cggl/tk',
+            key: '/spa1003',
           },
         ],
       },
       {
         title: '库存管理',
-        key: '/bjgl/kcgl',
+        key: '',
         children: [
           {
             title: '备件清单列表',
@@ -44,12 +43,12 @@ export default [
   },
   {
     title: '销售管理',
-    key: '/xsgl',
+    key: '',
     icon: 'icon-flag-fill',
     children: [
       {
         title: '线索管理',
-        key: '/xsgl/xugl',
+        key: '',
         children: [
           {
             title: '线索分配',
@@ -71,7 +70,7 @@ export default [
       },
       {
         title: '机会管理',
-        key: '/xsgl/jhgl',
+        key: '',
         children: [
           {
             title: '销售机会',
@@ -89,7 +88,7 @@ export default [
       },
       {
         title: '客户管理',
-        key: '/xsgl/khgl',
+        key: '',
         children: [
           {
             title: '客户订单管理',
@@ -109,12 +108,12 @@ export default [
   },
   {
     title: '客服管理',
-    key: '/kfgl',
+    key: '',
     icon: 'icon-flag-fill',
     children: [
       {
         title: '回访',
-        key: '/kfgl/hf',
+        key: '',
         children: [
           {
             title: '销售回访',
@@ -128,7 +127,7 @@ export default [
       },
       {
         title: '投诉',
-        key: '/kfgl/ts',
+        key: '',
         children: [
           {
             title: '投诉管理',

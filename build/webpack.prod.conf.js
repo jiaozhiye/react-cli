@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-10 22:40:56
+ * @Last Modified time: 2022-04-17 09:41:09
  */
 'use strict';
 
@@ -101,7 +101,8 @@ const webpackConfig = merge(baseWebpackConfig, {
       filename: config.build.index,
       template: 'public/index.html',
       favicon: 'public/favicon.ico',
-      inject: true,
+      // inject: true,
+      inject: 'body', // for qiankun
       minify: {
         removeComments: true,
       },

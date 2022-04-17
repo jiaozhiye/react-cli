@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-25 19:12:46
+ * @Last Modified time: 2022-04-17 09:50:52
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -12,6 +12,7 @@ import {
   STAR_MENU,
   TAB_MENU,
   IFRAME_MENU,
+  MICRO_MENU,
   COMP_SIZE,
   LOCALE_LANG,
   THEME_COLOR,
@@ -52,6 +53,7 @@ type IState = {
   tabMenus: ITabNav[];
   flattenMenus: Omit<ISideMenu, 'children'>[];
   iframeMenus: ICacheMenu[];
+  microMenus: ICacheMenu[];
   keepAliveList: ICacheMenu[];
   dict: Record<string, Dictionary[]>;
   auth: Record<string, string[]>;
@@ -86,7 +88,7 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
   list.forEach((x) => {
     const route = mRoutes.find((k) => k.path === x.key);
     if (route) {
-      route.meta = Object.assign({}, route.meta, { title: x.title });
+      Object.assign(route.meta, { title: x.title });
     }
   });
 };
@@ -105,6 +107,7 @@ const initState: IState = {
   tabMenus: [{ path: '/home', title: t('app.global.dashboard') }], // 顶部选项卡菜单数据
   flattenMenus: [], // 展平后的三级菜单列表
   iframeMenus: [], // iframe 列表
+  microMenus: [], // 乾坤 列表
   keepAliveList: [], // 路由组件缓存列表
   dict: {}, // 数据字典
   auth: {}, // 按钮权限
@@ -138,6 +141,16 @@ const setIframeMenus = (state, payload, behavior) => {
       behavior === 'add'
         ? uniqBy([...state.iframeMenus, payload], 'key')
         : state.iframeMenus.filter((x) => x.key !== payload),
+  });
+};
+
+// 设置 micro 导航
+const setMicroMenus = (state, payload, behavior) => {
+  return Object.assign({}, state, {
+    microMenus:
+      behavior === 'add'
+        ? uniqBy([...state.microMenus, payload], 'key')
+        : state.microMenus.filter((x) => x.key !== payload),
   });
 };
 
@@ -226,6 +239,8 @@ export const appReducer = (state = initState, action) => {
       return setTabMenus(state, action.payload, action.behavior);
     case IFRAME_MENU:
       return setIframeMenus(state, action.payload, action.behavior);
+    case MICRO_MENU:
+      return setMicroMenus(state, action.payload, action.behavior);
     case COMP_SIZE:
       return setComponentSize(state, action.payload);
     case LOCALE_LANG:

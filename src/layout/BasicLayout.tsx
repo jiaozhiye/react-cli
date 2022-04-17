@@ -2,15 +2,18 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-24 15:11:59
+ * @Last Modified time: 2022-04-17 09:43:44
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
+import { registerMicroApps, start } from 'qiankun';
 import { connect } from 'react-redux';
 import { renderRoutes } from '../router';
 import { Layout } from '@jiaozhiye/qm-design-react';
 import { matchRoutes } from '@/router';
+import { getLocalRoutes } from '@/router/config';
 import { createDictData, createAuthData, createDeviceType } from '@/store/actions';
+import { emitter as microEvent } from '@/utils/mitt';
 import config from '@/config';
 import type { AppState } from '@/store/reducers/app';
 
@@ -30,6 +33,7 @@ import './index.less';
 const { Header, Sider, Content } = Layout;
 
 const MOBILE_WIDTH = 992;
+const EXCLUDE_URLS = ['http://localhost:8000', 'http://localhost:18000'];
 
 type IState = {
   collapsed: boolean;
@@ -43,6 +47,7 @@ class BasicLayout extends Component<any> {
     const isMobile = this.checkDevice();
     this.state = { collapsed: isMobile };
     props.createDeviceType(isMobile ? 'mobile' : 'desktop');
+    this.registerMicroRoutes();
   }
 
   get isMobile() {
@@ -56,7 +61,38 @@ class BasicLayout extends Component<any> {
     return !this.state.collapsed ? config.sideWidth[0] : config.sideWidth[1];
   }
 
+  registerMicroRoutes = () => {
+    const subRoutes = getLocalRoutes();
+    registerMicroApps(
+      subRoutes
+        .filter((x) => x.microRule)
+        .map((x) => ({
+          name: x.path,
+          entry: x.microHost,
+          container: `#qk${x.path.replace(/\/+/g, '-')}`,
+          activeRule: x.microRule,
+          props: {
+            microEvent,
+          },
+        }))
+    );
+  };
+
+  startMicroApp = () => {
+    if (config.system !== 'app') return;
+    start({
+      singular: false,
+      excludeAssetFilter: (assetUrl) => {
+        if (EXCLUDE_URLS.some((x) => assetUrl.startsWith(x))) {
+          return true;
+        }
+        return false;
+      },
+    });
+  };
+
   componentDidMount() {
+    this.startMicroApp();
     this.props.createDictData();
     this.props.createAuthData();
     window.addEventListener('resize', this.resizeHandler, false);
@@ -101,6 +137,17 @@ class BasicLayout extends Component<any> {
     ));
   }
 
+  createMicroView(route) {
+    const { microMenus } = this.props;
+    return microMenus.map((x) => (
+      <div
+        key={x.key}
+        id={`qk${x.key.replace(/\/+/g, '-')}`}
+        style={{ display: route.path === x.key ? 'block' : 'none' }}
+      />
+    ));
+  }
+
   render(): React.ReactElement {
     const { routes } = this.props.route;
     const { pathname } = this.props.location;
@@ -142,6 +189,7 @@ class BasicLayout extends Component<any> {
           <Content className={classNames(!route.meta?.bgColor ? 'no-bg-color' : '')}>
             {renderRoutes(routes)}
             {this.createIframeView(route)}
+            {this.createMicroView(route)}
           </Content>
           {config.openWatermark && <Watermark />}
         </Layout>
@@ -155,6 +203,7 @@ export default connect(
     size: state.app.size,
     device: state.app.device,
     iframeMenus: state.app.iframeMenus,
+    microMenus: state.app.microMenus,
   }),
   {
     createDictData,

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:40:32
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-24 21:00:41
+ * @Last Modified time: 2022-04-17 09:49:43
  */
 import { lazy } from 'react';
 import { t } from '@/locale';
@@ -15,6 +15,8 @@ const BasicLayout = lazy(() => import('@/layout/BasicLayout'));
 const BlankLayout = lazy(() => import('@/layout/BlankLayout'));
 const Nomatch = lazy(() => import('@/pages/nomatch'));
 const Redirect = lazy(() => import('@/pages/redirect'));
+
+const flattenRoutes = moduleRoutes.map((x) => x.routes).flat();
 
 export const getLocalRoutes = () => {
   let result: any[] = [];
@@ -34,6 +36,24 @@ export const getLocalRoutes = () => {
   return result;
 };
 
+const getMicroRoutes = () => {
+  let result: any[] = [];
+  // for qiankun
+  if (window.__POWERED_BY_QIANKUN__) {
+    result = flattenRoutes.map((x) => ({
+      path: `/${config.system}` + x.path,
+      meta: x.meta,
+      props: x.props,
+      component: x.component,
+    }));
+    result.push({
+      path: `/${config.system}/*`,
+      component: Nomatch,
+    });
+  }
+  return result;
+};
+
 const routes = [
   {
     path: '/login',
@@ -41,15 +61,13 @@ const routes = [
     component: Login,
   },
   ...moduleRoutes.map((x) => x.public).flat(),
-  ...moduleRoutes
-    .map((x) => x.routes)
-    .flat()
-    .map((x) => ({
-      path: '/iframe' + x.path,
-      meta: x.meta,
-      props: x.props,
-      component: x.component,
-    })),
+  ...getMicroRoutes(),
+  ...flattenRoutes.map((x) => ({
+    path: '/iframe' + x.path,
+    meta: x.meta,
+    props: x.props,
+    component: x.component,
+  })),
   {
     path: '/iframe/*',
     component: Nomatch,
@@ -69,20 +87,18 @@ const routes = [
         meta: { title: t('app.global.dashboard'), bgColor: true, keepAlive: false },
         component: Dashboard,
       },
-      ...moduleRoutes
-        .map((x) => x.routes)
-        .flat()
-        .map((x) => {
-          if (config.useIframe || x.iframePath) {
-            return {
-              path: x.path,
-              meta: x.meta,
-              iframePath: x.iframePath || '/iframe' + x.path,
-              component: BlankLayout,
-            };
-          }
-          return x;
-        }),
+      ...flattenRoutes.map((x) => {
+        if (config.microType) {
+          const _iframe = x.iframePath || config.microType === 'iframe' ? `/iframe${x.path}` : '';
+          return {
+            path: x.path,
+            meta: x.meta,
+            iframePath: _iframe ? config.baseRoute + _iframe : _iframe,
+            component: BlankLayout,
+          };
+        }
+        return x;
+      }),
       ...getLocalRoutes(),
       {
         path: '/redirect/:path(.*)',

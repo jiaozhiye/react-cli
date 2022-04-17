@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-24 19:49:30
+ * @Last Modified time: 2022-04-17 09:50:41
  */
 import {
   SIDE_MENU,
@@ -11,6 +11,7 @@ import {
   STAR_MENU,
   TAB_MENU,
   IFRAME_MENU,
+  MICRO_MENU,
   COMP_SIZE,
   LOCALE_LANG,
   THEME_COLOR,
@@ -215,6 +216,9 @@ export const createTabMenu = (payload, behavior) => ({ type: TAB_MENU, payload, 
 
 // 设置 iframe 导航
 export const createIframeMenu = (payload, behavior) => ({ type: IFRAME_MENU, payload, behavior });
+
+// 设置 micro 导航
+export const createMicroMenu = (payload, behavior) => ({ type: MICRO_MENU, payload, behavior });
 
 // 设置尺寸
 export const createComponentSize = (payload) => ({ type: COMP_SIZE, payload });

@@ -2,13 +2,14 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-24 14:39:06
+ * @Last Modified time: 2022-04-17 09:48:15
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 import { connect } from 'react-redux';
 import { createComponentSize } from '@/store/actions';
+import { emitter } from '@/utils/mitt';
 import { t } from '@/locale';
 import { application } from '@/hoc';
 import { COMP_SIZE } from '@/store/types';
@@ -28,6 +29,7 @@ class SizeSetting extends Component<any> {
       if (!$iframe) return;
       $iframe.contentWindow?.postMessage({ type: COMP_SIZE, data: size }, '*');
     });
+    emitter.$emit(COMP_SIZE, size);
     // 刷新页面
     setTimeout(() => this.props.refreshView(this.props.location.pathname));
   }

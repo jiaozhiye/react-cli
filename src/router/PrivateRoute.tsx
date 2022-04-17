@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-24 19:35:06
+ * @Last Modified time: 2022-04-17 09:50:13
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -10,7 +10,7 @@ import { matchRoutes } from '@/router';
 import { nextTick, Message } from '@/utils';
 import { t } from '@/locale';
 import { connect } from 'react-redux';
-import { createMenuList, createTabMenu, createIframeMenu } from '@/store/actions';
+import { createMenuList, createTabMenu, createIframeMenu, createMicroMenu } from '@/store/actions';
 import type { AppState, ITabNav } from '@/store/reducers/app';
 
 import routes from '@/router/config';
@@ -76,10 +76,11 @@ class PrivateRoute extends Component<any> {
     this.props.createTabMenu({ path: pathname, title: route.meta.title }, 'add');
     // iframe 模式
     if (route.iframePath) {
-      this.props.createIframeMenu(
-        { key: pathname, value: config.baseRoute + route.iframePath + search },
-        'add'
-      );
+      this.props.createIframeMenu({ key: pathname, value: route.iframePath + search }, 'add');
+    }
+    // micro 模式
+    if (route.microRule) {
+      this.props.createMicroMenu({ key: pathname, value: '' }, 'add');
     }
     // 本地存储
     nextTick(() => {
@@ -123,5 +124,6 @@ export default connect(
     createMenuList,
     createTabMenu,
     createIframeMenu,
+    createMicroMenu,
   }
 )(PrivateRoute);

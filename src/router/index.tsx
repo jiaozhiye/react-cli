@@ -2,12 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:02:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-31 20:55:44
+ * @Last Modified time: 2022-04-17 09:49:59
  */
 import React, { Suspense } from 'react';
 import { Router, Switch, Route, Redirect, matchPath } from 'react-router-dom';
 import { t } from '@/locale';
 import { getToken } from '@/utils/cookies';
+import config from '@/config';
 
 import PrivateRoute from '@/router/PrivateRoute';
 import ErrorBoundary from '@/pages/errorBoundary';
@@ -16,7 +17,7 @@ import ErrorBoundary from '@/pages/errorBoundary';
 const whiteList: string[] = ['/login', '/public'];
 
 // 权限白名单
-const whiteAuth: string[] = ['/home', '/iframe', '/redirect', '/404', '/large-screen', '/test'];
+const whiteAuth: string[] = ['/home', '/iframe', `/${config.system}`, '/redirect', '/404', '/test'];
 
 // 登录判断
 export const isLogin = (): boolean => {
@@ -44,7 +45,10 @@ export const renderRoutes = (routes: any[] = [], extraProps = {}, switchProps = 
             strict={route.strict}
             render={(props) => {
               const { path, redirect } = route;
-              document.title = `${t('app.global.title')}-${route.meta?.title || '404'}`;
+              // for qiankun
+              if (!window.__POWERED_BY_QIANKUN__) {
+                document.title = `${t('app.global.title')}-${route.meta?.title || '404'}`;
+              }
               if (isLogin()) {
                 // 跳转首页
                 if (path === whiteList[0]) {

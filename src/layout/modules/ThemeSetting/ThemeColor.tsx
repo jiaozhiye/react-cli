@@ -2,13 +2,14 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-19 15:40:48
+ * @Last Modified time: 2022-04-17 09:48:33
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { CheckOutlined } from '@/icons';
 import { connect } from 'react-redux';
 import { createThemeColor } from '@/store/actions';
+import { emitter } from '@/utils/mitt';
 import { t } from '@/locale';
 import { THEME_COLOR } from '@/store/types';
 import config from '@/config';
@@ -74,6 +75,7 @@ class ThemeColor extends Component<any> {
       if (!$iframe) return;
       $iframe.contentWindow?.postMessage({ type: THEME_COLOR, data: color }, '*');
     });
+    emitter.$emit(THEME_COLOR, color);
   }
 
   render(): React.ReactElement {

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:48:42
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-21 18:18:25
+ * @Last Modified time: 2022-04-17 09:50:22
  */
 // 系统导航菜单
 export const SIDE_MENU = 'SIDE_MENU';
@@ -12,6 +12,9 @@ export const TAB_MENU = 'TAB_MENU';
 
 // iframe 菜单模式
 export const IFRAME_MENU = 'IFRAME_MENU';
+
+// micro 菜单模式
+export const MICRO_MENU = 'MICRO_MENU';
 
 // 数据字典
 export const DICT_DATA = 'DICT_DATA';

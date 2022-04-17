@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 14:17:46
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-04 08:57:24
+ * @Last Modified time: 2022-04-17 09:44:37
  */
 .app-layout {
   height: 100vh;
@@ -31,7 +31,7 @@
   }
   .ant-layout-sider {
     position: relative;
-    z-index: 1;
+    z-index: 5;
     box-shadow: 2px 0 6px rgba(0, 21, 41, 0.35);
     transition: width 0.2s, min-width 0.2s, max-width 0.2s;
     &-dark {
@@ -64,7 +64,7 @@
       }
     }
     .app-side-menu {
-      .ant-menu-submenu-title,
+      .ant-menu-submenu .ant-menu-submenu-title,
       .ant-menu-item {
         height: 28px;
         line-height: 28px;
@@ -136,7 +136,7 @@
         }
       }
       .app-side-menu {
-        .ant-menu-submenu-title,
+        .ant-menu-submenu .ant-menu-submenu-title,
         .ant-menu-item {
           height: @item-height;
           line-height: @item-height;
@@ -172,7 +172,7 @@
         }
       }
       .app-side-menu {
-        .ant-menu-submenu-title,
+        .ant-menu-submenu .ant-menu-submenu-title,
         .ant-menu-item {
           height: @item-height;
           line-height: @item-height;

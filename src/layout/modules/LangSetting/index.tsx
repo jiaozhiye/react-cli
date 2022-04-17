@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-24 14:42:32
+ * @Last Modified time: 2022-04-17 09:46:08
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -10,6 +10,7 @@ import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';
 import { changeLocale } from '@/locale';
+import { emitter } from '@/utils/mitt';
 import { application } from '@/hoc';
 import { LOCALE_LANG } from '@/store/types';
 import type { AppState } from '@/store/reducers/app';
@@ -28,6 +29,7 @@ class LangSetting extends Component<any> {
       if (!$iframe) return;
       $iframe.contentWindow?.postMessage({ type: LOCALE_LANG, data: lang }, '*');
     });
+    emitter.$emit(LOCALE_LANG, lang);
     // 刷新页面
     setTimeout(() => this.props.refreshView(this.props.location.pathname));
   }

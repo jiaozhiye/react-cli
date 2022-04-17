@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 13:44:13
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 12:45:21
+ * @Last Modified time: 2022-04-17 09:46:51
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -13,7 +13,7 @@ import { application } from '@/hoc';
 import { t } from '@/locale';
 
 import { connect } from 'react-redux';
-import { createTabMenu, createIframeMenu } from '@/store/actions';
+import { createTabMenu, createIframeMenu, createMicroMenu } from '@/store/actions';
 import type { AppState } from '@/store/reducers/app';
 
 import { Tabs } from '@jiaozhiye/qm-design-react';
@@ -66,6 +66,7 @@ class MultiTab extends Component<any> {
     const { tabMenus } = this.props;
     this.props.createTabMenu(targetKey, 'remove');
     this.props.createIframeMenu(targetKey, 'remove');
+    this.props.createMicroMenu(targetKey, 'remove');
     if (targetKey === activeKey) {
       const index = this.findCurTagIndex(targetKey);
       const nextActiveKey = tabMenus[index - 1].path;
@@ -161,5 +162,6 @@ export default connect(
   {
     createTabMenu,
     createIframeMenu,
+    createMicroMenu,
   }
 )(MultiTab);

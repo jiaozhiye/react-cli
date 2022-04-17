@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 12:43:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-19 14:49:44
+ * @Last Modified time: 2022-04-17 09:42:54
  */
 import config from '../../config/app.conf';
 import type { ComponentSize, Language, ThemeType } from '@/utils/types';
@@ -14,7 +14,7 @@ type IConfig = {
   size: ComponentSize;
   themeType: ThemeType;
   prefix: string;
-  useIframe: boolean;
+  microType: 'iframe' | 'qiankun' | '';
   sideWidth: number[];
   maxCacheNum: number;
   showBreadcrumb: boolean;
@@ -36,7 +36,7 @@ export default {
   size: 'middle', // 尺寸
   themeType: 'light', // 主题模式
   prefix: '/api', // ajax 请求前缀
-  useIframe: true, // 是否使用 iframe 承载路由页面
+  microType: 'iframe', // 微前端模式
   sideWidth: [200, 60], // 侧栏导航宽度
   maxCacheNum: 10, // 路由组件最大缓存数量
   showBreadcrumb: false, // 是否显示面包屑
