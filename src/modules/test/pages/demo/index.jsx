@@ -7,6 +7,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { useLocale } from '@/hooks';
+import { phoneValidate } from '@/utils/validate';
 import { QmForm, QmTable, QmButton } from '@jiaozhiye/qm-design-react';
 import css from './index.module.less';
 import './lang';
@@ -34,6 +35,7 @@ const Demo = (props) => {
         label: t('demo.label1'),
         tooltip: 'Label 描述信息',
         fieldName: 'a',
+        rules: [{ required: true }, { validator: phoneValidate }],
       },
       {
         type: 'SEARCH_HELPER',
