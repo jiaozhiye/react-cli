@@ -30,7 +30,7 @@
     "src/**/*.{less}": "prettier --write"
   },
   "dependencies": {
-    "@jiaozhiye/qm-design-react": "^1.0.0-beta.59",
+    "@jiaozhiye/qm-design-react": "^1.0.0-beta.60",
     "add-dom-event-listener": "^1.1.0",
     "axios": "^0.26.0",
     "classnames": "^2.3.1",
