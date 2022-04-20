@@ -10,7 +10,7 @@ import { dict } from '@/hoc';
 import { Message } from '@/utils';
 import { getRecordById, getTableData, addRecord, saveRecord } from '@test/api/spa1001';
 
-import { QmForm, QmButton, QmSpace } from '@jiaozhiye/qm-design-react';
+import { QmForm, QmAnchor, QmButton, QmSpace } from '@jiaozhiye/qm-design-react';
 
 import css from './index.module.less';
 
@@ -20,6 +20,12 @@ class FormEdit extends React.Component {
     formList: this.createFormList(),
   };
 
+  anchorLabelList = [
+    { label: '标题1', id: '_a1' },
+    { label: '标题2', id: '_a2' },
+    { label: '标题3', id: '_a3' },
+  ];
+
   componentDidMount() {
     if (this.props.type !== 'add') {
       this.setFormInitValue();
@@ -28,6 +34,11 @@ class FormEdit extends React.Component {
 
   createFormList() {
     return [
+      {
+        type: 'DIVIDER',
+        label: '标题1',
+        fieldName: '_a1',
+      },
       {
         type: 'INPUT',
         label: '条件1',
@@ -92,6 +103,11 @@ class FormEdit extends React.Component {
         fieldName: 'd',
       },
       {
+        type: 'DIVIDER',
+        label: '标题2',
+        fieldName: '_a2',
+      },
+      {
         type: 'RANGE_DATE',
         label: '条件4',
         fieldName: 'e1|e2',
@@ -115,6 +131,31 @@ class FormEdit extends React.Component {
             return { formList: prev.formList };
           });
         },
+      },
+      {
+        type: 'DIVIDER',
+        label: '标题3',
+        fieldName: '_a3',
+      },
+      {
+        type: 'INPUT',
+        label: '条件7',
+        fieldName: 'h',
+      },
+      {
+        type: 'INPUT',
+        label: '条件8',
+        fieldName: 'i',
+      },
+      {
+        type: 'INPUT',
+        label: '条件9',
+        fieldName: 'j',
+      },
+      {
+        type: 'INPUT',
+        label: '条件10',
+        fieldName: 'k',
       },
     ];
   }
@@ -168,15 +209,17 @@ class FormEdit extends React.Component {
     const formType = type !== 'show' ? 'default' : 'onlyShow';
     return (
       <>
-        <QmForm
-          ref={(ref) => (this.formRef = ref)}
-          uniqueKey="SPA1001_FormEdit"
-          items={formList}
-          labelWidth={90}
-          formType={formType}
-          fieldsChange={(items) => this.setState({ formList: items })}
-          onValuesChange={this.valuesChangeHandle}
-        />
+        <QmAnchor labelList={this.anchorLabelList} style={{ height: `calc(100% - 10px)` }}>
+          <QmForm
+            ref={(ref) => (this.formRef = ref)}
+            uniqueKey="SPA1001_FormEdit"
+            items={formList}
+            labelWidth={90}
+            formType={formType}
+            fieldsChange={(items) => this.setState({ formList: items })}
+            onValuesChange={this.valuesChangeHandle}
+          />
+        </QmAnchor>
         <QmSpace className={`fixed-footer`}>
           <QmButton onClick={() => this.cancelHandle()}>关闭</QmButton>
           {formType !== 'onlyShow' && (
