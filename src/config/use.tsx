@@ -56,6 +56,14 @@ class UseConfig extends Component<any> {
     document.removeEventListener('click', this.clickEventHandle);
   }
 
+  componentDidUpdate(prevProps) {
+    const { pathname: prevPathname } = prevProps.location;
+    const { pathname: nextPathname } = this.props.location;
+    if (prevPathname !== nextPathname) {
+      this.props.addTabMenus();
+    }
+  }
+
   clickEventHandle = () => {
     this.props.emitOutsideClick();
   };

@@ -6,7 +6,7 @@
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
+import { Menu, Dropdown, Badge } from '@jiaozhiye/qm-design-react';
 
 import { BellOutlined } from '@/icons';
 
@@ -27,7 +27,9 @@ class MessageCenter extends Component<any> {
       <div className={classNames('app-message-center')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
           <span>
-            <BellOutlined className={`icon`} />
+            <Badge dot>
+              <BellOutlined className={`icon`} />
+            </Badge>
           </span>
         </Dropdown>
       </div>

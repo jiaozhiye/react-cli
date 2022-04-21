@@ -6,18 +6,14 @@
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
-import { matchRoutes } from '@/router';
-import { nextTick, Message } from '@/utils';
-import { t } from '@/locale';
+import { application } from '@/hoc';
 import { connect } from 'react-redux';
-import { createMenuList, createTabMenu, createIframeMenu, createMicroMenu } from '@/store/actions';
+import { createMenuList, createTabMenu } from '@/store/actions';
 import type { AppState, ITabNav } from '@/store/reducers/app';
-
-import routes from '@/router/config';
-import config from '@/config';
 
 import Loading from '@/pages/loading';
 
+@application
 @withRouter
 class PrivateRoute extends Component<any> {
   get loading() {
@@ -38,15 +34,8 @@ class PrivateRoute extends Component<any> {
         this.props.createTabMenu({ path: x.path, title: x.title }, 'add');
       }
     });
-    this.addTabMenus();
-  }
-
-  componentDidUpdate(prevProps) {
-    const { pathname: prevPathname } = prevProps.location;
-    const { pathname: nextPathname } = this.props.location;
-    if (prevPathname !== nextPathname) {
-      this.addTabMenus();
-    }
+    // 重要
+    this.props.addTabMenus();
   }
 
   getLocalTabMenus() {
@@ -60,32 +49,6 @@ class PrivateRoute extends Component<any> {
       }
     }
     return result.slice(1);
-  }
-
-  addTabMenus() {
-    const { tabMenus } = this.props;
-    const { pathname, search } = this.props.location;
-    const { route } = matchRoutes(routes, pathname).pop();
-    // title 非空判断 - 重要
-    if (!route.meta?.title) return;
-    // 最大数量判断
-    if (tabMenus.length > config.maxCacheNum) {
-      return Message(t('app.information.maxCache', { total: config.maxCacheNum }), 'warning');
-    }
-    // 选项卡菜单
-    this.props.createTabMenu({ path: pathname, title: route.meta.title }, 'add');
-    // iframe 模式
-    if (route.iframePath) {
-      this.props.createIframeMenu({ key: pathname, value: route.iframePath + search }, 'add');
-    }
-    // micro 模式
-    if (route.microRule) {
-      this.props.createMicroMenu({ key: pathname, value: '' }, 'add');
-    }
-    // 本地存储
-    nextTick(() => {
-      localStorage.setItem('tab_menus', JSON.stringify(this.props.tabMenus));
-    });
   }
 
   isMatch(arr, path) {
@@ -123,7 +86,5 @@ export default connect(
   {
     createMenuList,
     createTabMenu,
-    createIframeMenu,
-    createMicroMenu,
   }
 )(PrivateRoute);
