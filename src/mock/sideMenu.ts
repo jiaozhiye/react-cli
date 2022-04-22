@@ -2,139 +2,130 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:57:34
+ * @Last Modified time: 2022-04-22 16:53:12
  */
-export default [
+const menus = [
   {
-    title: '备件管理',
-    key: '',
-    icon: 'icon-flag-fill',
+    id: '100',
+    appCode: 'dms', // 子应用 code
+    caseCode: null,
+    title: '业务', // 子应用名称
+    icon: '', // 图标
     children: [
       {
-        title: '采购管理',
-        key: '',
+        id: '1',
+        appCode: 'dms',
+        caseCode: null,
+        icon: 'icon-flag-fill',
+        title: '备件管理', // 菜单名称
         children: [
           {
-            title: '备件采购订单',
-            key: '/spa1001',
-          },
-          {
-            title: '备件采购入库',
-            key: '/spa1002',
-          },
-          {
-            title: '备件采购退库',
-            key: '/spa1003',
+            id: '2',
+            appCode: 'dms',
+            caseCode: null,
+            icon: '',
+            title: '采购管理',
+            children: [
+              {
+                id: '3',
+                appCode: 'dms',
+                caseCode: 'spa1001', // 用例号
+                icon: '',
+                title: '备件采购订单',
+              },
+              {
+                id: '4',
+                appCode: 'dms',
+                caseCode: 'spa1002',
+                icon: '',
+                title: '备件采购入库',
+              },
+              {
+                id: '5',
+                appCode: 'dms',
+                caseCode: 'spa1003',
+                icon: '',
+                title: '备件采购退库',
+              },
+            ],
           },
         ],
       },
       {
-        title: '库存管理',
-        key: '',
+        id: '6',
+        appCode: 'dms',
+        caseCode: null,
+        icon: 'icon-flag-fill',
+        title: '销售管理',
         children: [
           {
-            title: '备件清单列表',
-            key: 'https://www.baidu.com/',
-            target: '_blank',
+            id: '7',
+            appCode: 'dms',
+            caseCode: null,
+            icon: '',
+            title: '线索管理',
+            children: [
+              {
+                id: '8',
+                appCode: 'dms',
+                caseCode: 'sal1001',
+                icon: '',
+                title: '线索分配',
+              },
+              {
+                id: '9',
+                appCode: 'dms',
+                caseCode: 'sal1002',
+                icon: '',
+                title: '线索记录',
+              },
+            ],
           },
         ],
       },
     ],
   },
   {
-    title: '销售管理',
-    key: '',
-    icon: 'icon-flag-fill',
+    id: '200',
+    appCode: 'tds',
+    caseCode: null,
+    title: '标准',
+    icon: '',
     children: [
       {
-        title: '线索管理',
-        key: '',
+        id: '10',
+        appCode: 'tds',
+        caseCode: null,
+        icon: 'icon-flag-fill',
+        title: '客服管理',
         children: [
           {
-            title: '线索分配',
-            key: '/xsgl/xugl/fp',
-          },
-          {
-            title: '线索记录',
-            key: '/xsgl/xugl/jl',
-          },
-          {
-            title: '线索跟进计划',
-            key: '/xsgl/xugl/jh',
-          },
-          {
-            title: '线索转移',
-            key: '/xsgl/xugl/zy',
-          },
-        ],
-      },
-      {
-        title: '机会管理',
-        key: '',
-        children: [
-          {
-            title: '销售机会',
-            key: '/xsgl/jhgl/xsjh',
-          },
-          {
-            title: '跟进计划设置',
-            key: '/xsgl/jhgl/jhsz',
-          },
-          {
-            title: '机会跟进计划',
-            key: '/xsgl/jhgl/gjjh',
-          },
-        ],
-      },
-      {
-        title: '客户管理',
-        key: '',
-        children: [
-          {
-            title: '客户订单管理',
-            key: '/xsgl/khgl/dd',
-          },
-          {
-            title: '车辆资源查询',
-            key: '/xsgl/khgl/cx',
-          },
-          {
-            title: '车辆资源管理',
-            key: '/xsgl/khgl/gl',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    title: '客服管理',
-    key: '',
-    icon: 'icon-flag-fill',
-    children: [
-      {
-        title: '回访',
-        key: '',
-        children: [
-          {
-            title: '销售回访',
-            key: '/kfgl/hf/xs',
-          },
-          {
-            title: '回访分配',
-            key: '/kfgl/hf/fp',
-          },
-        ],
-      },
-      {
-        title: '投诉',
-        key: '',
-        children: [
-          {
-            title: '投诉管理',
-            key: '/kfgl/ts/gl',
+            id: '11',
+            appCode: 'tds',
+            caseCode: null,
+            icon: '',
+            title: '回访管理',
+            children: [
+              {
+                id: '12',
+                appCode: 'tds',
+                caseCode: 'car1001',
+                icon: '',
+                title: '销售回访',
+              },
+              {
+                id: '13',
+                appCode: 'tds',
+                caseCode: 'car1002',
+                icon: '',
+                title: '回访分配',
+              },
+            ],
           },
         ],
       },
     ],
   },
 ];
+
+export default menus[0].children;

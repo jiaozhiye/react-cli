@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-12 10:12:28
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:50:13
+ * @Last Modified time: 2022-04-22 21:45:50
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
@@ -16,16 +16,17 @@ import Loading from '@/pages/loading';
 @application
 @withRouter
 class PrivateRoute extends Component<any> {
+  private fetching: boolean;
+
   get loading() {
     return !this.props.flattenMenus.length;
   }
 
   async componentDidMount() {
-    const {
-      route: { path: pathname },
-    } = this.props;
-    if (pathname !== '/' || !this.loading) return;
+    if (this.fetching || !this.loading) return;
+    this.fetching = true;
     const isLoaded: boolean = await this.props.createMenuList();
+    this.fetching = false;
     if (!isLoaded) {
       return console.error('应用菜单加载失败，请检查菜单接口！');
     }

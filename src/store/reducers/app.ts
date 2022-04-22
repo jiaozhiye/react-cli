@@ -29,6 +29,8 @@ import type { ComponentSize, Device, Dictionary, ThemeType } from '@/utils/types
 export type ISideMenu = {
   key: string;
   title: string;
+  icon?: string;
+  id?: string;
   children?: Array<ISideMenu>;
 };
 

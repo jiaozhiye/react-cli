@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:50:41
+ * @Last Modified time: 2022-04-22 21:50:34
  */
 import {
   SIDE_MENU,
@@ -38,6 +38,24 @@ import type { ISideMenu } from '@/store/reducers/app';
 const defaultMenuList: Array<ISideMenu & { hideInMenu: boolean }> = [
   { title: t('app.global.dashboard'), key: '/home', hideInMenu: true },
 ];
+
+const createMenuPath = (item) => {
+  const { appCode, caseCode } = item;
+  if (config.system === 'app') {
+    return appCode && caseCode ? `/${appCode}/${caseCode}` : '';
+  }
+  return caseCode ? `/${caseCode}` : '';
+};
+
+const formateMenus = (list): ISideMenu[] => {
+  return list.map((x) => {
+    const item: ISideMenu = { id: x.id, key: createMenuPath(x), title: x.title, icon: x.icon };
+    if (Array.isArray(x.children)) {
+      item.children = formateMenus(x.children);
+    }
+    return item;
+  });
+};
 
 // 设置导航菜单
 export const createMenuList =
@@ -75,7 +93,7 @@ export const createMenuList =
 
     dispatch({
       type: SIDE_MENU,
-      payload: data,
+      payload: formateMenus(data),
     });
 
     return status;
