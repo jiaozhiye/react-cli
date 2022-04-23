@@ -6,8 +6,9 @@
  */
 import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
-import { application } from '@/hoc';
 import { connect } from 'react-redux';
+import { application } from '@/hoc';
+import { isIframe, isMicro } from './index';
 import { createMenuList, createTabMenu } from '@/store/actions';
 import type { AppState, ITabNav } from '@/store/reducers/app';
 
@@ -23,7 +24,8 @@ class PrivateRoute extends Component<any> {
   }
 
   async componentDidMount() {
-    if (this.fetching || !this.loading) return;
+    const { pathname } = this.props.location;
+    if (this.fetching || !this.loading || isIframe(pathname) || isMicro(pathname)) return;
     this.fetching = true;
     const isLoaded: boolean = await this.props.createMenuList();
     this.fetching = false;
