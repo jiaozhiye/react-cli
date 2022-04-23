@@ -26,8 +26,11 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
   class C extends Component<any> {
     static displayName = `Tool(${WrappedComponent.displayName || WrappedComponent.name})`;
 
-    openView = (fullpath: string) => {
+    openView = (fullpath: string, reload?: boolean) => {
       window.parent.postMessage({ type: OPEN_VIEW, data: fullpath }, '*');
+      if (reload) {
+        setTimeout(() => this.reloadView());
+      }
     };
 
     closeView = (fullpath: string) => {};

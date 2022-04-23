@@ -12,8 +12,11 @@ export default function useTool() {
   const history = useHistory();
   const location = useLocation();
 
-  const openView = (fullpath: string) => {
+  const openView = (fullpath: string, reload?: boolean) => {
     window.parent.postMessage({ type: OPEN_VIEW, data: fullpath }, '*');
+    if (reload) {
+      setTimeout(() => reloadView());
+    }
   };
 
   const closeView = (fullpath: string) => {};
