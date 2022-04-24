@@ -66,6 +66,7 @@ primaryColor: '#1890ff'
 │   ├── components             # 全局公用组件
 │   ├── directive              # 全局自定义指令
 │   ├── config                 # 全局配置
+│   ├── icons                  # 图标
 │   ├── layout                 # 全局 layout
 │   ├── locale                 # 多语言支持
 │   ├── mixins                 # 全局混入
