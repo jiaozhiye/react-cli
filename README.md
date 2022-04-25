@@ -69,7 +69,6 @@ primaryColor: '#1890ff'
 │   ├── icons                  # 图标
 │   ├── layout                 # 全局 layout
 │   ├── locale                 # 多语言支持
-│   ├── mixins                 # 全局混入
 │   ├── mock                   # 项目 mock 模拟数据
 │   ├── modules                # 微前端模块
 │   ├── pages                  # 非业务页面
