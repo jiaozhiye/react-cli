@@ -20,7 +20,7 @@ const flattenRoutes = moduleRoutes.map((x) => x.routes).flat();
 
 export const getLocalRoutes = () => {
   let result: any[] = [];
-  if (config.system === 'app') {
+  if (config.isMainApp) {
     const localRoutes = localStorage.getItem('sub_routes');
     if (localRoutes) {
       try {

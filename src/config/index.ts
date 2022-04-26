@@ -9,6 +9,7 @@ import type { ComponentSize, Language, ThemeType } from '@/utils/types';
 
 type IConfig = {
   system: string;
+  isMainApp: boolean;
   baseRoute: string;
   lang: Language;
   size: ComponentSize;
@@ -31,6 +32,7 @@ type IConfig = {
 
 export default {
   system: config.name,
+  isMainApp: config.name === 'app',
   baseRoute: '',
   lang: 'zh-cn', // 语言
   size: 'middle', // 尺寸

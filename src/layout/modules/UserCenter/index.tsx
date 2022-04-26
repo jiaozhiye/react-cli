@@ -6,7 +6,7 @@
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
+import { Menu, Dropdown, QmDrawer } from '@jiaozhiye/qm-design-react';
 import { Avatar } from '@jiaozhiye/qm-design-react';
 import { UserOutlined, SettingOutlined, ClearOutlined, LogoutOutlined } from '@/icons';
 import { connect } from 'react-redux';
@@ -15,11 +15,16 @@ import { t } from '@/locale';
 import { getUserName } from '@/utils/cookies';
 import type { AppState } from '@/store/reducers/app';
 
+import Center from './Center';
+import Setting from './Setting';
+
 import './index.less';
 
 class UserCenter extends Component<any> {
   state = {
     avatarImg: require('@/assets/img/avatar.jpg'),
+    visibleUserCenter: false,
+    visibleUserSetting: false,
   };
 
   doClearCache = () => {
@@ -38,10 +43,18 @@ class UserCenter extends Component<any> {
           {getUserName() || t('app.settings.admin')}
         </Menu.Item>
         <Menu.Divider />
-        <Menu.Item key="2" icon={<UserOutlined />}>
+        <Menu.Item
+          key="2"
+          icon={<UserOutlined />}
+          onClick={() => this.setState({ visibleUserCenter: true })}
+        >
           {t('app.settings.usercenter')}
         </Menu.Item>
-        <Menu.Item key="3" icon={<SettingOutlined />}>
+        <Menu.Item
+          key="3"
+          icon={<SettingOutlined />}
+          onClick={() => this.setState({ visibleUserSetting: true })}
+        >
           {t('app.settings.usersetting')}
         </Menu.Item>
         <Menu.Item key="4" icon={<ClearOutlined />} onClick={this.doClearCache}>
@@ -56,6 +69,7 @@ class UserCenter extends Component<any> {
   }
 
   render(): React.ReactElement {
+    const { visibleUserCenter, visibleUserSetting } = this.state;
     return (
       <div className={classNames('app-user-center')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
@@ -63,6 +77,34 @@ class UserCenter extends Component<any> {
             <Avatar size={26} src={this.state.avatarImg} />
           </span>
         </Dropdown>
+        <QmDrawer
+          visible={visibleUserCenter}
+          title={t('app.settings.usercenter')}
+          width={'40%'}
+          loading={false}
+          bodyStyle={{ paddingBottom: 52 }}
+          onClose={() => this.setState({ visibleUserCenter: false })}
+        >
+          <Center
+            onClose={() => {
+              this.setState({ visibleUserCenter: false });
+            }}
+          />
+        </QmDrawer>
+        <QmDrawer
+          visible={visibleUserSetting}
+          title={t('app.settings.usersetting')}
+          width={'40%'}
+          loading={false}
+          bodyStyle={{ paddingBottom: 52 }}
+          onClose={() => this.setState({ visibleUserSetting: false })}
+        >
+          <Setting
+            onClose={() => {
+              this.setState({ visibleUserSetting: false });
+            }}
+          />
+        </QmDrawer>
       </div>
     );
   }

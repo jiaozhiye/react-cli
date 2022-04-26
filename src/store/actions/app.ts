@@ -41,7 +41,7 @@ const defaultMenuList: Array<ISideMenu & { hideInMenu: boolean }> = [
 
 const createMenuPath = (item) => {
   const { appCode, caseCode } = item;
-  if (config.system === 'app') {
+  if (config.isMainApp) {
     return appCode && caseCode ? `/${appCode}/${caseCode}` : '';
   }
   return caseCode ? `/${caseCode}` : '';

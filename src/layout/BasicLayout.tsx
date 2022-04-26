@@ -79,7 +79,7 @@ class BasicLayout extends Component<any> {
   };
 
   startMicroApp = () => {
-    if (config.system !== 'app') return;
+    if (!config.isMainApp) return;
     start({
       singular: false,
       excludeAssetFilter: (assetUrl) => {

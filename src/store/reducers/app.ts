@@ -80,7 +80,7 @@ const createFlattenMenus = <T extends ISideMenu>(list: T[]): T[] => {
 
 const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
   const { routes: mRoutes } = routes.find((k) => k.path === '/');
-  if (config.system === 'app') {
+  if (config.isMainApp) {
     const valueTemp: any[] = uniqBy([...getLocalRoutes(), ...mRoutes.slice(2)], 'path');
     mRoutes.length = 2;
     for (let i = 0, len = valueTemp.length; i < len; i++) {
