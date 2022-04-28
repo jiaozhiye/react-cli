@@ -12,7 +12,7 @@ import { UserOutlined, SettingOutlined, ClearOutlined, LogoutOutlined } from '@/
 import { connect } from 'react-redux';
 import { createLocaleLang, createSignOut } from '@/store/actions';
 import { t } from '@/locale';
-import { getUserName } from '@/utils/cookies';
+import { getUserInfo } from '@/utils/cookies';
 import type { AppState } from '@/store/reducers/app';
 
 import Center from './Center';
@@ -40,7 +40,7 @@ class UserCenter extends Component<any> {
     return (
       <Menu>
         <Menu.Item key="1" style={{ pointerEvents: 'none' }}>
-          {getUserName() || t('app.settings.admin')}
+          {getUserInfo().userName || t('app.settings.admin')}
         </Menu.Item>
         <Menu.Divider />
         <Menu.Item

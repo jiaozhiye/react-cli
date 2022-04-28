@@ -1107,10 +1107,10 @@
   resolved "https://registry.npmmirror.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@jiaozhiye/qm-design-react@^1.0.0-beta.60":
-  version "1.0.0-beta.60"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.0.0-beta.60.tgz#4f20bb01218467a94103714a20f8e271afb9cd0b"
-  integrity sha512-6O8qrywsb6KDQzJiQ8FrXYoSmMyfZooiExKdf82kucL1Xul7B1x8J/iH8gnJC6rSXzcklnndw7lPwB/YCEPIGA==
+"@jiaozhiye/qm-design-react@^1.0.0-beta.61":
+  version "1.0.0-beta.61"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.0.0-beta.61.tgz#bb7062cb7c107beeeb4a8e47152693d1d0910fd6"
+  integrity sha512-lfP8JtsP7lzpgwiiSByHVNsbZDpsleH0/n4fAfJevU2uJYCtohNKAraSQQqeZlKOx+SFIPD1Yd1hGC61LVQaQw==
   dependencies:
     add-dom-event-listener "^1.1.0"
     antd "^4.19.5"

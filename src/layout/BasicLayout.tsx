@@ -92,10 +92,15 @@ class BasicLayout extends Component<any> {
   };
 
   componentDidMount() {
-    this.startMicroApp();
     this.props.createDictData();
     this.props.createAuthData();
     window.addEventListener('resize', this.resizeHandler, false);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.flattenMenus.length !== this.props.flattenMenus.length) {
+      this.startMicroApp();
+    }
   }
 
   componentWillUnmount() {
@@ -204,6 +209,7 @@ export default connect(
     device: state.app.device,
     iframeMenus: state.app.iframeMenus,
     microMenus: state.app.microMenus,
+    flattenMenus: state.app.flattenMenus,
   }),
   {
     createDictData,

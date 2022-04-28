@@ -5,19 +5,17 @@
  * @Last Modified time: 2021-06-17 11:36:53
  */
 import Cookies from 'js-cookie';
-import config from '@/config/envMaps';
-
-const options = {
-  domain: config.domain,
-};
+import { getParentLocal } from '@/utils';
 
 // 架构 cookie
-export const getToken = (): string => Cookies.get('jwt', options) ?? '';
-export const setToken = (val: string) => Cookies.set('jwt', val, options);
-export const removeToken = (): void => Cookies.remove('jwt', options);
+export const getToken = (): string => getParentLocal('jwt').value ?? '';
+export const setToken = (val: string) =>
+  localStorage.setItem('jwt', JSON.stringify({ value: val }));
+export const removeToken = (): void => localStorage.removeItem('jwt');
 
-export const getUserName = (): string => Cookies.get('username', options) ?? '';
-export const setUserName = (val: string) => Cookies.set('username', val, options);
-export const removeUserName = (): void => Cookies.remove('username', options);
+export const getUserInfo = () => getParentLocal('userinfo');
+export const setUserInfo = (val: Record<string, unknown>) =>
+  localStorage.setItem('userinfo', JSON.stringify(val));
+export const removeUserInfo = (): void => localStorage.removeItem('userinfo');
 
 // 业务 cookie

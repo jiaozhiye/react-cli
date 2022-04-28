@@ -14,21 +14,21 @@ import type { AppState, ITabNav } from '@/store/reducers/app';
 
 import Loading from '@/pages/loading';
 
+let _fetching: boolean;
+
 @application
 @withRouter
 class PrivateRoute extends Component<any> {
-  private fetching: boolean;
-
   get loading() {
     return !this.props.flattenMenus.length;
   }
 
   async componentDidMount() {
     const { pathname } = this.props.location;
-    if (this.fetching || !this.loading || isIframe(pathname) || isMicro(pathname)) return;
-    this.fetching = true;
+    if (_fetching || !this.loading || isIframe(pathname) || isMicro(pathname)) return;
+    _fetching = true;
     const isLoaded: boolean = await this.props.createMenuList();
-    this.fetching = false;
+    _fetching = false;
     if (!isLoaded) {
       return console.error('应用菜单加载失败，请检查菜单接口！');
     }
