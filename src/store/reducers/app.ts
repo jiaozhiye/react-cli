@@ -222,7 +222,7 @@ const setSignIn = (state, payload) => {
 // 退出登录
 const setSignOut = (state, payload) => {
   return Object.assign({}, state, {
-    loginInfo: payload,
+    loginInfo: payload || {},
   });
 };
 

@@ -24,7 +24,7 @@ class Watermark extends Component<any> {
   public watermarkRef = React.createRef<HTMLDivElement>();
 
   createWatermark = () => {
-    const { setWatermark } = useWatermark(this.watermarkRef.current!);
+    const { setWatermark } = useWatermark(this.watermarkRef.current);
     setWatermark(t('app.global.title'), dayjs().format('YYYY-MM-DD'));
   };
 
