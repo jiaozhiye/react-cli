@@ -7,7 +7,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { confirmBeforeClose, Notification, Message } from '@/utils';
-import { dict } from '@/hoc';
+import { dict, tool } from '@/hoc';
 
 import { QmForm, QmTable, QmButton, QmDrawer } from '@jiaozhiye/qm-design-react';
 import { PlusOutlined, DeleteOutlined } from '@/icons';
@@ -26,6 +26,7 @@ import {
   removeRecord,
 } from '@test/api/spa1001';
 
+@tool
 @dict
 class Spa1001 extends React.Component {
   static displayName = 'Spa1001'; // 用例号 - 用于页面缓存
@@ -411,7 +412,13 @@ class Spa1001 extends React.Component {
           exportExcel={{ fileName: '导出文件.xlsx' }}
           columnsChange={(columns) => this.setState({ columns })}
         >
-          <QmButton type="primary" icon={<PlusOutlined />} onClick={() => this.clickHandle('add')}>
+          <QmButton
+            type="primary"
+            icon={<PlusOutlined />}
+            onClick={() => {
+              this.props.openView('/spa1003');
+            }}
+          >
             新建
           </QmButton>
           <QmButton type="danger" icon={<DeleteOutlined />} confirm={{}} click={this.removeHandle}>

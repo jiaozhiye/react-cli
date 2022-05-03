@@ -80,7 +80,7 @@ class NavList extends Component<any> {
     const result = active ? starMenus.filter((x) => x.key !== key) : [...starMenus, { key, title }];
     // 最大数量判断
     if (result.length > config.maxCacheNum) {
-      return Message(t('app.information.maxCache', { total: config.maxCacheNum }), 'warning');
+      return Message(t('app.information.maxStar', { total: config.maxCacheNum }), 'warning');
     }
     this.props.setStarMenu(result);
   };

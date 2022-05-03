@@ -52,8 +52,9 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       // title 非空判断 - 重要
       if (!route.meta?.title || this.notDisplayTab(pathname)) return;
       // 最大数量判断
-      if (tabMenus.length > config.maxCacheNum) {
-        return Message(t('app.information.maxCache', { total: config.maxCacheNum }), 'warning');
+      if (tabMenus.length > config.maxCacheNum && !tabMenus.find((x) => x.path === pathname)) {
+        Message(t('app.information.maxCache', { total: config.maxCacheNum }), 'warning');
+        return this.props.history.go(-1);
       }
       // 选项卡菜单
       this.props.createTabMenu({ path: pathname, title: route.meta.title }, 'add');
@@ -66,7 +67,9 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
         this.props.createMicroMenu({ key: pathname, value: '' }, 'add');
       }
       // 本地存储
-      nextTick(() => localStorage.setItem('tab_menus', JSON.stringify(this.props.tabMenus)));
+      nextTick(() => {
+        localStorage.setItem('tab_menus', JSON.stringify(this.props.tabMenus));
+      });
     };
 
     refreshView = (pathname: string) => {
