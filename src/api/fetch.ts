@@ -153,7 +153,7 @@ instance.interceptors.response.use((response: AxiosResponse) => {
   }
   // 请求异常提示信息
   if (data.code !== 200) {
-    // token 过期，需要重新登录
+    // token 过期/错误，需要重新登录
     if (data.code === 40105 || data.code === 40108) {
       store.dispatch(createSignOut() as any);
     }
