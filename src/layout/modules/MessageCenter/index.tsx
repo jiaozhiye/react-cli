@@ -14,12 +14,17 @@ import './index.less';
 
 class MessageCenter extends Component<any> {
   renderMenus() {
-    return (
-      <Menu>
-        <Menu.Item key="1">测试消息1</Menu.Item>
-        <Menu.Item key="2">测试消息2</Menu.Item>
-      </Menu>
-    );
+    const items = [
+      {
+        key: 1,
+        label: '测试消息1',
+      },
+      {
+        key: 2,
+        label: '测试消息2',
+      },
+    ];
+    return <Menu items={items} />;
   }
 
   render(): React.ReactElement {

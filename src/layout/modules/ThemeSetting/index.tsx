@@ -18,13 +18,11 @@ import './index.less';
 class ThemeSetting extends Component<any> {
   renderMenus() {
     return (
-      <Menu>
-        <Menu.Item key="1">
-          <DarkTheme />
-          <div style={{ height: '20px' }} />
-          <ThemeColor />
-        </Menu.Item>
-      </Menu>
+      <div className={`ant-dropdown-menu`}>
+        <DarkTheme />
+        <div style={{ height: '20px' }} />
+        <ThemeColor />
+      </div>
     );
   }
 

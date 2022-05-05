@@ -6,7 +6,6 @@
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import addEventListener from 'add-dom-event-listener';
 import classNames from 'classnames';
 import { Menu } from '@jiaozhiye/qm-design-react';
 import { AppstoreFilled } from '@/icons';
@@ -58,18 +57,17 @@ class AllNav extends Component<any> {
       [`app-all-nav`]: true,
       selected: visible,
     };
+    const items = [
+      {
+        key: 'all-nav',
+        icon: <AppstoreFilled />,
+        label: t('app.sidebar.allNavTitle'),
+        onClick: (ev) => this.visibleChange(ev),
+      },
+    ];
     return (
       <div className={classNames(cls)}>
-        <Menu mode="inline" theme="dark" selectable={false}>
-          <Menu.Item
-            key="all-nav"
-            id="all-nav"
-            icon={<AppstoreFilled />}
-            onClick={this.visibleChange}
-          >
-            {t('app.sidebar.allNavTitle')}
-          </Menu.Item>
-        </Menu>
+        <Menu mode="inline" theme="dark" selectable={false} items={items} />
         <NavList
           ref={this.navListRef}
           visible={visible}

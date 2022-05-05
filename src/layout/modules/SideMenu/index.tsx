@@ -15,8 +15,6 @@ import { Menu } from '@jiaozhiye/qm-design-react';
 
 import './index.less';
 
-const SubMenu = Menu.SubMenu;
-
 const getIcon = (icon: string) => {
   if (!icon) return null;
   return (
@@ -78,22 +76,19 @@ class SideMenu extends Component<any> {
         );
         const uniqueKey = depth + (index + 1);
         if (Array.isArray(item.children) && !item.hideChildrenInMenu) {
-          return (
-            <SubMenu
-              key={uniqueKey}
-              popupClassName={`ant-submenu-popup-dark`}
-              title={
-                <>
-                  {getIcon(icon)}
-                  <span>{title}</span>
-                </>
-              }
-            >
-              {this.createMenuTree(item.children, `${uniqueKey}-`)}
-            </SubMenu>
-          );
+          return {
+            key: uniqueKey,
+            popupClassName: 'ant-submenu-popup-dark',
+            label: (
+              <>
+                {getIcon(icon)}
+                <span>{title}</span>
+              </>
+            ),
+            children: this.createMenuTree(item.children, `${uniqueKey}-`),
+          };
         }
-        return <Menu.Item key={path}>{menuItem}</Menu.Item>;
+        return { key: path, label: menuItem };
       });
   }
 
@@ -108,11 +103,10 @@ class SideMenu extends Component<any> {
           key={sideMenus.length}
           mode="inline"
           theme="dark"
+          items={this.createMenuTree(sideMenus)}
           selectedKeys={[pathname]}
           defaultOpenKeys={this.getOpenKeys(pathname)}
-        >
-          {this.createMenuTree(sideMenus)}
-        </Menu>
+        />
       </div>
     );
   }

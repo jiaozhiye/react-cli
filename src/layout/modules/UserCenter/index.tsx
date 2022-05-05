@@ -37,35 +37,46 @@ class UserCenter extends Component<any> {
   };
 
   renderMenus() {
-    return (
-      <Menu>
-        <Menu.Item key="1" style={{ pointerEvents: 'none' }}>
-          {getUserInfo().userName || t('app.settings.admin')}
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item
-          key="2"
-          icon={<UserOutlined />}
-          onClick={() => this.setState({ visibleUserCenter: true })}
-        >
-          {t('app.settings.usercenter')}
-        </Menu.Item>
-        <Menu.Item
-          key="3"
-          icon={<SettingOutlined />}
-          onClick={() => this.setState({ visibleUserSetting: true })}
-        >
-          {t('app.settings.usersetting')}
-        </Menu.Item>
-        <Menu.Item key="4" icon={<ClearOutlined />} onClick={this.doClearCache}>
-          {t('app.settings.clearcache')}
-        </Menu.Item>
-        <Menu.Divider />
-        <Menu.Item key="5" icon={<LogoutOutlined />} onClick={this.doLogout}>
-          {t('app.settings.logout')}
-        </Menu.Item>
-      </Menu>
-    );
+    const items = [
+      {
+        key: 1,
+        label: getUserInfo().userName || t('app.settings.admin'),
+        style: { pointerEvents: 'none' } as React.CSSProperties,
+      },
+      {
+        key: 2,
+        type: 'divider',
+      },
+      {
+        key: 3,
+        icon: <UserOutlined />,
+        label: t('app.settings.usercenter'),
+        onClick: () => this.setState({ visibleUserCenter: true }),
+      },
+      {
+        key: 4,
+        icon: <SettingOutlined />,
+        label: t('app.settings.usersetting'),
+        onClick: () => this.setState({ visibleUserSetting: true }),
+      },
+      {
+        key: 5,
+        icon: <ClearOutlined />,
+        label: t('app.settings.clearcache'),
+        onClick: () => this.doClearCache(),
+      },
+      {
+        key: 6,
+        type: 'divider',
+      },
+      {
+        key: 7,
+        icon: <LogoutOutlined />,
+        label: t('app.settings.logout'),
+        onClick: () => this.doLogout(),
+      },
+    ];
+    return <Menu items={items} />;
   }
 
   render(): React.ReactElement {

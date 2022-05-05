@@ -81,7 +81,7 @@ class BasicLayout extends Component<any> {
   startMicroApp = () => {
     if (!config.isMainApp) return;
     start({
-      singular: false,
+      prefetch: false,
       excludeAssetFilter: (assetUrl) => {
         if (EXCLUDE_URLS.some((x) => assetUrl.startsWith(x))) {
           return true;

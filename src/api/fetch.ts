@@ -137,6 +137,13 @@ instance.interceptors.request.use((config: IRequestConfig) => {
     ...config.headers,
     ...getConfigHeaders(),
   };
+  // 处理 GET 请求缓存
+  if (config.method === 'get') {
+    config.params = {
+      ...config.params,
+      _t: +new Date().getTime(),
+    };
+  }
   addPendingRequest(config);
   addLockingRequest(config);
   return config;

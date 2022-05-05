@@ -36,31 +36,27 @@ class SizeSetting extends Component<any> {
 
   renderMenus() {
     const { size } = this.props;
-    return (
-      <Menu>
-        <Menu.Item
-          key="large"
-          disabled={size === 'large'}
-          onClick={() => this.sizeChangeHandle('large')}
-        >
-          {t('app.sizeSelect.large')}
-        </Menu.Item>
-        <Menu.Item
-          key="middle"
-          disabled={size === 'middle'}
-          onClick={() => this.sizeChangeHandle('middle')}
-        >
-          {t('app.sizeSelect.middle')}
-        </Menu.Item>
-        <Menu.Item
-          key="small"
-          disabled={size === 'small'}
-          onClick={() => this.sizeChangeHandle('small')}
-        >
-          {t('app.sizeSelect.small')}
-        </Menu.Item>
-      </Menu>
-    );
+    const items = [
+      {
+        key: 'large',
+        label: t('app.sizeSelect.large'),
+        disabled: size === 'large',
+        onClick: () => this.sizeChangeHandle('large'),
+      },
+      {
+        key: 'middle',
+        label: t('app.sizeSelect.middle'),
+        disabled: size === 'middle',
+        onClick: () => this.sizeChangeHandle('middle'),
+      },
+      {
+        key: 'small',
+        label: t('app.sizeSelect.small'),
+        disabled: size === 'small',
+        onClick: () => this.sizeChangeHandle('small'),
+      },
+    ];
+    return <Menu items={items} />;
   }
 
   render(): React.ReactElement {

@@ -17,36 +17,35 @@ import type { AppState } from '@/store/reducers/app';
 
 import './index.less';
 
-const { SubMenu } = Menu;
-
 class StarNav extends Component<any> {
   componentDidMount() {
     this.props.createStarMenu();
   }
 
   createMenuItems() {
-    return this.props.starMenus.map((x) => (
-      <Menu.Item key={x.key}>
+    return this.props.starMenus.map((x) => ({
+      key: x.key,
+      label: (
         <Link to={x.key} target={x.target}>
           <span>{x.title}</span>
         </Link>
-      </Menu.Item>
-    ));
+      ),
+    }));
   }
 
   render(): React.ReactElement {
+    const items = [
+      {
+        key: 'star-nav',
+        popupClassName: 'ant-submenu-popup-dark',
+        icon: <StarFilled />,
+        label: t('app.sidebar.starNav'),
+        children: this.createMenuItems(),
+      },
+    ];
     return (
       <div className={classNames('app-star-nav')}>
-        <Menu mode="inline" theme="dark">
-          <SubMenu
-            key="star-nav"
-            popupClassName={`ant-submenu-popup-dark`}
-            icon={<StarFilled />}
-            title={t('app.sidebar.starNav')}
-          >
-            {this.createMenuItems()}
-          </SubMenu>
-        </Menu>
+        <Menu mode="inline" theme="dark" items={items} />
       </div>
     );
   }

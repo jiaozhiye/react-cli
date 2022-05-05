@@ -15,12 +15,17 @@ import './index.less';
 
 class HelperDoc extends Component<any> {
   renderMenus() {
-    return (
-      <Menu>
-        <Menu.Item key="1">{t('app.helperDoc.helpDoc')}</Menu.Item>
-        <Menu.Item key="2">{t('app.helperDoc.useManual')}</Menu.Item>
-      </Menu>
-    );
+    const items = [
+      {
+        key: 1,
+        label: t('app.helperDoc.helpDoc'),
+      },
+      {
+        key: 2,
+        label: t('app.helperDoc.useManual'),
+      },
+    ];
+    return <Menu items={items} />;
   }
 
   render(): React.ReactElement {

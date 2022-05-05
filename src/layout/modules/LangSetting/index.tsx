@@ -36,20 +36,21 @@ class LangSetting extends Component<any> {
 
   renderMenus() {
     const { lang } = this.props;
-    return (
-      <Menu>
-        <Menu.Item
-          key="zh-cn"
-          disabled={lang === 'zh-cn'}
-          onClick={() => this.langChangeHandle('zh-cn')}
-        >
-          CN&nbsp;&nbsp;简体中文
-        </Menu.Item>
-        <Menu.Item key="en" disabled={lang === 'en'} onClick={() => this.langChangeHandle('en')}>
-          US&nbsp;&nbsp;English
-        </Menu.Item>
-      </Menu>
-    );
+    const items = [
+      {
+        key: 'zh-cn',
+        disabled: lang === 'zh-cn',
+        label: <>CN&nbsp;&nbsp;简体中文</>,
+        onClick: () => this.langChangeHandle('zh-cn'),
+      },
+      {
+        key: 'en',
+        disabled: lang === 'en',
+        label: <>US&nbsp;&nbsp;English</>,
+        onClick: () => this.langChangeHandle('en'),
+      },
+    ];
+    return <Menu items={items} />;
   }
 
   render(): React.ReactElement {
