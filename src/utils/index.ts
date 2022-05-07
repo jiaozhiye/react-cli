@@ -96,6 +96,14 @@ export const getParentLocal = (key: string): Record<string, any> => {
 };
 
 /**
+ * @description 获取当前用例号
+ * @returns {string} 用例号
+ */
+export const getCaseCode = (): string => {
+  return window.location.pathname.split('/').pop() || '';
+};
+
+/**
  * @description 动态加载 js 文件
  * @param {string} url js 文件地址
  * @param {func} callback 回调函数
