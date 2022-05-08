@@ -39,6 +39,13 @@ message.config({
 @application
 @withRouter
 class UseConfig extends Component<any> {
+  private globalConfig = {
+    autoInsertSpaceInButton: false,
+    tinymce: {
+      scriptSrc: '/static/tinymce/tinymce.min.js',
+    },
+  };
+
   componentDidMount() {
     this.setDocumentDomain();
     const localTheme = localStorage.getItem('theme_color');
@@ -107,11 +114,7 @@ class UseConfig extends Component<any> {
   render(): React.ReactElement {
     const { pathname } = this.props.location;
     return (
-      <QmConfigProvider
-        locale={this.props.lang}
-        size={this.props.size}
-        global={{ autoInsertSpaceInButton: false }}
-      >
+      <QmConfigProvider locale={this.props.lang} size={this.props.size} global={this.globalConfig}>
         {isIframe(pathname) ? (
           <section className={classNames('app-iframe')}>{this.props.children}</section>
         ) : (
