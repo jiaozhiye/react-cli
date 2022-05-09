@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:40:32
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:49:43
+ * @Last Modified time: 2022-05-09 13:03:20
  */
 import { lazy } from 'react';
 import { t } from '@/locale';
@@ -89,11 +89,14 @@ const routes = [
       },
       ...flattenRoutes.map((x) => {
         if (config.microType) {
-          const _iframe = x.iframePath || config.microType === 'iframe' ? `/iframe${x.path}` : '';
           return {
             path: x.path,
             meta: x.meta,
-            iframePath: _iframe ? config.baseRoute + _iframe : _iframe,
+            iframePath: x.iframePath
+              ? x.iframePath
+              : config.microType === 'iframe'
+              ? `${config.baseRoute}/iframe${x.path}`
+              : '',
             component: BlankLayout,
           };
         }
