@@ -125,12 +125,25 @@ class Spa1001 extends React.Component {
         type: 'SELECT',
         label: '条件4',
         fieldName: 'd',
-        request: {
-          fetchApi: getSelectData,
-          params: {},
-          dataKey: 'records',
-          valueKey: 'value',
-          textKey: 'text',
+        options: {
+          itemList: [
+            { text: 'aaa', value: '1' },
+            { text: 'bbb', value: '2' },
+          ],
+        },
+        onChange: (val) => {
+          this.setState((prev) => {
+            prev.filters.find((x) => x.fieldName === 'i').request.params = { key: val };
+            prev.filters.find((x) => x.fieldName === 'j').options.itemList = [
+              { text: 'aaa', value: 1 },
+              { text: 'bbb', value: 2 },
+            ];
+            return { filters: [...prev.filters] };
+          });
+          // this.setState((prev) => {
+          //   prev.filters.find((x) => x.fieldName === 'b').searchHelper.table.fetch.params = { key: val };
+          //   return { filters: prev.filters };
+          // });
         },
       },
       {
@@ -180,6 +193,26 @@ class Spa1001 extends React.Component {
           fieldAliasMap: () => {
             return { h: 'date', c: 'date', id: 'id' };
           },
+        },
+      },
+      {
+        type: 'SELECT',
+        label: '条件9',
+        fieldName: 'i',
+        request: {
+          fetchApi: getSelectData,
+          params: {},
+          dataKey: 'records',
+          valueKey: 'value',
+          textKey: 'text',
+        },
+      },
+      {
+        type: 'SELECT',
+        label: '条件10',
+        fieldName: 'j',
+        options: {
+          itemList: [],
         },
       },
     ];
