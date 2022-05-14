@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:50:52
+ * @Last Modified time: 2022-05-14 10:22:34
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -88,7 +88,7 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
     }
   }
   list.forEach((x) => {
-    const route = mRoutes.find((k) => k.path === x.key);
+    const route = mRoutes.find((k) => k.path === x.key.split('?')[0]);
     if (route) {
       Object.assign(route.meta, { title: x.title });
     }
