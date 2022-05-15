@@ -61,7 +61,7 @@ class PrivateRoute extends Component<any> {
   isAuth(path) {
     return (
       this.props.route.meta?.noAuth ||
-      this.props.flattenMenus.findIndex((x) => x.key.split('?')[0] === path) !== -1
+      this.props.flattenMenus.findIndex((x) => x.key?.split('?')[0] === path) !== -1
     );
   }
 

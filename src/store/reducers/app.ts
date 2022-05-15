@@ -88,7 +88,7 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
     }
   }
   list.forEach((x) => {
-    const route = mRoutes.find((k) => k.path === x.key.split('?')[0]);
+    const route = mRoutes.find((k) => k.path === x.key?.split('?')[0]);
     if (route) {
       Object.assign(route.meta, { title: x.title });
     }
