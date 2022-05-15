@@ -2,13 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2022-05-13 10:50:17
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-13 16:49:51
+ * @Last Modified time: 2022-05-15 18:06:16
  */
 import React, { Component } from 'react';
 import echarts from '../lib';
 import { debounce } from '@/utils';
 
-import type { EChartsOption } from 'echarts';
+import type { EChartsOption } from '../lib';
 import type { Nullable } from '@/utils/types';
 
 type ITheme = 'light' | 'dark' | 'default';
@@ -30,14 +30,14 @@ export default (params?: IParams) => {
 
       public resizeObserver: ResizeObserver;
 
-      getOptions = (options: EChartsOption) => {
+      getOptions = (options: EChartsOption): EChartsOption => {
         if (theme !== 'dark') {
           return options;
         }
         return {
           backgroundColor: 'transparent',
           ...options,
-        } as EChartsOption;
+        };
       };
 
       setOptions = (options: EChartsOption, clear = true) => {

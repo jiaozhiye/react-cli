@@ -2,11 +2,12 @@
  * @Author: 焦质晔
  * @Date: 2022-05-13 10:53:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-13 16:50:14
+ * @Last Modified time: 2022-05-15 18:05:10
  */
 import React from 'react';
 import { get, isEqual } from 'lodash-es';
 import { chart } from '@/charts';
+import type { EChartsOption } from '@/charts/lib';
 
 import { QmSpin } from '@jiaozhiye/qm-design-react';
 
@@ -27,7 +28,7 @@ class Chart1 extends React.Component<any> {
 
   componentDidUpdate(prevProps) {
     if (!isEqual(prevProps.fetch?.params, this.props.fetch?.params)) {
-      this.getChartData();
+      this.getChartData('update');
     }
   }
 
@@ -36,7 +37,7 @@ class Chart1 extends React.Component<any> {
   }
 
   // echarts 配置
-  createOptios = (data) => {
+  createOptios = (data): EChartsOption => {
     return {
       xAxis: {
         type: 'category',

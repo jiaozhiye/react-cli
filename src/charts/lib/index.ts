@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-11-17 14:25:10
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-11-17 19:45:39
+ * @Last Modified time: 2022-05-15 18:03:45
  */
 import * as echarts from 'echarts/core';
 
@@ -26,6 +26,8 @@ import {
 import { LabelLayout, UniversalTransition } from 'echarts/features';
 
 import { CanvasRenderer } from 'echarts/renderers';
+
+export type { EChartsOption } from 'echarts';
 
 echarts.use([
   BarChart,
