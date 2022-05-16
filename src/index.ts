@@ -2,11 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2021-02-05 09:13:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:41:52
+ * @Last Modified time: 2022-05-16 15:49:45
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { COMP_SIZE, LOCALE_LANG, THEME_COLOR } from '@/store/types';
+import { setDocumentDomain } from '@/utils';
+import env from '@/config/envMaps';
 import App from './App';
 
 declare const window: Window & {
@@ -22,6 +24,8 @@ function render(props) {
     container ? container.querySelector('#app') : document.querySelector('#app')
   );
 }
+
+setDocumentDomain(env.domain);
 
 if (window.__POWERED_BY_QIANKUN__) {
   __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-24 15:11:23
+ * @Last Modified time: 2022-05-16 15:48:23
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -16,7 +16,6 @@ import { changeLocale } from '@/locale';
 import { application } from '@/hoc';
 import * as types from '@/store/types';
 import config from '@/config';
-import env from '@/config/envMaps';
 import type { AppState } from '@/store/reducers/app';
 
 import '@jiaozhiye/qm-design-react/lib/style/index.less';
@@ -47,7 +46,6 @@ class UseConfig extends Component<any> {
   };
 
   componentDidMount() {
-    this.setDocumentDomain();
     const localTheme = localStorage.getItem('theme_color');
     if (localTheme && localTheme !== this.props.themeColor) {
       this.props.createThemeColor(localTheme);
@@ -74,11 +72,6 @@ class UseConfig extends Component<any> {
   clickEventHandle = () => {
     this.props.emitOutsideClick();
   };
-
-  setDocumentDomain() {
-    if (!env.domain) return;
-    document.domain = env.domain;
-  }
 
   messageEventHandle = ({ data }) => {
     if (typeof data !== 'object') return;
