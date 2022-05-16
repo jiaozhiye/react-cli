@@ -7,7 +7,9 @@
 import React from 'react';
 import { get, isEqual } from 'lodash-es';
 import { chart } from '@/charts';
+
 import type { EChartsOption } from '@/charts/lib';
+import type { IntervalHandle } from '@/utils/types';
 
 import { QmSpin } from '@jiaozhiye/qm-design-react';
 
@@ -16,7 +18,7 @@ const DELAY_TIME = 15;
 
 @chart()
 class Chart1 extends React.Component<any> {
-  private timer;
+  private timer: IntervalHandle;
 
   state = {
     loading: false,

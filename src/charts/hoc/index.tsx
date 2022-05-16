@@ -61,9 +61,7 @@ export default (params?: IParams) => {
         return this.chartInstance;
       };
 
-      resizeDebouncer = debounce(() => {
-        this.setResize();
-      }, 20);
+      resizeDebouncer = debounce(() => this.setResize(), 20);
 
       componentDidMount() {
         this.resizeObserver = new ResizeObserver(this.resizeDebouncer);
