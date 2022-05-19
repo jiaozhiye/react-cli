@@ -2,19 +2,20 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:40:32
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-09 13:03:20
+ * @Last Modified time: 2022-05-19 16:11:30
  */
 import { lazy } from 'react';
 import { t } from '@/locale';
 import config from '@/config';
 import moduleRoutes from './routes';
 
+import Redirect from '@/pages/redirect';
+
 const Login = lazy(() => import('@/modules/framework/pages/login'));
 const Dashboard = lazy(() => import('@/modules/framework/pages/dashboard'));
 const BasicLayout = lazy(() => import('@/layout/BasicLayout'));
 const BlankLayout = lazy(() => import('@/layout/BlankLayout'));
 const Nomatch = lazy(() => import('@/pages/nomatch'));
-const Redirect = lazy(() => import('@/pages/redirect'));
 
 const flattenRoutes = moduleRoutes.map((x) => x.routes).flat();
 

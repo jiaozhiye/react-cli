@@ -29,13 +29,13 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
 
     /**
      * @description 对按钮进行权限控制
-     * @param {string} appCode 用例号
+     * @param {string} caseCode 用例号
      * @param {string} code 权限按钮的 code 码
      * @returns {boolean}
      */
-    getButtonAuth = (appCode: string, code: string): boolean => {
+    getButtonAuth = (caseCode: string, code: string): boolean => {
       const auth = this.getLocalAuth();
-      const list: string[] = auth[appCode] ?? [];
+      const list: string[] = auth[caseCode] ?? [];
       if (Array.isArray(list)) {
         return list.findIndex((x) => x == code) > -1;
       }

@@ -2,21 +2,21 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:43:44
+ * @Last Modified time: 2022-05-19 16:33:02
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { registerMicroApps, start } from 'qiankun';
 import { connect } from 'react-redux';
-import { renderRoutes } from '../router';
-import { Layout } from '@jiaozhiye/qm-design-react';
 import { matchRoutes } from '@/router';
+import { Layout } from '@jiaozhiye/qm-design-react';
 import { getLocalRoutes } from '@/router/config';
 import { createDictData, createAuthData, createDeviceType } from '@/store/actions';
 import { emitter as microEvent } from '@/utils/mitt';
 import config from '@/config';
 import type { AppState } from '@/store/reducers/app';
 
+import RouteView from './RouteView';
 import Watermark from './modules/Watermark';
 import ContentMasker from './modules/ContentMasker';
 import Logo from './modules/Logo';
@@ -52,13 +52,6 @@ class BasicLayout extends Component<any> {
 
   get isMobile() {
     return this.props.device === 'mobile';
-  }
-
-  get asideWidth() {
-    if (this.isMobile) {
-      return config.sideWidth[0];
-    }
-    return !this.state.collapsed ? config.sideWidth[0] : config.sideWidth[1];
   }
 
   registerMicroRoutes = () => {
@@ -117,9 +110,11 @@ class BasicLayout extends Component<any> {
   };
 
   resizeHandler = () => {
-    const isMobile = this.checkDevice();
-    this.toggle(isMobile); // 重置 collapsed
-    this.props.createDeviceType(isMobile ? 'mobile' : 'desktop');
+    const value = this.checkDevice();
+    if (this.isMobile !== value) {
+      this.toggle(value); // 重置 collapsed
+      this.props.createDeviceType(value ? 'mobile' : 'desktop');
+    }
   };
 
   createIframeView(route) {
@@ -192,7 +187,7 @@ class BasicLayout extends Component<any> {
             <Actions />
           </Header>
           <Content className={classNames(!route.meta?.bgColor ? 'no-bg-color' : '')}>
-            {renderRoutes(routes)}
+            <RouteView routes={routes} />
             {this.createIframeView(route)}
             {this.createMicroView(route)}
           </Content>
