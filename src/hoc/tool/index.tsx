@@ -2,13 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-13 21:13:13
+ * @Last Modified time: 2022-05-24 19:16:33
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { OPEN_VIEW, REFRESH_VIEW } from '@/store/types';
+import { OPEN_VIEW, CLOSE_VIEW, REFRESH_VIEW } from '@/store/types';
 
 import type { AppState } from '@/store/reducers/app';
 
@@ -33,7 +33,9 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       }
     };
 
-    closeView = (fullpath: string) => {};
+    closeView = (fullpath: string) => {
+      window.parent.postMessage({ type: CLOSE_VIEW, data: fullpath }, '*');
+    };
 
     reloadView = () => {
       window.parent.postMessage({ type: REFRESH_VIEW, data: '' }, '*');

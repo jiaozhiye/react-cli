@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-19 15:40:27
+ * @Last Modified time: 2022-05-24 19:22:52
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -41,6 +41,10 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
   class C extends Component<any> {
     static displayName = `App(${WrappedComponent.displayName || WrappedComponent.name})`;
 
+    setLocalTabs = () => {
+      nextTick(() => localStorage.setItem('tab_menus', JSON.stringify(this.props.tabMenus)));
+    };
+
     notDisplayTab = (pathname: string) => {
       return ['/login'].some((x) => pathname.startsWith(x));
     };
@@ -67,9 +71,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
         this.props.createMicroMenu({ key: pathname, value: '' }, 'add');
       }
       // 本地存储
-      nextTick(() => {
-        localStorage.setItem('tab_menus', JSON.stringify(this.props.tabMenus));
-      });
+      this.setLocalTabs();
     };
 
     refreshView = (pathname: string) => {
@@ -106,6 +108,13 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       this.props.history.push(fullpath);
     };
 
+    closeView = (fullpath: string) => {
+      this.props.createTabMenu(fullpath, 'remove');
+      this.props.createIframeMenu(fullpath, 'remove');
+      this.props.createMicroMenu(fullpath, 'remove');
+      this.setLocalTabs();
+    };
+
     emitOutsideClick = () => {
       if (window.parent === window) return;
       window.parent.postMessage({ type: OUTSIDE_CLICK, data: '' }, '*');
@@ -139,6 +148,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           addTabMenus={this.addTabMenus}
           refreshView={this.refreshView}
           openView={this.openView}
+          closeView={this.closeView}
           emitOutsideClick={this.emitOutsideClick}
           dispatchMouseClick={this.dispatchMouseClick}
           createThemeColor={this.createThemeColor}

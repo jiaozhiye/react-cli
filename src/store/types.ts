@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:48:42
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:50:22
+ * @Last Modified time: 2022-05-24 19:17:34
  */
 // 系统导航菜单
 export const SIDE_MENU = 'SIDE_MENU';
@@ -49,8 +49,11 @@ export const SIGN_IN = 'SIGN_IN';
 // 退出登录
 export const SIGN_OUT = 'SIGN_OUT';
 
-//
+// 打开窗口
 export const OPEN_VIEW = 'OPEN_VIEW';
 
-//
+// 关闭窗口
+export const CLOSE_VIEW = 'CLOSE_VIEW';
+
+// 刷新窗口
 export const REFRESH_VIEW = 'REFRESH_VIEW';

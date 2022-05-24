@@ -1107,13 +1107,13 @@
   resolved "https://registry.npmmirror.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@jiaozhiye/qm-design-react@^1.1.0-beta.17":
-  version "1.1.0-beta.17"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.1.0-beta.17.tgz#335acd46ac18aab89d6809f53817127f244de8d7"
-  integrity sha512-kGU+sFoMlgUrKFhLrel9khBZlJKzimzlz4X4kB9Cmx1KrPB26B9McLvQbR1yXOWWAqJ6SGo8JYwKXC7/EQ3nhA==
+"@jiaozhiye/qm-design-react@^1.1.0-beta.20":
+  version "1.1.0-beta.20"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.1.0-beta.20.tgz#028cc6ecd709244b442370422f9a68fe6fcd6be0"
+  integrity sha512-qVGTJ+3C9QctLGLakJjA+aTWJI8s1huG2ABLCBMMWHlRbFrXAjCJeBbGPk8MAVU733lVWDM+nTm7eYadZrqoUw==
   dependencies:
     add-dom-event-listener "^1.1.0"
-    antd "^4.20.4"
+    antd "^4.20.6"
     axios "^0.26.0"
     china-area-data "^5.0.1"
     classnames "^2.3.1"
@@ -1323,7 +1323,7 @@
   resolved "https://registry.npmmirror.com/@types/prop-types/-/prop-types-15.7.4.tgz#fcf7205c25dff795ee79af1e30da2c9790808f11"
   integrity sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==
 
-"@types/qs@*":
+"@types/qs@*", "@types/qs@^6.9.7":
   version "6.9.7"
   resolved "https://registry.npmmirror.com/@types/qs/-/qs-6.9.7.tgz#63bb7d067db107cc1e457c303bc25d511febf6cb"
   integrity sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==
@@ -1744,16 +1744,17 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-antd@^4.20.4:
-  version "4.20.4"
-  resolved "https://registry.npmmirror.com/antd/-/antd-4.20.4.tgz#63064be2ead13b6ad7585b58a8e71bcd380d170a"
-  integrity sha512-xtaMNuRvumMXQLsoAwiQRY5rEJVRtJGumby3aPIJdWXwBtZ7eDDuXbT/Uo8xT8rTND0cK5rRQlxMyisCJrZD9Q==
+antd@^4.20.6:
+  version "4.20.6"
+  resolved "https://registry.npmmirror.com/antd/-/antd-4.20.6.tgz#0d46a4b6128a717b4cad7ac6902311a0210f1d6f"
+  integrity sha512-JHEwCDjWTAJ1yxlC5QPb7LhRMvdhccN5lzMYDs72sp6VOiaXVGAlwols+F8nQQRaF9h/eA6yQyZ622y8b9vaoQ==
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/icons" "^4.7.0"
     "@ant-design/react-slick" "~0.28.1"
     "@babel/runtime" "^7.12.5"
     "@ctrl/tinycolor" "^3.4.0"
+    "@types/qs" "^6.9.7"
     classnames "^2.2.6"
     copy-to-clipboard "^3.2.0"
     lodash "^4.17.21"
@@ -4184,10 +4185,10 @@ lazystream@^1.0.0:
   dependencies:
     readable-stream "^2.0.5"
 
-less-loader@^10.2.0:
-  version "10.2.0"
-  resolved "https://registry.npmmirror.com/less-loader/-/less-loader-10.2.0.tgz#97286d8797dc3dc05b1d16b0ecec5f968bdd4e32"
-  integrity sha512-AV5KHWvCezW27GT90WATaDnfXBv99llDbtaj4bshq6DvAihMdNjaPDcUMa6EXKLRF+P2opFenJp89BXg91XLYg==
+less-loader@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.npmmirror.com/less-loader/-/less-loader-11.0.0.tgz#a31b2bc5cdfb62f1c7de9b2d01cd944c22b1a024"
+  integrity sha512-9+LOWWjuoectIEx3zrfN83NAGxSUB5pWEabbbidVQVgZhN+wN68pOvuyirVlH1IK4VT1f3TmlyvAnCXh8O5KEw==
   dependencies:
     klona "^2.0.4"
 

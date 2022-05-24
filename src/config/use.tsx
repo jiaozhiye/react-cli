@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-16 15:48:23
+ * @Last Modified time: 2022-05-24 19:16:27
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -94,6 +94,9 @@ class UseConfig extends Component<any> {
     }
     if (data.type === types.OPEN_VIEW) {
       this.props.history.push(data.data);
+    }
+    if (data.type === types.CLOSE_VIEW) {
+      this.props.closeView(data.data);
     }
     if (data.type === types.REFRESH_VIEW) {
       this.props.refreshView(this.props.location.pathname);

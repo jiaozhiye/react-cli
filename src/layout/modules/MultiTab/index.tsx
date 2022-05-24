@@ -2,18 +2,15 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 13:44:13
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:46:51
+ * @Last Modified time: 2022-05-24 19:33:56
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import classNames from 'classnames';
-import { nextTick } from '@/utils';
-import { application } from '@/hoc';
 import { t } from '@/locale';
-
-import { connect } from 'react-redux';
-import { createTabMenu, createIframeMenu, createMicroMenu } from '@/store/actions';
+import { application } from '@/hoc';
 import type { AppState } from '@/store/reducers/app';
 
 import { Tabs } from '@jiaozhiye/qm-design-react';
@@ -64,18 +61,11 @@ class MultiTab extends Component<any> {
   doRemove(targetKey) {
     const { activeKey } = this.state;
     const { tabMenus } = this.props;
-    this.props.createTabMenu(targetKey, 'remove');
-    this.props.createIframeMenu(targetKey, 'remove');
-    this.props.createMicroMenu(targetKey, 'remove');
+    this.props.closeView(targetKey);
     if (targetKey === activeKey) {
       const index = this.findCurTagIndex(targetKey);
       const nextActiveKey = tabMenus[index - 1].path;
       this.changeHandle(nextActiveKey);
-    } else {
-      // 本地存储
-      nextTick(() => {
-        localStorage.setItem('tab_menus', JSON.stringify(this.props.tabMenus));
-      });
     }
   }
 
@@ -159,9 +149,5 @@ export default connect(
   (state: AppState) => ({
     tabMenus: state.app.tabMenus,
   }),
-  {
-    createTabMenu,
-    createIframeMenu,
-    createMicroMenu,
-  }
+  {}
 )(MultiTab);
