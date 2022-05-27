@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:40:32
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-19 16:11:30
+ * @Last Modified time: 2022-05-27 10:58:15
  */
 import { lazy } from 'react';
 import { t } from '@/locale';
@@ -98,7 +98,7 @@ const routes = [
               : config.microType === 'iframe'
               ? `${config.baseRoute}/iframe${x.path}`
               : '',
-            component: BlankLayout,
+            component: () => null,
           };
         }
         return x;

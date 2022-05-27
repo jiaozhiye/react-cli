@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-22 21:50:34
+ * @Last Modified time: 2022-05-27 11:01:55
  */
 import {
   SIDE_MENU,
@@ -49,7 +49,13 @@ const createMenuPath = (item) => {
 
 const formateMenus = (list): ISideMenu[] => {
   return list.map((x) => {
-    const item: ISideMenu = { id: x.id, key: createMenuPath(x), title: x.title, icon: x.icon };
+    const item: ISideMenu = {
+      id: x.id,
+      key: createMenuPath(x),
+      title: x.title,
+      icon: x.icon,
+      caseHref: x.caseHref,
+    };
     if (Array.isArray(x.children)) {
       item.children = formateMenus(x.children);
     }

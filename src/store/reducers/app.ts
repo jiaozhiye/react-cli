@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-14 10:22:34
+ * @Last Modified time: 2022-05-27 10:54:24
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -29,8 +29,9 @@ import type { ComponentSize, Device, Dictionary, ThemeType } from '@/utils/types
 export type ISideMenu = {
   key: string;
   title: string;
-  icon?: string;
   id?: string;
+  icon?: string;
+  caseHref?: string;
   children?: Array<ISideMenu>;
 };
 
@@ -91,6 +92,13 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
     const route = mRoutes.find((k) => k.path === x.key?.split('?')[0]);
     if (route) {
       Object.assign(route.meta, { title: x.title });
+    } else if (x.caseHref) {
+      mRoutes.splice(-3, 0, {
+        path: x.key,
+        meta: { keepAlive: true, title: x.title },
+        iframePath: x.caseHref,
+        component: () => null,
+      });
     }
   });
 };
