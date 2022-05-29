@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-15 12:44:47
+ * @Last Modified time: 2022-05-29 12:05:06
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -44,7 +44,7 @@ const reduxConnect: any = connect;
 class NavList extends Component<any> {
   static propTypes = {
     visible: PropTypes.bool,
-    collapsed: PropTypes.bool,
+    getWidth: PropTypes.func,
     onChange: PropTypes.func,
   };
 
@@ -98,13 +98,13 @@ class NavList extends Component<any> {
   }
 
   render(): React.ReactElement {
-    const { forwardedRef, visible, collapsed, flattenMenus, sideMenus, starMenus } = this.props;
+    const { forwardedRef, visible, flattenMenus, sideMenus, starMenus, getWidth } = this.props;
     const { searchValue } = this.state;
     return (
       <>
         <div
           className={classNames('nav-list-masker', { show: visible })}
-          style={{ left: !collapsed ? `${config.sideWidth[0]}px` : `${config.sideWidth[1]}px` }}
+          style={{ left: getWidth() }}
           onClick={(ev) => {
             ev.stopPropagation();
             this.clickHandle();
@@ -113,7 +113,7 @@ class NavList extends Component<any> {
         <div
           ref={forwardedRef}
           className={classNames('nav-list-container', { show: visible })}
-          style={{ left: !collapsed ? `${config.sideWidth[0]}px` : `${config.sideWidth[1]}px` }}
+          style={{ left: getWidth() }}
           onClick={(ev) => ev.stopPropagation()}
         >
           <div className={classNames('wrapper')}>

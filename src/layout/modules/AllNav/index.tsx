@@ -2,10 +2,9 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-01-16 18:20:00
+ * @Last Modified time: 2022-05-29 12:02:05
  */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Menu } from '@jiaozhiye/qm-design-react';
 import { AppstoreFilled } from '@/icons';
@@ -16,30 +15,13 @@ import NavList from './NavList';
 import './index.less';
 
 class AllNav extends Component<any> {
-  static propTypes = {
-    collapsed: PropTypes.bool,
-  };
-
-  private event;
+  private wrapRef = React.createRef<HTMLDivElement>();
 
   private navListRef = React.createRef();
 
   state = {
     visible: false,
   };
-
-  // componentDidMount() {
-  //   this.event = addEventListener(document.querySelector('.ant-layout-sider'), 'click', (ev) => {
-  //     const $$allNavMenu = document.getElementById('all-nav');
-  //     const $$allNavModal = this.navListRef.current;
-  //     if (ev.nativeEvent.path.some((x) => x === $$allNavMenu || x === $$allNavModal)) return;
-  //     this.closeHandle();
-  //   });
-  // }
-
-  // componentWillUnmount() {
-  //   this.event.remove();
-  // }
 
   visibleChange = (ev) => {
     ev.domEvent.stopPropagation();
@@ -50,8 +32,11 @@ class AllNav extends Component<any> {
     this.setState({ visible: false });
   };
 
+  getOuterWidth = () => {
+    return this.wrapRef.current?.offsetWidth;
+  };
+
   render(): React.ReactElement {
-    const { collapsed } = this.props;
     const { visible } = this.state;
     const cls = {
       [`app-all-nav`]: true,
@@ -66,12 +51,12 @@ class AllNav extends Component<any> {
       },
     ];
     return (
-      <div className={classNames(cls)}>
+      <div ref={this.wrapRef} className={classNames(cls)}>
         <Menu mode="inline" theme="dark" selectable={false} items={items} />
         <NavList
           ref={this.navListRef}
           visible={visible}
-          collapsed={collapsed}
+          getWidth={this.getOuterWidth}
           onChange={this.closeHandle}
         />
       </div>

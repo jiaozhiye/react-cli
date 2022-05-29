@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-29 11:15:25
+ * @Last Modified time: 2022-05-29 12:00:10
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -192,7 +192,7 @@ class BasicLayout extends Component<any, IState> {
           style={{ pointerEvents: locked ? 'none' : 'auto' }}
         >
           <Logo collapsed={_collapsed} />
-          <AllNav collapsed={_collapsed} />
+          <AllNav />
           {config.showStarNav && <StarNav />}
           <SideMenu />
         </Sider>
