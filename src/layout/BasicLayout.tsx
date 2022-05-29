@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-19 16:33:02
+ * @Last Modified time: 2022-05-29 11:15:25
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -17,6 +17,7 @@ import config from '@/config';
 import type { AppState } from '@/store/reducers/app';
 
 import RouteView from './RouteView';
+import SplitView from './modules/SplitView';
 import Watermark from './modules/Watermark';
 import ContentMasker from './modules/ContentMasker';
 import Logo from './modules/Logo';
@@ -37,15 +38,21 @@ const EXCLUDE_URLS = ['http://localhost:8000', 'http://localhost:18000'];
 
 type IState = {
   collapsed: boolean;
+  locked: boolean;
+  left: number;
 };
 
-class BasicLayout extends Component<any> {
+class BasicLayout extends Component<any, IState> {
   public state: IState;
 
   constructor(props) {
     super(props);
     const isMobile = this.checkDevice();
-    this.state = { collapsed: isMobile };
+    this.state = {
+      collapsed: isMobile,
+      locked: false,
+      left: config.sideWidth[0],
+    };
     props.createDeviceType(isMobile ? 'mobile' : 'desktop');
     this.registerMicroRoutes();
   }
@@ -101,7 +108,10 @@ class BasicLayout extends Component<any> {
   }
 
   toggle = (value?: boolean) => {
-    this.setState({ collapsed: value ?? !this.state.collapsed });
+    this.setState((prev) => {
+      const val = value ?? !prev.collapsed;
+      return { collapsed: val, left: val ? config.sideWidth[1] : config.sideWidth[0] };
+    });
   };
 
   checkDevice = () => {
@@ -152,7 +162,7 @@ class BasicLayout extends Component<any> {
     const { routes } = this.props.route;
     const { pathname } = this.props.location;
     const { route } = matchRoutes(routes, pathname).pop();
-    const { collapsed } = this.state;
+    const { collapsed, locked, left } = this.state;
     const cls = {
       [`app-layout`]: !0,
       [`is-mobile`]: this.isMobile,
@@ -165,19 +175,28 @@ class BasicLayout extends Component<any> {
     return (
       <Layout className={classNames(cls)}>
         {this.isMobile && !collapsed && <ContentMasker onClick={() => this.toggle(true)} />}
+        <SplitView
+          offset={left}
+          min={config.sideWidth[1]}
+          max={500}
+          threshold={config.sideWidth[0]}
+          onDrag={(val) => this.setState({ left: val, collapsed: val === config.sideWidth[1] })}
+          onDragChange={(active) => this.setState({ locked: active })}
+        />
         <Sider
           trigger={null}
           collapsible={true}
           collapsed={_collapsed}
-          width={config.sideWidth[0]}
+          width={left}
           collapsedWidth={config.sideWidth[1]}
+          style={{ pointerEvents: locked ? 'none' : 'auto' }}
         >
           <Logo collapsed={_collapsed} />
           <AllNav collapsed={_collapsed} />
           {config.showStarNav && <StarNav />}
           <SideMenu />
         </Sider>
-        <Layout>
+        <Layout style={{ pointerEvents: locked ? 'none' : 'auto' }}>
           <Header>
             {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
               className: classNames('trigger'),

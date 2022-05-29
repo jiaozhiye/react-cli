@@ -1,0 +1,39 @@
+/*
+ * @Author: 焦质晔
+ * @Date: 2022-05-29 09:00:08
+ * @Last Modified by: 焦质晔
+ * @Last Modified time: 2022-05-29 11:18:04
+ */
+.app-split-view {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  .resize-bar {
+    position: absolute;
+    z-index: 9;
+    touch-action: none;
+    pointer-events: auto;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      transition: background-color 0.1s ease-out;
+      background: transparent;
+      pointer-events: none;
+    }
+    &.vertical {
+      cursor: ew-resize;
+      top: 0;
+      width: 4px;
+      height: 100%;
+    }
+    &.hover,
+    &.active {
+      &::before {
+        background: @primaryColor;
+      }
+    }
+  }
+}
