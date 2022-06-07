@@ -449,8 +449,8 @@ class Spa1001 extends React.Component {
             type="primary"
             icon={<PlusOutlined />}
             onClick={() => {
-              this.props.closeView('/spa1003');
-              this.props.openView('/home');
+              // this.props.closeView('/spa1003');
+              this.props.openView('/spa1001?a=' + Math.random());
             }}
           >
             新建

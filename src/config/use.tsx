@@ -93,7 +93,7 @@ class UseConfig extends Component<any> {
       localStorage.setItem('size', data.data);
     }
     if (data.type === types.OPEN_VIEW) {
-      this.props.history.push(data.data);
+      this.props.openView(data.data);
     }
     if (data.type === types.CLOSE_VIEW) {
       this.props.closeView(data.data);

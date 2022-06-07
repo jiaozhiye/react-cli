@@ -75,7 +75,7 @@ class MultiTab extends Component<any> {
   };
 
   changeHandle = (activeKey) => {
-    this.props.history.push(activeKey);
+    this.props.openView(activeKey);
     this.setState({ activeKey });
   };
 

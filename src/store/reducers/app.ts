@@ -144,12 +144,23 @@ const setTabMenus = (state, payload, behavior) => {
   });
 };
 
+const addIframeMenu = <T extends ICacheMenu>(iframeMenus: T[], data: T) => {
+  const target = iframeMenus.find((x) => x.key === data.key);
+  if (!target) {
+    return [...iframeMenus, data];
+  }
+  if (target.value !== data.value) {
+    target.value = data.value;
+  }
+  return [...iframeMenus];
+};
+
 // 设置 iframe 导航
 const setIframeMenus = (state, payload, behavior) => {
   return Object.assign({}, state, {
     iframeMenus:
       behavior === 'add'
-        ? uniqBy([...state.iframeMenus, payload], 'key')
+        ? addIframeMenu(state.iframeMenus, payload)
         : state.iframeMenus.filter((x) => x.key !== payload),
   });
 };

@@ -100,7 +100,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       const target = iframeMenus.find((x) => x.key === pathname);
       this.props.createIframeMenu(pathname, 'remove');
       setTimeout(() => {
-        this.props.createIframeMenu({ key: pathname, value: target?.value }, 'add');
+        this.props.createIframeMenu({ key: pathname, value: target!.value }, 'add');
       }, 10);
     };
 
