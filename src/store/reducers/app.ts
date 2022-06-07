@@ -38,6 +38,7 @@ export type ISideMenu = {
 export type ITabNav = {
   path: string;
   title: string;
+  search?: string;
 };
 
 export type ICacheMenu = {
@@ -134,12 +135,23 @@ const setSideMenus = (state, payload) => {
   });
 };
 
+const addTabMenu = <T extends ITabNav>(tabMenus: T[], data: T) => {
+  const target = tabMenus.find((x) => x.path === data.path);
+  if (!target) {
+    return [...tabMenus, data];
+  }
+  if (data.search && target.search !== data.search) {
+    target.search = data.search;
+  }
+  return [...tabMenus];
+};
+
 // 设置顶部选项卡导航
 const setTabMenus = (state, payload, behavior) => {
   return Object.assign({}, state, {
     tabMenus:
       behavior === 'add'
-        ? uniqBy([...state.tabMenus, payload], 'path')
+        ? addTabMenu(state.tabMenus, payload)
         : state.tabMenus.filter((x) => x.path !== payload),
   });
 };

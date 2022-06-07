@@ -75,7 +75,9 @@ class MultiTab extends Component<any> {
   };
 
   changeHandle = (activeKey) => {
-    this.props.openView(activeKey);
+    const { tabMenus } = this.props;
+    const { search = '' } = tabMenus.find((x) => x.path === activeKey) || {};
+    this.props.openView(activeKey + search);
     this.setState({ activeKey });
   };
 

@@ -61,7 +61,10 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
         return this.props.history.go(-1);
       }
       // 选项卡菜单
-      this.props.createTabMenu({ path: pathname, title: route.meta.title }, 'add');
+      this.props.createTabMenu(
+        Object.assign({}, { path: pathname, title: route.meta.title }, search ? { search } : null),
+        'add'
+      );
       // iframe 模式
       if (route.iframePath) {
         this.props.createIframeMenu({ key: pathname, value: route.iframePath + search }, 'add');
