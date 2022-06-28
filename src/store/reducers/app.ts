@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-27 10:54:24
+ * @Last Modified time: 2022-06-26 21:33:55
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -118,7 +118,7 @@ const initState: IState = {
   tabMenus: [{ path: '/home', title: t('app.global.dashboard') }], // 顶部选项卡菜单数据
   flattenMenus: [], // 展平后的三级菜单列表
   iframeMenus: [], // iframe 列表
-  microMenus: [], // 乾坤 列表
+  microMenus: [], // qiankun 列表
   keepAliveList: [], // 路由组件缓存列表
   dict: {}, // 数据字典
   auth: {}, // 按钮权限
