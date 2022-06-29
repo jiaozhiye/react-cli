@@ -164,7 +164,7 @@ instance.interceptors.response.use((response: AxiosResponse) => {
     if (data.code === 40105 || data.code === 40108) {
       store.dispatch(createSignOut() as any);
     }
-    data.msg && Notification(data.msg, 'error', 10);
+    data.message && Notification(getErrorText(data.code) || data.message, 'error', 10);
   }
   return data;
 }, errorHandler);

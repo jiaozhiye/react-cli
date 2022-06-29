@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-06-26 21:33:55
+ * @Last Modified time: 2022-06-29 15:32:16
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -31,6 +31,7 @@ export type ISideMenu = {
   title: string;
   id?: string;
   icon?: string;
+  hideInMenu?: boolean;
   caseHref?: string;
   children?: Array<ISideMenu>;
 };

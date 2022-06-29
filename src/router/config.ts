@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:40:32
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-29 16:51:50
+ * @Last Modified time: 2022-06-29 14:23:55
  */
 import { lazy } from 'react';
 import { t } from '@/locale';
@@ -44,6 +44,7 @@ const getMicroRoutes = () => {
     result = flattenRoutes.map((x) => ({
       path: `/${config.system}` + x.path,
       meta: x.meta,
+      exact: x.exact,
       props: x.props,
       component: x.component,
     }));
@@ -66,6 +67,7 @@ const routes = [
   ...flattenRoutes.map((x) => ({
     path: '/iframe' + x.path,
     meta: x.meta,
+    exact: x.exact,
     props: x.props,
     component: x.component,
   })),
@@ -93,6 +95,7 @@ const routes = [
           return {
             path: x.path,
             meta: x.meta,
+            exact: x.exact,
             iframePath: x.iframePath
               ? x.iframePath
               : config.microType === 'iframe'

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-27 11:01:55
+ * @Last Modified time: 2022-06-29 15:33:52
  */
 import {
   SIDE_MENU,
@@ -54,6 +54,7 @@ const formateMenus = (list): ISideMenu[] => {
       key: createMenuPath(x),
       title: x.title,
       icon: x.icon,
+      hideInMenu: x.hidden,
       caseHref: x.caseHref,
     };
     if (Array.isArray(x.children)) {
