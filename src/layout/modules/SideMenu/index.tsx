@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
-
+import { application } from '@/hoc';
 import { connect } from 'react-redux';
 import type { AppState } from '@/store/reducers/app';
 
@@ -49,6 +49,7 @@ const deepGetPath = (arr, val, depth = '') => {
   }
 };
 
+@application
 @withRouter
 class SideMenu extends Component<any> {
   getOpenKeys(path) {
@@ -87,7 +88,7 @@ class SideMenu extends Component<any> {
             const {
               location: { pathname },
             } = this.props;
-            this.props.history.push(path.split('?')[0] === pathname ? `/redirect${path}` : path);
+            this.props.openView(path.split('?')[0] === pathname ? `/redirect${path}` : path);
           },
         };
       });
