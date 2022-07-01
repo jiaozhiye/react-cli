@@ -2,10 +2,10 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-06 23:29:01
+ * @Last Modified time: 2022-07-01 00:17:19
  */
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { connect } from 'react-redux';
@@ -64,14 +64,10 @@ class SideMenu extends Component<any> {
         const path: string = conversionPath(item.key || '');
         // 判断是否为 http 链接
         const menuItem = !isHttpLink(path) ? (
-          <Link to={path} target={target}>
-            {getIcon(icon)}
-            <span>{title}</span>
-          </Link>
+          title
         ) : (
           <a href={path} target={target || '_blank'}>
-            {getIcon(icon)}
-            <span>{title}</span>
+            {title}
           </a>
         );
         const uniqueKey = depth + (index + 1);
@@ -79,24 +75,30 @@ class SideMenu extends Component<any> {
           return {
             key: uniqueKey,
             popupClassName: 'ant-submenu-popup-dark',
-            label: (
-              <>
-                {getIcon(icon)}
-                <span>{title}</span>
-              </>
-            ),
+            icon: getIcon(icon),
+            label: title,
             children: this.createMenuTree(item.children, `${uniqueKey}-`),
           };
         }
-        return { key: path, label: menuItem };
+        return {
+          key: path,
+          label: menuItem,
+          onClick: () => {
+            const {
+              location: { pathname },
+            } = this.props;
+            this.props.history.push(path.split('?')[0] === pathname ? `/redirect${path}` : path);
+          },
+        };
       });
   }
 
   render(): React.ReactElement {
     const {
       sideMenus,
-      location: { pathname },
+      location: { pathname, search },
     } = this.props;
+    const fullpath: string = pathname + search;
     return (
       <div className={classNames('app-side-menu')}>
         <Menu
@@ -104,8 +106,8 @@ class SideMenu extends Component<any> {
           mode="inline"
           theme="dark"
           items={this.createMenuTree(sideMenus)}
-          selectedKeys={[pathname]}
-          defaultOpenKeys={this.getOpenKeys(pathname)}
+          selectedKeys={[fullpath]}
+          defaultOpenKeys={this.getOpenKeys(fullpath)}
         />
       </div>
     );

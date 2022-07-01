@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-27 10:50:28
+ * @Last Modified time: 2022-06-30 22:44:24
  */
 const menus = [
   {
@@ -36,14 +36,14 @@ const menus = [
               {
                 id: '4',
                 appCode: 'dms',
-                caseCode: 'spa1002',
+                caseCode: 'spa1002?a=1',
                 icon: '',
                 title: '备件采购入库',
               },
               {
                 id: '5',
                 appCode: 'dms',
-                caseCode: 'spa1003',
+                caseCode: 'spa1002?a=2',
                 icon: '',
                 title: '备件采购退库',
               },

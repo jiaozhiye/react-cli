@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-05 09:13:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-16 15:49:45
+ * @Last Modified time: 2022-07-01 11:36:22
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -10,6 +10,21 @@ import { COMP_SIZE, LOCALE_LANG, THEME_COLOR } from '@/store/types';
 import { setDocumentDomain } from '@/utils';
 import env from '@/config/envMaps';
 import App from './App';
+
+// const sub_routes = [
+//   {
+//     iframePath: 'http://www.faw.cn/react-dms/iframe/spa1001',
+//     meta: { keepAlive: true },
+//     path: '/dms/spa1001',
+//   },
+//   {
+//     iframePath: 'http://www.faw.cn/react-dms/iframe/spa1002',
+//     meta: { keepAlive: true },
+//     path: '/dms/spa1002',
+//   },
+// ];
+
+// localStorage.setItem('sub_routes', JSON.stringify(sub_routes));
 
 declare const window: Window & {
   __POWERED_BY_QIANKUN__: boolean;

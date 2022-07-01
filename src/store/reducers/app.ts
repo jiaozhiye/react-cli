@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-06-29 15:32:16
+ * @Last Modified time: 2022-07-01 00:02:14
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -142,7 +142,7 @@ const addTabMenu = <T extends ITabNav>(tabMenus: T[], data: T) => {
     return [...tabMenus, data];
   }
   if (data.search && target.search !== data.search) {
-    target.search = data.search;
+    Object.assign(target, data);
   }
   return [...tabMenus];
 };

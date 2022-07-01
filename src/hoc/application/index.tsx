@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-24 19:22:52
+ * @Last Modified time: 2022-07-01 00:00:48
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -30,6 +30,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       size: state.app.size,
       lang: state.app.lang,
       tabMenus: state.app.tabMenus,
+      flattenMenus: state.app.flattenMenus,
     }),
     {
       createTabMenu,
@@ -50,7 +51,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     };
 
     addTabMenus = () => {
-      const { tabMenus } = this.props;
+      const { tabMenus, flattenMenus } = this.props;
       const { pathname, search } = this.props.location;
       const { route } = matchRoutes(routes, pathname).pop();
       // title 非空判断 - 重要
@@ -60,9 +61,12 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
         Message(t('app.information.maxCache', { total: config.maxCacheNum }), 'warning');
         return this.props.history.go(-1);
       }
+      const title = !search
+        ? route.meta.title
+        : flattenMenus.find((x) => x.key === pathname + search)?.title || route.meta.title;
       // 选项卡菜单
       this.props.createTabMenu(
-        Object.assign({}, { path: pathname, title: route.meta.title }, search ? { search } : null),
+        Object.assign({}, { path: pathname, title }, search ? { search } : null),
         'add'
       );
       // iframe 模式

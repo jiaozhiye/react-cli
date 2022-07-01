@@ -1114,13 +1114,13 @@
   resolved "https://registry.npmmirror.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@jiaozhiye/qm-design-react@^1.2.0-beta.4":
-  version "1.2.0-beta.4"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.2.0-beta.4.tgz#b8a8cbe5b5e898e9cc9ce5316d25d6f9693f52b0"
-  integrity sha512-5TNFH05/BKByfIEauFMZ4VBKsNM61i49Ed41r/Crc0EoQAA7G1dPfw3YumOT2Gx86QgyL8DLVYfVDW+c0pXjhg==
+"@jiaozhiye/qm-design-react@^1.2.0-beta.7":
+  version "1.2.0-beta.7"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.2.0-beta.7.tgz#c805614643f05c2e51014f3f0ab4f8bcc3b5f641"
+  integrity sha512-LdxAMsHp5E/unACSojIgckY7Lqv0IiSPkGDQQ3N8Bqkq56SyOb/7e7OQYrhjFf7sQu899WxSuGwM7sjX4NnopA==
   dependencies:
     add-dom-event-listener "^1.1.0"
-    antd "^4.21.3"
+    antd "^4.21.4"
     axios "^0.27.2"
     china-area-data "^5.0.1"
     classnames "^2.3.1"
@@ -1134,7 +1134,7 @@
     omit.js "^2.0.2"
     prop-types "^15.8.0"
     react-countup "^6.1.0"
-    react-draggable "^4.4.4"
+    react-draggable "^4.4.5"
     react-sortablejs "^6.0.0"
     resize-observer-polyfill "^1.5.1"
     scroll-into-view-if-needed "^2.2.28"
@@ -1759,15 +1759,15 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
   dependencies:
     color-convert "^2.0.1"
 
-antd@^4.21.3:
-  version "4.21.3"
-  resolved "https://registry.npmmirror.com/antd/-/antd-4.21.3.tgz#a87a5936b3fbb92c0112a6b6fc8f1305ec6d4bdc"
-  integrity sha512-TETxAqqkgzpmQl/74kG2JiY6cd6E7LmrXjU7PN3Kxs8oPfQk7CGxez4smCMdpbTI2NU2qvOw0ugnvqzES82VJQ==
+antd@^4.21.4:
+  version "4.21.4"
+  resolved "https://registry.npmmirror.com/antd/-/antd-4.21.4.tgz#e246c3db02c936247de25e264a34f8fadb9913a8"
+  integrity sha512-seSXyzVwfOI0a9/HIxUQ41nVJpR8hHn+DbBlJTCOM92Q56Fvw0FlbtZuNMA2gaOkDzyPTnp4W7adlbaqkGsvog==
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/icons" "^4.7.0"
     "@ant-design/react-slick" "~0.29.1"
-    "@babel/runtime" "^7.12.5"
+    "@babel/runtime" "^7.18.3"
     "@ctrl/tinycolor" "^3.4.0"
     classnames "^2.2.6"
     copy-to-clipboard "^3.2.0"
@@ -1806,7 +1806,7 @@ antd@^4.21.3:
     rc-tree-select "~5.4.0"
     rc-trigger "^5.2.10"
     rc-upload "~4.3.0"
-    rc-util "^5.20.0"
+    rc-util "^5.22.5"
     scroll-into-view-if-needed "^2.2.25"
 
 anymatch@~3.1.2:
@@ -5516,7 +5516,7 @@ process-nextick-args@~2.0.0:
   resolved "https://registry.npmmirror.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
 
-prop-types@^15.6.0, prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.0, prop-types@^15.8.1:
+prop-types@^15.6.2, prop-types@^15.7.2, prop-types@^15.8.0, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmmirror.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
@@ -5981,7 +5981,7 @@ rc-util@^5.17.0:
     react-is "^16.12.0"
     shallowequal "^1.1.0"
 
-rc-util@^5.19.2:
+rc-util@^5.19.2, rc-util@^5.22.5:
   version "5.22.5"
   resolved "https://registry.npmmirror.com/rc-util/-/rc-util-5.22.5.tgz#d4d6d886c5ecb6a2a51dde1840d780a2b70f5179"
   integrity sha512-awD2TGMGU97OZftT2R3JwrHWjR8k/xIwqjwcivPskciweUdgXE7QsyXkBKVSBHXS+c17AWWMDWuKWsJSheQy8g==
@@ -5990,7 +5990,7 @@ rc-util@^5.19.2:
     react-is "^16.12.0"
     shallowequal "^1.1.0"
 
-rc-util@^5.20.0, rc-util@^5.20.1, rc-util@^5.21.0:
+rc-util@^5.20.1, rc-util@^5.21.0:
   version "5.21.2"
   resolved "https://registry.npmmirror.com/rc-util/-/rc-util-5.21.2.tgz#fa23277ba84e5561af2febdca64de3fc2b3e1528"
   integrity sha512-QuuZ2tKMScGtxSx3rLzgPGGDZm/np7phMqA7OcDidSf44abvSk+AdtdD7ZvQPvCEtdC6nCSI5tEVnUaYjjD9/w==
@@ -6041,13 +6041,13 @@ react-dom@^17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-draggable@^4.4.4:
-  version "4.4.4"
-  resolved "https://registry.npmmirror.com/react-draggable/-/react-draggable-4.4.4.tgz#5b26d9996be63d32d285a426f41055de87e59b2f"
-  integrity sha512-6e0WdcNLwpBx/YIDpoyd2Xb04PB0elrDrulKUgdrIlwuYvxh5Ok9M+F8cljm8kPXXs43PmMzek9RrB1b7mLMqA==
+react-draggable@^4.4.5:
+  version "4.4.5"
+  resolved "https://registry.npmmirror.com/react-draggable/-/react-draggable-4.4.5.tgz#9e37fe7ce1a4cf843030f521a0a4cc41886d7e7c"
+  integrity sha512-OMHzJdyJbYTZo4uQE393fHcqqPYsEtkjfMgvCHr6rejT+Ezn4OZbNyGH50vv+SunC1RMvwOTSWkEODQLzw1M9g==
   dependencies:
     clsx "^1.1.1"
-    prop-types "^15.6.0"
+    prop-types "^15.8.1"
 
 react-is@^16.12.0, react-is@^16.13.1, react-is@^16.6.0, react-is@^16.7.0:
   version "16.13.1"
