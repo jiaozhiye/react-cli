@@ -2,36 +2,19 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:48:33
+ * @Last Modified time: 2022-07-03 11:21:39
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { CheckOutlined } from '@/icons';
 import { connect } from 'react-redux';
-import { createThemeColor } from '@/store/actions';
 import { emitter } from '@/utils/mitt';
 import { t } from '@/locale';
+import { application } from '@/hoc';
 import { THEME_COLOR } from '@/store/types';
-import config from '@/config';
 import type { AppState } from '@/store/reducers/app';
 
-// 自定义主题
-import client from 'webpack-custom-theme/client';
-import { generate } from '@ant-design/colors';
-
 import './index.less';
-
-export const getAntdSerials = (color) => {
-  const lightens = new Array(9).fill(null).map((t, i) => {
-    return client.varyColor.lighten(color, i / 10);
-  });
-  const darkens = new Array(6).fill(null).map((t, i) => {
-    return client.varyColor.darken(color, i / 10);
-  });
-  const colorPalettes = generate(color);
-  const rgb = client.varyColor.toNum3(color.replace('#', '')).join(',');
-  return lightens.concat(darkens).concat(colorPalettes).concat(rgb);
-};
 
 const Tag = ({ color, check, ...rest }) => (
   <div
@@ -44,6 +27,7 @@ const Tag = ({ color, check, ...rest }) => (
   </div>
 );
 
+@application
 class ThemeColor extends Component<any> {
   state = {
     colorList: [
@@ -60,16 +44,7 @@ class ThemeColor extends Component<any> {
   };
 
   themeColorChangeHandle(color) {
-    const options = {
-      newColors: getAntdSerials(color),
-      changeUrl: (cssUrl) =>
-        `${process.env.NODE_ENV === 'development' ? '' : config.baseRoute}/${cssUrl}`,
-      openLocalStorage: false,
-    };
-    client.changer.changeColor(options, Promise).then(() => {
-      this.props.createThemeColor(color);
-      localStorage.setItem('theme_color', color);
-    });
+    this.props.setThemeColor(color);
     this.props.iframeMenus.forEach((x) => {
       const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
@@ -104,9 +79,6 @@ export default connect(
   (state: AppState) => ({
     themeColor: state.app.themeColor,
     iframeMenus: state.app.iframeMenus,
-    lang: state.app.lang,
   }),
-  {
-    createThemeColor,
-  }
+  {}
 )(ThemeColor);

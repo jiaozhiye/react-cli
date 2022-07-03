@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-01 00:00:48
+ * @Last Modified time: 2022-07-03 11:25:22
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -11,10 +11,15 @@ import { connect } from 'react-redux';
 import { matchRoutes } from '@/router';
 import { nextTick, Message } from '@/utils';
 import { t } from '@/locale';
-import { createTabMenu, createIframeMenu, createMicroMenu } from '@/store/actions';
+import {
+  createTabMenu,
+  createIframeMenu,
+  createMicroMenu,
+  createThemeColor,
+} from '@/store/actions';
 import { OUTSIDE_CLICK } from '@/store/types';
 import client from 'webpack-custom-theme/client';
-import { getAntdSerials } from '@/layout/modules/ThemeSetting/ThemeColor';
+import { getAntdSerials } from '@/layout/modules/ThemeSetting/color';
 import store from '@/store';
 import config from '@/config';
 import routes from '@/router/config';
@@ -36,6 +41,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       createTabMenu,
       createIframeMenu,
       createMicroMenu,
+      createThemeColor,
     }
   )
   @withRouter
@@ -133,7 +139,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       document.body.click();
     };
 
-    createThemeColor = (color: string) => {
+    setThemeColor = (color: string) => {
       const options = {
         newColors: getAntdSerials(color),
         changeUrl: (cssUrl) =>
@@ -158,7 +164,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           closeView={this.closeView}
           emitOutsideClick={this.emitOutsideClick}
           dispatchMouseClick={this.dispatchMouseClick}
-          createThemeColor={this.createThemeColor}
+          setThemeColor={this.setThemeColor}
         />
       );
     }

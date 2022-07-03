@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-24 19:16:27
+ * @Last Modified time: 2022-07-03 11:27:44
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -10,7 +10,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { notification, message, QmConfigProvider } from '@jiaozhiye/qm-design-react';
 import '@/locale/setting';
-import { createThemeColor, createLocaleLang, createComponentSize } from '@/store/actions';
+import { createLocaleLang, createComponentSize } from '@/store/actions';
 import { isIframe } from '@/router';
 import { changeLocale } from '@/locale';
 import { application } from '@/hoc';
@@ -48,7 +48,7 @@ class UseConfig extends Component<any> {
   componentDidMount() {
     const localTheme = localStorage.getItem('theme_color');
     if (localTheme && localTheme !== this.props.themeColor) {
-      this.props.createThemeColor(localTheme);
+      this.props.setThemeColor(localTheme);
     }
     if (isIframe(this.props.location.pathname)) {
       document.addEventListener('click', this.clickEventHandle, false);
@@ -79,7 +79,7 @@ class UseConfig extends Component<any> {
       this.props.dispatchMouseClick();
     }
     if (data.type === types.THEME_COLOR) {
-      this.props.createThemeColor(data.data);
+      this.props.setThemeColor(data.data);
     }
     if (data.type === types.THEME_TYPE) {
       // ...
@@ -128,7 +128,6 @@ export default connect(
     themeColor: state.app.themeColor,
   }),
   {
-    createThemeColor,
     createLocaleLang,
     createComponentSize,
   }
