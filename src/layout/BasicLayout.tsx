@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-29 12:00:10
+ * @Last Modified time: 2022-07-04 19:21:51
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -73,6 +73,7 @@ class BasicLayout extends Component<any, IState> {
           activeRule: x.microRule,
           props: {
             microEvent,
+            isMainEnv: config.isMainApp,
           },
         }))
     );
@@ -141,7 +142,11 @@ class BasicLayout extends Component<any, IState> {
           width="100%"
           height="100%"
           frameBorder="0"
-          onLoad={(ev) => (ev.target as HTMLIFrameElement).focus()}
+          onLoad={(ev) => {
+            const $iframe = ev.target as HTMLIFrameElement;
+            $iframe.contentWindow!.__MAIM_APP_ENV__ = config.isMainApp;
+            $iframe.focus();
+          }}
         />
       </div>
     ));
