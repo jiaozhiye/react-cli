@@ -141,8 +141,10 @@ const addTabMenu = <T extends ITabNav>(tabMenus: T[], data: T) => {
   if (!target) {
     return [...tabMenus, data];
   }
-  if (data.search && target.search !== data.search) {
+  if (data.search) {
     Object.assign(target, data);
+  } else {
+    delete target.search;
   }
   return [...tabMenus];
 };
