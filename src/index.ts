@@ -2,12 +2,12 @@
  * @Author: 焦质晔
  * @Date: 2021-02-05 09:13:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-04 19:21:14
+ * @Last Modified time: 2022-07-11 18:01:27
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { COMP_SIZE, LOCALE_LANG, THEME_COLOR } from '@/store/types';
-import { setDocumentDomain } from '@/utils';
+import { ACHIEVE_LOCAL, COMP_SIZE, LOCALE_LANG, THEME_COLOR } from '@/store/types';
+import config from '@/config';
 import env from '@/config/envMaps';
 import App from './App';
 
@@ -36,7 +36,19 @@ function render(props) {
   );
 }
 
-setDocumentDomain(env.domain);
+function initial() {
+  if (env.domain) {
+    document.domain = env.domain;
+  } else if (!config.isMainApp) {
+    try {
+      window.parent.localStorage;
+    } catch (err) {
+      window.parent.postMessage({ type: ACHIEVE_LOCAL, data: window.name }, '*');
+    }
+  }
+}
+
+initial();
 
 if (window.__POWERED_BY_QIANKUN__) {
   __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-03 11:25:22
+ * @Last Modified time: 2022-07-11 18:16:39
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -17,7 +17,7 @@ import {
   createMicroMenu,
   createThemeColor,
 } from '@/store/actions';
-import { OUTSIDE_CLICK } from '@/store/types';
+import { OUTSIDE_CLICK, SEND_LOCAL } from '@/store/types';
 import client from 'webpack-custom-theme/client';
 import { getAntdSerials } from '@/layout/modules/ThemeSetting/color';
 import store from '@/store';
@@ -87,12 +87,14 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       this.setLocalTabs();
     };
 
+    getIframeNode = (id: string) => {
+      return document.getElementById(id) as Nullable<HTMLIFrameElement>;
+    };
+
     refreshView = (pathname: string) => {
       const { search } = this.props.location;
       this.props.history.replace(`/redirect${pathname}` + search);
-      let $iframe: Nullable<HTMLIFrameElement> = document.getElementById(
-        pathname
-      ) as HTMLIFrameElement;
+      let $iframe = this.getIframeNode(pathname);
       if (!$iframe) return;
       // 未释放内存，待优化
       // $iframe.contentWindow.location.reload();
@@ -115,6 +117,28 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       setTimeout(() => {
         this.props.createIframeMenu({ key: pathname, value: target!.value }, 'add');
       }, 10);
+    };
+
+    sendLocalStore = (name: string) => {
+      this.getIframeNode(name)?.contentWindow!.postMessage(
+        {
+          type: SEND_LOCAL,
+          data: {
+            jwt: localStorage.getItem('jwt'),
+            userinfo: localStorage.getItem('userinfo'),
+            dict: localStorage.getItem('dict'),
+            auth: localStorage.getItem('auth'),
+          },
+        },
+        '*'
+      );
+    };
+
+    setLocalStore = (data: Record<string, string>) => {
+      for (const key in data) {
+        if (!data[key]) continue;
+        localStorage.setItem(key, data[key]);
+      }
     };
 
     openView = (fullpath: string) => {
@@ -160,6 +184,8 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           {...this.props}
           addTabMenus={this.addTabMenus}
           refreshView={this.refreshView}
+          sendLocalStore={this.sendLocalStore}
+          setLocalStore={this.setLocalStore}
           openView={this.openView}
           closeView={this.closeView}
           emitOutsideClick={this.emitOutsideClick}

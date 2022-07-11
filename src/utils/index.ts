@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 14:22:31
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-16 15:54:18
+ * @Last Modified time: 2022-07-11 16:13:48
  */
 import React from 'react';
 import { message, notification, Modal } from '@jiaozhiye/qm-design-react';
@@ -81,23 +81,13 @@ export const createUidKey = (key = ''): string => {
 };
 
 /**
- * @description 设置 document domain
- * @param {string} domain domain 值
- * @returns
- */
-export const setDocumentDomain = (domain?: string) => {
-  if (!domain || process.env.NODE_ENV === 'development') return;
-  document.domain = domain;
-};
-
-/**
  * @description 获取父窗口的本地存储
  * @param {string} key 本地存储的 key 值
  * @returns {object} 本地存储的 value 值
  */
 export const getParentLocal = (key: string): Record<string, any> => {
   try {
-    const val = window.parent.localStorage.getItem(key) || '{}';
+    const val = localStorage.getItem(key) || window.parent.localStorage.getItem(key) || '{}';
     return JSON.parse(val);
   } catch (err) {
     console.error('iframe is cross-origin, please set document domain!');

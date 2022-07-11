@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-03 11:27:44
+ * @Last Modified time: 2022-07-11 16:26:59
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -100,6 +100,12 @@ class UseConfig extends Component<any> {
     }
     if (data.type === types.REFRESH_VIEW) {
       this.props.refreshView(this.props.location.pathname);
+    }
+    if (data.type === types.ACHIEVE_LOCAL) {
+      this.props.sendLocalStore(data.data);
+    }
+    if (data.type === types.SEND_LOCAL) {
+      this.props.setLocalStore(data.data);
     }
     if (data.type === types.SIGN_OUT) {
       const { pathname } = this.props.location;

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:48:42
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-24 19:17:34
+ * @Last Modified time: 2022-07-11 15:46:01
  */
 // 系统导航菜单
 export const SIDE_MENU = 'SIDE_MENU';
@@ -57,3 +57,9 @@ export const CLOSE_VIEW = 'CLOSE_VIEW';
 
 // 刷新窗口
 export const REFRESH_VIEW = 'REFRESH_VIEW';
+
+// 接收本地数据
+export const ACHIEVE_LOCAL = 'ACHIEVE_LOCAL';
+
+// 发送本地数据
+export const SEND_LOCAL = 'SEND_LOCAL';

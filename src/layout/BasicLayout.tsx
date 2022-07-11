@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-04 19:21:51
+ * @Last Modified time: 2022-07-11 15:02:37
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -138,13 +138,18 @@ class BasicLayout extends Component<any, IState> {
       >
         <iframe
           id={x.key}
+          name={x.key}
           src={x.value}
           width="100%"
           height="100%"
           frameBorder="0"
           onLoad={(ev) => {
             const $iframe = ev.target as HTMLIFrameElement;
-            $iframe.contentWindow!.__MAIM_APP_ENV__ = config.isMainApp;
+            try {
+              $iframe.contentWindow!.__MAIM_APP_ENV__ = config.isMainApp;
+            } catch (err) {
+              // ...
+            }
             $iframe.focus();
           }}
         />
