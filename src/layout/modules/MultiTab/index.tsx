@@ -86,7 +86,7 @@ class MultiTab extends Component<any> {
     this.doRemove(targetKey);
   };
 
-  render(): React.ReactElement {
+  render() {
     const { activeKey } = this.state;
     const { tabMenus } = this.props;
     return (

@@ -36,7 +36,7 @@ class AllNav extends Component<any> {
     return this.wrapRef.current?.offsetWidth;
   };
 
-  render(): React.ReactElement {
+  render() {
     const { visible } = this.state;
     const cls = {
       [`app-all-nav`]: true,

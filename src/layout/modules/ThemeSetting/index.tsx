@@ -26,7 +26,7 @@ class ThemeSetting extends Component<any> {
     );
   }
 
-  render(): React.ReactElement {
+  render() {
     return (
       <div className={classNames('app-theme-setting')}>
         <Dropdown

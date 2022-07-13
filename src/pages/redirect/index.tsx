@@ -15,7 +15,7 @@ class Redirect extends Component<any> {
     const { search } = this.props.location;
     this.props.history.replace(`/${params.path}` + search);
   }
-  render(): React.ReactElement {
+  render() {
     return <div></div>;
   }
 }

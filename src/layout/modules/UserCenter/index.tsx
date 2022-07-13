@@ -79,7 +79,7 @@ class UserCenter extends Component<any> {
     return <Menu items={items} />;
   }
 
-  render(): React.ReactElement {
+  render() {
     const { visibleUserCenter, visibleUserSetting } = this.state;
     return (
       <div className={classNames('app-user-center')}>

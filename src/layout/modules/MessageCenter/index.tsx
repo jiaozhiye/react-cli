@@ -27,7 +27,7 @@ class MessageCenter extends Component<any> {
     return <Menu items={items} />;
   }
 
-  render(): React.ReactElement {
+  render() {
     return (
       <div className={classNames('app-message-center')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>

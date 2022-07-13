@@ -113,7 +113,7 @@ class UseConfig extends Component<any> {
     }
   };
 
-  render(): React.ReactElement {
+  render() {
     const { pathname } = this.props.location;
     return (
       <QmConfigProvider locale={this.props.lang} size={this.props.size} global={this.globalConfig}>

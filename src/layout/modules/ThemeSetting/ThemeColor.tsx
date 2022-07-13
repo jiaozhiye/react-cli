@@ -53,7 +53,7 @@ class ThemeColor extends Component<any> {
     emitter.$emit(THEME_COLOR, color);
   }
 
-  render(): React.ReactElement {
+  render() {
     const { themeColor } = this.props;
     const { colorList } = this.state;
     return (

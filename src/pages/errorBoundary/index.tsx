@@ -15,7 +15,7 @@ interface IState {
 }
 
 interface IProps {
-  children: React.ReactElement;
+  children;
 }
 
 class ErrorBoundary extends Component<IProps, IState> {
@@ -31,7 +31,7 @@ class ErrorBoundary extends Component<IProps, IState> {
     console.error(error, errorInfo);
   }
 
-  render(): React.ReactElement {
+  render() {
     if (this.state.hasError) {
       return <div className={classNames('app-error-boundary')}>{t('app.global.errorLoad')}</div>;
     }

@@ -19,7 +19,7 @@ class Logo extends Component<any> {
     collapsed: PropTypes.bool,
   };
 
-  render(): React.ReactElement {
+  render() {
     const { collapsed } = this.props;
     return (
       <div className={classNames('app-logo')}>

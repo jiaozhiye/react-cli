@@ -49,7 +49,7 @@ class ScreenFull extends Component<any> {
     }
   }
 
-  render(): React.ReactElement {
+  render() {
     return (
       <div className={classNames('app-screen-full')} onClick={this.clickHandle}>
         <span className={classNames('ant-dropdown-trigger')}>

@@ -9,7 +9,7 @@ import React, { Component } from 'react';
 import './index.less';
 
 class ContentMasker extends Component<any> {
-  render(): React.ReactElement {
+  render() {
     const { onClick: handler } = this.props;
     return <div className={`app-masker`} onClick={() => handler()} />;
   }

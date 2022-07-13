@@ -14,7 +14,7 @@ import routes from '@/router/config';
 import config from '@/config';
 
 class App extends Component {
-  render(): React.ReactElement {
+  render() {
     return (
       <Provider store={store}>
         <Router basename={config.baseRoute}>

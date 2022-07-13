@@ -94,7 +94,7 @@ class SideMenu extends Component<any> {
       });
   }
 
-  render(): React.ReactElement {
+  render() {
     const {
       sideMenus,
       location: { pathname, search },

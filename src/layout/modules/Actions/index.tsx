@@ -19,7 +19,7 @@ import HelperDoc from '../HelperDoc';
 import './index.less';
 
 class Actions extends Component {
-  render(): React.ReactElement {
+  render() {
     return (
       <div className={classNames('app-actions')}>
         {config.showScreenFull && <ScreenFull />}

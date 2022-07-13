@@ -53,7 +53,7 @@ class LangSetting extends Component<any> {
     return <Menu items={items} />;
   }
 
-  render(): React.ReactElement {
+  render() {
     return (
       <div className={classNames('app-lang-setting')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>

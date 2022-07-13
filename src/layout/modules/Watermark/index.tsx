@@ -38,7 +38,7 @@ class Watermark extends Component<any> {
     this.createWatermark();
   }
 
-  render(): React.ReactElement {
+  render() {
     const { size } = this.props;
     return (
       <div

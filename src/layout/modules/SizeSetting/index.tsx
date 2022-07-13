@@ -59,7 +59,7 @@ class SizeSetting extends Component<any> {
     return <Menu items={items} />;
   }
 
-  render(): React.ReactElement {
+  render() {
     return (
       <div className={classNames('app-size-setting')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>

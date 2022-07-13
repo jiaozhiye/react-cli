@@ -97,7 +97,7 @@ class NavList extends Component<any> {
     );
   }
 
-  render(): React.ReactElement {
+  render() {
     const { forwardedRef, visible, flattenMenus, sideMenus, starMenus, getWidth } = this.props;
     const { searchValue } = this.state;
     return (

@@ -28,7 +28,7 @@ class HelperDoc extends Component<any> {
     return <Menu items={items} />;
   }
 
-  render(): React.ReactElement {
+  render() {
     return (
       <div className={classNames('app-helper-doc')}>
         <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>

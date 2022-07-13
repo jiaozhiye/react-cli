@@ -65,7 +65,7 @@ class PrivateRoute extends Component<any> {
     );
   }
 
-  render(): React.ReactElement {
+  render() {
     const { whiteList, whiteAuth } = this.props;
     const { path } = this.props.route;
 

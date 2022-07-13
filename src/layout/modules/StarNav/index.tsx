@@ -33,7 +33,7 @@ class StarNav extends Component<any> {
     }));
   }
 
-  render(): React.ReactElement {
+  render() {
     const items = [
       {
         key: 'star-nav',

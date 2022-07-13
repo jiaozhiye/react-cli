@@ -168,7 +168,7 @@ class BasicLayout extends Component<any, IState> {
     ));
   }
 
-  render(): React.ReactElement {
+  render() {
     const { routes } = this.props.route;
     const { pathname } = this.props.location;
     const { route } = matchRoutes(routes, pathname).pop();

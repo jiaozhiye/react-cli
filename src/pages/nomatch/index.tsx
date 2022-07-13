@@ -11,7 +11,7 @@ import { t } from '@/locale';
 import './index.less';
 
 class Nomatch extends Component {
-  render(): React.ReactElement {
+  render() {
     return (
       <div className={classNames('app-nomatch')}>
         <div className={classNames('container')}>

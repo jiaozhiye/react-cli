@@ -20,7 +20,7 @@ class ThemeColor extends Component<any> {
     localStorage.setItem('theme_type', theme);
   }
 
-  render(): React.ReactElement {
+  render() {
     const { themeType } = this.props;
     return (
       <div className={classNames('themeColor')}>

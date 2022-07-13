@@ -11,7 +11,7 @@ import { Spin } from '@jiaozhiye/qm-design-react';
 import './index.less';
 
 class Loading extends Component {
-  render(): React.ReactElement {
+  render() {
     return <Spin size="large" className={classNames('app-loading')} />;
   }
 }
