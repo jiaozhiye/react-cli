@@ -5447,7 +5447,7 @@ punycode@^2.1.0:
   resolved "https://registry.npmmirror.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-qiankun@^2.7.0:
+qiankun@^2.7.3:
   version "2.7.3"
   resolved "https://registry.npmmirror.com/qiankun/-/qiankun-2.7.3.tgz#76461ffc21a6bcad5abf3fcafac08d7ee243c0e0"
   integrity sha512-o0hEXgpMxkmlADiiEfQBMFo1cp84LfsEP6xhMT5R7QbGa3uGFR/T8EtyeOlvmhzjAaGExP6+r1bxiF8w4JV71A==
