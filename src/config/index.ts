@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 12:43:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-18 13:02:49
+ * @Last Modified time: 2022-07-18 13:29:47
  */
 import config from '../../config/app.conf';
 import type { ComponentSize, Language, ThemeType } from '@/utils/types';
@@ -40,7 +40,7 @@ export default {
   size: 'middle', // 尺寸
   themeType: 'light', // 主题模式
   prefix: '/api', // ajax 请求前缀
-  microType: 'micro-app', // 微前端模式
+  microType: 'iframe', // 微前端模式
   sideWidth: [200, 60], // 侧栏导航宽度
   maxCacheNum: 10, // 路由组件最大缓存数量
   showBreadcrumb: false, // 是否显示面包屑
