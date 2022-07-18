@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 12:43:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:42:54
+ * @Last Modified time: 2022-07-18 13:02:49
  */
 import config from '../../config/app.conf';
 import type { ComponentSize, Language, ThemeType } from '@/utils/types';
@@ -10,12 +10,13 @@ import type { ComponentSize, Language, ThemeType } from '@/utils/types';
 type IConfig = {
   system: string;
   isMainApp: boolean;
+  powerByMicro: boolean;
   baseRoute: string;
   lang: Language;
   size: ComponentSize;
   themeType: ThemeType;
   prefix: string;
-  microType: 'iframe' | 'qiankun' | '';
+  microType: 'iframe' | 'qiankun' | 'micro-app' | '';
   sideWidth: number[];
   maxCacheNum: number;
   showBreadcrumb: boolean;
@@ -33,12 +34,13 @@ type IConfig = {
 export default {
   system: config.name,
   isMainApp: config.name === 'app',
-  baseRoute: '',
+  powerByMicro: window.__POWERED_BY_QIANKUN__ || window.__MICRO_APP_ENVIRONMENT__,
+  baseRoute: '', // 二级目录-
   lang: 'zh-cn', // 语言
   size: 'middle', // 尺寸
   themeType: 'light', // 主题模式
   prefix: '/api', // ajax 请求前缀
-  microType: 'iframe', // 微前端模式
+  microType: 'micro-app', // 微前端模式
   sideWidth: [200, 60], // 侧栏导航宽度
   maxCacheNum: 10, // 路由组件最大缓存数量
   showBreadcrumb: false, // 是否显示面包屑

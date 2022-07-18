@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-11 16:26:59
+ * @Last Modified time: 2022-07-18 13:00:12
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -67,7 +67,24 @@ class UseConfig extends Component<any> {
     if (prevPathname !== nextPathname) {
       this.props.addTabMenus();
     }
+    if (prevProps.flattenMenus.length !== this.props.flattenMenus.length) {
+      if (config.microType === 'qiankun') {
+        this.registerQiankun();
+      }
+      if (config.microType === 'micro-app') {
+        this.registerMicroApp();
+      }
+    }
   }
+
+  registerQiankun = () => {
+    this.props.registerQiankun();
+    this.props.startQiankun();
+  };
+
+  registerMicroApp = () => {
+    this.props.startMicroApp();
+  };
 
   clickEventHandle = () => {
     this.props.emitOutsideClick();

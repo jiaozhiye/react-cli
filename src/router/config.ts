@@ -39,8 +39,8 @@ export const getLocalRoutes = () => {
 
 const getMicroRoutes = () => {
   let result: any[] = [];
-  // for qiankun
-  if (window.__POWERED_BY_QIANKUN__) {
+  // for qiankun micro-app
+  if (config.powerByMicro) {
     result = flattenRoutes.map((x) => ({
       path: `/${config.system}` + x.path,
       meta: x.meta,

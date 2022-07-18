@@ -30,7 +30,8 @@
     "src/**/*.{less}": "prettier --write"
   },
   "dependencies": {
-    "@jiaozhiye/qm-design-react": "^1.2.0-beta.16",
+    "@jiaozhiye/qm-design-react": "^1.2.0-beta.18",
+    "@micro-zoe/micro-app": "^0.8.8",
     "add-dom-event-listener": "^1.1.0",
     "axios": "^0.27.2",
     "classnames": "^2.3.1",
@@ -43,7 +44,7 @@
     "mockjs": "^1.1.0",
     "nprogress": "^0.2.0",
     "prop-types": "^15.8.0",
-    "qiankun": "^2.7.3",
+    "qiankun": "^2.7.4",
     "react": "^17.0.2",
     "react-contextmenu": "^2.14.0",
     "react-dom": "^17.0.2",

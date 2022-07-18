@@ -2,11 +2,15 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-11 18:16:39
+ * @Last Modified time: 2022-07-18 12:57:56
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import { withRouter } from 'react-router-dom';
+import microApp from '@micro-zoe/micro-app';
+import { registerMicroApps, loadMicroApp, start } from 'qiankun';
+import { getLocalRoutes } from '@/router/config';
+import { emitter as microEvent } from '@/utils/mitt';
 import { connect } from 'react-redux';
 import { matchRoutes } from '@/router';
 import { nextTick, Message } from '@/utils';
@@ -27,6 +31,8 @@ import routes from '@/router/config';
 import type { AppState } from '@/store/reducers/app';
 import type { Nullable } from '@/utils/types';
 
+const EXCLUDE_URLS = ['http://localhost:8000', 'http://localhost:18000'];
+
 const reduxConnect: any = connect;
 
 export default (WrappedComponent: React.ComponentType<any>): any => {
@@ -35,6 +41,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       size: state.app.size,
       lang: state.app.lang,
       tabMenus: state.app.tabMenus,
+      microMenus: state.app.microMenus,
       flattenMenus: state.app.flattenMenus,
     }),
     {
@@ -80,8 +87,8 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
         this.props.createIframeMenu({ key: pathname, value: route.iframePath + search }, 'add');
       }
       // micro 模式
-      if (route.microRule) {
-        this.props.createMicroMenu({ key: pathname, value: '' }, 'add');
+      if (route.microHost && route.microRule) {
+        this.props.createMicroMenu({ key: pathname, value: route.microHost }, 'add');
       }
       // 本地存储
       this.setLocalTabs();
@@ -94,10 +101,17 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     refreshView = (pathname: string) => {
       const { search } = this.props.location;
       this.props.history.replace(`/redirect${pathname}` + search);
+      // micro-app
+      if (config.microType === 'micro-app') {
+        const microItem = this.props.microMenus.find((x) => x.key === pathname);
+        if (microItem) {
+          this.props.createMicroMenu(pathname, 'remove');
+          setTimeout(() => this.props.createMicroMenu(microItem, 'add'));
+        }
+      }
+      // iframe
       let $iframe = this.getIframeNode(pathname);
       if (!$iframe) return;
-      // 未释放内存，待优化
-      // $iframe.contentWindow.location.reload();
       // 释放 iframe 内存
       $iframe.src = 'about:blank';
       try {
@@ -117,6 +131,70 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       setTimeout(() => {
         this.props.createIframeMenu({ key: pathname, value: target!.value }, 'add');
       }, 10);
+    };
+
+    createMicroApp = (path: string) => {
+      const target = getLocalRoutes().find((x) => x.path === path);
+      if (!target) return;
+      loadMicroApp(
+        {
+          name: path,
+          entry: target.microHost,
+          container: `#qk${target.path.replace(/\/+/g, '-')}`,
+          // activeRule: target.microRule,
+          props: {
+            microEvent,
+            isMainEnv: config.isMainApp,
+          },
+        },
+        { singular: false }
+      );
+    };
+
+    registerQiankun = () => {
+      const subRoutes = getLocalRoutes();
+      registerMicroApps(
+        subRoutes
+          .filter((x) => x.microHost && x.microRule)
+          .map((x) => ({
+            name: x.path,
+            entry: x.microHost,
+            container: `#qk${x.path.replace(/\/+/g, '-')}`,
+            activeRule: x.microRule,
+            props: {
+              microEvent,
+              isMainEnv: config.isMainApp,
+            },
+          }))
+      );
+    };
+
+    startQiankun = () => {
+      if (!config.isMainApp) return;
+      start({
+        prefetch: false,
+        excludeAssetFilter: (assetUrl) => {
+          if (EXCLUDE_URLS.some((x) => assetUrl.startsWith(x))) {
+            return true;
+          }
+          return false;
+        },
+      });
+    };
+
+    startMicroApp = () => {
+      if (!config.isMainApp) return;
+      microApp.start({
+        fetch(url, options) {
+          if (EXCLUDE_URLS.some((x) => url.startsWith(x))) {
+            return Promise.resolve('');
+          }
+          const config: Record<string, unknown> = {
+            // credentials: 'include', // 请求时带上cookie
+          };
+          return window.fetch(url, Object.assign(options, config)).then((res) => res.text());
+        },
+      });
     };
 
     sendLocalStore = (name: string) => {
@@ -142,6 +220,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     };
 
     openView = (fullpath: string) => {
+      if (window.__MAIM_APP_ENV__) return;
       this.props.history.push(fullpath);
     };
 
@@ -184,6 +263,9 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           {...this.props}
           addTabMenus={this.addTabMenus}
           refreshView={this.refreshView}
+          registerQiankun={this.registerQiankun}
+          startQiankun={this.startQiankun}
+          startMicroApp={this.startMicroApp}
           sendLocalStore={this.sendLocalStore}
           setLocalStore={this.setLocalStore}
           openView={this.openView}

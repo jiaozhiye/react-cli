@@ -1103,10 +1103,10 @@
   resolved "https://registry.npmmirror.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@jiaozhiye/qm-design-react@^1.2.0-beta.16":
-  version "1.2.0-beta.16"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.2.0-beta.16.tgz#b5d60e85a116996819c30bc18fdd11452cfc7d61"
-  integrity sha512-++t7HXMjXOHg5v5PiuJxiNInRDHMH5JXxc2M+n7JXmu6IDrDdOCKUaowJDfExLM1e1UlTtJUns9ljz2CaCiOWw==
+"@jiaozhiye/qm-design-react@^1.2.0-beta.18":
+  version "1.2.0-beta.18"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.2.0-beta.18.tgz#bb24638d66f1227431de83266a406398c15ba145"
+  integrity sha512-OYDXByOqkzb2v6XI1qD+LBtlFIp849wUFFIyp18KTBk343Zu00SlRQSF8EVx9TKZiYHnvCfB8pgrwe+4cnSUwg==
   dependencies:
     add-dom-event-listener "^1.1.0"
     antd "4.21.6"
@@ -1181,6 +1181,11 @@
   version "2.0.4"
   resolved "https://registry.npmmirror.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
+
+"@micro-zoe/micro-app@^0.8.8":
+  version "0.8.8"
+  resolved "https://registry.npmmirror.com/@micro-zoe/micro-app/-/micro-app-0.8.8.tgz#a5f3c649f5460889c818b954d6c388e21b687931"
+  integrity sha512-nT3DEOaZfNCqiBGoqktrJDxnAFUgOjyng+mn97jK3p9TZg1ao0LaXWwE2cuc63ZAPivjBiRE/BodIcn7DLnVBQ==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -5447,10 +5452,10 @@ punycode@^2.1.0:
   resolved "https://registry.npmmirror.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-qiankun@^2.7.3:
-  version "2.7.3"
-  resolved "https://registry.npmmirror.com/qiankun/-/qiankun-2.7.3.tgz#76461ffc21a6bcad5abf3fcafac08d7ee243c0e0"
-  integrity sha512-o0hEXgpMxkmlADiiEfQBMFo1cp84LfsEP6xhMT5R7QbGa3uGFR/T8EtyeOlvmhzjAaGExP6+r1bxiF8w4JV71A==
+qiankun@^2.7.4:
+  version "2.7.4"
+  resolved "https://registry.npmmirror.com/qiankun/-/qiankun-2.7.4.tgz#53ad6a12f4d0ec0f1ef134b46102fa95c983d841"
+  integrity sha512-aihz6ue94CdalEBHBpJGD2UjY30Er0FEy8KxQuxCuEffOFvCXrvBsUm5UkfW32pu4AmAD/yB+lxad0Vzt6l5KQ==
   dependencies:
     "@babel/runtime" "^7.10.5"
     import-html-entry "^1.9.0"

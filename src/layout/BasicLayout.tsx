@@ -2,15 +2,16 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-11 15:02:37
+ * @Last Modified time: 2022-07-18 12:59:40
  */
+/** @jsxRuntime classic */
+/** @jsx jsxCustomEvent */
+import jsxCustomEvent from '@micro-zoe/micro-app/polyfill/jsx-custom-event';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { registerMicroApps, start } from 'qiankun';
 import { connect } from 'react-redux';
 import { matchRoutes } from '@/router';
 import { Layout } from '@jiaozhiye/qm-design-react';
-import { getLocalRoutes } from '@/router/config';
 import { createDictData, createAuthData, createDeviceType } from '@/store/actions';
 import { emitter as microEvent } from '@/utils/mitt';
 import config from '@/config';
@@ -34,7 +35,6 @@ import './index.less';
 const { Header, Sider, Content } = Layout;
 
 const MOBILE_WIDTH = 992;
-const EXCLUDE_URLS = ['http://localhost:8000', 'http://localhost:18000'];
 
 type IState = {
   collapsed: boolean;
@@ -54,54 +54,16 @@ class BasicLayout extends Component<any, IState> {
       left: config.sideWidth[0],
     };
     props.createDeviceType(isMobile ? 'mobile' : 'desktop');
-    this.registerMicroRoutes();
   }
 
   get isMobile() {
     return this.props.device === 'mobile';
   }
 
-  registerMicroRoutes = () => {
-    const subRoutes = getLocalRoutes();
-    registerMicroApps(
-      subRoutes
-        .filter((x) => x.microRule)
-        .map((x) => ({
-          name: x.path,
-          entry: x.microHost,
-          container: `#qk${x.path.replace(/\/+/g, '-')}`,
-          activeRule: x.microRule,
-          props: {
-            microEvent,
-            isMainEnv: config.isMainApp,
-          },
-        }))
-    );
-  };
-
-  startMicroApp = () => {
-    if (!config.isMainApp) return;
-    start({
-      prefetch: false,
-      excludeAssetFilter: (assetUrl) => {
-        if (EXCLUDE_URLS.some((x) => assetUrl.startsWith(x))) {
-          return true;
-        }
-        return false;
-      },
-    });
-  };
-
   componentDidMount() {
     this.props.createDictData();
     this.props.createAuthData();
     window.addEventListener('resize', this.resizeHandler, false);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.flattenMenus.length !== this.props.flattenMenus.length) {
-      this.startMicroApp();
-    }
   }
 
   componentWillUnmount() {
@@ -159,13 +121,28 @@ class BasicLayout extends Component<any, IState> {
 
   createMicroView(route) {
     const { microMenus } = this.props;
-    return microMenus.map((x) => (
-      <div
-        key={x.key}
-        id={`qk${x.key.replace(/\/+/g, '-')}`}
-        style={{ display: route.path === x.key ? 'block' : 'none' }}
-      />
-    ));
+    return microMenus.map((x) => {
+      return config.microType === 'qiankun' ? (
+        <div
+          key={x.key}
+          id={`qk${x.key.replace(/\/+/g, '-')}`}
+          style={{ display: route.path === x.key ? 'block' : 'none', height: '100%' }}
+        />
+      ) : (
+        <micro-app
+          key={x.key}
+          name={x.key.replace(/\/+/g, '-').slice(1)}
+          baseroute={x.key}
+          url={x.value}
+          data={{
+            microEvent,
+            isMainEnv: config.isMainApp,
+          }}
+          destroy
+          style={{ display: route.path === x.key ? 'block' : 'none', height: '100%' }}
+        />
+      );
+    });
   }
 
   render() {
@@ -233,7 +210,6 @@ export default connect(
     device: state.app.device,
     iframeMenus: state.app.iframeMenus,
     microMenus: state.app.microMenus,
-    flattenMenus: state.app.flattenMenus,
   }),
   {
     createDictData,

@@ -6,6 +6,7 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { setMicroEvent } from '@/utils/mitt';
 import { ACHIEVE_LOCAL, COMP_SIZE, LOCALE_LANG, THEME_COLOR } from '@/store/types';
 import config from '@/config';
 import env from '@/config/envMaps';
@@ -48,7 +49,24 @@ function initial() {
   }
 }
 
+function initialMicro(props) {
+  const { microEvent, isMainEnv } = props;
+  setMicroEvent(microEvent);
+  microEvent?.$on(COMP_SIZE, (data) => window.postMessage({ type: COMP_SIZE, data }, '*'));
+  microEvent?.$on(LOCALE_LANG, (data) => window.postMessage({ type: LOCALE_LANG, data }, '*'));
+  microEvent?.$on(THEME_COLOR, (data) => window.postMessage({ type: THEME_COLOR, data }, '*'));
+  window.__MAIM_APP_ENV__ = isMainEnv;
+}
+
 initial();
+
+if (window.__MICRO_APP_ENVIRONMENT__) {
+  __webpack_public_path__ = window.__MICRO_APP_PUBLIC_PATH__;
+  initialMicro(window.microApp.getData());
+  window.addEventListener('unmount', () => {
+    ReactDOM.unmountComponentAtNode(document.querySelector('#app')!);
+  });
+}
 
 if (window.__POWERED_BY_QIANKUN__) {
   __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
@@ -59,11 +77,7 @@ if (window.__POWERED_BY_QIANKUN__) {
 export async function bootstrap() {}
 
 export async function mount(props) {
-  const { microEvent, isMainEnv } = props;
-  microEvent?.$on(COMP_SIZE, (data) => window.postMessage({ type: COMP_SIZE, data }, '*'));
-  microEvent?.$on(LOCALE_LANG, (data) => window.postMessage({ type: LOCALE_LANG, data }, '*'));
-  microEvent?.$on(THEME_COLOR, (data) => window.postMessage({ type: THEME_COLOR, data }, '*'));
-  window.__MAIM_APP_ENV__ = isMainEnv;
+  initialMicro(props);
   render(props);
 }
 

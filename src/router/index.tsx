@@ -50,8 +50,8 @@ export const renderRoutes = (routes: any[] = [], extraProps = {}, switchProps = 
             strict={route.strict}
             render={(props) => {
               const { path, redirect } = route;
-              // for qiankun
-              if (!window.__POWERED_BY_QIANKUN__) {
+              // for qiankun micro-app
+              if (!config.powerByMicro) {
                 document.title = `${t('app.global.title')}-${route.meta?.title || '404'}`;
               }
               if (isLogin()) {
