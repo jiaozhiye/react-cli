@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-18 12:59:40
+ * @Last Modified time: 2022-07-18 13:21:48
  */
 /** @jsxRuntime classic */
 /** @jsx jsxCustomEvent */
@@ -130,7 +130,7 @@ class BasicLayout extends Component<any, IState> {
         />
       ) : (
         <micro-app
-          key={x.key}
+          key={x.key + (x.search || '')}
           name={x.key.replace(/\/+/g, '-').slice(1)}
           baseroute={x.key}
           url={x.value}

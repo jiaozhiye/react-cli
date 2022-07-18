@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-18 12:57:56
+ * @Last Modified time: 2022-07-18 13:13:06
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -88,7 +88,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       }
       // micro 模式
       if (route.microHost && route.microRule) {
-        this.props.createMicroMenu({ key: pathname, value: route.microHost }, 'add');
+        this.props.createMicroMenu({ key: pathname, value: route.microHost, search }, 'add');
       }
       // 本地存储
       this.setLocalTabs();

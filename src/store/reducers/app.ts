@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-01 00:02:14
+ * @Last Modified time: 2022-07-18 13:21:25
  */
 import { uniqBy } from 'lodash-es';
 import {
@@ -45,6 +45,7 @@ export type ITabNav = {
 export type ICacheMenu = {
   key: string;
   value: string;
+  search?: string;
 };
 
 type IState = {
@@ -180,12 +181,25 @@ const setIframeMenus = (state, payload, behavior) => {
   });
 };
 
+const addMicroMenu = <T extends ICacheMenu>(microMenus: T[], data: T) => {
+  const target = microMenus.find((x) => x.key === data.key);
+  if (!target) {
+    return [...microMenus, data];
+  }
+  if (data.search) {
+    Object.assign(target, data);
+  } else {
+    delete target.search;
+  }
+  return [...microMenus];
+};
+
 // 设置 micro 导航
 const setMicroMenus = (state, payload, behavior) => {
   return Object.assign({}, state, {
     microMenus:
       behavior === 'add'
-        ? uniqBy([...state.microMenus, payload], 'key')
+        ? addMicroMenu(state.microMenus, payload)
         : state.microMenus.filter((x) => x.key !== payload),
   });
 };
