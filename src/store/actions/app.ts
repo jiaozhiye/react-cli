@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-06-30 08:55:51
+ * @Last Modified time: 2022-07-20 10:21:01
  */
 import {
   SIDE_MENU,
@@ -27,6 +27,7 @@ import {
   getStarMenuList,
   setStarMenuList,
 } from '@/api/application';
+import { getParentLocal } from '@/utils';
 import { getToken, removeToken } from '@/utils/cookies';
 import { t } from '@/locale';
 import localDict from '@/utils/localDict';
@@ -118,7 +119,7 @@ export const createDictData =
       return;
     }
 
-    const lastToken = JSON.parse(localStorage.getItem('dict') as string)?._t;
+    const lastToken = getParentLocal('dict')._t;
     if (getToken() === lastToken) return;
     // 数据
     let data: Record<string, Array<Dictionary> | string> = {};
@@ -156,7 +157,7 @@ export const createAuthData =
       return;
     }
 
-    const lastToken = JSON.parse(localStorage.getItem('auth') as string)?._t;
+    const lastToken = getParentLocal('auth')._t;
     if (getToken() === lastToken) return;
     // 数据
     let data: Record<string, string[] | string> = {};

@@ -26,7 +26,7 @@ const config: IEnvCongig = {
     domain: '',
   },
   prod: {
-    domain: 'faw.cn',
+    domain: '',
   },
   gray: {
     domain: '',
