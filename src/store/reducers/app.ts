@@ -55,6 +55,7 @@ type IState = {
   device: Device;
   themeType: ThemeType;
   themeColor: string;
+  isReady: boolean;
   sideMenus: ISideMenu[];
   starMenus: ISideMenu[];
   tabMenus: ITabNav[];
@@ -135,6 +136,7 @@ const initState: IState = {
   device: 'desktop', // 设备类型
   themeType: config.themeType, // 主题模式
   themeColor: process.env.THEME_COLOR || '', // 主题颜色
+  isReady: false, // 是否完成菜单的加载
   sideMenus: [], // 侧栏菜单数据
   starMenus: [], // 收藏菜单
   tabMenus: [{ path: '/home', title: t('app.global.dashboard') }], // 顶部选项卡菜单数据
@@ -152,6 +154,7 @@ const setSideMenus = (state, payload) => {
   const flattenMenus = createFlattenMenus(payload);
   setRouteMeta(flattenMenus);
   return Object.assign({}, state, {
+    isReady: true,
     sideMenus: payload,
     flattenMenus,
   });
