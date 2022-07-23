@@ -121,6 +121,8 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
   });
   if (config.isMainApp) {
     subRoutes.splice(-3, 0, ...mainAppRoutes.map((x) => ({ ...x, dynamic: true })));
+    // 修正兜底路由
+    subRoutes[subRoutes.length - 1].redirect = '/404';
   }
 };
 

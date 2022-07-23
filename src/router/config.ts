@@ -116,7 +116,7 @@ const routes = [
       },
       {
         path: '*',
-        ...(!config.isMainApp ? { redirect: '/404' } : { component: BlankLayout }),
+        redirect: !config.isMainApp ? '/404' : '',
       },
     ],
   },
