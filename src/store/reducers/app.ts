@@ -2,9 +2,8 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-18 13:21:25
+ * @Last Modified time: 2022-07-23 10:21:56
  */
-import { uniqBy } from 'lodash-es';
 import {
   SIDE_MENU,
   DICT_DATA,
@@ -48,6 +47,8 @@ export type ICacheMenu = {
   search?: string;
 };
 
+export type IRoute = any;
+
 type IState = {
   size: ComponentSize;
   lang: string;
@@ -83,27 +84,44 @@ const createFlattenMenus = <T extends ISideMenu>(list: T[]): T[] => {
 };
 
 const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
-  const { routes: mRoutes } = routes.find((k) => k.path === '/');
+  const subRoutes: IRoute[] = routes.find((k) => k.path === '/').routes;
+  const localRoutes: IRoute[] = getLocalRoutes();
+  const mainAppRoutes: IRoute[] = []; // 主应用路由表
   if (config.isMainApp) {
-    const valueTemp: any[] = uniqBy([...getLocalRoutes(), ...mRoutes.slice(2)], 'path');
-    mRoutes.length = 2;
-    for (let i = 0, len = valueTemp.length; i < len; i++) {
-      mRoutes[i + 2] = valueTemp[i]; // 不可破坏 routes 引用
+    for (let i = 0; i < subRoutes.length; i++) {
+      if (subRoutes[i].dynamic) {
+        subRoutes.splice(i, 1);
+        i = i - 1;
+      }
     }
+    localRoutes.forEach((x) => {
+      if (x.meta.noAuth && x.meta.title) {
+        mainAppRoutes.push(x);
+      }
+    });
   }
   list.forEach((x) => {
-    const route = mRoutes.find((k) => k.path === x.key?.replace(/\?.*/, ''));
+    const _routes = config.isMainApp ? localRoutes : subRoutes;
+    const route = _routes.find((k) => k.path === x.key.replace(/\?.*/, ''));
     if (route) {
       Object.assign(route.meta, { title: x.title });
-    } else if (x.caseHref) {
-      mRoutes.splice(-3, 0, {
+    }
+    if (config.isMainApp && route) {
+      mainAppRoutes.push(route);
+    }
+    if (!route && x.caseHref) {
+      subRoutes.splice(-3, 0, {
         path: x.key,
         meta: { keepAlive: true, title: x.title },
         iframePath: x.caseHref,
+        dynamic: true,
         component: () => null,
       });
     }
   });
+  if (config.isMainApp) {
+    subRoutes.splice(-3, 0, ...mainAppRoutes.map((x) => ({ ...x, dynamic: true })));
+  }
 };
 
 /**

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-05 09:13:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-11 18:01:27
+ * @Last Modified time: 2022-07-23 10:11:26
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -22,6 +22,81 @@ import App from './App';
 //     iframePath: 'http://www.faw.cn/react-dms/iframe/spa1002',
 //     meta: { keepAlive: true },
 //     path: '/dms/spa1002',
+//   },
+// ];
+
+// const sub_routes = [
+//   {
+//     path: '/home/fcw', // 特殊的
+//     exact: true,
+//     meta: { title: '工作台首页', noAuth: true, keepAlive: true },
+//     iframePath: '',
+//     microHost: 'http://localhost:9021/', // 结尾的 / 重要，/react-dms -> 子应用二级目录部署
+//     microRule: '/home/fcw',
+//   },
+//   {
+//     path: '/dms/dashboard', // 特殊的
+//     exact: true,
+//     meta: { title: '业务中心概览', noAuth: true, keepAlive: true },
+//     iframePath: '',
+//     microHost: 'http://localhost:9021/', // 结尾的 / 重要，/react-dms -> 子应用二级目录部署
+//     microRule: '/dms/dashboard',
+//   },
+//   {
+//     path: '/dms/spa1001', // 子应用 => /spa1001
+//     exact: true,
+//     meta: { keepAlive: true },
+//     iframePath: '',
+//     microHost: 'http://localhost:9021/',
+//     microRule: '/dms/spa1001',
+//   },
+//   {
+//     path: '/dms/spa1002',
+//     exact: true,
+//     meta: { keepAlive: true },
+//     iframePath: '',
+//     microHost: 'http://localhost:9021/',
+//     microRule: '/dms/spa1002',
+//   },
+//   {
+//     path: '/dms/spa1003',
+//     exact: true,
+//     meta: { keepAlive: true },
+//     iframePath: 'http://localhost:9021/iframe/spa1003',
+//     microHost: 'http://localhost:9021/',
+//     microRule: '',
+//   },
+//   {
+//     path: '/home/ipds', // 特殊的
+//     exact: true,
+//     meta: { title: '工作台首页', noAuth: true, keepAlive: true },
+//     iframePath: '',
+//     microHost: 'http://localhost:9022/', // 结尾的 / 重要，/react-dm -> 子应用二级目录部署
+//     microRule: '/home/ipds',
+//   },
+//   {
+//     path: '/tds/dashboard', // 特殊的
+//     exact: true,
+//     meta: { title: '标准中心概览', noAuth: true, keepAlive: true },
+//     iframePath: '',
+//     microHost: 'http://localhost:9022/',
+//     microRule: '/tds/dashboard',
+//   },
+//   {
+//     path: '/tds/car1001', // 子应用 => /car1001
+//     exact: true,
+//     meta: { keepAlive: true },
+//     iframePath: '',
+//     microHost: 'http://localhost:9022/',
+//     microRule: '/tds/car1001',
+//   },
+//   {
+//     path: '/tds/car1002',
+//     exact: true,
+//     meta: { keepAlive: true },
+//     iframePath: '',
+//     microHost: 'http://localhost:9022/',
+//     microRule: '/tds/car1002',
 //   },
 // ];
 

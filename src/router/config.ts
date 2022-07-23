@@ -106,7 +106,6 @@ const routes = [
         }
         return x;
       }),
-      ...getLocalRoutes(),
       {
         path: '/redirect/:path(.*)',
         component: Redirect,
@@ -117,7 +116,7 @@ const routes = [
       },
       {
         path: '*',
-        redirect: '/404',
+        ...(!config.isMainApp ? { redirect: '/404' } : { component: BlankLayout }),
       },
     ],
   },

@@ -83,7 +83,12 @@ class UserCenter extends Component<any> {
     const { visibleUserCenter, visibleUserSetting } = this.state;
     return (
       <div className={classNames('app-user-center')}>
-        <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
+        <Dropdown
+          overlay={this.renderMenus()}
+          overlayClassName="app-user-center__popper"
+          placement="bottomRight"
+          trigger={['click']}
+        >
           <span>
             <Avatar size={26} src={this.state.avatarImg} />
           </span>
