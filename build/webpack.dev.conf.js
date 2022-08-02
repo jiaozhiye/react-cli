@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:41:09
+ * @Last Modified time: 2022-08-02 10:42:01
  */
 'use strict';
 
@@ -90,7 +90,16 @@ const devWebpackConfig = merge(baseWebpackConfig, {
 });
 
 if (config.dev.useEslint) {
-  devWebpackConfig.plugins.push(new ESLintPlugin({ extensions: ['.ts', '.tsx', '.js', '.jsx'] }));
+  devWebpackConfig.plugins.push(
+    new ESLintPlugin({
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+      context: utils.resolve('src'),
+      formatter: require.resolve('react-dev-utils/eslintFormatter'),
+      eslintPath: require.resolve('eslint'),
+      cache: true,
+      cacheLocation: utils.resolve('node_modules/.cache/.eslintcache'),
+    })
+  );
 }
 
 module.exports = devWebpackConfig;
