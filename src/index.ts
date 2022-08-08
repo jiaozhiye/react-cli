@@ -71,7 +71,7 @@ import App from './App';
 //     exact: true,
 //     meta: { title: '工作台首页', noAuth: true, keepAlive: true },
 //     iframePath: '',
-//     microHost: 'http://localhost:9022/', // 结尾的 / 重要，/react-dm -> 子应用二级目录部署
+//     microHost: 'http://localhost:9022/', // 结尾的 / 重要，/react-tds -> 子应用二级目录部署
 //     microRule: '/home/ipds',
 //   },
 //   {
