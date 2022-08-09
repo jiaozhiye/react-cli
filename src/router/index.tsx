@@ -33,11 +33,6 @@ export const isIframe = (path: string): boolean => {
   return path.startsWith(whiteAuth[1]);
 };
 
-// micro 判断
-export const isMicro = (path: string): boolean => {
-  return path.startsWith(whiteAuth[2]);
-};
-
 export const renderRoutes = (routes: any[] = [], extraProps = {}, switchProps = {}) => {
   return (
     <Suspense fallback={null}>
