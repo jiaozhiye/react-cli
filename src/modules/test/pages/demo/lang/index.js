@@ -2,9 +2,9 @@
  * @Author: 焦质晔
  * @Date: 2020-05-14 19:27:24
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-02-22 12:40:13
+ * @Last Modified time: 2022-08-19 15:44:42
  */
-import { mergeTranslations } from '@/locale';
+import { t, mergeTranslations } from '@/locale';
 
 import enLocale from './en';
 import zhLocale from './zh-cn';
@@ -17,3 +17,5 @@ const messages = {
 for (let key in messages) {
   mergeTranslations(key, messages[key]);
 }
+
+export { t };
