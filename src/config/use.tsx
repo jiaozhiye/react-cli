@@ -109,6 +109,14 @@ class UseConfig extends Component<any> {
       this.props.createComponentSize(data.data);
       localStorage.setItem('size', data.data);
     }
+    if (data.type === types.ACHIEVE_LOCAL) {
+      this.props.sendLocalStore(data.data);
+    }
+    if (data.type === types.SEND_LOCAL) {
+      this.props.setLocalStore(data.data);
+    }
+    // qiankun、micro-app 环境下，window 的 `message` 事件未被隔离，当主应用触发事件时，子应用也会被触发
+    if (config.powerByMicro) return;
     if (data.type === types.OPEN_VIEW) {
       this.props.openView(data.data);
     }
@@ -117,12 +125,6 @@ class UseConfig extends Component<any> {
     }
     if (data.type === types.REFRESH_VIEW) {
       this.props.refreshView(this.props.location.pathname);
-    }
-    if (data.type === types.ACHIEVE_LOCAL) {
-      this.props.sendLocalStore(data.data);
-    }
-    if (data.type === types.SEND_LOCAL) {
-      this.props.setLocalStore(data.data);
     }
     if (data.type === types.SIGN_OUT) {
       const { pathname } = this.props.location;

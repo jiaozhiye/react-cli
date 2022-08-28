@@ -61,9 +61,11 @@ class BasicLayout extends Component<any, IState> {
   }
 
   componentDidMount() {
-    this.props.createDictData();
-    this.props.createAuthData();
-    window.addEventListener('resize', this.resizeHandler, false);
+    if (!window.__MAIM_APP_ENV__) {
+      this.props.createDictData();
+      this.props.createAuthData();
+      window.addEventListener('resize', this.resizeHandler, false);
+    }
   }
 
   componentWillUnmount() {
@@ -122,24 +124,24 @@ class BasicLayout extends Component<any, IState> {
   createMicroView(route) {
     const { microMenus } = this.props;
     return microMenus.map((x) => {
+      const { key, value, search = '' } = x;
       return config.microType === 'qiankun' ? (
         <div
-          key={x.key}
-          id={`qk${x.key.replace(/\/+/g, '-')}`}
-          style={{ display: route.path === x.key ? 'block' : 'none', height: '100%' }}
+          key={key}
+          id={`qk${key.replace(/\/+/g, '-')}`}
+          style={{ display: route.path === key ? 'block' : 'none', height: '100%' }}
         />
       ) : (
         <micro-app
-          key={x.key + (x.search || '')}
-          name={x.key.replace(/\/+/g, '-').slice(1)}
-          baseroute={x.key}
-          url={x.value}
+          key={key + search}
+          name={key.replace(/\/+/g, '-').slice(1)}
+          baseroute={key}
+          url={value}
           data={{
             microEvent,
             isMainEnv: config.isMainApp,
           }}
-          destroy
-          style={{ display: route.path === x.key ? 'block' : 'none', height: '100%' }}
+          style={{ display: route.path === key ? 'block' : 'none', height: '100%' }}
         />
       );
     });
@@ -159,6 +161,7 @@ class BasicLayout extends Component<any, IState> {
       [`app-layout__lg`]: this.props.size === 'large',
     };
     const _collapsed = !this.isMobile ? collapsed : false;
+    const _style: React.CSSProperties = { pointerEvents: locked ? 'none' : undefined };
     return (
       <Layout className={classNames(cls)}>
         {this.isMobile && !collapsed && <ContentMasker onClick={() => this.toggle(true)} />}
@@ -176,14 +179,14 @@ class BasicLayout extends Component<any, IState> {
           collapsed={_collapsed}
           width={left}
           collapsedWidth={config.sideWidth[1]}
-          style={{ pointerEvents: locked ? 'none' : 'auto' }}
+          style={_style}
         >
           <Logo collapsed={_collapsed} />
           <AllNav />
           {config.showStarNav && <StarNav />}
           <SideMenu />
         </Sider>
-        <Layout style={{ pointerEvents: locked ? 'none' : 'auto' }}>
+        <Layout style={_style}>
           <Header>
             {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
               className: classNames('trigger'),

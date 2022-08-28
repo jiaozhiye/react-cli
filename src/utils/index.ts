@@ -96,11 +96,46 @@ export const getParentLocal = (key: string): Record<string, any> => {
 };
 
 /**
- * @description 获取当前用例号
- * @returns {string} 用例号
+ * @description 通过 URL 获取 Domain
+ * @param {string} url url 地址
+ * @returns {string} domain
  */
-export const getCaseCode = (): string => {
-  return window.location.pathname.split('/').pop() || '';
+export const getDomain = (url: string) => {
+  let str = '';
+  if (isURL(url)) {
+    const arr = url.split('.').slice(-2);
+    if (arr.length === 2) {
+      str = `${arr[0]}.${arr[1]}`.replace(/\/+$/, '');
+    }
+  }
+  return str;
+};
+
+/**
+ * @description 判断是否是 URL 格式
+ * @param {string} str url 地址
+ * @returns {boolean}
+ */
+export const isURL = (str: string) => {
+  const pattern = new RegExp(
+    '^(https?:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|)' + // domain name
+      // '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$',
+    'i'
+  );
+  return !!pattern.test(str);
+};
+
+/**
+ * @description 销毁提示消息
+ * @returns
+ */
+export const destroyAlert = () => {
+  message.destroy();
+  notification.destroy();
 };
 
 /**

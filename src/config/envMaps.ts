@@ -5,7 +5,7 @@
  * @Last Modified time: 2022-03-24 14:52:35
  */
 type IConfig = {
-  domain: string;
+  baseUrl: string;
 };
 
 type IEnvCongig = Record<'dev' | 'tst' | 'uat' | 'pre' | 'prod' | 'gray', IConfig>;
@@ -14,22 +14,22 @@ const env = process.env.ENV_CONFIG || 'prod';
 
 const config: IEnvCongig = {
   dev: {
-    domain: '', // 用例不跨域，无需设置
+    baseUrl: '/',
   },
   tst: {
-    domain: '',
+    baseUrl: 'https://sit-apps-fc-base.faw.cn',
   },
   uat: {
-    domain: '',
+    baseUrl: 'https://uat-apps-fc-base.faw.cn',
   },
   pre: {
-    domain: '',
+    baseUrl: 'https://pre-apps-fc-base.faw.cn',
   },
   prod: {
-    domain: '',
+    baseUrl: 'https://apps-fc-base.faw.cn',
   },
   gray: {
-    domain: '',
+    baseUrl: '/',
   },
 };
 

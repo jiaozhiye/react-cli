@@ -27,7 +27,7 @@ export const getLocalRoutes = () => {
       try {
         result = JSON.parse(localRoutes).map((x) => ({
           ...x,
-          component: BlankLayout,
+          component: () => null, // 重要
         }));
       } catch (err) {
         // ...

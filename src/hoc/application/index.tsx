@@ -173,6 +173,10 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       if (!config.isMainApp) return;
       start({
         prefetch: false,
+        sandbox: {
+          strictStyleIsolation: false,
+          experimentalStyleIsolation: true, // 模态框的样式会丢失
+        },
         excludeAssetFilter: (assetUrl) => {
           if (EXCLUDE_URLS.some((x) => assetUrl.startsWith(x))) {
             return true;
@@ -220,7 +224,6 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     };
 
     openView = (fullpath: string) => {
-      if (window.__MAIM_APP_ENV__) return;
       this.props.history.push(fullpath);
     };
 
