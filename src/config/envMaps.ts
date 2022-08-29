@@ -14,7 +14,7 @@ const env = process.env.ENV_CONFIG || 'prod';
 
 const config: IEnvCongig = {
   dev: {
-    baseUrl: '/',
+    baseUrl: '/', // 本地开发环境不走这里，配置请求代理即可
   },
   tst: {
     baseUrl: 'https://sit-apps-fc-base.faw.cn',
