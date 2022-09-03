@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:40:32
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-06-29 14:23:55
+ * @Last Modified time: 2022-09-02 09:35:24
  */
 import { lazy } from 'react';
 import { t } from '@/locale';
@@ -56,6 +56,11 @@ const getMicroRoutes = () => {
   return result;
 };
 
+// subView 判断
+const isSubView = (path = ''): boolean => {
+  return path.startsWith('/subview');
+};
+
 const routes = [
   {
     path: '/login',
@@ -91,7 +96,7 @@ const routes = [
         component: Dashboard,
       },
       ...flattenRoutes.map((x) => {
-        if (config.microType) {
+        if (config.microType && !isSubView(x.path)) {
           return {
             path: x.path,
             meta: x.meta,

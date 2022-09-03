@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 21:38:08
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-11 18:49:13
+ * @Last Modified time: 2022-09-02 09:43:36
  */
 import { lazy } from 'react';
 
@@ -24,6 +24,12 @@ export default {
       path: '/spa1003',
       meta: { keepAlive: true },
       component: lazy(() => import(/* webpackChunkName: "test/spa1002" */ '@test/pages/spa1002')),
+    },
+    {
+      path: '/subview/a',
+      meta: { keepAlive: true, title: '子用例' },
+      exact: true,
+      component: lazy(() => import(/* webpackChunkName: "test/demo" */ '@test/pages/demo')),
     },
     {
       path: '/test',

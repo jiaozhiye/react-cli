@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 15:05:14
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-24 19:17:58
+ * @Last Modified time: 2022-09-02 08:11:53
  */
 import React from 'react';
 import classNames from 'classnames';
@@ -450,7 +450,8 @@ class Spa1001 extends React.Component {
             icon={<PlusOutlined />}
             onClick={() => {
               // this.props.closeView('/spa1003');
-              this.props.openView('/spa1001?a=' + Math.random());
+              // this.props.openView('/spa1001?a=' + Math.random());
+              this.props.openView('/subview/a');
             }}
           >
             新建

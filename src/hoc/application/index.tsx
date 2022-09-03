@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-18 13:13:06
+ * @Last Modified time: 2022-09-02 08:31:04
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -60,7 +60,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     };
 
     notDisplayTab = (pathname: string) => {
-      return ['/login'].some((x) => pathname.startsWith(x));
+      return ['/login', '/subview'].some((x) => pathname.startsWith(x));
     };
 
     addTabMenus = () => {
