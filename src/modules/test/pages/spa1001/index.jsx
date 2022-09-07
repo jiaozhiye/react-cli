@@ -362,7 +362,10 @@ class Spa1001 extends React.Component {
 
   // 执行表格查询
   fetchHandle = (params) => {
-    this.setState((prev) => ({ fetchParams: Object.assign({}, prev.fetchParams, params) }));
+    // this.setState((prev) => ({ fetchParams: Object.assign({}, prev.fetchParams, params) }));
+    this.setState((prev) => ({
+      fetchParams: Object.assign({}, params ? params : prev.fetchParams),
+    }));
   };
 
   // 新增、编辑、查看 方法
