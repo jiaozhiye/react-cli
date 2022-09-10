@@ -32,6 +32,7 @@ import type { AppState } from '@/store/reducers/app';
 import type { Nullable } from '@/utils/types';
 
 const EXCLUDE_URLS = ['http://localhost:8000', 'http://localhost:18000'];
+const ASSET_URLS = ['/tinymce/'];
 
 const reduxConnect: any = connect;
 
@@ -177,9 +178,24 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           strictStyleIsolation: false,
           experimentalStyleIsolation: true, // 模态框的样式会丢失
         },
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        async fetch(url, options) {
+          if (EXCLUDE_URLS.some((x) => url.toString().startsWith(x))) {
+            return {
+              text() {
+                return Promise.resolve('');
+              },
+            };
+          }
+          const config: Record<string, unknown> = {
+            // credentials: 'include', // 请求时带上cookie
+          };
+          return window.fetch(url, Object.assign({}, options, config));
+        },
         excludeAssetFilter: (assetUrl) => {
-          if (EXCLUDE_URLS.some((x) => assetUrl.startsWith(x))) {
-            return true;
+          if (ASSET_URLS.some((x) => assetUrl.includes(x))) {
+            return true; // 不会劫持处理当前文件
           }
           return false;
         },
@@ -196,7 +212,13 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           const config: Record<string, unknown> = {
             // credentials: 'include', // 请求时带上cookie
           };
-          return window.fetch(url, Object.assign(options, config)).then((res) => res.text());
+          return window.fetch(url, Object.assign({}, options, config)).then((res) => res.text());
+        },
+        excludeAssetFilter(assetUrl) {
+          if (ASSET_URLS.some((x) => assetUrl.includes(x))) {
+            return true; // 不会劫持处理当前文件
+          }
+          return false;
         },
       });
     };
