@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:41:09
+ * @Last Modified time: 2022-09-17 14:59:43
  */
 'use strict';
 
@@ -81,10 +81,18 @@ const webpackConfig = merge(baseWebpackConfig, {
           chunks: 'initial',
           reuseExistingChunk: true,
         },
+        components: {
+          name: 'chunk-components',
+          test: (module) => {
+            return /lodash-es|antd|@ant-design|@jiaozhiye/.test(module.context);
+          },
+          chunks: 'all',
+          priority: 10,
+        },
         libs: {
           name: 'chunk-libs',
           test: (module) => {
-            return /echarts|exceljs|china-area-data/.test(module.context);
+            return /echarts|exceljs/.test(module.context);
           },
           chunks: 'all',
           priority: 10,
