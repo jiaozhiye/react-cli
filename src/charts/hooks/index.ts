@@ -57,6 +57,7 @@ export default function useChart(
     resizeObserver.current.observe(elRef.current!);
     return () => {
       chartInstance.current?.dispose();
+      resizeObserver.current?.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
