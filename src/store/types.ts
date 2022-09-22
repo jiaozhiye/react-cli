@@ -16,6 +16,9 @@ export const IFRAME_MENU = 'IFRAME_MENU';
 // micro 菜单模式
 export const MICRO_MENU = 'MICRO_MENU';
 
+// 不允许关闭的页签
+export const PREVENT_TAB = 'PREVENT_TAB';
+
 // 数据字典
 export const DICT_DATA = 'DICT_DATA';
 

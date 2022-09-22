@@ -20,6 +20,7 @@ import {
   createIframeMenu,
   createMicroMenu,
   createThemeColor,
+  createPreventTab,
 } from '@/store/actions';
 import { OUTSIDE_CLICK, SEND_LOCAL } from '@/store/types';
 import client from 'webpack-custom-theme/client';
@@ -50,6 +51,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       createIframeMenu,
       createMicroMenu,
       createThemeColor,
+      createPreventTab,
     }
   )
   @withRouter
@@ -253,7 +255,16 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       this.props.createTabMenu(fullpath, 'remove');
       this.props.createIframeMenu(fullpath, 'remove');
       this.props.createMicroMenu(fullpath, 'remove');
+      this.props.createPreventTab(fullpath, 'remove');
       this.setLocalTabs();
+    };
+
+    setForbidenTab = (data: Record<string, string | undefined>) => {
+      if (data.action === 'add') {
+        this.props.createPreventTab({ path: data.path, message: data.message }, 'add');
+      } else {
+        this.props.createPreventTab(data.path, 'remove');
+      }
     };
 
     emitOutsideClick = () => {
@@ -298,6 +309,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           emitOutsideClick={this.emitOutsideClick}
           dispatchMouseClick={this.dispatchMouseClick}
           setThemeColor={this.setThemeColor}
+          setForbidenTab={this.setForbidenTab}
         />
       );
     }

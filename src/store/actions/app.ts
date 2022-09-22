@@ -12,6 +12,7 @@ import {
   TAB_MENU,
   IFRAME_MENU,
   MICRO_MENU,
+  PREVENT_TAB,
   COMP_SIZE,
   LOCALE_LANG,
   THEME_COLOR,
@@ -245,6 +246,9 @@ export const createIframeMenu = (payload, behavior) => ({ type: IFRAME_MENU, pay
 
 // 设置 micro 导航
 export const createMicroMenu = (payload, behavior) => ({ type: MICRO_MENU, payload, behavior });
+
+// 设置禁止关闭页签
+export const createPreventTab = (payload, behavior) => ({ type: PREVENT_TAB, payload, behavior });
 
 // 设置尺寸
 export const createComponentSize = (payload) => ({ type: COMP_SIZE, payload });

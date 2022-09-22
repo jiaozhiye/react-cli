@@ -12,6 +12,7 @@ import {
   TAB_MENU,
   IFRAME_MENU,
   MICRO_MENU,
+  PREVENT_TAB,
   COMP_SIZE,
   LOCALE_LANG,
   THEME_COLOR,
@@ -41,6 +42,11 @@ export type ITabNav = {
   search?: string;
 };
 
+export type IPreventTab = {
+  path: string;
+  message?: string;
+};
+
 export type ICacheMenu = {
   key: string;
   value: string;
@@ -63,6 +69,7 @@ type IState = {
   iframeMenus: ICacheMenu[];
   microMenus: ICacheMenu[];
   keepAliveList: ICacheMenu[];
+  preventTabs: IPreventTab[];
   dict: Record<string, Dictionary[]>;
   auth: Record<string, string[]>;
   loginInfo: Record<string, string>;
@@ -144,6 +151,7 @@ const initState: IState = {
   iframeMenus: [], // iframe 列表
   microMenus: [], // qiankun 列表
   keepAliveList: [], // 路由组件缓存列表
+  preventTabs: [], // 不允许关闭的页签列表
   dict: {}, // 数据字典
   auth: {}, // 按钮权限
   loginInfo: {}, // 用户登录信息
@@ -224,6 +232,27 @@ const setMicroMenus = (state, payload, behavior) => {
       behavior === 'add'
         ? addMicroMenu(state.microMenus, payload)
         : state.microMenus.filter((x) => x.key !== payload),
+  });
+};
+
+const addPreventTab = <T extends IPreventTab>(preventTabs: T[], data: T) => {
+  const target = preventTabs.find((x) => x.path === data.path);
+  if (!target) {
+    return [...preventTabs, data];
+  }
+  if (data.message) {
+    Object.assign(target, data);
+  }
+  return [...preventTabs];
+};
+
+// 设置阻止关闭选项卡
+const setPreventTabs = (state, payload, behavior) => {
+  return Object.assign({}, state, {
+    preventTabs:
+      behavior === 'add'
+        ? addPreventTab(state.preventTabs, payload)
+        : state.preventTabs.filter((x) => x.path !== payload),
   });
 };
 
@@ -314,6 +343,8 @@ export const appReducer = (state = initState, action) => {
       return setIframeMenus(state, action.payload, action.behavior);
     case MICRO_MENU:
       return setMicroMenus(state, action.payload, action.behavior);
+    case PREVENT_TAB:
+      return setPreventTabs(state, action.payload, action.behavior);
     case COMP_SIZE:
       return setComponentSize(state, action.payload);
     case LOCALE_LANG:

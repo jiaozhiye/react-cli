@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { ContextMenu, MenuItem, ContextMenuTrigger } from 'react-contextmenu';
 import classNames from 'classnames';
 import { t } from '@/locale';
+import { Confirm } from '@/utils';
 import { application } from '@/hoc';
 import type { AppState } from '@/store/reducers/app';
 
@@ -46,28 +47,42 @@ class MultiTab extends Component<any> {
     tabMenus.forEach((x, i) => {
       if (i === 0) return;
       if (dir === 'right' && i > index) {
-        this.doRemove(x.path);
+        this.removeHandle(x.path);
       }
       if (dir === 'left' && i < index) {
-        this.doRemove(x.path);
+        this.removeHandle(x.path);
       }
       if (dir === 'other') {
         if (i === index) return;
-        this.doRemove(x.path);
+        this.removeHandle(x.path);
       }
     });
   };
 
-  doRemove(targetKey) {
+  doRemove = (targetKey) => {
     const { activeKey } = this.state;
     const { tabMenus } = this.props;
-    this.props.closeView(targetKey);
     if (targetKey === activeKey) {
       const index = this.findCurTagIndex(targetKey);
       const nextActiveKey = tabMenus[index - 1].path;
       this.changeHandle(nextActiveKey);
     }
-  }
+    this.props.closeView(targetKey);
+  };
+
+  removeHandle = async (targetKey) => {
+    const { tabMenus, preventTabs } = this.props;
+    const preventTab = preventTabs.find((x) => x.path === targetKey);
+    try {
+      if (preventTab) {
+        const { title = '' } = tabMenus.find((x) => x.path === targetKey) || {};
+        await Confirm(preventTab.message || `${title}${t('app.global.leaveText')}`);
+      }
+      this.doRemove(targetKey);
+    } catch (err) {
+      // ...
+    }
+  };
 
   refreshTagHandle = () => {
     const { activeKey } = this.state;
@@ -83,7 +98,7 @@ class MultiTab extends Component<any> {
 
   editHandle = (targetKey, action) => {
     if (action !== 'remove') return;
-    this.doRemove(targetKey);
+    this.removeHandle(targetKey);
   };
 
   render() {
@@ -150,6 +165,7 @@ class MultiTab extends Component<any> {
 export default connect(
   (state: AppState) => ({
     tabMenus: state.app.tabMenus,
+    preventTabs: state.app.preventTabs,
   }),
   {}
 )(MultiTab);
