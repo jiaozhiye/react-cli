@@ -13,7 +13,7 @@ import { getLocalRoutes } from '@/router/config';
 import { emitter as microEvent } from '@/utils/mitt';
 import { connect } from 'react-redux';
 import { matchRoutes } from '@/router';
-import { nextTick, Message } from '@/utils';
+import { Message } from '@/utils';
 import { t } from '@/locale';
 import {
   createTabMenu,
