@@ -58,15 +58,11 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
   class C extends Component<any> {
     static displayName = `App(${WrappedComponent.displayName || WrappedComponent.name})`;
 
-    setLocalTabs = () => {
-      nextTick(() => localStorage.setItem('tab_menus', JSON.stringify(this.props.tabMenus)));
-    };
-
     notDisplayTab = (pathname: string) => {
       return ['/login', '/subview'].some((x) => pathname.startsWith(x));
     };
 
-    addTabMenus = () => {
+    addTabMenus = (prevPathname: string) => {
       const { tabMenus, flattenMenus } = this.props;
       const { pathname, search } = this.props.location;
       const { route } = matchRoutes(routes, pathname).pop();
@@ -82,7 +78,12 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
         : flattenMenus.find((x) => x.key === pathname + search)?.title || route.meta.title;
       // 选项卡菜单
       this.props.createTabMenu(
-        Object.assign({}, { path: pathname, title }, search ? { search } : null),
+        Object.assign(
+          {},
+          { path: pathname, title },
+          search ? { search } : null,
+          !this.notDisplayTab(prevPathname) ? { from: prevPathname } : null
+        ),
         'add'
       );
       // iframe 模式
@@ -93,8 +94,6 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       if (route.microHost && route.microRule) {
         this.props.createMicroMenu({ key: pathname, value: route.microHost, search }, 'add');
       }
-      // 本地存储
-      this.setLocalTabs();
     };
 
     getIframeNode = (id: string) => {
@@ -256,7 +255,6 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       this.props.createIframeMenu(fullpath, 'remove');
       this.props.createMicroMenu(fullpath, 'remove');
       this.props.createPreventTab(fullpath, 'remove');
-      this.setLocalTabs();
     };
 
     setForbidenTab = (data: Record<string, string | undefined>) => {

@@ -39,6 +39,7 @@ export type ISideMenu = {
 export type ITabNav = {
   path: string;
   title: string;
+  from?: string;
   search?: string;
 };
 
@@ -158,7 +159,7 @@ const initState: IState = {
 };
 
 // 设置导航菜单
-const setSideMenus = (state, payload) => {
+const setSideMenus = (state: IState, payload) => {
   const flattenMenus = createFlattenMenus(payload);
   setRouteMeta(flattenMenus);
   return Object.assign({}, state, {
@@ -171,7 +172,13 @@ const setSideMenus = (state, payload) => {
 const addTabMenu = <T extends ITabNav>(tabMenus: T[], data: T) => {
   const target = tabMenus.find((x) => x.path === data.path);
   if (!target) {
-    return [...tabMenus, data];
+    const v = tabMenus.findIndex((x) => x.path === data.from);
+    if (v !== -1) {
+      tabMenus.splice(v + 1, 0, data);
+    } else {
+      tabMenus.push(data);
+    }
+    return [...tabMenus];
   }
   if (data.search) {
     Object.assign(target, data);
@@ -182,12 +189,14 @@ const addTabMenu = <T extends ITabNav>(tabMenus: T[], data: T) => {
 };
 
 // 设置顶部选项卡导航
-const setTabMenus = (state, payload, behavior) => {
+const setTabMenus = (state: IState, payload, behavior) => {
+  const results =
+    behavior === 'add'
+      ? addTabMenu(state.tabMenus, payload)
+      : state.tabMenus.filter((x) => x.path !== payload);
+  localStorage.setItem('tab_menus', JSON.stringify(results));
   return Object.assign({}, state, {
-    tabMenus:
-      behavior === 'add'
-        ? addTabMenu(state.tabMenus, payload)
-        : state.tabMenus.filter((x) => x.path !== payload),
+    tabMenus: results,
   });
 };
 
@@ -203,7 +212,7 @@ const addIframeMenu = <T extends ICacheMenu>(iframeMenus: T[], data: T) => {
 };
 
 // 设置 iframe 导航
-const setIframeMenus = (state, payload, behavior) => {
+const setIframeMenus = (state: IState, payload, behavior) => {
   return Object.assign({}, state, {
     iframeMenus:
       behavior === 'add'
@@ -226,7 +235,7 @@ const addMicroMenu = <T extends ICacheMenu>(microMenus: T[], data: T) => {
 };
 
 // 设置 micro 导航
-const setMicroMenus = (state, payload, behavior) => {
+const setMicroMenus = (state: IState, payload, behavior) => {
   return Object.assign({}, state, {
     microMenus:
       behavior === 'add'
@@ -247,7 +256,7 @@ const addPreventTab = <T extends IPreventTab>(preventTabs: T[], data: T) => {
 };
 
 // 设置阻止关闭选项卡
-const setPreventTabs = (state, payload, behavior) => {
+const setPreventTabs = (state: IState, payload, behavior) => {
   return Object.assign({}, state, {
     preventTabs:
       behavior === 'add'
@@ -257,77 +266,77 @@ const setPreventTabs = (state, payload, behavior) => {
 };
 
 // 设置数据字典
-const setDictData = (state, payload) => {
+const setDictData = (state: IState, payload) => {
   return Object.assign({}, state, {
     dict: payload,
   });
 };
 
 // 设置数据字典
-const setAuthData = (state, payload) => {
+const setAuthData = (state: IState, payload) => {
   return Object.assign({}, state, {
     auth: payload,
   });
 };
 
 // 设置搜藏菜单
-const setStarMenus = (state, payload) => {
+const setStarMenus = (state: IState, payload) => {
   return Object.assign({}, state, {
     starMenus: payload,
   });
 };
 
 // 设置尺寸
-const setComponentSize = (state, payload) => {
+const setComponentSize = (state: IState, payload) => {
   return Object.assign({}, state, {
     size: payload,
   });
 };
 
 // 设置多语言
-const setLocaleLang = (state, payload) => {
+const setLocaleLang = (state: IState, payload) => {
   return Object.assign({}, state, {
     lang: payload,
   });
 };
 
 // 设置主题颜色
-const setThemeColor = (state, payload) => {
+const setThemeColor = (state: IState, payload) => {
   return Object.assign({}, state, {
     themeColor: payload,
   });
 };
 
 // 设置主题模式
-const setThemeType = (state, payload) => {
+const setThemeType = (state: IState, payload) => {
   return Object.assign({}, state, {
     themeType: payload,
   });
 };
 
 // 设置设备类型
-const setDeviceType = (state, payload) => {
+const setDeviceType = (state: IState, payload) => {
   return Object.assign({}, state, {
     device: payload,
   });
 };
 
 // 登录
-const setSignIn = (state, payload) => {
+const setSignIn = (state: IState, payload) => {
   return Object.assign({}, state, {
     loginInfo: payload,
   });
 };
 
 // 退出登录
-const setSignOut = (state, payload) => {
+const setSignOut = (state: IState, payload) => {
   return Object.assign({}, state, {
     loginInfo: payload || {},
   });
 };
 
 // 必须要给 state 参数默认赋值 initState
-export const appReducer = (state = initState, action) => {
+export const appReducer = (state: IState = initState, action) => {
   switch (action.type) {
     case SIDE_MENU:
       return setSideMenus(state, action.payload);

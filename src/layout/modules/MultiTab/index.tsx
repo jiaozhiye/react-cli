@@ -63,8 +63,9 @@ class MultiTab extends Component<any> {
     const { activeKey } = this.state;
     const { tabMenus } = this.props;
     if (targetKey === activeKey) {
-      const index = this.findCurTagIndex(targetKey);
-      const nextActiveKey = tabMenus[index - 1].path;
+      const v = this.findCurTagIndex(targetKey);
+      const from = tabMenus.find((x) => x.path === tabMenus[v].from) ? tabMenus[v].from : '';
+      const nextActiveKey = from || tabMenus[v - 1].path;
       this.changeHandle(nextActiveKey);
     }
     this.props.closeView(targetKey);

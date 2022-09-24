@@ -52,7 +52,27 @@ const getMicroRoutes = () => {
       path: `/${config.system}/*`,
       component: Nomatch,
     });
+    result.push({
+      path: '/404',
+      component: Nomatch,
+    });
   }
+  return result;
+};
+
+const getIframeRoutes = () => {
+  let result: any[] = [];
+  result = flattenRoutes.map((x) => ({
+    path: '/iframe' + x.path,
+    meta: x.meta,
+    exact: x.exact,
+    props: x.props,
+    component: x.component,
+  }));
+  result.push({
+    path: '/iframe/*',
+    component: Nomatch,
+  });
   return result;
 };
 
@@ -69,17 +89,7 @@ const routes = [
   },
   ...moduleRoutes.map((x) => x.public).flat(),
   ...getMicroRoutes(),
-  ...flattenRoutes.map((x) => ({
-    path: '/iframe' + x.path,
-    meta: x.meta,
-    exact: x.exact,
-    props: x.props,
-    component: x.component,
-  })),
-  {
-    path: '/iframe/*',
-    component: Nomatch,
-  },
+  ...getIframeRoutes(),
   {
     path: '/',
     meta: { title: t('app.global.home') },

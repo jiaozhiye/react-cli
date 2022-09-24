@@ -65,7 +65,7 @@ class UseConfig extends Component<any> {
     const { pathname: prevPathname } = prevProps.location;
     const { pathname: nextPathname } = this.props.location;
     if (prevPathname !== nextPathname) {
-      this.props.addTabMenus();
+      this.props.addTabMenus(prevPathname);
     }
     if (prevProps.isReady !== this.props.isReady) {
       if (config.microType === 'qiankun') {

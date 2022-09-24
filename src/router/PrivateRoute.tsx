@@ -35,11 +35,11 @@ class PrivateRoute extends Component<any> {
     }
     this.getLocalTabMenus().forEach((x) => {
       if (this.props.flattenMenus.some((k) => k.key === x.path)) {
-        this.props.createTabMenu({ path: x.path, title: x.title }, 'add');
+        this.props.createTabMenu(x, 'add');
       }
     });
     // 重要
-    this.props.addTabMenus();
+    this.props.addTabMenus('');
   }
 
   getLocalTabMenus() {
