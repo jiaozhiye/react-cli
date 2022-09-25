@@ -7,7 +7,7 @@
 import BaseComponent from './Base';
 import { fetchTranslation, replace } from './utils';
 
-export const settings = {
+export const settings: any = {
   localeKey: 'zh-cn',
   translationsObject: {},
   getTranslations: null,

@@ -24,7 +24,7 @@ import {
 import { t } from '@/locale';
 import config from '@/config';
 import routes, { getLocalRoutes } from '@/router/config';
-import type { ComponentSize, Device, Dictionary, ThemeType } from '@/utils/types';
+import type { ComponentSize, Device, Dictionary, Language, ThemeType } from '@/utils/types';
 
 export type ISideMenu = {
   key: string;
@@ -58,7 +58,7 @@ export type IRoute = any;
 
 type IState = {
   size: ComponentSize;
-  lang: string;
+  lang: Language;
   device: Device;
   themeType: ThemeType;
   themeColor: string;
@@ -140,7 +140,7 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
  */
 const initState: IState = {
   size: (localStorage.getItem('size') || config.size) as ComponentSize, // 组件尺寸
-  lang: localStorage.getItem('lang') || config.lang, // 多语言
+  lang: (localStorage.getItem('lang') || config.lang) as Language, // 多语言
   device: 'desktop', // 设备类型
   themeType: config.themeType, // 主题模式
   themeColor: process.env.THEME_COLOR || '', // 主题颜色
@@ -279,7 +279,7 @@ const setAuthData = (state: IState, payload) => {
   });
 };
 
-// 设置搜藏菜单
+// 设置收藏菜单
 const setStarMenus = (state: IState, payload) => {
   return Object.assign({}, state, {
     starMenus: payload,

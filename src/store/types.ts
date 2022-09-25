@@ -25,7 +25,7 @@ export const DICT_DATA = 'DICT_DATA';
 // 按钮权限
 export const AUTH_DATA = 'AUTH_DATA';
 
-// 搜藏菜单
+// 收藏菜单
 export const STAR_MENU = 'STAR_MENU';
 
 // 组件尺寸

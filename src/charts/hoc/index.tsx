@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2022-05-13 10:50:17
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-15 18:06:16
+ * @Last Modified time: 2022-09-25 08:57:58
  */
 import React, { Component } from 'react';
 import echarts from '../lib';
@@ -28,7 +28,7 @@ export default (params?: IParams) => {
 
       public chartInstance: Nullable<echarts.ECharts> = null;
 
-      public resizeObserver: ResizeObserver;
+      public resizeObserver: ResizeObserver | undefined;
 
       getOptions = (options: EChartsOption): EChartsOption => {
         if (theme !== 'dark') {
@@ -61,7 +61,9 @@ export default (params?: IParams) => {
         return this.chartInstance;
       };
 
-      resizeDebouncer = debounce(() => this.setResize(), 20);
+      resizeDebouncer = debounce(() => {
+        this.setResize();
+      }, 20);
 
       componentDidMount() {
         this.resizeObserver = new ResizeObserver(this.resizeDebouncer);
@@ -69,7 +71,7 @@ export default (params?: IParams) => {
       }
 
       componentWillUnmount() {
-        this.resizeObserver.disconnect();
+        this.resizeObserver?.disconnect();
         this.chartInstance?.dispose();
         this.chartInstance = null;
       }
