@@ -150,7 +150,7 @@ class BasicLayout extends Component<any, IState> {
   render() {
     const { routes } = this.props.route;
     const { pathname } = this.props.location;
-    const { route } = matchRoutes(routes, pathname).pop();
+    const { route } = matchRoutes(routes, pathname).pop()!;
     const { collapsed, locked, left } = this.state;
     const cls = {
       [`app-layout`]: !0,

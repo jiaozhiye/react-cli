@@ -9,6 +9,7 @@ import { Router, Switch, Route, Redirect, matchPath } from 'react-router-dom';
 import { t } from '@/locale';
 import { getToken } from '@/utils/cookies';
 import config from '@/config';
+import type { IRoute } from '@/utils/types';
 
 import PrivateRoute from '@/router/PrivateRoute';
 import ErrorBoundary from '@/pages/errorBoundary';
@@ -41,7 +42,7 @@ export const isIframe = (path: string): boolean => {
   return path.startsWith(whiteAuth[1]);
 };
 
-export const renderRoutes = (routes: any[] = [], extraProps = {}, switchProps = {}) => {
+export const renderRoutes = (routes: IRoute[] = [], extraProps = {}, switchProps = {}) => {
   return (
     <Suspense fallback={null}>
       <Switch {...switchProps}>
@@ -99,7 +100,11 @@ export const renderRoutes = (routes: any[] = [], extraProps = {}, switchProps = 
   );
 };
 
-export const matchRoutes = (routes, pathname, branch: any[] = []) => {
+export const matchRoutes = (
+  routes: IRoute[],
+  pathname: string,
+  branch: Array<{ route: IRoute; match: string }> = []
+) => {
   routes.some((route) => {
     const match = route.path
       ? matchPath(pathname, route)

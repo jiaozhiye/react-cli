@@ -8,6 +8,7 @@ import { lazy } from 'react';
 import { t } from '@/locale';
 import config from '@/config';
 import moduleRoutes from './routes';
+import type { IRoute } from '@/utils/types';
 
 import Redirect from '@/pages/redirect';
 
@@ -20,7 +21,7 @@ const Nomatch = lazy(() => import('@/pages/nomatch'));
 const flattenRoutes = moduleRoutes.map((x) => x.routes).flat();
 
 export const getLocalRoutes = () => {
-  let result: any[] = [];
+  let result: IRoute[] = [];
   if (config.isMainApp) {
     const localRoutes = localStorage.getItem('sub_routes');
     if (localRoutes) {
@@ -38,7 +39,7 @@ export const getLocalRoutes = () => {
 };
 
 const getMicroRoutes = () => {
-  let result: any[] = [];
+  let result: IRoute[] = [];
   // for qiankun micro-app
   if (config.powerByMicro) {
     result = flattenRoutes.map((x) => ({
@@ -61,7 +62,7 @@ const getMicroRoutes = () => {
 };
 
 const getIframeRoutes = () => {
-  let result: any[] = [];
+  let result: IRoute[] = [];
   result = flattenRoutes.map((x) => ({
     path: '/iframe' + x.path,
     meta: x.meta,
@@ -81,7 +82,7 @@ const isSubView = (path = ''): boolean => {
   return path.startsWith('/subview');
 };
 
-const routes = [
+const routes: IRoute[] = [
   {
     path: '/login',
     meta: { title: t('app.login.title') },

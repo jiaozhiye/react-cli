@@ -50,3 +50,23 @@ export type Dictionary = {
 export type DeepDictionary = Dictionary & {
   children?: Array<DeepDictionary> | Nullable<undefined>;
 };
+
+export type IRoute = {
+  path: string;
+  component?: any;
+  redirect?: string;
+  exact?: boolean;
+  strict?: boolean;
+  dynamic?: boolean;
+  iframePath?: string;
+  microHost?: string;
+  microRule?: string;
+  meta?: {
+    title?: string;
+    keepAlive?: boolean;
+    bgColor?: boolean;
+    noAuth?: boolean;
+  };
+  routes?: IRoute[];
+  render?: (...args: unknown[]) => any;
+};

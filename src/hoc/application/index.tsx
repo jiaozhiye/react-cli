@@ -65,7 +65,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     addTabMenus = (prevPathname: string) => {
       const { tabMenus, flattenMenus } = this.props;
       const { pathname, search } = this.props.location;
-      const { route } = matchRoutes(routes, pathname).pop();
+      const { route } = matchRoutes(routes, pathname).pop()!;
       // title 非空判断 - 重要
       if (!route.meta?.title || this.notDisplayTab(pathname)) return;
       // 最大数量判断
@@ -137,7 +137,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
 
     createMicroApp = (path: string) => {
       const target = getLocalRoutes().find((x) => x.path === path);
-      if (!target) return;
+      if (!target?.microHost) return;
       loadMicroApp(
         {
           name: path,
@@ -160,9 +160,9 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           .filter((x) => x.microHost && x.microRule)
           .map((x) => ({
             name: x.path,
-            entry: x.microHost,
+            entry: x.microHost!,
             container: `#qk${x.path.replace(/\/+/g, '-')}`,
-            activeRule: x.microRule,
+            activeRule: x.microRule!,
             props: {
               microEvent,
               isMainEnv: config.isMainApp,

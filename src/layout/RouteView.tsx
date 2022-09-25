@@ -2,14 +2,15 @@
  * @Author: 焦质晔
  * @Date: 2022-05-19 16:20:53
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-06-06 19:02:39
+ * @Last Modified time: 2022-09-25 20:10:56
  */
 import React from 'react';
 import { isEqual } from 'lodash-es';
 import { renderRoutes } from '../router';
+import type { IRoute } from '@/utils/types';
 
 type IProps = {
-  routes: any[];
+  routes: IRoute[];
 };
 
 class RouteView extends React.Component<IProps> {

@@ -24,7 +24,7 @@ import {
 import { t } from '@/locale';
 import config from '@/config';
 import routes, { getLocalRoutes } from '@/router/config';
-import type { ComponentSize, Device, Dictionary, Language, ThemeType } from '@/utils/types';
+import type { ComponentSize, Device, Dictionary, IRoute, Language, ThemeType } from '@/utils/types';
 
 export type ISideMenu = {
   key: string;
@@ -53,8 +53,6 @@ export type ICacheMenu = {
   value: string;
   search?: string;
 };
-
-export type IRoute = any;
 
 type IState = {
   size: ComponentSize;
@@ -93,7 +91,7 @@ const createFlattenMenus = <T extends ISideMenu>(list: T[]): T[] => {
 };
 
 const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
-  const subRoutes: IRoute[] = routes.find((k) => k.path === '/').routes;
+  const subRoutes: IRoute[] = routes.find((k) => k.path === '/')!.routes!;
   const localRoutes: IRoute[] = getLocalRoutes();
   const mainAppRoutes: IRoute[] = []; // 主应用路由表
   if (config.isMainApp) {
@@ -104,7 +102,7 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
       }
     }
     localRoutes.forEach((x) => {
-      if (x.meta.noAuth && x.meta.title) {
+      if (x.meta?.noAuth && x.meta?.title) {
         mainAppRoutes.push(x);
       }
     });
@@ -113,7 +111,9 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
     const _routes = config.isMainApp ? localRoutes : subRoutes;
     const route = _routes.find((k) => k.path === x.key?.replace(/\?.*/, ''));
     if (route) {
-      Object.assign(route.meta, { title: x.title });
+      route.meta
+        ? Object.assign(route.meta, { title: x.title })
+        : (route.meta = { title: x.title });
     }
     if (config.isMainApp && route) {
       mainAppRoutes.push(route);
