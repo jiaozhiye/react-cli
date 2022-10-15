@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { application } from '@/hoc';
+import { getPathName } from '@/utils';
 import { isIframe } from './index';
 import { createMenuList, createTabMenu } from '@/store/actions';
 
@@ -34,7 +35,7 @@ class PrivateRoute extends Component<any> {
       return console.error('应用菜单加载失败，请检查菜单接口！');
     }
     this.getLocalTabMenus().forEach((x) => {
-      if (this.props.flattenMenus.some((k) => k.key === x.path)) {
+      if (this.props.flattenMenus.some((k) => getPathName(k.key) === x.path)) {
         this.props.createTabMenu(x, 'add');
       }
     });
@@ -62,7 +63,7 @@ class PrivateRoute extends Component<any> {
   isAuth(path) {
     return (
       this.props.route.meta?.noAuth ||
-      this.props.flattenMenus.findIndex((x) => x.key?.replace(/\?.*/, '') === path) !== -1
+      this.props.flattenMenus.findIndex((x) => getPathName(x.key) === path) !== -1
     );
   }
 

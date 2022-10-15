@@ -22,6 +22,7 @@ import {
   DEVICE,
 } from '../types';
 import { t } from '@/locale';
+import { getPathName } from '@/utils';
 import config from '@/config';
 import routes, { getLocalRoutes } from '@/router/config';
 import type { ComponentSize, Device, Dictionary, IRoute, Language, ThemeType } from '@/utils/types';
@@ -109,7 +110,7 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
   }
   list.forEach((x) => {
     const _routes = config.isMainApp ? localRoutes : subRoutes;
-    const route = _routes.find((k) => k.path === x.key?.replace(/\?.*/, ''));
+    const route = _routes.find((k) => k.path === getPathName(x.key));
     if (route) {
       route.meta
         ? Object.assign(route.meta, { title: x.title })

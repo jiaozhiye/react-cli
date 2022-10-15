@@ -96,6 +96,14 @@ export const getParentLocal = (key: string): Record<string, any> => {
 };
 
 /**
+ * @description 获取 URL 的 pathname
+ * @returns {string}
+ */
+export const getPathName = (fullpath: string) => {
+  return fullpath ? fullpath.replace(/\?.*/, '') : '';
+};
+
+/**
  * @description 通过 URL 获取 Domain
  * @param {string} url url 地址
  * @returns {string} domain
