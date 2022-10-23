@@ -53,32 +53,33 @@ primaryColor: '#1890ff'
 ## 目录结构
 
 ```
-├── build                      # webpack 构建相关
-├── config                     # webpack 参数配置
-├── static                     # 资源文件
+├── build                      # 编译构建
+├── config                     # 应用参数
+├── static                     # 静态资源
 ├── public                     # 公共资源
-│   ├── index.html             # 所有请求
+│   ├── index.html             # Html 入口
 │   ├── favicon.ico            # favicon 图标
 ├── src                        # 源代码
-│   ├── api                    # 所有请求
+│   ├── api                    # ajax 封装
 │   ├── assets                 # 静态资源
-│   ├── charts                 # 图表组件
-│   ├── components             # 全局公用组件
-│   ├── directive              # 全局自定义指令
+│   ├── charts                 # Echart 图表
+│   ├── components             # 公用组件
 │   ├── config                 # 全局配置
-│   ├── icons                  # 图标
-│   ├── layout                 # 全局 layout
-│   ├── locale                 # 多语言支持
-│   ├── mock                   # 项目 mock 模拟数据
-│   ├── modules                # 微前端模块
+│   ├── hoc                    # 高阶组件
+│   ├── hooks                  # hooks
+│   ├── icon                   # 图标
+│   ├── layout                 # 布局
+│   ├── locale                 # 国际化
+│   ├── mock                   # 模拟数据
+│   ├── modules                # 业务子模块
 │   ├── pages                  # 非业务页面
 │   ├── router                 # 路由
-│   ├── store                  # 全局 store 管理
-│   ├── utils                  # 全局公用方法
-│   ├── app.tsx                # 根组件
+│   ├── store                  # 状态管理
+│   ├── utils                  # 公共方法
+│   ├── App.tsx                # 根组件
 │   ├── index.ts               # 应用入口
-│   └── shims-vue.d.ts         # 声明文件
-├── babel.config.js            # babel-loader 配置
+│   └── typings.d.ts           # Ts 声明文件
+├── babel.config.js            # babel 配置
 ├── .browserslistrc            # 浏览器兼容配置
 ├── .editorconfig              # EditorConfig 配置
 ├── .env.dev                   # 开发环境环境常量
@@ -86,12 +87,13 @@ primaryColor: '#1890ff'
 ├── .eslintignore              # Eslint 忽略清单
 ├── .eslintrc.js               # Eslint 校验规则
 ├── .gitignore                 # git 忽略清单
-├── .npmrc                     # npm 配置
+├── .npmrc                     # npm 镜像地址
 ├── .postcssrc.js              # postcss 配置
-├── .prettierrc                # Prettier 配置
+├── .prettierrc                # prettier 配置
 ├── README.md                  # README.md
 ├── package.json               # package.json
-└── tsconfig.json              # tsconfig.json
+├── yarn.lock                  # 包版本锁定
+└── tsconfig.json              # Ts 配置
 ```
 
 欢迎访问个人 [github](https://github.com/jiaozhiye) 主页.
