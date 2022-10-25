@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:39:34
+ * @Last Modified time: 2022-10-25 20:11:03
  */
 'use strict';
 
@@ -63,6 +63,14 @@ module.exports = {
         use: utils.jsLoaders(),
         exclude: /node_modules/,
         include: [utils.resolve('src')],
+      },
+      // mjs
+      {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false,
+        },
+        include: [/node_modules/],
       },
       // ts tsx
       {
