@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:40:32
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-09-02 09:35:24
+ * @Last Modified time: 2022-10-28 13:55:43
  */
 import { lazy } from 'react';
 import { t } from '@/locale';
@@ -107,7 +107,7 @@ const routes: IRoute[] = [
         component: Dashboard,
       },
       ...flattenRoutes.map((x) => {
-        if (config.microType && !isSubView(x.path)) {
+        if (x.iframePath || (config.microType && !isSubView(x.path))) {
           return {
             path: x.path,
             meta: x.meta,
