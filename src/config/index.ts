@@ -11,6 +11,7 @@ type IConfig = {
   system: string;
   isMainApp: boolean;
   powerByMicro: boolean;
+  baseUrl: string;
   baseRoute: string;
   lang: Language;
   size: ComponentSize;
@@ -35,6 +36,10 @@ export default {
   system: config.name,
   isMainApp: config.name === 'app',
   powerByMicro: window.__POWERED_BY_QIANKUN__ || window.__MICRO_APP_ENVIRONMENT__,
+  baseUrl:
+    window.__MICRO_APP_PUBLIC_PATH__ ||
+    window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__ ||
+    window.location.origin,
   baseRoute: '', // 二级目录-
   lang: 'zh-cn', // 语言
   size: 'middle', // 尺寸

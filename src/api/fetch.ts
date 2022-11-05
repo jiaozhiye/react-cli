@@ -18,7 +18,6 @@ import { getToken } from '@/utils/cookies';
 import { Notification } from '@/utils';
 import { t } from '@/locale';
 import config from '@/config';
-import env from '@/config/envMaps';
 
 type IRequestConfig = AxiosRequestConfig & {
   cancelable?: boolean;
@@ -106,7 +105,7 @@ const getErrorText = (code?: number): string => {
 
 // 创建 axios 实例
 const instance: IAxiosInstance = axios.create({
-  baseURL: config.powerByMicro ? env.baseUrl : '/',
+  baseURL: config.powerByMicro ? config.baseUrl : '/',
   timeout: 1000 * 20,
   withCredentials: false, // 跨域请求是否携带 cookie
   paramsSerializer: (params): string => {

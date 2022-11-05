@@ -69,7 +69,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       // title 非空判断 - 重要
       if (!route.meta?.title || this.notDisplayTab(pathname)) return;
       // 最大数量判断
-      if (tabMenus.length > config.maxCacheNum && !tabMenus.find((x) => x.path === pathname)) {
+      if (tabMenus.length >= config.maxCacheNum && !tabMenus.find((x) => x.path === pathname)) {
         Message(t('app.information.maxCache', { total: config.maxCacheNum }), 'warning');
         return this.props.history.go(-1);
       }

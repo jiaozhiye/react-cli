@@ -5,7 +5,7 @@
  * @Last Modified time: 2022-03-24 14:52:35
  */
 type IConfig = {
-  baseUrl: string;
+  prefix: string;
 };
 
 type IEnvCongig = Record<'dev' | 'tst' | 'uat' | 'pre' | 'prod' | 'gray', IConfig>;
@@ -14,22 +14,22 @@ const env = process.env.ENV_CONFIG || 'prod';
 
 const config: IEnvCongig = {
   dev: {
-    baseUrl: '/', // 本地开发环境不走这里，配置请求代理即可
+    prefix: '/api-dev', // 网关请求前缀
   },
   tst: {
-    baseUrl: 'https://sit-apps-fc-base.faw.cn',
+    prefix: '/api-dev',
   },
   uat: {
-    baseUrl: 'https://uat-apps-fc-base.faw.cn',
+    prefix: '/api-dev',
   },
   pre: {
-    baseUrl: 'https://pre-apps-fc-base.faw.cn',
+    prefix: '/api-dev',
   },
   prod: {
-    baseUrl: 'https://apps-fc-base.faw.cn',
+    prefix: '/api-dev',
   },
   gray: {
-    baseUrl: '/',
+    prefix: '/api-dev',
   },
 };
 

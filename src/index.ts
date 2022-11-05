@@ -10,7 +10,6 @@ import { getDomain, destroyAlert } from '@/utils';
 import { setMicroEvent } from '@/utils/mitt';
 import { ACHIEVE_LOCAL, COMP_SIZE, LOCALE_LANG, THEME_COLOR } from '@/store/types';
 import config from '@/config';
-import env from '@/config/envMaps';
 import App from './App';
 
 // const sub_routes = [
@@ -114,7 +113,7 @@ function render(props) {
 }
 
 function initial() {
-  const domain = getDomain(env.baseUrl);
+  const domain = getDomain(config.baseUrl);
   if (domain) {
     document.domain = domain;
   } else if (!config.isMainApp) {
