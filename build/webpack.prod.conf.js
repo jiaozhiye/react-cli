@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-09-17 14:59:43
+ * @Last Modified time: 2022-11-08 16:59:38
  */
 'use strict';
 
@@ -51,8 +51,8 @@ const webpackConfig = merge(baseWebpackConfig, {
         // sourceMap: config.build.productionSourceMap,
         terserOptions: {
           compress: {
-            drop_console: true,
             drop_debugger: true,
+            pure_funcs: ['console.log'],
           },
         },
       }),
