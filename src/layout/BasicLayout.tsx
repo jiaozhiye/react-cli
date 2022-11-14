@@ -12,7 +12,12 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { matchRoutes } from '@/router';
 import { Layout } from '@jiaozhiye/qm-design-react';
-import { createDictData, createAuthData, createDeviceType } from '@/store/actions';
+import {
+  createDictData,
+  createAuthData,
+  createMicroState,
+  createDeviceType,
+} from '@/store/actions';
 import { emitter as microEvent } from '@/utils/mitt';
 import config from '@/config';
 import type { AppState } from '@/store/reducers/app';
@@ -142,6 +147,9 @@ class BasicLayout extends Component<any, IState> {
             isMainEnv: config.isMainApp,
           }}
           style={{ display: route.path === key ? 'block' : 'none', height: '100%' }}
+          onCreated={() => this.props.createMicroState(false)}
+          onMounted={() => this.props.createMicroState(true)}
+          onError={() => this.props.createMicroState(true)}
         />
       );
     });
@@ -217,6 +225,7 @@ export default connect(
   {
     createDictData,
     createAuthData,
+    createMicroState,
     createDeviceType,
   }
 )(BasicLayout);

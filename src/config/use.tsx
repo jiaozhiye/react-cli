@@ -67,7 +67,7 @@ class UseConfig extends Component<any> {
     if (prevPathname !== nextPathname) {
       this.props.addTabMenus(prevPathname);
     }
-    if (prevProps.isReady !== this.props.isReady) {
+    if (prevProps.navLoaded !== this.props.navLoaded) {
       if (config.microType === 'qiankun') {
         this.registerQiankun();
       }
@@ -154,7 +154,7 @@ export default connect(
     size: state.app.size,
     lang: state.app.lang,
     themeColor: state.app.themeColor,
-    isReady: state.app.isReady,
+    isReady: state.app.navLoaded,
   }),
   {
     createLocaleLang,

@@ -16,6 +16,9 @@ export const IFRAME_MENU = 'IFRAME_MENU';
 // micro 菜单模式
 export const MICRO_MENU = 'MICRO_MENU';
 
+// 子应用加载状态
+export const MICRO_STATE = 'MICRO_STATE';
+
 // 不允许关闭的页签
 export const PREVENT_TAB = 'PREVENT_TAB';
 

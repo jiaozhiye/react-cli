@@ -10,6 +10,7 @@ import {
   AUTH_DATA,
   STAR_MENU,
   TAB_MENU,
+  MICRO_STATE,
   IFRAME_MENU,
   MICRO_MENU,
   PREVENT_TAB,
@@ -61,7 +62,8 @@ type IState = {
   device: Device;
   themeType: ThemeType;
   themeColor: string;
-  isReady: boolean;
+  navLoaded: boolean;
+  microAppReady: boolean;
   sideMenus: ISideMenu[];
   starMenus: ISideMenu[];
   tabMenus: ITabNav[];
@@ -145,7 +147,8 @@ const initState: IState = {
   device: 'desktop', // 设备类型
   themeType: config.themeType, // 主题模式
   themeColor: process.env.THEME_COLOR || '', // 主题颜色
-  isReady: false, // 是否完成菜单的加载
+  navLoaded: false, // 是否完成菜单的加载
+  microAppReady: true, // 微应用加载状态
   sideMenus: [], // 侧栏菜单数据
   starMenus: [], // 收藏菜单
   tabMenus: [{ path: '/home', title: t('app.global.dashboard') }], // 顶部选项卡菜单数据
@@ -164,7 +167,7 @@ const setSideMenus = (state: IState, payload) => {
   const flattenMenus = createFlattenMenus(payload);
   setRouteMeta(flattenMenus);
   return Object.assign({}, state, {
-    isReady: true,
+    navLoaded: true,
     sideMenus: payload,
     flattenMenus,
   });
@@ -266,6 +269,13 @@ const setPreventTabs = (state: IState, payload, behavior) => {
   });
 };
 
+// 设置子应用加载状态
+const setMicroState = (state: IState, payload) => {
+  return Object.assign({}, state, {
+    microAppReady: payload,
+  });
+};
+
 // 设置数据字典
 const setDictData = (state: IState, payload) => {
   return Object.assign({}, state, {
@@ -347,6 +357,8 @@ export const appReducer = (state: IState = initState, action) => {
       return setAuthData(state, action.payload);
     case STAR_MENU:
       return setStarMenus(state, action.payload);
+    case MICRO_STATE:
+      return setMicroState(state, action.payload);
     case TAB_MENU:
       return setTabMenus(state, action.payload, action.behavior);
     case IFRAME_MENU:

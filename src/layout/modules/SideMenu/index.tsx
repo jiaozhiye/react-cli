@@ -88,6 +88,7 @@ class SideMenu extends Component<any> {
             const {
               location: { pathname },
             } = this.props;
+            if (!this.props.microAppReady) return;
             this.props.openView(path.split('?')[0] === pathname ? `/redirect${path}` : path);
           },
         };
@@ -115,4 +116,10 @@ class SideMenu extends Component<any> {
   }
 }
 
-export default connect((state: AppState) => ({ sideMenus: state.app.sideMenus }), {})(SideMenu);
+export default connect(
+  (state: AppState) => ({
+    sideMenus: state.app.sideMenus,
+    microAppReady: state.app.microAppReady,
+  }),
+  {}
+)(SideMenu);

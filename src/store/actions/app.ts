@@ -10,6 +10,7 @@ import {
   AUTH_DATA,
   STAR_MENU,
   TAB_MENU,
+  MICRO_STATE,
   IFRAME_MENU,
   MICRO_MENU,
   PREVENT_TAB,
@@ -237,6 +238,9 @@ export const createSignOut =
 
 // 登录
 export const createSignIn = (payload) => ({ type: SIGN_IN, payload });
+
+// 子应用加载状态
+export const createMicroState = (payload) => ({ type: MICRO_STATE, payload });
 
 // 设置顶部选项卡导航
 export const createTabMenu = (payload, behavior) => ({ type: TAB_MENU, payload, behavior });
