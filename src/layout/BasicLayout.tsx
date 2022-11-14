@@ -127,7 +127,7 @@ class BasicLayout extends Component<any, IState> {
   }
 
   createMicroView(route) {
-    const { microMenus } = this.props;
+    const { microMenus, createMicroState } = this.props;
     return microMenus.map((x) => {
       const { key, value, search = '' } = x;
       return config.microType === 'qiankun' ? (
@@ -147,9 +147,9 @@ class BasicLayout extends Component<any, IState> {
             isMainEnv: config.isMainApp,
           }}
           style={{ display: route.path === key ? 'block' : 'none', height: '100%' }}
-          onCreated={() => this.props.createMicroState(false)}
-          onMounted={() => this.props.createMicroState(true)}
-          onError={() => this.props.createMicroState(true)}
+          onCreated={() => createMicroState(false)}
+          onMounted={() => createMicroState(true)}
+          onError={() => createMicroState(true)}
         />
       );
     });
