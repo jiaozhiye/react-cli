@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-09-02 08:31:04
+ * @Last Modified time: 2022-11-23 17:00:19
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -179,7 +179,6 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           strictStyleIsolation: false,
           experimentalStyleIsolation: true, // 模态框的样式会丢失
         },
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         async fetch(url, options) {
           if (EXCLUDE_URLS.some((x) => url.toString().startsWith(x))) {

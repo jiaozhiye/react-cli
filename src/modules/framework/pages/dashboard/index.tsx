@@ -2,14 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-15 18:21:00
+ * @Last Modified time: 2022-11-23 17:00:23
  */
 import React from 'react';
 import classNames from 'classnames';
 import { t } from '@/locale';
 import './lang';
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { getTableData } from '@test/api/demo';
 import Chart1 from './charts/Chart1';
