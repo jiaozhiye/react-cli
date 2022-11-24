@@ -87,10 +87,16 @@ ol {
   justify-content: flex-end;
 }
 
-.qm-table .cell .ant-btn-text {
-  padding-left: 0;
-  padding-right: 0;
-  + .ant-btn-text {
-    margin-left: @moduleMargin - 2px;
+.qm-table {
+  .cell {
+    .ant-btn-text,
+    .ant-btn-link {
+      padding-left: 0;
+      padding-right: 0;
+      + .ant-btn-text,
+      + .ant-btn-link {
+        margin-left: @moduleMargin - 2px;
+      }
+    }
   }
 }
