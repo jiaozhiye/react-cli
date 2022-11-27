@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-29 12:02:05
+ * @Last Modified time: 2022-11-27 13:53:26
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -52,7 +52,7 @@ class AllNav extends Component<any> {
     ];
     return (
       <div ref={this.wrapRef} className={classNames(cls)}>
-        <Menu mode="inline" theme="dark" selectable={false} items={items} />
+        <Menu mode="inline" theme="dark" inlineIndent={20} selectable={false} items={items} />
         <NavList
           ref={this.navListRef}
           visible={visible}

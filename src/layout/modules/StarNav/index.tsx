@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-06 23:29:24
+ * @Last Modified time: 2022-11-27 13:53:52
  */
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
@@ -45,7 +45,7 @@ class StarNav extends Component<any> {
     ];
     return (
       <div className={classNames('app-star-nav')}>
-        <Menu mode="inline" theme="dark" items={items} />
+        <Menu mode="inline" theme="dark" inlineIndent={20} items={items} />
       </div>
     );
   }

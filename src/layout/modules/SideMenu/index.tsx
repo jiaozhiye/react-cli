@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-01 00:17:19
+ * @Last Modified time: 2022-11-27 13:45:36
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -107,6 +107,7 @@ class SideMenu extends Component<any> {
           key={sideMenus.length}
           mode="inline"
           theme="dark"
+          inlineIndent={20}
           items={this.createMenuTree(sideMenus)}
           selectedKeys={[fullpath]}
           defaultOpenKeys={this.getOpenKeys(fullpath)}

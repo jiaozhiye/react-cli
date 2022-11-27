@@ -121,7 +121,6 @@ class MultiTab extends Component<any> {
                 <ContextMenuTrigger
                   id={item.path === activeKey ? CTX_MENU_ID : ''}
                   renderTag="span"
-                  attributes={{ style: { marginLeft: '-16px', padding: '10px 0 10px 16px' } }}
                 >
                   {item.title}
                 </ContextMenuTrigger>

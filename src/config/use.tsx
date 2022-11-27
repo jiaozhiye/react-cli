@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-18 13:00:12
+ * @Last Modified time: 2022-11-27 11:50:34
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -16,11 +16,11 @@ import { changeLocale } from '@/locale';
 import { application } from '@/hoc';
 import * as types from '@/store/types';
 import config from '@/config';
+
+import type { Nullable } from '@/utils/types';
 import type { AppState } from '@/store/reducers/app';
 
 import '@jiaozhiye/qm-design-react/lib/style/index.less';
-// import 'antd/dist/antd.dark.less'; // 引入官方提供的暗色 less 样式入口文件
-// import 'antd/dist/antd.compact.less'; // 引入官方提供的紧凑 less 样式入口文件
 import '@/assets/css/reset.less';
 import '@/assets/css/style.less';
 import '@/assets/css/antd-ui.less';
@@ -35,6 +35,8 @@ message.config({
   maxCount: 3,
 });
 
+const COMPACT_MARK = 'small';
+
 @application
 @withRouter
 class UseConfig extends Component<any> {
@@ -45,10 +47,15 @@ class UseConfig extends Component<any> {
     },
   };
 
+  private $styleNode: Nullable<HTMLLinkElement | HTMLStyleElement> = null;
+
   componentDidMount() {
     const localTheme = localStorage.getItem('theme_color');
     if (localTheme && localTheme !== this.props.themeColor) {
       this.props.setThemeColor(localTheme);
+    }
+    if (this.props.size === COMPACT_MARK) {
+      this.loadStyleNode();
     }
     if (isIframe(this.props.location.pathname)) {
       document.addEventListener('click', this.clickEventHandle, false);
@@ -75,7 +82,39 @@ class UseConfig extends Component<any> {
         this.registerMicroApp();
       }
     }
+    if (prevProps.size !== this.props.size) {
+      if (this.props.size === COMPACT_MARK) {
+        this.loadStyleNode();
+      }
+      if (prevProps.size === COMPACT_MARK) {
+        this.removeStyleNode();
+      }
+    }
   }
+
+  findStyleNode = () => {
+    const $links = document.head.getElementsByTagName(
+      process.env.NODE_ENV === 'production' ? 'link' : 'style'
+    );
+    return Array.from($links).pop() || null;
+  };
+
+  removeStyleNode = () => {
+    try {
+      this.$styleNode && document.head.removeChild(this.$styleNode);
+    } catch (err) {
+      // ...
+    }
+  };
+
+  loadStyleNode = async () => {
+    if (this.$styleNode) {
+      return document.head.appendChild(this.$styleNode);
+    }
+    // 不能使用 require 方法
+    await import('@jiaozhiye/qm-design-react/lib/style/compact.less');
+    this.$styleNode = this.findStyleNode();
+  };
 
   registerQiankun = () => {
     this.props.registerQiankun();
