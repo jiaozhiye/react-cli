@@ -193,7 +193,7 @@ export default connect(
     size: state.app.size,
     lang: state.app.lang,
     themeColor: state.app.themeColor,
-    isReady: state.app.navLoaded,
+    navLoaded: state.app.navLoaded,
   }),
   {
     createLocaleLang,
