@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-10-25 20:11:03
+ * @Last Modified time: 2022-11-27 22:06:25
  */
 'use strict';
 
@@ -44,6 +44,7 @@ module.exports = {
           library: `${config.name}-[name]`,
           libraryTarget: 'umd',
           chunkLoadingGlobal: `webpackJsonp_${config.name}`,
+          globalObject: 'window',
         }
       : null),
   },

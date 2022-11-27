@@ -2,12 +2,12 @@
  * @Author: 焦质晔
  * @Date: 2021-02-05 09:13:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-23 10:11:26
+ * @Last Modified time: 2022-11-27 22:06:47
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { getDomain, destroyAlert } from '@/utils';
-import { setMicroEvent } from '@/utils/mitt';
+import { setMicroEvent, getMicroEvent } from '@/utils/mitt';
 import { ACHIEVE_LOCAL, COMP_SIZE, LOCALE_LANG, THEME_COLOR } from '@/store/types';
 import config from '@/config';
 import App from './App';
@@ -168,6 +168,10 @@ export async function mount(props: any = {}) {
 
 export async function unmount(props: any = {}) {
   const { container } = props;
+  const microEvent = getMicroEvent();
+  microEvent?.$off(COMP_SIZE);
+  microEvent?.$off(LOCALE_LANG);
+  microEvent?.$off(THEME_COLOR);
   destroyAlert();
   ReactDOM.unmountComponentAtNode(
     container ? container.querySelector('#app') : document.querySelector('#app')
