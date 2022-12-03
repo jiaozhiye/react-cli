@@ -8,9 +8,9 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { CheckOutlined } from '@/icons';
 import { connect } from 'react-redux';
+import { createTheme } from '@/store/actions';
 import { emitter } from '@/utils/mitt';
 import { t } from '@/locale';
-import { application } from '@/hoc';
 import { THEME_COLOR } from '@/store/types';
 import type { AppState } from '@/store/reducers/app';
 
@@ -27,7 +27,6 @@ const Tag = ({ color, check, ...rest }) => (
   </div>
 );
 
-@application
 class ThemeColor extends Component<any> {
   state = {
     colorList: [
@@ -44,7 +43,7 @@ class ThemeColor extends Component<any> {
   };
 
   themeColorChangeHandle(color) {
-    this.props.setThemeColor(color);
+    this.props.createTheme(color);
     this.props.iframeMenus.forEach((x) => {
       const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
@@ -80,5 +79,7 @@ export default connect(
     themeColor: state.app.themeColor,
     iframeMenus: state.app.iframeMenus,
   }),
-  {}
+  {
+    createTheme,
+  }
 )(ThemeColor);

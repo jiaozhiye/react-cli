@@ -7,8 +7,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { getDomain, destroyAlert } from '@/utils';
-import { setMicroEvent, getMicroEvent } from '@/utils/mitt';
-import { ACHIEVE_LOCAL, COMP_SIZE, LOCALE_LANG, THEME_COLOR } from '@/store/types';
+import { setMicroEvent } from '@/utils/mitt';
+import { ACHIEVE_LOCAL } from '@/store/types';
 import config from '@/config';
 import App from './App';
 
@@ -128,9 +128,6 @@ function initial() {
 function initialMicro(props) {
   const { microEvent, isMainEnv } = props;
   setMicroEvent(microEvent);
-  microEvent?.$on(COMP_SIZE, (data) => window.postMessage({ type: COMP_SIZE, data }, '*'));
-  microEvent?.$on(LOCALE_LANG, (data) => window.postMessage({ type: LOCALE_LANG, data }, '*'));
-  microEvent?.$on(THEME_COLOR, (data) => window.postMessage({ type: THEME_COLOR, data }, '*'));
   window.__MAIM_APP_ENV__ = isMainEnv;
 }
 
@@ -168,10 +165,6 @@ export async function mount(props: any = {}) {
 
 export async function unmount(props: any = {}) {
   const { container } = props;
-  const microEvent = getMicroEvent();
-  microEvent?.$off(COMP_SIZE);
-  microEvent?.$off(LOCALE_LANG);
-  microEvent?.$off(THEME_COLOR);
   destroyAlert();
   ReactDOM.unmountComponentAtNode(
     container ? container.querySelector('#app') : document.querySelector('#app')

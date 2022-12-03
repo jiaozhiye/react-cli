@@ -34,6 +34,8 @@ import { getToken, removeToken } from '@/utils/cookies';
 import { t } from '@/locale';
 import localDict from '@/utils/localDict';
 import config from '@/config';
+import client from 'webpack-custom-theme/client';
+import { getAntdSerials } from '@/layout/modules/ThemeSetting/color';
 
 import type { Dictionary } from '@/utils/types';
 import type { ISideMenu } from '@/store/reducers/app';
@@ -235,6 +237,23 @@ export const createSignOut =
     // 刷新浏览器，释放内存
     setTimeout(() => window.parent.postMessage({ type: SIGN_OUT, data: '' }, '*'), 400);
   };
+
+// 创建主题色
+export const createTheme = (color: string) => (dispatch, getState) => {
+  const options = {
+    newColors: getAntdSerials(color),
+    changeUrl: (cssUrl) =>
+      `${process.env.NODE_ENV === 'development' ? '' : config.baseRoute}/${cssUrl}`,
+    openLocalStorage: false,
+  };
+  client.changer.changeColor(options, Promise).then(() => {
+    dispatch({
+      type: THEME_COLOR,
+      payload: color,
+    });
+    localStorage.setItem('theme_color', color);
+  });
+};
 
 // 登录
 export const createSignIn = (payload) => ({ type: SIGN_IN, payload });

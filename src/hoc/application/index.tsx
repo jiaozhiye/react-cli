@@ -23,8 +23,6 @@ import {
   createPreventTab,
 } from '@/store/actions';
 import { OUTSIDE_CLICK, SEND_LOCAL } from '@/store/types';
-import client from 'webpack-custom-theme/client';
-import { getAntdSerials } from '@/layout/modules/ThemeSetting/color';
 import store from '@/store';
 import config from '@/config';
 import routes from '@/router/config';
@@ -275,19 +273,6 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       document.body.click();
     };
 
-    setThemeColor = (color: string) => {
-      const options = {
-        newColors: getAntdSerials(color),
-        changeUrl: (cssUrl) =>
-          `${process.env.NODE_ENV === 'development' ? '' : config.baseRoute}/${cssUrl}`,
-        openLocalStorage: false,
-      };
-      client.changer.changeColor(options, Promise).then(() => {
-        this.props.createThemeColor(color);
-        localStorage.setItem('theme_color', color);
-      });
-    };
-
     render() {
       const { forwardedRef } = this.props;
       return (
@@ -305,7 +290,6 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           closeView={this.closeView}
           emitOutsideClick={this.emitOutsideClick}
           dispatchMouseClick={this.dispatchMouseClick}
-          setThemeColor={this.setThemeColor}
           setForbidenTab={this.setForbidenTab}
         />
       );
