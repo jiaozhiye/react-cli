@@ -5,13 +5,13 @@
  * @Last Modified time: 2022-04-09 16:08:17
  */
 import mitt from 'mitt';
-import type { Emitter, EventType } from 'mitt';
+import type { Emitter, EventType, Handler } from 'mitt';
 import type { Nullable } from './types';
 
 interface IEmitter extends Emitter<Record<EventType, unknown>> {
-  $on: (type: string, handler: (payload: any) => void) => void;
-  $off: (type: string) => void;
-  $emit: (type: string, payload: any) => void;
+  $on: (type: EventType, handler: Handler<any>) => void;
+  $off: (type: EventType) => void;
+  $emit: (type: EventType, payload: any) => void;
 }
 
 const emitter = mitt() as IEmitter;
