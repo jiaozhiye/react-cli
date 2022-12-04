@@ -50,7 +50,7 @@ const Chart2: React.FC<any> = (props) => {
       series: [
         {
           data: [120, 200, 150, 80, 70, 110, Math.random() * 1000],
-          type: 'bar',
+          type: 'line',
         },
       ],
     };
