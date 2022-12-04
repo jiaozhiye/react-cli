@@ -69,3 +69,7 @@ export const ACHIEVE_LOCAL = 'ACHIEVE_LOCAL';
 
 // 发送本地数据
 export const SEND_LOCAL = 'SEND_LOCAL';
+
+// widget 事件
+export const WIDGET_MAIN = 'WIDGET_MAIN';
+export const WIDGET_SUB = 'WIDGET_SUB';

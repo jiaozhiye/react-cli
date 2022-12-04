@@ -6,9 +6,11 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import '@/locale/setting';
 import { getDomain, destroyAlert } from '@/utils';
 import { setMicroEvent } from '@/utils/mitt';
 import { ACHIEVE_LOCAL } from '@/store/types';
+import routes from '@/router/config';
 import config from '@/config';
 import App from './App';
 
@@ -126,7 +128,12 @@ function initial() {
 }
 
 function initialMicro(props) {
-  const { microEvent, isMainEnv } = props;
+  const { microEvent, isMainEnv, isWidget, pathRoute } = props || {};
+  // Widget 挂件
+  if (isWidget) {
+    const route = routes.find((x) => x.path === pathRoute);
+    route && (route.path = '/');
+  }
   setMicroEvent(microEvent);
   window.__MAIM_APP_ENV__ = isMainEnv;
 }

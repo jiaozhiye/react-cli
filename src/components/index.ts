@@ -5,3 +5,4 @@
  * @Last Modified time: 2022-03-28 19:07:50
  */
 export { default as Test } from './Test';
+export { default as Widget } from './Widget';

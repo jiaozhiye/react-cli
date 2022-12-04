@@ -9,7 +9,6 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { notification, message, QmConfigProvider } from '@jiaozhiye/qm-design-react';
-import '@/locale/setting';
 import { createTheme, createLocaleLang, createComponentSize } from '@/store/actions';
 import { isIframe } from '@/router';
 import { changeLocale } from '@/locale';
