@@ -133,7 +133,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       }, 10);
     };
 
-    createMicroApp = (path: string) => {
+    createQiankunApp = (path: string) => {
       const target = getLocalRoutes().find((x) => x.path === path);
       if (!target?.microHost) return;
       loadMicroApp(
