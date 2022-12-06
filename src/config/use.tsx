@@ -42,6 +42,7 @@ const COMPACT_MARK = 'small';
 class UseConfig extends Component<any> {
   private globalConfig = {
     autoInsertSpaceInButton: false,
+    compactModeInSmallSize: true,
     tinymce: {
       scriptSrc: '/static/tinymce/tinymce.min.js',
     },
