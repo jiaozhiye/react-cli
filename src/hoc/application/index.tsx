@@ -8,8 +8,8 @@ import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import { withRouter } from 'react-router-dom';
 import microApp from '@micro-zoe/micro-app';
-import { registerMicroApps, loadMicroApp, start } from 'qiankun';
-import { getLocalRoutes } from '@/router/config';
+import { registerMicroApps, start } from 'qiankun';
+import { getSubRoutes } from '@/router/config';
 import { emitter as microEvent } from '@/utils/mitt';
 import { connect } from 'react-redux';
 import { matchRoutes } from '@/router';
@@ -133,28 +133,9 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       }, 10);
     };
 
-    createQiankunApp = (path: string) => {
-      const target = getLocalRoutes().find((x) => x.path === path);
-      if (!target?.microHost) return;
-      loadMicroApp(
-        {
-          name: path,
-          entry: target.microHost,
-          container: `#qk${target.path.replace(/\/+/g, '-')}`,
-          // activeRule: target.microRule,
-          props: {
-            microEvent,
-            isMainEnv: config.isMainApp,
-          },
-        },
-        { singular: false }
-      );
-    };
-
     registerQiankun = () => {
-      const subRoutes = getLocalRoutes();
       registerMicroApps(
-        subRoutes
+        getSubRoutes()
           .filter((x) => x.microHost && x.microRule)
           .map((x) => ({
             name: x.path,

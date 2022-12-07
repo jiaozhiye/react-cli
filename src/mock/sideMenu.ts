@@ -9,6 +9,7 @@ const menus = [
     id: '100',
     appCode: 'dms', // 子应用 code
     caseCode: null,
+    microHost: null,
     title: '业务', // 子应用名称
     icon: '', // 图标
     children: [
@@ -16,6 +17,7 @@ const menus = [
         id: '1',
         appCode: 'dms',
         caseCode: null,
+        microHost: null,
         icon: 'icon-flag-fill',
         title: '备件管理', // 菜单名称
         children: [
@@ -23,6 +25,7 @@ const menus = [
             id: '2',
             appCode: 'dms',
             caseCode: null,
+            microHost: null,
             icon: '',
             title: '采购管理',
             children: [
@@ -30,6 +33,7 @@ const menus = [
                 id: '3',
                 appCode: 'dms',
                 caseCode: 'spa1001', // 用例号
+                microHost: 'http://localhost:9021/', // 子应用地址
                 icon: '',
                 title: '备件采购订单',
               },
@@ -37,6 +41,7 @@ const menus = [
                 id: '4',
                 appCode: 'dms',
                 caseCode: 'spa1002?a=1',
+                microHost: 'http://localhost:9021/',
                 icon: '',
                 title: '备件采购入库',
               },
@@ -44,6 +49,7 @@ const menus = [
                 id: '5',
                 appCode: 'dms',
                 caseCode: 'spa1002?a=2',
+                microHost: 'http://localhost:9021/',
                 icon: '',
                 title: '备件采购退库',
               },
@@ -55,6 +61,7 @@ const menus = [
         id: '6',
         appCode: 'dms',
         caseCode: null,
+        microHost: null,
         icon: 'icon-flag-fill',
         title: '销售管理',
         children: [
@@ -62,6 +69,7 @@ const menus = [
             id: '7',
             appCode: 'dms',
             caseCode: null,
+            microHost: null,
             icon: '',
             title: '线索管理',
             children: [
@@ -69,6 +77,7 @@ const menus = [
                 id: '8',
                 appCode: 'dms',
                 caseCode: 'sal1001',
+                microHost: 'http://localhost:9021/',
                 icon: '',
                 title: '线索分配',
                 caseHref: 'https://sit-mdata.faw.cn/iframe/mdata-fe/sys027',
@@ -77,6 +86,7 @@ const menus = [
                 id: '9',
                 appCode: 'dms',
                 caseCode: 'sal1002',
+                microHost: 'http://localhost:9021/',
                 icon: '',
                 title: '线索记录',
               },
@@ -90,6 +100,7 @@ const menus = [
     id: '200',
     appCode: 'tds',
     caseCode: null,
+    microHost: null,
     title: '标准',
     icon: '',
     children: [
@@ -97,6 +108,7 @@ const menus = [
         id: '10',
         appCode: 'tds',
         caseCode: null,
+        microHost: null,
         icon: 'icon-flag-fill',
         title: '客服管理',
         children: [
@@ -104,6 +116,7 @@ const menus = [
             id: '11',
             appCode: 'tds',
             caseCode: null,
+            microHost: null,
             icon: '',
             title: '回访管理',
             children: [
@@ -111,6 +124,7 @@ const menus = [
                 id: '12',
                 appCode: 'tds',
                 caseCode: 'car1001',
+                microHost: 'http://localhost:9022/',
                 icon: '',
                 title: '销售回访',
               },
@@ -118,6 +132,7 @@ const menus = [
                 id: '13',
                 appCode: 'tds',
                 caseCode: 'car1002',
+                microHost: 'http://localhost:9022/',
                 icon: '',
                 title: '回访分配',
               },

@@ -62,6 +62,9 @@ const formateMenus = (list): ISideMenu[] => {
       hideInMenu: !!x.hidden,
       caseHref: x.caseHref,
     };
+    if (x.microHost) {
+      item.microHost = `${x.microHost.trim()}/`.replace(/\/+$/, '/');
+    }
     if (Array.isArray(x.children)) {
       item.children = formateMenus(x.children);
     }

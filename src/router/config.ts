@@ -20,20 +20,10 @@ const Nomatch = lazy(() => import('@/pages/nomatch'));
 
 const flattenRoutes = moduleRoutes.map((x) => x.routes).flat();
 
-export const getLocalRoutes = () => {
+export const getSubRoutes = () => {
   let result: IRoute[] = [];
   if (config.isMainApp) {
-    const localRoutes = localStorage.getItem('sub_routes');
-    if (localRoutes) {
-      try {
-        result = JSON.parse(localRoutes).map((x) => ({
-          ...x,
-          component: () => null, // 重要
-        }));
-      } catch (err) {
-        // ...
-      }
-    }
+    result = routes.find((k) => k.path === '/')!.routes!.filter((x) => x.dynamic);
   }
   return result;
 };

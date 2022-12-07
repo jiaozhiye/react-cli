@@ -25,7 +25,7 @@ import {
 import { t } from '@/locale';
 import { getPathName } from '@/utils';
 import config from '@/config';
-import routes, { getLocalRoutes } from '@/router/config';
+import routes from '@/router/config';
 import type { ComponentSize, Device, Dictionary, IRoute, Language, ThemeType } from '@/utils/types';
 
 export type ISideMenu = {
@@ -34,6 +34,7 @@ export type ISideMenu = {
   id?: string;
   icon?: string;
   hideInMenu?: boolean;
+  microHost?: string;
   caseHref?: string;
   children?: Array<ISideMenu>;
 };
@@ -95,7 +96,6 @@ const createFlattenMenus = <T extends ISideMenu>(list: T[]): T[] => {
 
 const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
   const subRoutes: IRoute[] = routes.find((k) => k.path === '/')!.routes!;
-  const localRoutes: IRoute[] = getLocalRoutes();
   const mainAppRoutes: IRoute[] = []; // 主应用路由表
   if (config.isMainApp) {
     for (let i = 0; i < subRoutes.length; i++) {
@@ -104,31 +104,33 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
         i = i - 1;
       }
     }
-    localRoutes.forEach((x) => {
-      if (x.meta?.noAuth && x.meta?.title) {
-        mainAppRoutes.push(x);
-      }
-    });
   }
   list.forEach((x) => {
-    const _routes = config.isMainApp ? localRoutes : subRoutes;
-    const route = _routes.find((k) => k.path === getPathName(x.key));
+    const route = subRoutes.find((k) => k.path === getPathName(x.key));
     if (route) {
       route.meta
         ? Object.assign(route.meta, { title: x.title })
         : (route.meta = { title: x.title });
     }
-    if (config.isMainApp && route) {
-      mainAppRoutes.push(route);
-    }
-    if (!route && x.caseHref) {
-      subRoutes.splice(-3, 0, {
-        path: x.key,
-        meta: { keepAlive: true, title: x.title },
-        iframePath: x.caseHref,
-        dynamic: true,
-        component: () => null,
-      });
+    if (config.isMainApp) {
+      const path = x.key.replace(/\?.*/, '');
+      if (path) {
+        mainAppRoutes.push({
+          path,
+          exact: true,
+          meta: { title: x.title, keepAlive: true },
+          ...(!x.caseHref
+            ? {
+                iframePath: ``, // iframePath 与 microHost、microRule 不共存
+                microHost: x.microHost,
+                microRule: path,
+              }
+            : {
+                iframePath: x.caseHref,
+              }),
+          component: () => null, // 重要
+        });
+      }
     }
   });
   if (config.isMainApp) {
