@@ -235,6 +235,14 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       this.props.createPreventTab(fullpath, 'remove');
     };
 
+    closeAllTabs = () => {
+      this.props.tabMenus.forEach((x) => {
+        if (x.path === '/home') return;
+        this.closeView(x.path);
+      });
+      this.openView('/home');
+    };
+
     setForbidenTab = (data: Record<string, string | undefined>) => {
       if (data.action === 'add') {
         this.props.createPreventTab({ path: data.path, message: data.message }, 'add');
@@ -269,6 +277,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           setLocalStore={this.setLocalStore}
           openView={this.openView}
           closeView={this.closeView}
+          closeAllTabs={this.closeAllTabs}
           emitOutsideClick={this.emitOutsideClick}
           dispatchMouseClick={this.dispatchMouseClick}
           setForbidenTab={this.setForbidenTab}
