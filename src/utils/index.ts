@@ -113,7 +113,7 @@ export const getDomain = (url: string) => {
   if (isURL(url)) {
     const arr = url.split('.').slice(-2);
     if (arr.length === 2) {
-      str = `${arr[0]}.${arr[1]}`.replace(/\/+$/, '');
+      str = `${arr[0]}.${arr[1].split('/')[0]}`.replace(/\/+$/, '');
     }
   }
   return str;
