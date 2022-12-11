@@ -12,10 +12,11 @@ import { registerMicroApps, start } from 'qiankun';
 import { getSubRoutes } from '@/router/config';
 import { emitter as microEvent } from '@/utils/mitt';
 import { connect } from 'react-redux';
-import { matchRoutes } from '@/router';
-import { Message } from '@/utils';
+import { matchRoutes, isIframe } from '@/router';
+import { getPathName, Message } from '@/utils';
 import { t } from '@/locale';
 import {
+  createMenus,
   createTabMenu,
   createIframeMenu,
   createMicroMenu,
@@ -27,7 +28,7 @@ import store from '@/store';
 import config from '@/config';
 import routes from '@/router/config';
 
-import type { AppState } from '@/store/reducers/app';
+import type { AppState, ITabNav } from '@/store/reducers/app';
 import type { Nullable } from '@/utils/types';
 
 const EXCLUDE_URLS = ['http://localhost:8000', 'http://localhost:18000'];
@@ -45,6 +46,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       flattenMenus: state.app.flattenMenus,
     }),
     {
+      createMenus,
       createTabMenu,
       createIframeMenu,
       createMicroMenu,
@@ -55,6 +57,35 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
   @withRouter
   class C extends Component<any> {
     static displayName = `App(${WrappedComponent.displayName || WrappedComponent.name})`;
+
+    fetchNavMenus = async () => {
+      const { pathname } = this.props.location;
+      if (this.props.flattenMenus.length || window.__MAIM_APP_ENV__ || isIframe(pathname)) return;
+      const isLoaded: boolean = await this.props.createMenus();
+      if (!isLoaded) {
+        return console.error('应用菜单加载失败，请检查菜单接口！');
+      }
+      this.getLocalTabMenus().forEach((x) => {
+        if (this.props.flattenMenus.some((k) => getPathName(k.key) === x.path)) {
+          this.props.createTabMenu(x, 'add');
+        }
+      });
+      // 重要
+      this.addTabMenus('');
+    };
+
+    getLocalTabMenus = () => {
+      const localTabNav = localStorage.getItem('tab_menus');
+      let result: ITabNav[] = [];
+      if (localTabNav) {
+        try {
+          result = JSON.parse(localTabNav);
+        } catch (err) {
+          // ...
+        }
+      }
+      return result;
+    };
 
     notDisplayTab = (pathname: string) => {
       return ['/login', '/subview'].some((x) => pathname.startsWith(x));
@@ -268,6 +299,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
         <WrappedComponent
           ref={forwardedRef}
           {...this.props}
+          fetchNavMenus={this.fetchNavMenus}
           addTabMenus={this.addTabMenus}
           refreshView={this.refreshView}
           registerQiankun={this.registerQiankun}

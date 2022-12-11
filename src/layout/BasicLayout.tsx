@@ -11,6 +11,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 import { matchRoutes } from '@/router';
+import { application } from '@/hoc';
 import { Layout } from '@jiaozhiye/qm-design-react';
 import {
   createDictData,
@@ -47,6 +48,7 @@ type IState = {
   left: number;
 };
 
+@application
 class BasicLayout extends Component<any, IState> {
   public state: IState;
 
@@ -66,6 +68,7 @@ class BasicLayout extends Component<any, IState> {
   }
 
   componentDidMount() {
+    this.props.fetchNavMenus();
     if (!window.__MAIM_APP_ENV__) {
       this.props.createDictData();
       this.props.createAuthData();

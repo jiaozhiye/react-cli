@@ -73,7 +73,7 @@ const formateMenus = (list): ISideMenu[] => {
 };
 
 // 设置导航菜单
-export const createMenuList =
+export const createMenus =
   () =>
   async (dispatch, getState): Promise<boolean> => {
     const {
