@@ -32,6 +32,7 @@ type IProps = {
     title?: string;
     content: React.ReactNode;
   };
+  children?: React.ReactNode;
 };
 
 const ROW_HEIGHT = 75;
