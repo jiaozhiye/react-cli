@@ -16,6 +16,7 @@ const Login = lazy(() => import('@/modules/framework/pages/login'));
 const Dashboard = lazy(() => import('@/modules/framework/pages/dashboard'));
 const BasicLayout = lazy(() => import('@/layout/BasicLayout'));
 const BlankLayout = lazy(() => import('@/layout/BlankLayout'));
+const MicroLayout = lazy(() => import('@/layout/MicroLayout'));
 const Nomatch = lazy(() => import('@/pages/nomatch'));
 
 const flattenRoutes = moduleRoutes.map((x) => x.routes).flat();
@@ -32,13 +33,19 @@ const getMicroRoutes = () => {
   let result: IRoute[] = [];
   // for qiankun micro-app
   if (config.powerByMicro) {
-    result = flattenRoutes.map((x) => ({
-      path: `/${config.system}` + x.path,
-      meta: x.meta,
-      exact: x.exact,
-      props: x.props,
-      component: x.component,
-    }));
+    result = flattenRoutes.map((x) => {
+      const _route: IRoute = {
+        path: `/${config.system}` + x.path,
+        meta: x.meta,
+        exact: x.exact,
+        props: x.props,
+        component: x.component,
+      };
+      return Object.assign(
+        _route,
+        x.iframePath ? { iframePath: x.iframePath, component: MicroLayout } : null
+      );
+    });
     result.push({
       path: `/${config.system}/*`,
       component: Nomatch,
@@ -102,6 +109,7 @@ const routes: IRoute[] = [
             path: x.path,
             meta: x.meta,
             exact: x.exact,
+            props: x.props,
             iframePath: x.iframePath
               ? x.iframePath
               : config.microType === 'iframe'

@@ -55,6 +55,7 @@ export type IRoute = {
   path: string;
   component?: any;
   redirect?: string;
+  props?: Record<string, unknown>;
   exact?: boolean;
   strict?: boolean;
   dynamic?: boolean;
