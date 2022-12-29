@@ -71,6 +71,9 @@ export default {
       color: '主题颜色',
       type: '主题模式',
     },
+    widget: {
+      fullScreen: '全屏',
+    },
     fetch: {
       errorCode: {
         200: '服务器成功返回请求的数据',

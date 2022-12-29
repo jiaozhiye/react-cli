@@ -9,7 +9,7 @@ export default {
   app: {
     global: {
       title: 'Cloud Platform',
-      home: 'Home Page',
+      home: 'Home',
       dashboard: 'Dashboard',
       emptyText: 'No Data',
       noMatch: 'Sorry, the page you visited does not exist.',
@@ -70,6 +70,9 @@ export default {
     theme: {
       color: 'Theme color',
       type: 'Theme type',
+    },
+    widget: {
+      fullScreen: 'Full Screen',
     },
     fetch: {
       errorCode: {
