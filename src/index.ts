@@ -10,7 +10,6 @@ import '@/locale/setting';
 import { getDomain, destroyAlert } from '@/utils';
 import { setMicroEvent } from '@/utils/mitt';
 import { ACHIEVE_LOCAL } from '@/store/types';
-import routes from '@/router/config';
 import config from '@/config';
 import App from './App';
 
@@ -41,6 +40,8 @@ function initialMicro(props) {
   const { microEvent, isMainEnv, isWidget, pathRoute } = props || {};
   // Widget 挂件
   if (isWidget) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const routes = require('@/router/config').default;
     const route = routes.find((x) => x.path === pathRoute);
     route && (route.path = '/');
   }
