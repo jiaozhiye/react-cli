@@ -7,11 +7,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import UseConfig from '@/config/use';
+import '@/locale/setting';
 import store from '@/store';
 import { renderRoutes } from '@/router';
 import routes from '@/router/config';
 import config from '@/config';
+import UseConfig from '@/config/use';
 
 class App extends Component {
   render() {

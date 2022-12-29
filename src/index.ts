@@ -6,7 +6,6 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import '@/locale/setting';
 import { getDomain, destroyAlert } from '@/utils';
 import { setMicroEvent } from '@/utils/mitt';
 import { ACHIEVE_LOCAL } from '@/store/types';
