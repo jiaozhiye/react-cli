@@ -131,15 +131,14 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
 
     refreshView = (pathname: string) => {
       const { search } = this.props.location;
-      this.props.history.replace(`/redirect${pathname}` + search);
       // micro-app
       if (config.microType === 'micro-app') {
         const microItem = this.props.microMenus.find((x) => x.key === pathname);
         if (microItem) {
           this.props.createMicroMenu(pathname, 'remove');
-          setTimeout(() => this.props.createMicroMenu(microItem, 'add'));
         }
       }
+      this.props.history.replace(`/redirect${pathname}` + search);
       // iframe
       let $iframe = this.getIframeNode(pathname);
       if (!$iframe) return;

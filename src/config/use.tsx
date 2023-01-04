@@ -18,7 +18,7 @@ import * as types from '@/store/types';
 import config from '@/config';
 
 import type { AppState } from '@/store/reducers/app';
-import type { ComponentSize, Language, Nullable } from '@/utils/types';
+import type { ComponentSize, Language } from '@/utils/types';
 
 import '@jiaozhiye/qm-design-react/lib/style/index.less';
 import '@/assets/css/reset.less';
@@ -48,7 +48,7 @@ class UseConfig extends Component<any> {
     },
   };
 
-  private $styleNode: Nullable<HTMLLinkElement | HTMLStyleElement> = null;
+  private $dynamicStyles: HTMLElement[] = [];
 
   componentDidMount() {
     const localTheme = localStorage.getItem('theme_color');
@@ -102,31 +102,37 @@ class UseConfig extends Component<any> {
       if (prevProps.size === COMPACT_MARK) {
         this.removeStyleNode();
       }
+      if (window.__MAIM_APP_ENV__) {
+        this.props.refreshView(nextPathname);
+      }
     }
   }
 
-  findStyleNode = () => {
-    const $links = document.head.getElementsByTagName(
-      process.env.NODE_ENV === 'production' ? 'link' : 'style'
+  getMicroHead = () => {
+    return document.getElementsByTagName(config.powerByMicro ? 'micro-app-head' : 'head')[0];
+  };
+
+  getStyleList = () => {
+    const $links = this.getMicroHead().getElementsByTagName(
+      process.env.NODE_ENV === 'production' && !config.powerByMicro ? 'link' : 'style'
     );
-    return Array.from($links).pop() || null;
+    return Array.from($links);
   };
 
   removeStyleNode = () => {
-    try {
-      this.$styleNode && document.head.removeChild(this.$styleNode);
-    } catch (err) {
-      // ...
-    }
+    this.$dynamicStyles.forEach((x) => x.parentNode!.removeChild(x));
   };
 
   loadStyleNode = async () => {
-    if (this.$styleNode) {
-      return document.head.appendChild(this.$styleNode);
+    if (this.$dynamicStyles.length) {
+      return this.$dynamicStyles.forEach((x) => this.getMicroHead().appendChild(x));
     }
+    const _$styles = this.getStyleList();
     // 不能使用 require 方法
     await import('@jiaozhiye/qm-design-react/lib/style/compact.less');
-    this.$styleNode = this.findStyleNode();
+    this.$dynamicStyles = config.powerByMicro
+      ? this.getStyleList().filter((x) => !_$styles.includes(x))
+      : [this.getStyleList().pop()!];
   };
 
   registerQiankun = () => {

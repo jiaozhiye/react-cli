@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-03 11:21:39
+ * @Last Modified time: 2023-01-04 09:22:34
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -37,7 +37,7 @@ class ThemeColor extends Component<any> {
       { color: '#13C2C2' },
       { color: '#52C41A' },
       { color: '#1890FF' },
-      { color: '#2F54EB' },
+      { color: '#0D5FE9' },
       { color: '#2A5CA5' },
     ],
   };
@@ -57,7 +57,7 @@ class ThemeColor extends Component<any> {
     const { colorList } = this.state;
     return (
       <div className={classNames('themeColor')}>
-        <h5 className={classNames('title')}>{t('app.theme.color')}</h5>
+        <div className={classNames('title')}>{t('app.theme.color')}</div>
         <div>
           {colorList.map(({ color }) => (
             <Tag

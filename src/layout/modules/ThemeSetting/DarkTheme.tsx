@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2021-07-15 21:23:46
+ * @Last Modified time: 2023-01-04 09:22:40
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -24,7 +24,7 @@ class ThemeColor extends Component<any> {
     const { themeType } = this.props;
     return (
       <div className={classNames('themeColor')}>
-        <h5 className={classNames('title')}>{t('app.theme.type')}</h5>
+        <div className={classNames('title')}>{t('app.theme.type')}</div>
         <div style={{ display: 'flex' }}>
           <div
             className={classNames('color-type-item', 'item-light')}
