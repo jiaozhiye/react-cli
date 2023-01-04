@@ -16,6 +16,10 @@ declare module '*.gif';
 declare module '*.bmp';
 declare module '*.tiff';
 
+declare interface Navigator {
+  msSaveBlob?: (blob: Blob, defaultName?: string) => boolean;
+}
+
 declare interface Window {
   microApp: any;
   __MAIM_APP_ENV__: boolean;

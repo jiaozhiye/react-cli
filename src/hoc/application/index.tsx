@@ -9,7 +9,7 @@ import hoistStatics from 'hoist-non-react-statics';
 import { withRouter } from 'react-router-dom';
 import microApp from '@micro-zoe/micro-app';
 import { registerMicroApps, start } from 'qiankun';
-import { getSubRoutes } from '@/router/config';
+import { getSubRoutes, deepFindRoute } from '@/router/config';
 import { emitter as microEvent } from '@/utils/mitt';
 import { connect } from 'react-redux';
 import { matchRoutes, isIframe } from '@/router';
@@ -66,8 +66,15 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
         return console.error('应用菜单加载失败，请检查菜单接口！');
       }
       this.getLocalTabMenus().forEach((x) => {
-        if (this.props.flattenMenus.some((k) => getPathName(k.key) === x.path)) {
-          this.props.createTabMenu(x, 'add');
+        const menuItem = this.props.flattenMenus.find((k) => getPathName(k.key) === x.path);
+        if (x.path.endsWith('/dashboard') || menuItem) {
+          if (menuItem) {
+            this.props.createTabMenu(Object.assign(x, { title: menuItem.title }), 'add');
+          } else {
+            const routeItem = deepFindRoute(routes, x.path);
+            routeItem &&
+              this.props.createTabMenu(Object.assign(x, { title: routeItem.meta!.title }), 'add');
+          }
         }
       });
       // 重要

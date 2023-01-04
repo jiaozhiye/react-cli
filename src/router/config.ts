@@ -29,6 +29,22 @@ export const getSubRoutes = () => {
   return result;
 };
 
+export const deepFindRoute = (list: IRoute[], path: string): IRoute | null => {
+  let res: IRoute | null = null;
+  for (let i = 0; i < list.length; i++) {
+    if (Array.isArray(list[i].routes)) {
+      res = deepFindRoute(list[i].routes!, path);
+    }
+    if (res) {
+      return res;
+    }
+    if (list[i].path === path) {
+      return list[i];
+    }
+  }
+  return res;
+};
+
 const getMicroRoutes = () => {
   let result: IRoute[] = [];
   // for qiankun micro-app

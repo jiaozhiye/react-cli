@@ -9,7 +9,7 @@ import { message, notification, Modal } from '@jiaozhiye/qm-design-react';
 import { ExclamationCircleOutlined } from '@/icons';
 import { debounce, throttle, round, cloneDeep, merge } from 'lodash-es';
 import { t } from '@/locale';
-import type { AnyFunction } from './types';
+import type { AnyFunction, Nullable } from './types';
 
 /**
  * @description 判断对象属性是否为自身属性
@@ -241,4 +241,24 @@ export const confirmBeforeClose = async (allowClose: boolean): Promise<void> => 
     }
   }
   return Promise.resolve();
+};
+
+/**
+ * @description 文件流下载
+ * @param {Blob} blob 对象
+ * @param {string} fileName 文件名
+ * @returns
+ */
+export const download = (blob: Blob, fileName: string): void => {
+  // ie10+
+  if (navigator.msSaveBlob) {
+    navigator.msSaveBlob(blob, decodeURI(fileName));
+  } else {
+    const downloadUrl: string = window.URL.createObjectURL(blob);
+    let a: Nullable<HTMLAnchorElement> = document.createElement('a');
+    a.href = downloadUrl;
+    a.download = decodeURI(fileName);
+    a.click();
+    a = null;
+  }
 };
