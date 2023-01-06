@@ -9,11 +9,11 @@ import hoistStatics from 'hoist-non-react-statics';
 import { withRouter } from 'react-router-dom';
 import microApp from '@micro-zoe/micro-app';
 import { registerMicroApps, start } from 'qiankun';
-import { getSubRoutes, deepFindRoute } from '@/router/config';
+import { getSubRoutes } from '@/router/config';
 import { emitter as microEvent } from '@/utils/mitt';
 import { connect } from 'react-redux';
 import { matchRoutes, isIframe } from '@/router';
-import { getPathName, Message } from '@/utils';
+import { Message } from '@/utils';
 import { t } from '@/locale';
 import {
   createMenus,
@@ -28,7 +28,7 @@ import store from '@/store';
 import config from '@/config';
 import routes from '@/router/config';
 
-import type { AppState, ITabNav } from '@/store/reducers/app';
+import type { AppState } from '@/store/reducers/app';
 import type { Nullable } from '@/utils/types';
 
 const EXCLUDE_URLS = ['http://localhost:8000', 'http://localhost:18000'];
@@ -58,40 +58,16 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
   class C extends Component<any> {
     static displayName = `App(${WrappedComponent.displayName || WrappedComponent.name})`;
 
-    fetchNavMenus = async () => {
+    fetchNavMenus = async (reload?: boolean) => {
       const { pathname } = this.props.location;
-      if (this.props.flattenMenus.length || window.__MAIM_APP_ENV__ || isIframe(pathname)) return;
-      const isLoaded: boolean = await this.props.createMenus();
+      const { flattenMenus } = this.props;
+      if (!reload && (flattenMenus.length || window.__MAIM_APP_ENV__ || isIframe(pathname))) return;
+      const isLoaded: boolean = await this.props.createMenus(reload);
       if (!isLoaded) {
         return console.error('应用菜单加载失败，请检查菜单接口！');
       }
-      this.getLocalTabMenus().forEach((x) => {
-        const menuItem = this.props.flattenMenus.find((k) => getPathName(k.key) === x.path);
-        if (x.path.endsWith('/dashboard') || menuItem) {
-          if (menuItem) {
-            this.props.createTabMenu(Object.assign(x, { title: menuItem.title }), 'add');
-          } else {
-            const routeItem = deepFindRoute(routes, x.path);
-            routeItem &&
-              this.props.createTabMenu(Object.assign(x, { title: routeItem.meta!.title }), 'add');
-          }
-        }
-      });
       // 重要
       this.addTabMenus('');
-    };
-
-    getLocalTabMenus = () => {
-      const localTabNav = localStorage.getItem('tab_menus');
-      let result: ITabNav[] = [];
-      if (localTabNav) {
-        try {
-          result = JSON.parse(localTabNav);
-        } catch (err) {
-          // ...
-        }
-      }
-      return result;
     };
 
     notDisplayTab = (pathname: string) => {

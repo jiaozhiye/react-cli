@@ -144,4 +144,88 @@ const menus = [
   },
 ];
 
-export default menus[0].children;
+const menus2 = [
+  {
+    id: '1',
+    appCode: 'dms',
+    caseCode: null,
+    microHost: null,
+    icon: 'icon-flag-fill',
+    title: 'bjgl', // 菜单名称
+    children: [
+      {
+        id: '2',
+        appCode: 'dms',
+        caseCode: null,
+        microHost: null,
+        icon: '',
+        title: 'cggl',
+        children: [
+          {
+            id: '3',
+            appCode: 'dms',
+            caseCode: 'spa1001', // 用例号
+            microHost: 'http://localhost:9021/', // 子应用地址
+            icon: '',
+            title: 'bjcgdd',
+          },
+          {
+            id: '4',
+            appCode: 'dms',
+            caseCode: 'spa1002?a=1',
+            microHost: 'http://localhost:9021/',
+            icon: '',
+            title: 'bjcgrk',
+          },
+          {
+            id: '5',
+            appCode: 'dms',
+            caseCode: 'spa1002?a=2',
+            microHost: 'http://localhost:9021/',
+            icon: '',
+            title: 'bjcgtk',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    id: '6',
+    appCode: 'dms',
+    caseCode: null,
+    microHost: null,
+    icon: 'icon-flag-fill',
+    title: 'xsgl',
+    children: [
+      {
+        id: '7',
+        appCode: 'dms',
+        caseCode: null,
+        microHost: null,
+        icon: '',
+        title: 'xsgl',
+        children: [
+          {
+            id: '8',
+            appCode: 'dms',
+            caseCode: 'sal1001',
+            microHost: 'http://localhost:9021/',
+            icon: '',
+            title: 'xsfp',
+            caseHref: 'https://sit-mdata.faw.cn/iframe/mdata-fe/sys027',
+          },
+          {
+            id: '9',
+            appCode: 'dms',
+            caseCode: 'sal1002',
+            microHost: 'http://localhost:9021/',
+            icon: '',
+            title: 'xsjl',
+          },
+        ],
+      },
+    ],
+  },
+];
+
+export default { ['zh-cn']: menus[0].children, ['en']: menus2 };

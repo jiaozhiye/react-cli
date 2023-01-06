@@ -142,6 +142,23 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
   }
 };
 
+const getLocalTabMenus = () => {
+  const localTabNav = localStorage.getItem('tab_menus');
+  let result: ITabNav[] = [];
+  if (localTabNav) {
+    try {
+      result = JSON.parse(localTabNav);
+    } catch (err) {
+      // ...
+    }
+  }
+  return result;
+};
+
+const setLocalTabMenus = (tabMenus: ITabNav[]) => {
+  localStorage.setItem('tab_menus', JSON.stringify(tabMenus));
+};
+
 /**
  * 初始化 state
  */
@@ -169,11 +186,22 @@ const initState: IState = {
 // 设置导航菜单
 const setSideMenus = (state: IState, payload) => {
   const flattenMenus = createFlattenMenus(payload);
-  setRouteMeta(flattenMenus);
+  setRouteMeta([{ key: '/home', title: t('app.global.home') }, ...flattenMenus]);
+  // 初始化 tabMenus
+  const tabMenus: ITabNav[] = [{ path: '/home', title: t('app.global.dashboard') }];
+  getLocalTabMenus().forEach((x) => {
+    const menuItem = flattenMenus.find((k) => getPathName(k.key) === x.path);
+    if (menuItem) {
+      tabMenus.push(Object.assign(x, { title: menuItem.title }));
+    }
+  });
+  setLocalTabMenus(tabMenus);
+  // End
   return Object.assign({}, state, {
     navLoaded: true,
     sideMenus: payload,
     flattenMenus,
+    tabMenus,
   });
 };
 
@@ -198,11 +226,11 @@ const addTabMenu = <T extends ITabNav>(tabMenus: T[], data: T) => {
 
 // 设置顶部选项卡导航
 const setTabMenus = (state: IState, payload, behavior) => {
-  const results =
+  const results: ITabNav[] =
     behavior === 'add'
       ? addTabMenu(state.tabMenus, payload)
       : state.tabMenus.filter((x) => x.path !== payload);
-  localStorage.setItem('tab_menus', JSON.stringify(results));
+  setLocalTabMenus(results);
   return Object.assign({}, state, {
     tabMenus: results,
   });

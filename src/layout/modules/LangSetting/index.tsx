@@ -31,8 +31,7 @@ class LangSetting extends Component<any> {
     });
     emitter.$emit(LOCALE_LANG, lang);
     // 刷新页面
-    // this.props.refreshView(this.props.location.pathname);
-    setTimeout(() => window.history.go(0));
+    this.props.refreshView(this.props.location.pathname);
   }
 
   renderMenus() {

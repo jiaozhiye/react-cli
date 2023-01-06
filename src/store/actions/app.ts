@@ -75,13 +75,13 @@ const formateMenus = (list): ISideMenu[] => {
 
 // 设置导航菜单
 export const createMenus =
-  () =>
+  (reload?: boolean) =>
   async (dispatch, getState): Promise<boolean> => {
     const {
-      app: { sideMenus },
+      app: { sideMenus, lang },
     } = getState();
 
-    if (sideMenus.length) {
+    if (!reload && sideMenus.length) {
       return true;
     }
 
@@ -91,7 +91,7 @@ export const createMenus =
     if (process.env.MOCK_DATA === 'true') {
       // eslint-disable-next-line @typescript-eslint/no-var-requires
       const res = require('@/mock/sideMenu').default;
-      data = res;
+      data = res[lang];
     } else {
       try {
         const res: any = await getMenuList({});
@@ -117,18 +117,18 @@ export const createMenus =
 
 // 设置数据字典
 export const createDictData =
-  () =>
+  (reload?: boolean) =>
   async (dispatch, getState): Promise<void> => {
     const {
       app: { dict },
     } = getState();
 
-    if (Object.keys(dict).length) {
+    if (!reload && Object.keys(dict).length) {
       return;
     }
 
     const lastToken = getParentLocal('dict')._t;
-    if (getToken() === lastToken) return;
+    if (!reload && getToken() === lastToken) return;
     // 数据
     let data: Record<string, Array<Dictionary> | string> = {};
     if (process.env.MOCK_DATA === 'true') {
@@ -155,18 +155,18 @@ export const createDictData =
 
 // 设置功能权限
 export const createAuthData =
-  () =>
+  (reload?: boolean) =>
   async (dispatch, getState): Promise<void> => {
     const {
       app: { auth },
     } = getState();
 
-    if (Object.keys(auth).length) {
+    if (!reload && Object.keys(auth).length) {
       return;
     }
 
     const lastToken = getParentLocal('auth')._t;
-    if (getToken() === lastToken) return;
+    if (!reload && getToken() === lastToken) return;
     // 数据
     let data: Record<string, string[] | string> = {};
     if (process.env.MOCK_DATA === 'true') {

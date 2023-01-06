@@ -76,6 +76,16 @@ class BasicLayout extends Component<any, IState> {
     }
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.lang !== this.props.lang) {
+      this.props.fetchNavMenus(true);
+      if (!window.__MAIM_APP_ENV__) {
+        this.props.createDictData(true);
+        this.props.createAuthData(true);
+      }
+    }
+  }
+
   componentWillUnmount() {
     window.removeEventListener('resize', this.resizeHandler);
   }
@@ -229,6 +239,7 @@ class BasicLayout extends Component<any, IState> {
 export default connect(
   (state: AppState) => ({
     size: state.app.size,
+    lang: state.app.lang,
     device: state.app.device,
     iframeMenus: state.app.iframeMenus,
     microMenus: state.app.microMenus,

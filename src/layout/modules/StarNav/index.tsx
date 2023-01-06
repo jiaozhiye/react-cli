@@ -22,6 +22,12 @@ class StarNav extends Component<any> {
     this.props.createStarMenu();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.lang !== this.props.lang) {
+      this.props.createStarMenu();
+    }
+  }
+
   createMenuItems() {
     return this.props.starMenus.map((x) => ({
       key: x.key,
