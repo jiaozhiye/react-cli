@@ -102,37 +102,45 @@ class BasicLayout extends Component<any, IState> {
 
   createIframeView(route) {
     const { iframeMenus } = this.props;
-    return iframeMenus.map((x) => (
-      <div
-        key={x.key}
-        className={classNames('app-iframe-container')}
-        style={{ display: route.path === x.key ? 'block' : 'none' }}
-      >
-        <iframe
-          id={x.key}
-          name={x.key}
-          src={x.value}
-          width="100%"
-          height="100%"
-          frameBorder="0"
-          onLoad={(ev) => {
-            const $iframe = ev.target as HTMLIFrameElement;
-            try {
-              $iframe.contentWindow!.__MAIM_APP_ENV__ = config.isMainApp;
-            } catch (err) {
-              // ...
-            }
-            $iframe.focus();
-          }}
-        />
-      </div>
-    ));
+    return iframeMenus.map((x) => {
+      if (!x.keep && route.path !== x.key) {
+        return null;
+      }
+      return (
+        <div
+          key={x.key}
+          className={classNames('app-iframe-container')}
+          style={{ display: route.path === x.key ? 'block' : 'none' }}
+        >
+          <iframe
+            id={x.key}
+            name={x.key}
+            src={x.value}
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            onLoad={(ev) => {
+              const $iframe = ev.target as HTMLIFrameElement;
+              try {
+                $iframe.contentWindow!.__MAIM_APP_ENV__ = config.isMainApp;
+              } catch (err) {
+                // ...
+              }
+              $iframe.focus();
+            }}
+          />
+        </div>
+      );
+    });
   }
 
   createMicroView(route) {
     const { microMenus, createMicroState } = this.props;
     return microMenus.map((x) => {
-      const { key, value, search = '' } = x;
+      const { key, value, keep, search = '' } = x;
+      if (!keep && route.path !== key) {
+        return null;
+      }
       return config.microType === 'qiankun' ? (
         <div
           key={key}

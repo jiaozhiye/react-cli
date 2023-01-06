@@ -33,6 +33,7 @@ export type ISideMenu = {
   title: string;
   id?: string;
   icon?: string;
+  keepAlive?: boolean;
   hideInMenu?: boolean;
   microHost?: string;
   caseHref?: string;
@@ -54,6 +55,7 @@ export type IPreventTab = {
 export type ICacheMenu = {
   key: string;
   value: string;
+  keep?: boolean;
   search?: string;
 };
 
@@ -118,7 +120,7 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
         mainAppRoutes.push({
           path,
           exact: true,
-          meta: { title: x.title, keepAlive: true },
+          meta: { title: x.title, keepAlive: x.keepAlive },
           ...(!x.caseHref
             ? {
                 iframePath: ``, // iframePath 与 microHost、microRule 不共存

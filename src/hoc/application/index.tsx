@@ -124,11 +124,17 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       );
       // iframe 模式
       if (route.iframePath) {
-        this.props.createIframeMenu({ key: pathname, value: route.iframePath + search }, 'add');
+        this.props.createIframeMenu(
+          { key: pathname, value: route.iframePath + search, keep: route.meta.keepAlive },
+          'add'
+        );
       }
       // micro 模式
       if (route.microHost && route.microRule) {
-        this.props.createMicroMenu({ key: pathname, value: route.microHost, search }, 'add');
+        this.props.createMicroMenu(
+          { key: pathname, value: route.microHost, keep: route.meta.keepAlive, search },
+          'add'
+        );
       }
     };
 

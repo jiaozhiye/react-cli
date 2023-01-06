@@ -59,6 +59,7 @@ const formateMenus = (list): ISideMenu[] => {
       key: createMenuPath(x),
       title: x.title,
       icon: x.icon,
+      keepAlive: !!(x.keepAlive ?? 1),
       hideInMenu: !!x.hidden,
       caseHref: x.caseHref,
     };

@@ -89,7 +89,8 @@ class SideMenu extends Component<any> {
               location: { pathname },
             } = this.props;
             if (!this.props.microAppReady) return;
-            this.props.openView(path.split('?')[0] === pathname ? `/redirect${path}` : path);
+            const p = path.split('?');
+            this.props.openView(p.length > 1 && p[0] === pathname ? `/redirect${path}` : path);
           },
         };
       });

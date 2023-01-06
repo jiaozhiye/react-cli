@@ -116,7 +116,7 @@ const routes: IRoute[] = [
       },
       {
         path: '/home',
-        meta: { title: t('app.global.dashboard'), bgColor: true, keepAlive: false },
+        meta: { title: t('app.global.dashboard'), bgColor: true },
         component: Dashboard,
       },
       ...flattenRoutes.map((x) => {
