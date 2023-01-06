@@ -238,8 +238,6 @@ class BasicLayout extends Component<any, IState> {
 
 export default connect(
   (state: AppState) => ({
-    size: state.app.size,
-    lang: state.app.lang,
     device: state.app.device,
     iframeMenus: state.app.iframeMenus,
     microMenus: state.app.microMenus,
