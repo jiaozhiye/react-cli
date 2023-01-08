@@ -29,7 +29,7 @@ const whiteAuth: string[] = [
 ];
 
 // 登录判断
-export const isLogin = (): boolean => {
+const isLogin = (): boolean => {
   if (process.env.MOCK_DATA === 'true') {
     return true;
   } else {
@@ -40,6 +40,13 @@ export const isLogin = (): boolean => {
 // iframe 判断
 export const isIframe = (path: string): boolean => {
   return path.startsWith(whiteAuth[1]);
+};
+
+// 设置 DocTitle
+export const setDocumentTitle = (title?: string) => {
+  if (!config.powerByMicro) {
+    document.title = `${t('app.global.title')}-${title || ''}`;
+  }
 };
 
 export const renderRoutes = (routes: IRoute[] = [], extraProps = {}, switchProps = {}) => {
@@ -54,10 +61,7 @@ export const renderRoutes = (routes: IRoute[] = [], extraProps = {}, switchProps
             strict={route.strict}
             render={(props) => {
               const { path, redirect } = route;
-              // for qiankun micro-app
-              if (!config.powerByMicro) {
-                document.title = `${t('app.global.title')}-${route.meta?.title || '404'}`;
-              }
+              setDocumentTitle(route.meta?.title);
               if (isLogin()) {
                 // 跳转首页
                 if (path === whiteList[0]) {

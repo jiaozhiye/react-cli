@@ -24,6 +24,7 @@ import {
 } from '../types';
 import { t } from '@/locale';
 import { getPathName } from '@/utils';
+import { matchRoutes, setDocumentTitle } from '@/router';
 import config from '@/config';
 import routes from '@/router/config';
 import type { ComponentSize, Device, Dictionary, IRoute, Language, ThemeType } from '@/utils/types';
@@ -196,7 +197,9 @@ const setSideMenus = (state: IState, payload) => {
     }
   });
   setLocalTabMenus(tabMenus);
-  // End
+  // 重置 DocTitle
+  const { route } = matchRoutes(routes, window.location.pathname).pop()!;
+  setDocumentTitle(route.meta?.title);
   return Object.assign({}, state, {
     navLoaded: true,
     sideMenus: payload,

@@ -75,7 +75,7 @@ const getIframeRoutes = () => {
 };
 
 // subView 判断
-const isSubView = (path = ''): boolean => {
+const isSubView = (path = '') => {
   return path.startsWith('/subview');
 };
 
