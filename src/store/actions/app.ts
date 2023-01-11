@@ -94,7 +94,7 @@ export const createMenus =
       data = res[lang];
     } else {
       try {
-        const res: any = await getMenuList({});
+        const res = await getMenuList({});
         if (res.code === 200) {
           if (Array.isArray(res.data) && res.data?.length) {
             data = res.data;
@@ -134,7 +134,7 @@ export const createDictData =
     if (process.env.MOCK_DATA === 'true') {
       data = { _t: getToken(), ...localDict };
     } else {
-      const res: any = await getDictList({});
+      const res = await getDictList({});
       if (res.code === 200) {
         // 数据字典规则：如果有重复的 Code，服务端覆盖客户端
         data = {
@@ -172,7 +172,7 @@ export const createAuthData =
     if (process.env.MOCK_DATA === 'true') {
       data = { _t: getToken() };
     } else {
-      const res: any = await getAuthList({});
+      const res = await getAuthList({});
       if (res.code === 200) {
         // 数据字典规则：如果有重复的 Code，服务端覆盖客户端
         data = {
@@ -204,7 +204,7 @@ export const createStarMenu =
       const res = require('@/mock/starMenu').default;
       data = res;
     } else {
-      const res: any = await getStarMenuList({});
+      const res = await getStarMenuList({});
       if (res.code === 200) {
         data = res.data?.filter((x) => flattenMenus.some((k) => k.key === x.key)) ?? [];
       }

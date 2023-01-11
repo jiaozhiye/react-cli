@@ -18,15 +18,16 @@ import { getToken } from '@/utils/cookies';
 import { Notification } from '@/utils';
 import { t } from '@/locale';
 import config from '@/config';
+import type { AjaxResponse } from '@/utils/types';
 
 type IRequestConfig = AxiosRequestConfig & {
   cancelable?: boolean;
   lockable?: boolean;
 };
 
-type IAxiosInstance = AxiosInstance & {
-  get<T = any, R = AxiosResponse<T>>(url: string, config?: IRequestConfig): Promise<R>;
-  post<T = any, R = AxiosResponse<T>>(url: string, data?: any, config?: IRequestConfig): Promise<R>;
+type IAxiosInstance = Omit<AxiosInstance, 'get' | 'post'> & {
+  get<T = any, R = AjaxResponse<T>>(url: string, config?: IRequestConfig): Promise<R>;
+  post<T = any, R = AjaxResponse<T>>(url: string, data?: any, config?: IRequestConfig): Promise<R>;
 };
 
 type IRequestHeader = {

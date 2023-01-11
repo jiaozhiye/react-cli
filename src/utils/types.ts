@@ -40,6 +40,12 @@ export enum SizeHeight {
   small = 24,
 }
 
+export type AjaxResponse<T = any> = {
+  code: number;
+  data: T;
+  msg: string;
+};
+
 export type Dictionary = {
   text: string;
   value: string | number;
