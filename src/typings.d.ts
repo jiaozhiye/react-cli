@@ -16,6 +16,8 @@ declare module '*.gif';
 declare module '*.bmp';
 declare module '*.tiff';
 
+declare let __webpack_public_path__: string;
+
 declare interface Navigator {
   msSaveBlob?: (blob: Blob, defaultName?: string) => boolean;
 }

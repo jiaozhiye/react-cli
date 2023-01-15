@@ -12,8 +12,6 @@ import { ACHIEVE_LOCAL } from '@/store/types';
 import config from '@/config';
 import App from './App';
 
-declare let __webpack_public_path__: string;
-
 function render(props) {
   const { container } = props;
   ReactDOM.render(

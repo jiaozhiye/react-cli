@@ -102,21 +102,21 @@ class UseConfig extends Component<any> {
       if (prevProps.size === COMPACT_MARK) {
         this.removeStyleNode();
       }
-      if (window.__MAIM_APP_ENV__) {
-        this.props.refreshView(nextPathname);
-      }
     }
   }
 
   getMicroHead = () => {
-    return document.getElementsByTagName(config.powerByMicro ? 'micro-app-head' : 'head')[0];
+    const microHeadTag = window.__MICRO_APP_ENVIRONMENT__ ? 'micro-app-head' : 'qiankun-head';
+    return document.getElementsByTagName(config.powerByMicro ? microHeadTag : 'head')[0];
   };
 
-  getStyleList = () => {
-    const $links = this.getMicroHead().getElementsByTagName(
-      process.env.NODE_ENV === 'production' && !config.powerByMicro ? 'link' : 'style'
-    );
-    return Array.from($links);
+  getCompactStyles = () => {
+    const styleTag =
+      process.env.NODE_ENV === 'production' && !config.powerByMicro ? 'link' : 'style';
+    const $links = Array.from(this.getMicroHead().getElementsByTagName(styleTag));
+    return styleTag === 'style'
+      ? $links.filter((x) => x.innerText.match(/#__compact__/) !== null)
+      : [$links.pop()!];
   };
 
   removeStyleNode = () => {
@@ -127,12 +127,9 @@ class UseConfig extends Component<any> {
     if (this.$dynamicStyles.length) {
       return this.$dynamicStyles.forEach((x) => this.getMicroHead().appendChild(x));
     }
-    const _$styles = this.getStyleList();
     // 不能使用 require 方法
     await import('@jiaozhiye/qm-design-react/lib/style/compact.less');
-    this.$dynamicStyles = config.powerByMicro
-      ? this.getStyleList().filter((x) => !_$styles.includes(x))
-      : [this.getStyleList().pop()!];
+    this.$dynamicStyles = this.getCompactStyles();
   };
 
   registerQiankun = () => {

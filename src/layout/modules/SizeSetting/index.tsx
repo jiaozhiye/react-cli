@@ -30,11 +30,7 @@ class SizeSetting extends Component<any> {
       $iframe.contentWindow?.postMessage({ type: COMP_SIZE, data: size }, '*');
     });
     // 延迟 - 重要
-    setTimeout(() => {
-      emitter.$emit(COMP_SIZE, size);
-      // 刷新页面
-      // this.props.refreshView(this.props.location.pathname);
-    });
+    setTimeout(() => emitter.$emit(COMP_SIZE, size));
   }
 
   renderMenus() {
