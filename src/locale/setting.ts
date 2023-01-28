@@ -5,6 +5,7 @@
  * @Last Modified time: 2021-07-18 18:22:04
  */
 import { setTranslations, setLocale } from './i18n';
+import config from '@/config';
 
 import enLocale from './lang/en';
 import zhLocale from './lang/zh-cn';
@@ -19,4 +20,4 @@ const messages = {
 };
 
 setTranslations(messages);
-setLocale(localStorage.getItem('lang') || 'zh-cn');
+setLocale(localStorage.getItem('lang') || config.lang);
