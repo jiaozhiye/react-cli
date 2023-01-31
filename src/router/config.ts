@@ -19,7 +19,7 @@ const BlankLayout = lazy(() => import('@/layout/BlankLayout'));
 const MicroLayout = lazy(() => import('@/layout/MicroLayout'));
 const Nomatch = lazy(() => import('@/pages/nomatch'));
 
-const flattenRoutes = moduleRoutes.map((x) => x.routes).flat();
+const flattenRoutes: IRoute[] = moduleRoutes.map((x) => x.routes).flat();
 
 export const getSubRoutes = () => {
   let result: IRoute[] = [];

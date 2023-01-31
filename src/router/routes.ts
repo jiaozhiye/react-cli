@@ -4,7 +4,7 @@
  * @Last Modified by: 焦质晔
  * @Last Modified time: 2021-07-06 13:41:52
  */
-const files = (require as any).context('../modules', true, /\.route\.js$/);
+const files = (require as any).context('../modules', true, /\.route\.(t|j)s$/);
 
 let configRouters: Record<string, any>[] = [];
 
