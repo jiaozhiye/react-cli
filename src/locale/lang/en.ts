@@ -56,7 +56,7 @@ export default {
     },
     sizeSelect: {
       large: 'Large Size',
-      medium: 'Medium Size',
+      middle: 'Middle Size',
       small: 'Small Size',
     },
     helperDoc: {

@@ -27,8 +27,12 @@ const Tag = ({ color, check, ...rest }) => (
   </div>
 );
 
+type IState = {
+  colorList: Array<{ color: string }>;
+};
+
 class ThemeColor extends Component<any> {
-  state = {
+  state: IState = {
     colorList: [
       { color: '#F5222D' },
       { color: '#FA541C' },
