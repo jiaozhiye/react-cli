@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-25 20:19:53
+ * @Last Modified time: 2023-02-04 22:24:11
  */
 'use strict';
 
@@ -109,13 +109,7 @@ exports.cssLoaders = function (options) {
         },
         javascriptEnabled: true,
       },
-      additionalData: '@THEME_COLOR: ' + config.primaryColor + ';',
-    }).concat({
-      loader: 'style-resources-loader',
-      options: {
-        // 加载全局 less 变量
-        patterns: [path.resolve(__dirname, '../src/assets/css/variables.less')],
-      },
+      additionalData: `@import "@/assets/css/variables.less";`,
     }),
     sass: generateLoaders('sass'),
     scss: generateLoaders('sass'),
