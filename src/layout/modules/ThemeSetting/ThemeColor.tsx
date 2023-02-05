@@ -2,14 +2,14 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-01-04 09:22:34
+ * @Last Modified time: 2023-02-05 13:35:59
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { CheckOutlined } from '@/icons';
 import { connect } from 'react-redux';
 import { createTheme } from '@/store/actions';
-import { emitter } from '@/utils/mitt';
+import { emitter as microEvent } from '@/utils/mitt';
 import { t } from '@/locale';
 import { THEME_COLOR } from '@/store/types';
 import type { AppState } from '@/store/reducers/app';
@@ -53,7 +53,7 @@ class ThemeColor extends Component<any> {
       if (!$iframe) return;
       $iframe.contentWindow?.postMessage({ type: THEME_COLOR, data: color }, '*');
     });
-    emitter.$emit(THEME_COLOR, color);
+    microEvent.$emit(THEME_COLOR, color);
   }
 
   render() {

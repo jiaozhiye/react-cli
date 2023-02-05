@@ -10,7 +10,7 @@ import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 import { connect } from 'react-redux';
 import { createLocaleLang } from '@/store/actions';
 import { changeLocale } from '@/locale';
-import { emitter } from '@/utils/mitt';
+import { emitter as microEvent } from '@/utils/mitt';
 import { application } from '@/hoc';
 import { LOCALE_LANG } from '@/store/types';
 import type { AppState } from '@/store/reducers/app';
@@ -29,7 +29,7 @@ class LangSetting extends Component<any> {
       if (!$iframe) return;
       $iframe.contentWindow?.postMessage({ type: LOCALE_LANG, data: lang }, '*');
     });
-    emitter.$emit(LOCALE_LANG, lang);
+    microEvent.$emit(LOCALE_LANG, lang);
     // 刷新页面
     this.props.refreshView(this.props.location.pathname);
   }

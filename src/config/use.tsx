@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-11-27 11:50:34
+ * @Last Modified time: 2023-02-05 13:33:58
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -60,9 +60,9 @@ class UseConfig extends Component<any> {
     }
     if (config.powerByMicro) {
       const microEvent = getMicroEvent();
-      microEvent?.$on(types.COMP_SIZE, (data) => this.setComponentSize(data));
-      microEvent?.$on(types.LOCALE_LANG, (data) => this.setLocaleLang(data));
-      microEvent?.$on(types.THEME_COLOR, (data) => this.setThemeColor(data));
+      microEvent?.$on(types.COMP_SIZE, this.setComponentSize);
+      microEvent?.$on(types.LOCALE_LANG, this.setLocaleLang);
+      microEvent?.$on(types.THEME_COLOR, this.setThemeColor);
     }
     if (isIframe(this.props.location.pathname)) {
       document.addEventListener('click', this.clickEventHandle, false);
@@ -73,9 +73,9 @@ class UseConfig extends Component<any> {
   componentWillUnmount() {
     if (config.powerByMicro) {
       const microEvent = getMicroEvent();
-      microEvent?.$off(types.COMP_SIZE);
-      microEvent?.$off(types.LOCALE_LANG);
-      microEvent?.$off(types.THEME_COLOR);
+      microEvent?.$off(types.COMP_SIZE, this.setComponentSize);
+      microEvent?.$off(types.LOCALE_LANG, this.setLocaleLang);
+      microEvent?.$off(types.THEME_COLOR, this.setThemeColor);
     }
     window.removeEventListener('message', this.messageEventHandle);
     document.removeEventListener('click', this.clickEventHandle);

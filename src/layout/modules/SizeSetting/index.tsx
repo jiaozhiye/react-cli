@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 import { connect } from 'react-redux';
 import { createComponentSize } from '@/store/actions';
-import { emitter } from '@/utils/mitt';
+import { emitter as microEvent } from '@/utils/mitt';
 import { t } from '@/locale';
 import { application } from '@/hoc';
 import { COMP_SIZE } from '@/store/types';
@@ -30,7 +30,7 @@ class SizeSetting extends Component<any> {
       $iframe.contentWindow?.postMessage({ type: COMP_SIZE, data: size }, '*');
     });
     // 延迟 - 重要
-    setTimeout(() => emitter.$emit(COMP_SIZE, size));
+    setTimeout(() => microEvent.$emit(COMP_SIZE, size));
   }
 
   renderMenus() {
