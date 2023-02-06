@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-18 19:57:39
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-11-23 17:00:19
+ * @Last Modified time: 2023-02-06 13:29:34
  */
 import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
@@ -12,7 +12,7 @@ import { registerMicroApps, start } from 'qiankun';
 import { getSubRoutes } from '@/router/config';
 import { emitter as microEvent } from '@/utils/mitt';
 import { connect } from 'react-redux';
-import { matchRoutes, isIframe } from '@/router';
+import { whiteList, whiteAuth, matchRoutes, isIframe } from '@/router';
 import { Message } from '@/utils';
 import { t } from '@/locale';
 import {
@@ -71,7 +71,9 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     };
 
     notDisplayTab = (pathname: string) => {
-      return ['/login', '/subview'].some((x) => pathname.startsWith(x));
+      return [...whiteList, ...whiteAuth.slice(0, -1), '/chp']
+        .filter((x) => x !== whiteAuth[3])
+        .some((x) => pathname.startsWith(x));
     };
 
     addTabMenus = (prevPathname: string) => {

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:02:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-09-02 09:16:54
+ * @Last Modified time: 2023-02-06 13:29:44
  */
 import React, { Suspense } from 'react';
 import { Router, Switch, Route, Redirect, matchPath } from 'react-router-dom';
@@ -15,17 +15,16 @@ import PrivateRoute from '@/router/PrivateRoute';
 import ErrorBoundary from '@/pages/errorBoundary';
 
 // 访问白名单
-const whiteList: string[] = ['/login', '/public'];
+export const whiteList: string[] = ['/login', '/public'];
 
 // 权限白名单
-const whiteAuth: string[] = [
+export const whiteAuth: string[] = [
   '/home',
   '/iframe',
   '/subview',
-  `/${config.system}`,
   '/redirect',
   '/404',
-  '/test',
+  `/${config.system}`,
 ];
 
 // 登录判断
