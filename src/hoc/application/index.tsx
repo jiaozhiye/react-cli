@@ -71,8 +71,8 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     };
 
     notDisplayTab = (pathname: string) => {
-      return [...whiteList, ...whiteAuth.slice(0, -1), '/chp']
-        .filter((x) => x !== whiteAuth[3])
+      return [...whiteList, ...whiteAuth.slice(0, -1)]
+        .filter((x) => x !== whiteAuth[0])
         .some((x) => pathname.startsWith(x));
     };
 
