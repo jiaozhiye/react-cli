@@ -6,6 +6,7 @@
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { isEqual } from 'lodash-es';
 import classNames from 'classnames';
 import { application } from '@/hoc';
 import { connect } from 'react-redux';
@@ -49,15 +50,42 @@ const deepGetPath = (arr, val, depth = '') => {
   }
 };
 
+type IState = {
+  openKeys: string[];
+};
+
 @application
 @withRouter
 class SideMenu extends Component<any> {
-  getOpenKeys(path) {
-    const allOpenKeys = deepGetPath(this.props.sideMenus, path) || [];
-    return allOpenKeys.slice(0, -1);
+  state: IState = {
+    openKeys: [],
+  };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.sideMenus !== this.props.sideMenus) {
+      this.setOpenKeys(this.getOpenKeys());
+    }
+    if (prevProps.location.pathname + prevProps.location.search !== this.getFullPath()) {
+      this.setOpenKeys(this.getOpenKeys());
+    }
   }
 
-  createMenuTree(arr, depth = '') {
+  getFullPath = (): string => {
+    const { location } = this.props;
+    return location.pathname + location.search;
+  };
+
+  getOpenKeys = (): string[] => {
+    const allOpenKeys = deepGetPath(this.props.sideMenus, this.getFullPath()) || [];
+    return allOpenKeys.slice(0, -1);
+  };
+
+  setOpenKeys = (keys: string[]) => {
+    if (isEqual(this.state.openKeys, keys)) return;
+    this.setState({ openKeys: keys });
+  };
+
+  createMenuTree = (arr, depth = '') => {
     return arr
       .filter((x) => !x.hideInMenu)
       .map((item, index) => {
@@ -94,14 +122,11 @@ class SideMenu extends Component<any> {
           },
         };
       });
-  }
+  };
 
   render() {
-    const {
-      sideMenus,
-      location: { pathname, search },
-    } = this.props;
-    const fullpath: string = pathname + search;
+    const { sideMenus } = this.props;
+    const { openKeys } = this.state;
     return (
       <div className={classNames('app-side-menu')}>
         <Menu
@@ -110,8 +135,11 @@ class SideMenu extends Component<any> {
           theme="dark"
           inlineIndent={20}
           items={this.createMenuTree(sideMenus)}
-          selectedKeys={[fullpath]}
-          defaultOpenKeys={this.getOpenKeys(fullpath)}
+          selectedKeys={[this.getFullPath()]}
+          openKeys={openKeys}
+          onOpenChange={(keys) => {
+            this.setState({ openKeys: keys });
+          }}
         />
       </div>
     );

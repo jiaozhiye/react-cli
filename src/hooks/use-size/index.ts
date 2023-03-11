@@ -9,5 +9,5 @@ import store from '@/store';
 
 export default function useSize() {
   const { app } = store.getState();
-  return app.size || localStorage.getItem('size') || 'small';
+  return app.size || localStorage.getItem('size') || 'middle';
 }
