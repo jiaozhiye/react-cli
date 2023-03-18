@@ -2,16 +2,12 @@
  * @Author: 焦质晔
  * @Date: 2022-11-26 10:16:06
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-02-05 12:28:01
+ * @Last Modified time: 2023-03-18 18:06:57
  */
 import React from 'react';
-import { useLocale } from '@/hooks';
 import { getMicroEvent } from '@/utils/mitt';
 import { WIDGET_MAIN, WIDGET_SUB } from '@/store/types';
 import config from '@/config';
-
-import { QmDrawer } from '@jiaozhiye/qm-design-react';
-import { ExpandOutlined } from '@/icons';
 
 import './index.less';
 
@@ -25,24 +21,22 @@ type EventHandler = (payload: IPayload) => void;
 export type WidgetRef = {
   dispatch: (value: IPayload) => void;
   attachEvent: (handler: EventHandler) => void;
+  doExpand: (value: number) => void;
 };
 
 type IProps = {
   cols: number;
   rows: number;
-  fullScreen?: {
-    title?: string;
-    content: React.ReactNode;
-  };
   style?: React.CSSProperties;
   children?: React.ReactNode;
 };
 
 const ROW_HEIGHT = 75;
 const GIRD_GUTTER = 16;
+const WIDGET_ROWSPAN = 'WIDGET_ROWSPAN';
 
 const Widget = React.forwardRef<WidgetRef, IProps>((props, ref) => {
-  const { cols = 1, rows = 1, style, fullScreen } = props;
+  const { cols = 1, rows = 1, style } = props;
   const evHandleRef = React.useRef<EventHandler | null>(null);
 
   const microEvent = getMicroEvent();
@@ -59,24 +53,40 @@ const Widget = React.forwardRef<WidgetRef, IProps>((props, ref) => {
     evHandleRef.current = fn;
   };
 
-  const { t } = useLocale();
-  const [visible, setVisible] = React.useState<boolean>(false);
+  const __DEV__ = process.env.NODE_ENV === 'development';
+  const __MICRO__ = config.powerByMicro || !!window.name;
+
+  const [expandHeight, setExpandHeight] = React.useState<number>(0);
 
   const height = React.useMemo<number>(() => {
-    return ROW_HEIGHT * rows + (rows - 1) * GIRD_GUTTER;
-  }, [rows]);
+    return ROW_HEIGHT * rows + (rows - 1) * GIRD_GUTTER + expandHeight;
+  }, [rows, expandHeight]);
 
   const width = React.useMemo<string>(() => {
-    return window.name || config.powerByMicro ? '100%' : ((cols * 4) / 24) * 100 + '%';
+    return __MICRO__ ? '100%' : ((cols * 4) / 24) * 100 + '%';
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cols]);
 
-  const __DEV__ = process.env.NODE_ENV === 'development';
-  const __MICRO__ = !!window.name || config.powerByMicro;
+  const doExpand = (value: number) => {
+    const v = (value + GIRD_GUTTER) / (ROW_HEIGHT + GIRD_GUTTER);
+    if (__MICRO__) {
+      const microAppName = window.__MICRO_APP_NAME__ || window.name;
+      dispatch({
+        code: WIDGET_ROWSPAN,
+        payload: {
+          name: microAppName.split('-')[2] || '',
+          rows: value ? Number(v.toFixed(1)) : 0,
+        },
+      });
+    }
+    setExpandHeight(value);
+  };
 
   // 公开方法
   React.useImperativeHandle(ref, () => ({
     dispatch,
     attachEvent,
+    doExpand,
   }));
 
   React.useEffect(() => {
@@ -96,43 +106,9 @@ const Widget = React.forwardRef<WidgetRef, IProps>((props, ref) => {
   }, []);
 
   return (
-    <>
-      <div className={`app-widget-wrap`} style={{ width, height, ...style }}>
-        {!!fullScreen && (
-          <div
-            className={`full-sign`}
-            title={t('app.widget.fullScreen')}
-            onClick={() => setVisible(true)}
-          >
-            <ExpandOutlined />
-          </div>
-        )}
-        {props.children}
-      </div>
-      {fullScreen && (
-        <QmDrawer
-          visible={visible}
-          title={fullScreen.title || ''}
-          width="100vw"
-          loading={false}
-          showFullScreen={false}
-          onClose={() => {
-            setVisible(false);
-          }}
-        >
-          <div
-            className={`container`}
-            style={{
-              margin: -10,
-              height: `calc(100% + 20px)`,
-              overflowY: 'auto',
-            }}
-          >
-            {fullScreen.content}
-          </div>
-        </QmDrawer>
-      )}
-    </>
+    <div className={`app-widget-wrap`} style={{ width, height, ...style }}>
+      {props.children}
+    </div>
   );
 });
 
