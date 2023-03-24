@@ -23,7 +23,7 @@ import {
   createThemeColor,
   createPreventTab,
 } from '@/store/actions';
-import { OUTSIDE_CLICK, SEND_LOCAL } from '@/store/types';
+import { OUTSIDE_CLICK, SEND_LOCAL, SUB_EVENT } from '@/store/types';
 import store from '@/store';
 import config from '@/config';
 import routes from '@/router/config';
@@ -106,6 +106,10 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           { key: pathname, value: route.iframePath + search, keep: route.meta.keepAlive },
           'add'
         );
+        this.getIframeNode(pathname)?.contentWindow!.postMessage(
+          { type: `${SUB_EVENT}__${pathname.split('/').pop()}`, data: null },
+          '*'
+        );
       }
       // micro 模式
       if (route.microHost && route.microRule) {
@@ -113,6 +117,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           { key: pathname, value: route.microHost, keep: route.meta.keepAlive, search },
           'add'
         );
+        microEvent.$emit(`${SUB_EVENT}__${pathname.split('/').pop()}`, null);
       }
     };
 
@@ -208,6 +213,8 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     startMicroApp = () => {
       if (!config.isMainApp) return;
       microApp.start({
+        'disable-memory-router': true, // 关闭虚拟路由系统
+        'disable-patch-request': true, // 关闭对子应用请求的拦截
         fetch(url, options) {
           if (EXCLUDE_URLS.some((x) => url.startsWith(x))) {
             return Promise.resolve('');

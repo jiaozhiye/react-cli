@@ -73,3 +73,6 @@ export const SEND_LOCAL = 'SEND_LOCAL';
 // widget 事件
 export const WIDGET_MAIN = 'WIDGET_MAIN';
 export const WIDGET_SUB = 'WIDGET_SUB';
+
+// 子应用事件
+export const SUB_EVENT = 'SUB_EVENT';
