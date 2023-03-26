@@ -194,7 +194,7 @@ class UseConfig extends Component<any> {
       this.props.refreshView(this.props.location.pathname);
     }
     if (data.type === types.PREVENT_TAB) {
-      this.props.setForbidenTab(data.data);
+      this.props.setControlTab(data.data);
     }
     if (data.type === types.SIGN_OUT) {
       const { pathname } = this.props.location;

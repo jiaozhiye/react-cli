@@ -44,11 +44,11 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       window.parent.postMessage({ type: REFRESH_VIEW, data: '' }, '*');
     };
 
-    addForbidenTab = (path: string, message?: string) => {
+    addControlTab = (path: string, message?: string) => {
       window.parent.postMessage({ type: PREVENT_TAB, data: { action: 'add', path, message } }, '*');
     };
 
-    removeForbidenTab = (path: string) => {
+    removeControlTab = (path: string) => {
       window.parent.postMessage({ type: PREVENT_TAB, data: { action: 'remove', path } }, '*');
     };
 
@@ -61,8 +61,8 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           openView={this.openView}
           closeView={this.closeView}
           reloadView={this.reloadView}
-          addForbidenTab={this.addForbidenTab}
-          removeForbidenTab={this.removeForbidenTab}
+          addControlTab={this.addControlTab}
+          removeControlTab={this.removeControlTab}
         />
       );
     }

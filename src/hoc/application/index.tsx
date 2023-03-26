@@ -274,7 +274,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       this.openView('/home');
     };
 
-    setForbidenTab = (data: Record<string, string | undefined>) => {
+    setControlTab = (data: Record<string, string | undefined>) => {
       if (data.action === 'add') {
         this.props.createPreventTab({ path: data.path, message: data.message }, 'add');
       } else {
@@ -312,7 +312,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           closeAllTabs={this.closeAllTabs}
           emitOutsideClick={this.emitOutsideClick}
           dispatchMouseClick={this.dispatchMouseClick}
-          setForbidenTab={this.setForbidenTab}
+          setControlTab={this.setControlTab}
         />
       );
     }

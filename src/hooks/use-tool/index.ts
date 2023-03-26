@@ -30,13 +30,13 @@ export default function useTool() {
     window.parent.postMessage({ type: REFRESH_VIEW, data: '' }, '*');
   };
 
-  const addForbidenTab = (path: string, message?: string) => {
+  const addControlTab = (path: string, message?: string) => {
     window.parent.postMessage({ type: PREVENT_TAB, data: { action: 'add', path, message } }, '*');
   };
 
-  const removeForbidenTab = (path: string) => {
+  const removeControlTab = (path: string) => {
     window.parent.postMessage({ type: PREVENT_TAB, data: { action: 'remove', path } }, '*');
   };
 
-  return { openView, closeView, reloadView, addForbidenTab, removeForbidenTab };
+  return { openView, closeView, reloadView, addControlTab, removeControlTab };
 }
