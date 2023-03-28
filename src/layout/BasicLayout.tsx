@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-18 13:21:48
+ * @Last Modified time: 2023-03-28 18:40:58
  */
 /** @jsxRuntime classic */
 /** @jsx jsxCustomEvent */
@@ -189,7 +189,6 @@ class BasicLayout extends Component<any, IState> {
       [`app-layout__sm`]: this.props.size === 'small',
       [`app-layout__lg`]: this.props.size === 'large',
     };
-    const _collapsed = !this.isMobile ? collapsed : false;
     const _style: React.CSSProperties = { pointerEvents: locked ? 'none' : undefined };
     return (
       <Layout className={classNames(cls)}>
@@ -205,12 +204,12 @@ class BasicLayout extends Component<any, IState> {
         <Sider
           trigger={null}
           collapsible={true}
-          collapsed={_collapsed}
+          collapsed={collapsed}
           width={left}
           collapsedWidth={config.sideWidth[1]}
           style={_style}
         >
-          <Logo collapsed={_collapsed} />
+          <Logo collapsed={collapsed} />
           <AllNav />
           {config.showStarNav && <StarNav />}
           <SideMenu />
