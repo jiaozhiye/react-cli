@@ -28,6 +28,7 @@ import '@/assets/css/iconfont.less';
 
 notification.config({
   duration: 4.5,
+  maxCount: 1,
 });
 
 message.config({
