@@ -188,11 +188,11 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           experimentalStyleIsolation: true, // 模态框的样式会丢失
         },
         // @ts-ignore
-        async fetch(url, options) {
+        fetch: async (url, options) => {
           if (EXCLUDE_URLS.some((x) => url.toString().startsWith(x))) {
             return {
-              text() {
-                return Promise.resolve('');
+              async text() {
+                return '';
               },
             };
           }
@@ -215,7 +215,8 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       microApp.start({
         'disable-memory-router': true, // 关闭虚拟路由系统
         'disable-patch-request': true, // 关闭对子应用请求的拦截
-        fetch(url, options) {
+        // iframe: true,
+        fetch: (url, options) => {
           if (EXCLUDE_URLS.some((x) => url.startsWith(x))) {
             return Promise.resolve('');
           }
@@ -224,7 +225,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           };
           return window.fetch(url, Object.assign({}, options, config)).then((res) => res.text());
         },
-        excludeAssetFilter(assetUrl) {
+        excludeAssetFilter: (assetUrl) => {
           if (ASSET_URLS.some((x) => assetUrl.includes(x))) {
             return true; // 不会劫持处理当前文件
           }
