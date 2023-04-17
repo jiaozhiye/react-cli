@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 13:44:13
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-24 19:33:56
+ * @Last Modified time: 2023-04-17 09:08:43
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -91,14 +91,17 @@ class MultiTab extends Component<any> {
   };
 
   changeHandle = (activeKey) => {
-    const { tabMenus } = this.props;
+    const { tabMenus, microAppReady } = this.props;
     const { search = '' } = tabMenus.find((x) => x.path === activeKey) || {};
+    if (!microAppReady) return;
     this.props.openView(activeKey + search);
-    this.setState({ activeKey });
   };
 
   editHandle = (targetKey, action) => {
     if (action !== 'remove') return;
+    const { activeKey } = this.state;
+    const { microAppReady } = this.props;
+    if (targetKey === activeKey && !microAppReady) return;
     this.removeHandle(targetKey);
   };
 
@@ -166,6 +169,7 @@ export default connect(
   (state: AppState) => ({
     tabMenus: state.app.tabMenus,
     preventTabs: state.app.preventTabs,
+    microAppReady: state.app.microAppReady,
   }),
   {}
 )(MultiTab);
