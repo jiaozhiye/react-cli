@@ -68,16 +68,17 @@ export const isFormEmpty = (input: unknown): boolean => {
 
 /**
  * @description 生成 uuid
- * @param {string} key uuid 的前缀标识
+ * @param {string} prefix 前缀标识
  * @returns {boolean} 生成的 uuid 字符串
  */
-export const createUidKey = (key = ''): string => {
+export const createUidKey = (prefix = ''): string => {
+  let d = new Date().getTime();
   const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0;
-    const v = c == 'x' ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
+    const r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+    return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
   });
-  return key + uuid;
+  return prefix + uuid;
 };
 
 /**
