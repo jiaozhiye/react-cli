@@ -107,7 +107,12 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           'add'
         );
         this.getIframeNode(pathname)?.contentWindow!.postMessage(
-          { type: `${SUB_EVENT}__${pathname.split('/').pop()}`, data: null },
+          {
+            type: `${SUB_EVENT}__${pathname.split('/').pop()}`,
+            data: {
+              activated: pathname,
+            },
+          },
           '*'
         );
       }
@@ -117,7 +122,12 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           { key: pathname, value: route.microHost, keep: route.meta.keepAlive, search },
           'add'
         );
-        microEvent.$emit(`${SUB_EVENT}__${pathname.split('/').pop()}`, null);
+        microEvent.$emit(SUB_EVENT, {
+          type: `${SUB_EVENT}__${pathname.split('/').pop()}`,
+          data: {
+            activated: pathname,
+          },
+        });
       }
     };
 
