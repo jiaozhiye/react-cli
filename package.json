@@ -30,8 +30,8 @@
     "src/**/*.{less}": "prettier --write"
   },
   "dependencies": {
-    "@jiaozhiye/qm-design-react": "^1.5.26",
-    "@micro-zoe/micro-app": "^1.0.0-beta.2",
+    "@jiaozhiye/qm-design-react": "^1.6.0",
+    "@micro-zoe/micro-app": "^1.0.0-beta.4",
     "add-dom-event-listener": "^1.1.0",
     "axios": "^0.27.2",
     "classnames": "^2.3.2",

@@ -1113,10 +1113,10 @@
   resolved "https://registry.npmmirror.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@jiaozhiye/qm-design-react@^1.5.26":
-  version "1.5.26"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.5.26.tgz#180f0c793347dde9b99fa2ad5aae422ff694af85"
-  integrity sha512-3lFjZtfBXio/BFHXknNZAP8rxuhLDDJZXWasA7Qfgz9XCh1RSNOSQ3VA4yqIW7MUzNcyWwkWxmZAiwG6iPylDg==
+"@jiaozhiye/qm-design-react@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.6.0.tgz#ed47b052712e985fe1682371b7ac959d57d0af42"
+  integrity sha512-KL7cmwuchRAFGwfIIa6kWZ7W0nyXWQ6Wlwqjjzc4KlnrJM5BriQaIbt7wJdAOrn1SXFnX40QYKsqUaqycNbkBg==
   dependencies:
     add-dom-event-listener "^1.1.0"
     antd "4.22.8"
@@ -1201,10 +1201,10 @@
   resolved "https://registry.npmmirror.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@micro-zoe/micro-app@^1.0.0-beta.2":
-  version "1.0.0-beta.2"
-  resolved "https://registry.npmmirror.com/@micro-zoe/micro-app/-/micro-app-1.0.0-beta.2.tgz#3788e83b3cb85e430f36ca62a4f71ae6e98c5493"
-  integrity sha512-t0371Ah9VjHixgpQ9DxwE0VknAMpQfbsde+Zm6PczujMvYLjT/VVKanskVbsOrqtbs4tuCt6+9TYZaSZNMt9wQ==
+"@micro-zoe/micro-app@^1.0.0-beta.4":
+  version "1.0.0-beta.4"
+  resolved "https://registry.npmmirror.com/@micro-zoe/micro-app/-/micro-app-1.0.0-beta.4.tgz#a161b4493cf5ae24cc08c551a32b1e4a10184e80"
+  integrity sha512-dvipt2srh7u84r0Q8+198Pxo7dZoK7Dhdvle7MbzT6loEhW9bsHAjuKegAe3a0qKUNYokhpRqz0CgD4/MuOQDQ==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
