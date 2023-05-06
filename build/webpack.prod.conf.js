@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-11-08 16:59:38
+ * @Last Modified time: 2023-05-06 22:21:00
  */
 'use strict';
 
@@ -15,7 +15,7 @@ const baseWebpackConfig = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const safePostCssParser = require('postcss-safe-parser');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
@@ -46,23 +46,22 @@ const webpackConfig = merge(baseWebpackConfig, {
     minimize: true,
     minimizer: [
       new TerserPlugin({
-        // cache: true,
         parallel: true,
-        // sourceMap: config.build.productionSourceMap,
         terserOptions: {
           compress: {
             drop_debugger: true,
             pure_funcs: ['console.log'],
           },
+          sourceMap: config.build.productionSourceMap,
         },
       }),
-      new OptimizeCSSAssetsPlugin({
-        cssProcessorOptions: {
+      new CssMinimizerPlugin({
+        parallel: true,
+        minify: [CssMinimizerPlugin.cssnanoMinify, CssMinimizerPlugin.cleanCssMinify],
+        minimizerOptions: {
           parser: safePostCssParser,
-          map: config.build.productionSourceMap,
-        },
-        cssProcessorPluginOptions: {
-          preset: ['default', { minifyFontValues: { removeQuotes: false } }],
+          preset: ['default', { discardComments: { removeAll: true } }],
+          sourceMap: config.build.productionSourceMap,
         },
       }),
     ],
