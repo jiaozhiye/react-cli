@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-08-02 10:42:01
+ * @Last Modified time: 2023-05-07 10:23:20
  */
 'use strict';
 
@@ -10,7 +10,7 @@ const path = require('path');
 const utils = require('./utils');
 const webpack = require('webpack');
 const config = require('../config');
-const merge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const Dotenv = require('dotenv-webpack');
 const baseWebpackConfig = require('./webpack.base.conf');
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -51,6 +51,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       overlay: {
         errors: true,
         warnings: false,
+        runtimeErrors: false,
       },
       progress: true,
     },
