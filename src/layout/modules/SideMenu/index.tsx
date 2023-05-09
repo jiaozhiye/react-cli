@@ -146,7 +146,7 @@ class SideMenu extends Component<any> {
   }
 }
 
-export default connect(
+export default connect<unknown, unknown, any>(
   (state: AppState) => ({
     sideMenus: state.app.sideMenus,
     microAppReady: state.app.microAppReady,

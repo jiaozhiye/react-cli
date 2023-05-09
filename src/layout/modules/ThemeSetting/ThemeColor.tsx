@@ -78,7 +78,7 @@ class ThemeColor extends Component<any> {
   }
 }
 
-export default connect(
+export default connect<unknown, unknown, any>(
   (state: AppState) => ({
     themeColor: state.app.themeColor,
     iframeMenus: state.app.iframeMenus,

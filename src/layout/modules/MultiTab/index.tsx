@@ -165,7 +165,7 @@ class MultiTab extends Component<any> {
   }
 }
 
-export default connect(
+export default connect<unknown, unknown, any>(
   (state: AppState) => ({
     tabMenus: state.app.tabMenus,
     preventTabs: state.app.preventTabs,

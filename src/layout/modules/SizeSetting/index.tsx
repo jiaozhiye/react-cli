@@ -71,7 +71,7 @@ class SizeSetting extends Component<any> {
   }
 }
 
-export default connect(
+export default connect<unknown, unknown, any>(
   (state: AppState) => ({
     size: state.app.size,
     iframeMenus: state.app.iframeMenus,

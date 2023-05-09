@@ -126,7 +126,7 @@ class UserCenter extends Component<any> {
   }
 }
 
-export default connect((state: AppState) => ({ lang: state.app.lang }), {
+export default connect<unknown, unknown, any>((state: AppState) => ({ lang: state.app.lang }), {
   createLocaleLang,
   createSignOut,
 })(UserCenter);

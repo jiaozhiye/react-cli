@@ -50,7 +50,7 @@ class ThemeColor extends Component<any> {
   }
 }
 
-export default connect(
+export default connect<unknown, unknown, any>(
   (state: AppState) => ({
     themeType: state.app.themeType,
     lang: state.app.lang,

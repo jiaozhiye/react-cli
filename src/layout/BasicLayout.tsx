@@ -235,7 +235,7 @@ class BasicLayout extends Component<any, IState> {
   }
 }
 
-export default connect(
+export default connect<unknown, unknown, any>(
   (state: AppState) => ({
     device: state.app.device,
     iframeMenus: state.app.iframeMenus,

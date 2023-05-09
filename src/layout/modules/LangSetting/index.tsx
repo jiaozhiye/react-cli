@@ -66,7 +66,7 @@ class LangSetting extends Component<any> {
   }
 }
 
-export default connect(
+export default connect<unknown, unknown, any>(
   (state: AppState) => ({
     lang: state.app.lang,
     iframeMenus: state.app.iframeMenus,

@@ -40,7 +40,7 @@ class PrivateRoute extends React.Component<any> {
   }
 }
 
-export default connect(
+export default connect<unknown, unknown, any>(
   (state: AppState) => ({
     flattenMenus: state.app.flattenMenus,
   }),

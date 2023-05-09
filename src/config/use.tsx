@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-02-05 13:33:58
+ * @Last Modified time: 2023-05-09 09:02:23
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -217,7 +217,7 @@ class UseConfig extends Component<any> {
   }
 }
 
-export default connect(
+export default connect<unknown, unknown, any>(
   (state: AppState) => ({
     size: state.app.size,
     lang: state.app.lang,
