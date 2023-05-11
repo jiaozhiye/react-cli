@@ -117,12 +117,14 @@ const instance: IAxiosInstance = axios.create({
 
 // 异常处理程序
 const errorHandler = (error: AxiosError): Promise<AxiosError> => {
-  const { isAxiosError, config = {}, response = {} } = error;
+  const { isAxiosError, code, config = {}, response = {} } = error;
   const { status, statusText = '' } = response as AxiosResponse;
   const errortext = getErrorText(status) || statusText || t('app.fetch.errorText');
   removePendingRequest(config);
   removeLockingRequest(config);
-  isAxiosError && Notification(errortext, 'error', 10);
+  if (code !== 'ERR_CANCELED') {
+    isAxiosError && Notification(errortext, 'error', 10);
+  }
   return Promise.reject(error);
 };
 
