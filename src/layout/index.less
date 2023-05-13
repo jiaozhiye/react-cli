@@ -139,18 +139,18 @@
         }
       }
       .app-side-menu {
-        .ant-menu-submenu .ant-menu-submenu-title,
+        .ant-menu-submenu-title,
         .ant-menu-item {
           height: @item-height;
           line-height: @item-height;
+          .anticon {
+            margin-top: 2px;
+          }
         }
         .ant-menu-inline-collapsed > .ant-menu-submenu-selected {
           &::before {
             height: @item-height;
           }
-        }
-        .anticon {
-          margin-top: 2px;
         }
       }
     }
