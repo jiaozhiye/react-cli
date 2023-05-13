@@ -13,16 +13,15 @@ import { connect } from 'react-redux';
 import type { AppState } from '@/store/reducers/app';
 
 import { Menu } from '@jiaozhiye/qm-design-react';
+import SvgIcon from '../SvgIcon';
 
 import './index.less';
 
 const getIcon = (icon: string) => {
-  if (!icon) return null;
-  return (
-    <span className={classNames('anticon')}>
-      <i className={classNames(`iconfont`, icon)} />
-    </span>
-  );
+  if (!icon || !isHttpLink(icon)) {
+    return null;
+  }
+  return <SvgIcon svgUrl={icon} />;
 };
 
 const isHttpLink = (path: string) => {

@@ -18,7 +18,7 @@ const menus = [
         appCode: 'dms',
         caseCode: null,
         microHost: null,
-        icon: 'icon-flag-fill',
+        icon: 'http://127.0.0.1:3000/menu-icon.svg',
         title: '备件管理', // 菜单名称
         children: [
           {
@@ -62,7 +62,7 @@ const menus = [
         appCode: 'dms',
         caseCode: null,
         microHost: null,
-        icon: 'icon-flag-fill',
+        icon: 'http://127.0.0.1:3000/menu-icon.svg',
         title: '销售管理',
         children: [
           {
@@ -109,7 +109,7 @@ const menus = [
         appCode: 'tds',
         caseCode: null,
         microHost: null,
-        icon: 'icon-flag-fill',
+        icon: 'http://127.0.0.1:3000/menu-icon.svg',
         title: '客服管理',
         children: [
           {
@@ -150,7 +150,7 @@ const menus2 = [
     appCode: 'dms',
     caseCode: null,
     microHost: null,
-    icon: 'icon-flag-fill',
+    icon: 'http://127.0.0.1:3000/menu-icon.svg',
     title: 'bjgl', // 菜单名称
     children: [
       {
@@ -194,7 +194,7 @@ const menus2 = [
     appCode: 'dms',
     caseCode: null,
     microHost: null,
-    icon: 'icon-flag-fill',
+    icon: 'http://127.0.0.1:3000/menu-icon.svg',
     title: 'xsgl',
     children: [
       {
