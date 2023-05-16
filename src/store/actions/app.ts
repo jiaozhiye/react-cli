@@ -244,10 +244,10 @@ export const createSignOut =
 
 // 创建主题色
 export const createTheme = (color: string) => (dispatch, getState) => {
+  const baseRoute = process.env.NODE_ENV === 'development' ? '' : config.baseRoute;
   const options = {
     newColors: getAntdSerials(color),
-    changeUrl: (cssUrl) =>
-      `${process.env.NODE_ENV === 'development' ? '' : config.baseRoute}/${cssUrl}`,
+    changeUrl: (cssUrl) => `${config.baseUrl.replace(/\/$/, '')}${baseRoute}/${cssUrl}`,
     openLocalStorage: false,
   };
   client.changer.changeColor(options, Promise).then(() => {
