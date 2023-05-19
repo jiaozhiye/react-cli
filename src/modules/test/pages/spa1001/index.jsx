@@ -362,10 +362,7 @@ class Spa1001 extends React.Component {
 
   // 执行表格查询
   fetchHandle = (params) => {
-    // this.setState((prev) => ({ fetchParams: Object.assign({}, prev.fetchParams, params) }));
-    this.setState((prev) => ({
-      fetchParams: Object.assign({}, params ? params : prev.fetchParams),
-    }));
+    this.setState({ fetchParams: params });
   };
 
   // 新增、编辑、查看 方法
@@ -390,7 +387,7 @@ class Spa1001 extends React.Component {
     if (res.code === 200) {
       Message('删除成功', 'success');
       this.tableRef.SET_SELECTION([]);
-      this.fetchHandle();
+      this.tableRef.DO_REFRESH();
     }
   };
 
@@ -476,7 +473,7 @@ class Spa1001 extends React.Component {
             type={actions.type}
             recordId={actions.recordId}
             onClose={(reload) => {
-              reload && this.fetchHandle();
+              reload && this.tableRef.DO_REFRESH();
               this.doCloseHandle();
             }}
           />
