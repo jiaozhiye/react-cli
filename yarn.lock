@@ -1144,10 +1144,10 @@
     "@types/yargs" "^17.0.8"
     chalk "^4.0.0"
 
-"@jiaozhiye/qm-design-react@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.6.0.tgz#ed47b052712e985fe1682371b7ac959d57d0af42"
-  integrity sha512-KL7cmwuchRAFGwfIIa6kWZ7W0nyXWQ6Wlwqjjzc4KlnrJM5BriQaIbt7wJdAOrn1SXFnX40QYKsqUaqycNbkBg==
+"@jiaozhiye/qm-design-react@^1.6.6":
+  version "1.6.6"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.6.6.tgz#785cdd6d65a657f4b104f3f51d124d707287d97a"
+  integrity sha512-dwiqQCDR+LDWeDXZoKjYGBLYSytx1MaKwCWQvJ1NGw0HtpyVxhw0Iy4K/H72G1OEm9CP7Pid95b2F7QzJMi+AQ==
   dependencies:
     add-dom-event-listener "^1.1.0"
     antd "4.22.8"
@@ -1163,7 +1163,7 @@
     lodash-es "^4.17.21"
     memoize-one "^6.0.0"
     omit.js "^2.0.2"
-    prop-types "^15.8.0"
+    prop-types "^15.8.1"
     react-countup "^6.4.0"
     react-draggable "^4.4.5"
     react-sortablejs "^6.1.4"
@@ -6089,7 +6089,7 @@ prompts@^2.4.2:
     kleur "^3.0.3"
     sisteransi "^1.0.5"
 
-prop-types@15.x, prop-types@^15.6.2, prop-types@^15.8.0, prop-types@^15.8.1:
+prop-types@15.x, prop-types@^15.6.2, prop-types@^15.8.1:
   version "15.8.1"
   resolved "https://registry.npmmirror.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
   integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
