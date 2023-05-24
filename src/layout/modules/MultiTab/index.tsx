@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 13:44:13
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-04-17 09:08:43
+ * @Last Modified time: 2023-05-24 14:27:52
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -14,11 +14,11 @@ import { Confirm } from '@/utils';
 import { application } from '@/hoc';
 import type { AppState } from '@/store/reducers/app';
 
-import { Tabs } from '@jiaozhiye/qm-design-react';
+import { QmTabs } from '@jiaozhiye/qm-design-react';
 
 import './index.less';
 
-const { TabPane } = Tabs;
+const { TabPane } = QmTabs;
 
 const CTX_MENU_ID = 'SIMPLE';
 
@@ -110,7 +110,7 @@ class MultiTab extends Component<any> {
     const { tabMenus } = this.props;
     return (
       <div className={classNames('app-multi-tab')}>
-        <Tabs
+        <QmTabs
           type="editable-card"
           activeKey={activeKey}
           hideAdd
@@ -131,7 +131,7 @@ class MultiTab extends Component<any> {
               closable={index > 0}
             />
           ))}
-        </Tabs>
+        </QmTabs>
         <ContextMenu id={CTX_MENU_ID} className={classNames('ant-dropdown-menu')}>
           <MenuItem
             className={classNames('ant-dropdown-menu-item')}

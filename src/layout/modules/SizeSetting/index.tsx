@@ -61,7 +61,11 @@ class SizeSetting extends Component<any> {
   render() {
     return (
       <div className={classNames('app-size-setting')}>
-        <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
+        <Dropdown
+          dropdownRender={() => this.renderMenus()}
+          placement="bottomRight"
+          trigger={['click']}
+        >
           <span>
             <FontSizeOutlined className={`icon`} />
           </span>

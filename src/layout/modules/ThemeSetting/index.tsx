@@ -30,7 +30,7 @@ class ThemeSetting extends Component<any> {
     return (
       <div className={classNames('app-theme-setting')}>
         <Dropdown
-          overlay={this.renderMenus()}
+          dropdownRender={() => this.renderMenus()}
           overlayClassName="theme-setting__popper"
           placement="bottomRight"
           trigger={['click']}

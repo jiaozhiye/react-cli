@@ -15,7 +15,7 @@ function resolve(dir) {
 
 // 配置常量
 const HOST = 'localhost';
-const PORT = 9020;
+const PORT = 9021;
 
 module.exports = {
   ...appConf,

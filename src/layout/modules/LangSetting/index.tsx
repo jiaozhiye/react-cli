@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-17 09:46:08
+ * @Last Modified time: 2023-05-24 14:31:22
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -56,7 +56,11 @@ class LangSetting extends Component<any> {
   render() {
     return (
       <div className={classNames('app-lang-setting')}>
-        <Dropdown overlay={this.renderMenus()} placement="bottomRight" trigger={['click']}>
+        <Dropdown
+          dropdownRender={() => this.renderMenus()}
+          placement="bottomRight"
+          trigger={['click']}
+        >
           <span>
             <TranslationOutlined className={`icon`} />
           </span>

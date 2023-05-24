@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-05-29 12:05:06
+ * @Last Modified time: 2023-05-24 14:26:36
  */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -16,13 +16,13 @@ import { t } from '@/locale';
 import { sleep, Message } from '@/utils';
 import type { AppState } from '@/store/reducers/app';
 
-import { Select, Tabs, pinyin } from '@jiaozhiye/qm-design-react';
+import { Select, QmTabs, pinyin } from '@jiaozhiye/qm-design-react';
 import { StarOutlined, StarFilled } from '@/icons';
 
 import './index.less';
 
 const { Option } = Select;
-const { TabPane } = Tabs;
+const { TabPane } = QmTabs;
 
 const isHttpLink = (path = '') => {
   return /^https?:\/\//.test(path);
@@ -149,7 +149,7 @@ class NavList extends Component<any> {
               </Select>
             </div>
             <div className={classNames('main')}>
-              <Tabs tabBarGutter={0} tabPosition="right" tabBarStyle={{ width: '150px' }}>
+              <QmTabs tabBarGutter={0} tabPosition="right" tabBarStyle={{ width: '150px' }}>
                 {sideMenus.map((item, index) => (
                   <TabPane key={index} tab={item.title}>
                     <div className={classNames('column-wrap')}>
@@ -175,7 +175,7 @@ class NavList extends Component<any> {
                     </div>
                   </TabPane>
                 ))}
-              </Tabs>
+              </QmTabs>
             </div>
           </div>
         </div>

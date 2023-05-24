@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-04-05 11:22:32
+ * @Last Modified time: 2023-05-24 14:32:13
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -84,7 +84,7 @@ class UserCenter extends Component<any> {
     return (
       <div className={classNames('app-user-center')}>
         <Dropdown
-          overlay={this.renderMenus()}
+          dropdownRender={() => this.renderMenus()}
           overlayClassName="app-user-center__popper"
           placement="bottomRight"
           trigger={['click']}
