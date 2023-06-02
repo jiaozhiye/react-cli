@@ -1151,10 +1151,10 @@
     "@types/yargs" "^17.0.8"
     chalk "^4.0.0"
 
-"@jiaozhiye/qm-design-react@1.7.0":
-  version "1.7.0"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.7.0.tgz#e639bdc891c9f96cc826e8a8cc0cd325bf5349f4"
-  integrity sha512-9eROmjDL1R0rD8Jizf6FpTxvVoW9QzakWeCMKc0S7grdmsC7IP8gDdWzo6IKAZW/ck/wG+Ms5zQ7pOarT1mjyA==
+"@jiaozhiye/qm-design-react@1.7.3":
+  version "1.7.3"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.7.3.tgz#39ba5c3dfdc4d9070747f1ad01798c2c145e729f"
+  integrity sha512-qIi13DgFtTOw8YSH0kpxZB8QkT+oTkNRw6bdVx1KPPYX/gUX5rP3UvsMY0P8PRe/Z/LQ6obMiyDfwfopz1QTbA==
   dependencies:
     add-dom-event-listener "^1.1.0"
     antd "4.24.10"
