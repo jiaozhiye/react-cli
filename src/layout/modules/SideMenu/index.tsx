@@ -35,15 +35,15 @@ const conversionPath = (path: string) => {
   return `/${path}`.replace(/\/+/g, '/');
 };
 
-const deepGetPath = (arr, val, depth = '') => {
+const deepGetPath = (arr, val) => {
   for (let i = 0; i < arr.length; i++) {
     if (arr[i].key == val) {
-      return [depth + (i + 1)];
+      return [arr[i].id];
     }
     if (Array.isArray(arr[i].children)) {
-      const temp = deepGetPath(arr[i].children, val, `${depth + (i + 1)}-`);
+      const temp = deepGetPath(arr[i].children, val);
       if (temp) {
-        return [depth + (i + 1), temp].flat();
+        return [arr[i].id, temp].flat();
       }
     }
   }
@@ -84,10 +84,10 @@ class SideMenu extends Component<any> {
     this.setState({ openKeys: keys });
   };
 
-  createMenuTree = (arr, depth = '') => {
-    return arr
+  createMenuTree = (list) => {
+    return list
       .filter((x) => !x.hideInMenu)
-      .map((item, index) => {
+      .map((item) => {
         const { title, icon, target } = item;
         const path: string = conversionPath(item.key || '');
         // 判断是否为 http 链接
@@ -98,14 +98,13 @@ class SideMenu extends Component<any> {
             {title}
           </a>
         );
-        const uniqueKey = depth + (index + 1);
         if (Array.isArray(item.children) && !item.hideChildrenInMenu) {
           return {
-            key: uniqueKey,
+            key: item.id,
             popupClassName: 'ant-submenu-popup-dark',
             icon: getIcon(icon),
             label: title,
-            children: this.createMenuTree(item.children, `${uniqueKey}-`),
+            children: this.createMenuTree(item.children),
           };
         }
         return {
