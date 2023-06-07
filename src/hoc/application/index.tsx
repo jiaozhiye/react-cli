@@ -13,7 +13,7 @@ import { getSubRoutes } from '@/router/config';
 import { emitter as microEvent } from '@/utils/mitt';
 import { connect } from 'react-redux';
 import { whiteList, whiteAuth, matchRoutes, isIframe } from '@/router';
-import { Message } from '@/utils';
+import { Message, addSearchToURL } from '@/utils';
 import { t } from '@/locale';
 import {
   createMenus,
@@ -103,7 +103,11 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       // iframe 模式
       if (route.iframePath) {
         this.props.createIframeMenu(
-          { key: pathname, value: route.iframePath + search, keep: route.meta.keepAlive },
+          {
+            key: pathname,
+            value: addSearchToURL(route.iframePath, search),
+            keep: route.meta.keepAlive,
+          },
           'add'
         );
         this.getIframeNode(pathname)?.contentWindow!.postMessage(

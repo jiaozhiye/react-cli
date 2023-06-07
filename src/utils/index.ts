@@ -104,6 +104,11 @@ export const getPathName = (fullpath: string) => {
   return fullpath ? fullpath.replace(/\?.*/, '') : '';
 };
 
+export const addSearchToURL = (url: string, search: string) => {
+  const hasQueryMark = url.includes('?');
+  return url + (!hasQueryMark ? search : search.replace(/^\?/, '&'));
+};
+
 /**
  * @description 通过 URL 获取 Domain
  * @param {string} url url 地址
