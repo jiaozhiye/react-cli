@@ -194,6 +194,10 @@ export const createAuthData =
 export const createStarMenu =
   () =>
   async (dispatch, getState): Promise<void> => {
+    const {
+      app: { flattenMenus },
+    } = getState();
+
     let data: ISideMenu[] = [];
     try {
       data = JSON.parse(localStorage.getItem('star_menus') || '[]');
@@ -203,7 +207,7 @@ export const createStarMenu =
     if (process.env.MOCK_DATA !== 'true') {
       const res = await getStarMenuList({});
       if (res.code === 200) {
-        data = res.data ?? [];
+        data = res.data?.filter((x) => flattenMenus.some((k) => k.key === x.key)) ?? [];
       }
     }
 
