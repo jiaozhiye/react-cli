@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-03-28 18:39:16
+ * @Last Modified time: 2023-06-10 14:43:56
  */
 'use strict';
 const path = require('path');
@@ -15,7 +15,7 @@ function resolve(dir) {
 
 // 配置常量
 const HOST = 'localhost';
-const PORT = 9021;
+const PORT = 9022;
 
 module.exports = {
   ...appConf,
