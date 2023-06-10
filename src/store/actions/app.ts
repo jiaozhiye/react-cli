@@ -194,19 +194,16 @@ export const createAuthData =
 export const createStarMenu =
   () =>
   async (dispatch, getState): Promise<void> => {
-    const {
-      app: { flattenMenus },
-    } = getState();
-
     let data: ISideMenu[] = [];
-    if (process.env.MOCK_DATA === 'true') {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      const res = require('@/mock/starMenu').default;
-      data = res;
-    } else {
+    try {
+      data = JSON.parse(localStorage.getItem('star_menus') || '[]');
+    } catch (err) {
+      // ...
+    }
+    if (process.env.MOCK_DATA !== 'true') {
       const res = await getStarMenuList({});
       if (res.code === 200) {
-        data = res.data?.filter((x) => flattenMenus.some((k) => k.key === x.key)) ?? [];
+        data = res.data ?? [];
       }
     }
 
@@ -220,9 +217,10 @@ export const createStarMenu =
 export const setStarMenu =
   (data: ISideMenu[]) =>
   async (dispatch, getState): Promise<void> => {
-    if (config.showStarNav && process.env.MOCK_DATA === 'false') {
+    if (config.showStarNav && process.env.MOCK_DATA !== 'true') {
       await setStarMenuList({ starMenus: data });
     }
+    localStorage.setItem('star_menus', JSON.stringify(data));
     dispatch({
       type: STAR_MENU,
       payload: data,

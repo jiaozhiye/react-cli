@@ -75,9 +75,11 @@ class NavList extends Component<any> {
     this.props.onChange();
   };
 
-  starChange = (active, key, title) => {
+  starChange = (active, { id, key, title }) => {
     const { starMenus } = this.props;
-    const result = active ? starMenus.filter((x) => x.key !== key) : [...starMenus, { key, title }];
+    const result = active
+      ? starMenus.filter((x) => x.key !== key)
+      : [...starMenus, { id, key, title }];
     // 最大数量判断
     if (result.length > config.maxCacheNum) {
       return Message(t('app.information.maxStar', { total: config.maxCacheNum }), 'warning');
@@ -163,7 +165,7 @@ class NavList extends Component<any> {
                                 <li key={i}>
                                   {React.createElement(actived ? StarFilled : StarOutlined, {
                                     className: classNames('icon'),
-                                    onClick: () => this.starChange(actived, x.key, x.title),
+                                    onClick: () => this.starChange(actived, x),
                                   })}
                                   {this.renderLinkItem(x)}
                                 </li>

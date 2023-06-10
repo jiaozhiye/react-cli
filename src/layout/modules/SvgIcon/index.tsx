@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2023-05-13 13:48:35
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-05-13 14:37:07
+ * @Last Modified time: 2023-06-08 10:34:53
  */
 import React from 'react';
 import classNames from 'classnames';
@@ -10,6 +10,7 @@ import classNames from 'classnames';
 type IProps = {
   svgUrl: string;
   className?: string;
+  style?: React.CSSProperties;
 };
 
 const isSVGFormat = (str: string) => {
@@ -18,7 +19,7 @@ const isSVGFormat = (str: string) => {
 };
 
 const SvgIcon: React.FC<IProps> = (props) => {
-  const { svgUrl, className } = props;
+  const { svgUrl, className, style } = props;
   const [svgContent, setSvgContent] = React.useState<string>();
 
   const fetchSvg = async () => {
@@ -41,6 +42,7 @@ const SvgIcon: React.FC<IProps> = (props) => {
   return svgContent ? (
     <span
       className={classNames('anticon', className)}
+      style={style}
       dangerouslySetInnerHTML={{ __html: svgContent }}
     />
   ) : null;
