@@ -2,12 +2,13 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 14:22:31
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-11 16:13:48
+ * @Last Modified time: 2023-06-15 09:11:53
  */
 import React from 'react';
 import { message, notification, Modal } from '@jiaozhiye/qm-design-react';
 import { ExclamationCircleOutlined } from '@/icons';
 import { debounce, throttle, round, cloneDeep, merge } from 'lodash-es';
+import { getToken } from './cookies';
 import { t } from '@/locale';
 import type { AnyFunction, Nullable } from './types';
 
@@ -104,52 +105,12 @@ export const getPathName = (fullpath: string) => {
   return fullpath ? fullpath.replace(/\?.*/, '') : '';
 };
 
-export const addSearchToURL = (url: string, search: string) => {
-  const hasQueryMark = url.includes('?');
-  return url + (!hasQueryMark ? search : search.replace(/^\?/, '&'));
-};
-
 /**
- * @description 通过 URL 获取 Domain
- * @param {string} url url 地址
- * @returns {string} domain
+ * @description 获取当前用例号
+ * @returns {string} 用例号
  */
-export const getDomain = (url: string) => {
-  let str = '';
-  if (isURL(url)) {
-    const arr = url.split('.').slice(-2);
-    if (arr.length === 2) {
-      str = `${arr[0]}.${arr[1]}`.split('/')[0].replace(/:\d+$/, '');
-    }
-  }
-  return str;
-};
-
-/**
- * @description 判断是否是 URL 格式
- * @param {string} str url 地址
- * @returns {boolean}
- */
-export const isURL = (str: string) => {
-  const pattern = new RegExp(
-    '^(https?:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|)' + // domain name
-      // '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$',
-    'i'
-  );
-  return !!pattern.test(str);
-};
-
-/**
- * @description 销毁提示消息
- * @returns
- */
-export const destroyAlert = () => {
-  message.destroy();
-  notification.destroy();
+export const getCaseCode = (): string => {
+  return window.location.pathname.split('/').pop() || '';
 };
 
 /**
@@ -173,6 +134,117 @@ export const loadScript = (url: string, callback: () => void): void => {
     }
   };
   head.appendChild(script);
+};
+
+/**
+ * @description 格式化 URL query 参数
+ * @param {string} url 的 query 对象
+ * @returns {string}
+ */
+export const queryParser = (query: Record<string, string | number>): string => {
+  if (!Object.keys(query).length) {
+    return '';
+  }
+  let str = '?';
+  for (const key in query) {
+    str += `${key}=${query[key] ?? ''}&`;
+  }
+  return str.replace(/&$/, '');
+};
+
+/**
+ * @description 获取 URL 中的 query 参数
+ * @param {string} url 的 query 参数
+ * @returns {object}
+ */
+export const queryFormat = (query: string) => {
+  const str = query.replace(/^\?/, '');
+  const res: Record<string, string> = {};
+  if (str === '') {
+    return res;
+  }
+  const arr = str.split('&');
+  arr.forEach((x) => {
+    const [key, val] = x.split('=');
+    if (key) {
+      res[key] = val ?? '';
+    }
+  });
+  return res;
+};
+
+/**
+ * @description 获取 URL 中的 jwt 参数
+ * @returns {string}
+ */
+export const getUrlToken = () => {
+  return queryFormat(window.location.search)[`token`] || '';
+};
+
+/**
+ * @description 给 URL 添加 jwt 参数
+ * @param {string} url url 地址
+ * @returns {string} url?token=xxx
+ */
+export const addUrlToken = (url: string) => {
+  const $jwt = getToken();
+  return addSearchToURL(url, `?token=${$jwt}`);
+};
+
+export const addSearchToURL = (url: string, search: string) => {
+  const hasQueryMark = url.replace(/[?&]$/, '').includes('?');
+  return url + (!hasQueryMark ? search : search.replace(/^\?/, '&'));
+};
+
+/**
+ * @description 通过 URL 获取 Domain
+ * @param {string} url url 地址
+ * @returns {string} domain
+ */
+export const getDomain = (url: string) => {
+  let str = '';
+  if (isURL(url)) {
+    str = url
+      .slice(url.indexOf('.') + 1)
+      .split('/')[0]
+      .replace(/:\d+$/, '');
+  }
+  return str;
+};
+
+/**
+ * @description 判断是否是 URL 格式
+ * @param {string} str url 地址
+ * @returns {boolean}
+ */
+export const isURL = (str: string) => {
+  const pattern = new RegExp(
+    '^(https?:\\/\\/)?' + // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|)' + // domain name
+      // '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
+      '(\\#[-a-z\\d_]*)?$',
+    'i'
+  );
+  return !!pattern.test(str);
+};
+
+/**
+ * @description 判断是否是外链
+ * @returns {boolean}
+ */
+export const isHttpLink = (path: string) => {
+  return /^https?:\/\//.test(path);
+};
+
+/**
+ * @description 销毁提示消息
+ * @returns
+ */
+export const destroyAlert = () => {
+  message.destroy();
+  notification.destroy();
 };
 
 /**

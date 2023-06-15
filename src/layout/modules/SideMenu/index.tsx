@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { isEqual } from 'lodash-es';
 import classNames from 'classnames';
+import { addUrlToken } from '@/utils';
 import { application } from '@/hoc';
 import { connect } from 'react-redux';
 import type { AppState } from '@/store/reducers/app';
@@ -114,9 +115,13 @@ class SideMenu extends Component<any> {
             const {
               location: { pathname },
             } = this.props;
-            if (!this.props.microAppReady) return;
-            const p = path.split('?');
-            this.props.openView(p.length > 1 && p[0] === pathname ? `/redirect${path}` : path);
+            if (isHttpLink(item.caseHref) && item.target === '_blank') {
+              window.open(addUrlToken(item.caseHref), '_blank');
+            } else {
+              if (!this.props.microAppReady) return;
+              const p = path.split('?');
+              this.props.openView(p.length > 1 && p[0] === pathname ? `/redirect${path}` : path);
+            }
           },
         };
       });

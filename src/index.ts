@@ -2,11 +2,12 @@
  * @Author: 焦质晔
  * @Date: 2021-02-05 09:13:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-11-27 22:06:47
+ * @Last Modified time: 2023-06-15 09:24:38
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { getDomain, destroyAlert } from '@/utils';
+import { getDomain, getUrlToken, queryFormat, destroyAlert } from '@/utils';
+import { getToken, setToken } from './utils/cookies';
 import { setMicroEvent } from '@/utils/mitt';
 import { ACHIEVE_LOCAL } from '@/store/types';
 import config from '@/config';
@@ -28,47 +29,61 @@ function initial() {
     try {
       window.parent.localStorage;
     } catch (err) {
-      window.parent.postMessage({ type: ACHIEVE_LOCAL, data: window.name }, '*');
+      const token = getUrlToken();
+      if (token && token !== getToken()) {
+        setToken(token);
+        window.parent.postMessage({ type: ACHIEVE_LOCAL, data: window.name }, '*');
+      }
     }
+  }
+  if (queryFormat(window.location.search).microEnv) {
+    window.__MAIM_APP_ENV__ = true;
   }
 }
 
 function initialMicro(props) {
-  const { microEvent, isMainEnv, isWidget, pathRoute } = props || {};
+  const { microEvent, isMainEnv, isWidget, pathRoute, extraProps } = props || {};
   // Widget 挂件
   if (isWidget) {
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const routes = require('@/router/config').default;
     const route = routes.find((x) => x.path === pathRoute);
-    route && (route.path = '/');
+    if (route) {
+      route.path = '/';
+      extraProps && (route.props = Object.assign({}, route.props, extraProps));
+    }
   }
   setMicroEvent(microEvent);
   window.__MAIM_APP_ENV__ = isMainEnv;
 }
 
+function doMount() {
+  if (config.powerByMicro) {
+    // micro-app
+    if (window.__MICRO_APP_ENVIRONMENT__) {
+      __webpack_public_path__ = window.__MICRO_APP_PUBLIC_PATH__;
+      const __MICRO_APP_UMD__ = true; // 开启 umd 模式 - 内存优化
+      if (__MICRO_APP_UMD__) {
+        window[`micro-app-${window.__MICRO_APP_NAME__}`] = { mount, unmount };
+      } else {
+        mount();
+        window.addEventListener('unmount', () => {
+          ReactDOM.unmountComponentAtNode(document.querySelector('#app')!);
+        });
+      }
+    }
+    // qiankun
+    if (window.__POWERED_BY_QIANKUN__) {
+      __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
+    }
+  } else {
+    render({});
+  }
+}
+
 initial();
 
-if (config.powerByMicro) {
-  // micro-app
-  if (window.__MICRO_APP_ENVIRONMENT__) {
-    __webpack_public_path__ = window.__MICRO_APP_PUBLIC_PATH__;
-    const __MICRO_APP_UMD__ = true; // 开启 umd 模式 - 内存优化
-    if (__MICRO_APP_UMD__) {
-      window[`micro-app-${window.__MICRO_APP_NAME__}`] = { mount, unmount };
-    } else {
-      mount();
-      window.addEventListener('unmount', () => {
-        ReactDOM.unmountComponentAtNode(document.querySelector('#app')!);
-      });
-    }
-  }
-  // qiankun
-  if (window.__POWERED_BY_QIANKUN__) {
-    __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;
-  }
-} else {
-  render({});
-}
+doMount();
 
 export async function bootstrap() {}
 

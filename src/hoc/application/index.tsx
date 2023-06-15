@@ -13,7 +13,7 @@ import { getSubRoutes } from '@/router/config';
 import { emitter as microEvent } from '@/utils/mitt';
 import { connect } from 'react-redux';
 import { whiteList, whiteAuth, matchRoutes, isIframe } from '@/router';
-import { Message, addSearchToURL } from '@/utils';
+import { Message, addSearchToURL, addUrlToken, isHttpLink } from '@/utils';
 import { t } from '@/locale';
 import {
   createMenus,
@@ -105,7 +105,10 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
         this.props.createIframeMenu(
           {
             key: pathname,
-            value: addSearchToURL(route.iframePath, search),
+            value: addSearchToURL(
+              isHttpLink(route.iframePath) ? addUrlToken(route.iframePath) : route.iframePath,
+              search
+            ),
             keep: route.meta.keepAlive,
           },
           'add'
