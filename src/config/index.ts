@@ -10,6 +10,7 @@ import type { ComponentSize, Language, ThemeType } from '@/utils/types';
 type IConfig = {
   system: string;
   isMainApp: boolean;
+  microName: string;
   powerByMicro: boolean;
   baseUrl: string;
   baseRoute: string;
@@ -35,7 +36,8 @@ type IConfig = {
 export default {
   system: config.name,
   isMainApp: config.name === 'app',
-  powerByMicro: window.__POWERED_BY_QIANKUN__ || window.__MICRO_APP_ENVIRONMENT__,
+  microName: window.__MICRO_APP_NAME__ || window.name || '', // 微应用名
+  powerByMicro: window.__POWERED_BY_QIANKUN__ || window.__MICRO_APP_ENVIRONMENT__, // 是否微应用运行时
   baseUrl:
     window.__MICRO_APP_PUBLIC_PATH__ ||
     window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__ ||

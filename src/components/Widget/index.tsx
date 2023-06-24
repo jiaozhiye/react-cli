@@ -70,11 +70,10 @@ const Widget = React.forwardRef<WidgetRef, IProps>((props, ref) => {
   const doExpand = (value: number) => {
     const v = (value + GIRD_GUTTER) / (ROW_HEIGHT + GIRD_GUTTER);
     if (__MICRO__) {
-      const microAppName = window.__MICRO_APP_NAME__ || window.name;
       dispatch({
         code: WIDGET_ROWSPAN,
         payload: {
-          name: microAppName.split('-')[2] || '',
+          name: config.microName.split('-')[2] || '',
           rows: value ? Number(v.toFixed(1)) : 0,
         },
       });
