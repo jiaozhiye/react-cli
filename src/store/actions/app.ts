@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:58:50
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-20 10:21:01
+ * @Last Modified time: 2023-06-24 21:42:46
  */
 import {
   SIDE_MENU,
@@ -246,10 +246,9 @@ export const createSignOut =
 
 // 创建主题色
 export const createTheme = (color: string) => (dispatch, getState) => {
-  const baseRoute = process.env.NODE_ENV === 'development' ? '' : config.baseRoute;
   const options = {
     newColors: getAntdSerials(color),
-    changeUrl: (cssUrl) => `${config.baseUrl.replace(/\/$/, '')}${baseRoute}/${cssUrl}`,
+    changeUrl: (cssUrl) => `${config.baseUrl.replace(/\/$/, '')}/${cssUrl}`,
     openLocalStorage: false,
   };
   client.changer.changeColor(options, Promise).then(() => {

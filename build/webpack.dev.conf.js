@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-05-07 10:23:20
+ * @Last Modified time: 2023-06-24 21:41:04
  */
 'use strict';
 
@@ -33,7 +33,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     /* 当使用 HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html */
     historyApiFallback: {
       disableDotRule: true,
-      rewrites: [{ from: /.*/, to: '/index.html' }],
+      rewrites: [{ from: /.*/, to: config.dev.assetsPublicPath + 'index.html' }],
     },
     headers: {
       'Access-Control-Allow-Origin': '*',

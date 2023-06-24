@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2019-06-20 10:00:00
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-06-10 14:43:56
+ * @Last Modified time: 2023-06-24 21:41:41
  */
 'use strict';
 const path = require('path');
@@ -30,7 +30,7 @@ module.exports = {
   dev: {
     // Paths
     assetsSubDirectory: 'static',
-    assetsPublicPath: `//${HOST}:${PORT}/`,
+    assetsPublicPath: `//${HOST}:${PORT}${envConf.publicPath}`,
 
     // 请求代理配置 -> can be modified
     proxyTable: {
@@ -66,7 +66,7 @@ module.exports = {
     // Paths
     assetsRoot: resolve('dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: `${envConf.publicPath}/`.replace(/\/+/g, '/'),
+    assetsPublicPath: envConf.publicPath,
 
     // Source Maps
     productionSourceMap: false,

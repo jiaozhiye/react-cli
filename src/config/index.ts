@@ -2,9 +2,10 @@
  * @Author: 焦质晔
  * @Date: 2021-02-12 12:43:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-18 13:29:47
+ * @Last Modified time: 2023-06-24 21:42:14
  */
 import config from '../../config/app.conf';
+import env from '../../config/env.conf';
 import type { ComponentSize, Language, ThemeType } from '@/utils/types';
 
 type IConfig = {
@@ -41,7 +42,7 @@ export default {
   baseUrl:
     window.__MICRO_APP_PUBLIC_PATH__ ||
     window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__ ||
-    window.location.origin,
+    window.location.origin + env.publicPath,
   baseRoute: '', // 二级目录-
   lang: 'zh-cn', // 语言
   size: 'middle', // 尺寸

@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-07-23 10:21:56
+ * @Last Modified time: 2023-06-24 21:45:22
  */
 import {
   SIDE_MENU,
@@ -117,19 +117,20 @@ const setRouteMeta = <T extends ISideMenu>(list: T[]) => {
     }
     if (config.isMainApp) {
       const path = x.key.replace(/\?.*/, '');
+      const host = x.microHost || '';
       if (path) {
         mainAppRoutes.push({
           path,
           exact: true,
           meta: { title: x.title, keepAlive: x.keepAlive },
-          ...(!x.caseHref
+          ...(x.caseHref || config.microType === 'iframe'
             ? {
-                iframePath: ``, // iframePath 与 microHost、microRule 不共存
-                microHost: x.microHost,
-                microRule: path,
+                iframePath: x.caseHref || host.slice(0, -1) + x.key.replace(/^\/[^/]+/, '/iframe'),
               }
             : {
-                iframePath: x.caseHref,
+                iframePath: ``, // iframePath 与 microHost、microRule 不共存
+                microHost: host,
+                microRule: path,
               }),
           component: () => null, // 重要
         });
