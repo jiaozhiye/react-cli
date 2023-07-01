@@ -147,7 +147,7 @@ class BasicLayout extends Component<any, IState> {
   createMicroView(route) {
     const { microMenus, createMicroState } = this.props;
     return microMenus.map((x) => {
-      const { key, value, keep, search = '' } = x;
+      const { key, value, keep } = x;
       if (!keep && route.path !== key) {
         return null;
       }
@@ -159,7 +159,6 @@ class BasicLayout extends Component<any, IState> {
         />
       ) : (
         <micro-app
-          key={key + search}
           name={key.replace(/\/+/g, '-').slice(1)}
           baseroute={key}
           url={value}
@@ -167,6 +166,7 @@ class BasicLayout extends Component<any, IState> {
             microEvent,
             isMainEnv: config.isMainApp,
           }}
+          disable-memory-router={true}
           style={{ display: route.path === key ? 'block' : 'none', height: '100%' }}
           onCreated={() => createMicroState(false)}
           onMounted={() => createMicroState(true)}
