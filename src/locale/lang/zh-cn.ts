@@ -41,9 +41,6 @@ export default {
       usersetting: '个人设置',
       clearcache: '清理缓存',
       logout: '退出登录',
-      companyName: '公司名称',
-      userInfo: '个人信息',
-      systemRole: '系统角色',
       admin: '管理员',
     },
     insideLetter: {

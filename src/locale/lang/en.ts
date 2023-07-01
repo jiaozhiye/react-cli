@@ -41,9 +41,6 @@ export default {
       usersetting: 'User setting',
       clearcache: 'Clear cache',
       logout: 'Logout',
-      companyName: 'Company name',
-      userInfo: 'Personal information',
-      systemRole: 'System role',
       admin: 'Administrator',
     },
     insideLetter: {
