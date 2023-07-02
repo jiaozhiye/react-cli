@@ -34,10 +34,12 @@ class LangSetting extends Component<any> {
     microEvent.$emit(LOCALE_LANG, lang);
     // 清空页签缓存
     this.props.tabMenus.forEach((x) => {
+      if (x.path === this.props.location.pathname) return;
       this.props.createMicroMenu(x.path, 'remove');
       this.props.createIframeMenu(x.path, 'remove');
     });
-    setTimeout(() => this.props.reloadView());
+    // 延迟 - 重要
+    setTimeout(() => this.props.refreshView(this.props.location.pathname));
   }
 
   renderMenus() {
