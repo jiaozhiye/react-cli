@@ -2,17 +2,19 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-05-24 14:31:22
+ * @Last Modified time: 2023-07-02 08:46:48
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Menu, Dropdown } from '@jiaozhiye/qm-design-react';
 import { connect } from 'react-redux';
-import { createLocaleLang } from '@/store/actions';
+import { createLocaleLang, createMicroMenu, createIframeMenu } from '@/store/actions';
 import { changeLocale } from '@/locale';
 import { emitter as microEvent } from '@/utils/mitt';
 import { application } from '@/hoc';
 import { LOCALE_LANG } from '@/store/types';
+import config from '@/config';
+
 import type { AppState } from '@/store/reducers/app';
 
 import { TranslationOutlined } from '@/icons';
@@ -27,11 +29,15 @@ class LangSetting extends Component<any> {
     this.props.iframeMenus.forEach((x) => {
       const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
-      $iframe.contentWindow?.postMessage({ type: LOCALE_LANG, data: lang }, '*');
+      $iframe.contentWindow?.postMessage({ type: LOCALE_LANG, data: lang }, config.postOrigin);
     });
     microEvent.$emit(LOCALE_LANG, lang);
-    // 刷新页面
-    this.props.refreshView(this.props.location.pathname);
+    // 清空页签缓存
+    this.props.tabMenus.forEach((x) => {
+      this.props.createMicroMenu(x.path, 'remove');
+      this.props.createIframeMenu(x.path, 'remove');
+    });
+    setTimeout(() => this.props.reloadView());
   }
 
   renderMenus() {
@@ -73,9 +79,12 @@ class LangSetting extends Component<any> {
 export default connect<unknown, unknown, any>(
   (state: AppState) => ({
     lang: state.app.lang,
+    tabMenus: state.app.tabMenus,
     iframeMenus: state.app.iframeMenus,
   }),
   {
     createLocaleLang,
+    createMicroMenu,
+    createIframeMenu,
   }
 )(LangSetting);

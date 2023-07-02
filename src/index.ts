@@ -32,7 +32,7 @@ function initial() {
       const token = getUrlToken();
       if (token && token !== getToken()) {
         setToken(token);
-        window.parent.postMessage({ type: ACHIEVE_LOCAL, data: window.name }, '*');
+        window.parent.postMessage({ type: ACHIEVE_LOCAL, data: window.name }, config.postOrigin);
       }
     }
   }

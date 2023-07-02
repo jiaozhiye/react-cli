@@ -9,6 +9,7 @@ import hoistStatics from 'hoist-non-react-statics';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { OPEN_VIEW, CLOSE_VIEW, REFRESH_VIEW, PREVENT_TAB } from '@/store/types';
+import config from '@/config';
 
 import type { AppState } from '@/store/reducers/app';
 
@@ -28,7 +29,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
 
     // 打开新页签
     openView = (fullpath: string, reload?: boolean) => {
-      window.parent.postMessage({ type: OPEN_VIEW, data: fullpath }, '*');
+      window.parent.postMessage({ type: OPEN_VIEW, data: fullpath }, config.postOrigin);
       if (reload) {
         setTimeout(() => this.reloadView());
       }
@@ -36,20 +37,26 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
 
     // 关闭页签
     closeView = (fullpath: string) => {
-      window.parent.postMessage({ type: CLOSE_VIEW, data: fullpath }, '*');
+      window.parent.postMessage({ type: CLOSE_VIEW, data: fullpath }, config.postOrigin);
     };
 
     // 刷新页签
     reloadView = () => {
-      window.parent.postMessage({ type: REFRESH_VIEW, data: '' }, '*');
+      window.parent.postMessage({ type: REFRESH_VIEW, data: '' }, config.postOrigin);
     };
 
     addControlTab = (path: string, message?: string) => {
-      window.parent.postMessage({ type: PREVENT_TAB, data: { action: 'add', path, message } }, '*');
+      window.parent.postMessage(
+        { type: PREVENT_TAB, data: { action: 'add', path, message } },
+        config.postOrigin
+      );
     };
 
     removeControlTab = (path: string) => {
-      window.parent.postMessage({ type: PREVENT_TAB, data: { action: 'remove', path } }, '*');
+      window.parent.postMessage(
+        { type: PREVENT_TAB, data: { action: 'remove', path } },
+        config.postOrigin
+      );
     };
 
     render() {

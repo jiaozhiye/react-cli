@@ -120,7 +120,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
               activated: pathname,
             },
           },
-          '*'
+          config.postOrigin
         );
       }
       // micro 模式
@@ -262,7 +262,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
             auth: localStorage.getItem('auth'),
           },
         },
-        '*'
+        config.postOrigin
       );
     };
 
@@ -302,7 +302,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
 
     emitOutsideClick = () => {
       if (window.parent === window) return;
-      window.parent.postMessage({ type: OUTSIDE_CLICK, data: '' }, '*');
+      window.parent.postMessage({ type: OUTSIDE_CLICK, data: '' }, config.postOrigin);
     };
 
     dispatchMouseClick = () => {

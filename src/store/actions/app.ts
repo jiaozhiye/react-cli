@@ -241,7 +241,10 @@ export const createSignOut =
       payload: {},
     });
     // 刷新浏览器，释放内存
-    setTimeout(() => window.parent.postMessage({ type: SIGN_OUT, data: '' }, '*'), 400);
+    setTimeout(
+      () => window.parent.postMessage({ type: SIGN_OUT, data: '' }, config.postOrigin),
+      400
+    );
   };
 
 // 创建主题色

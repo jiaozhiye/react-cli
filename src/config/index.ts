@@ -20,6 +20,7 @@ type IConfig = {
   themeType: ThemeType;
   prefix: string;
   microType: 'iframe' | 'qiankun' | 'micro-app' | '';
+  postOrigin: string;
   sideWidth: number[];
   maxCacheNum: number;
   showBreadcrumb: boolean;
@@ -49,6 +50,7 @@ export default {
   themeType: 'light', // 主题模式
   prefix: '/api', // ajax 请求前缀
   microType: 'iframe', // 微前端模式
+  postOrigin: '*', // postMessage 接收源
   sideWidth: [200, 60], // 侧栏导航宽度
   maxCacheNum: 10, // 路由组件最大缓存数量
   showBreadcrumb: false, // 是否显示面包屑

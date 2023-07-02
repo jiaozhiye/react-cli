@@ -12,6 +12,8 @@ import { createTheme } from '@/store/actions';
 import { emitter as microEvent } from '@/utils/mitt';
 import { t } from '@/locale';
 import { THEME_COLOR } from '@/store/types';
+import config from '@/config';
+
 import type { AppState } from '@/store/reducers/app';
 
 import './index.less';
@@ -51,7 +53,7 @@ class ThemeColor extends Component<any> {
     this.props.iframeMenus.forEach((x) => {
       const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
-      $iframe.contentWindow?.postMessage({ type: THEME_COLOR, data: color }, '*');
+      $iframe.contentWindow?.postMessage({ type: THEME_COLOR, data: color }, config.postOrigin);
     });
     microEvent.$emit(THEME_COLOR, color);
   }

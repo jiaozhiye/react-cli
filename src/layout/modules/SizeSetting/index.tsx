@@ -13,6 +13,8 @@ import { emitter as microEvent } from '@/utils/mitt';
 import { t } from '@/locale';
 import { application } from '@/hoc';
 import { COMP_SIZE } from '@/store/types';
+import config from '@/config';
+
 import type { AppState } from '@/store/reducers/app';
 
 import { FontSizeOutlined } from '@/icons';
@@ -27,7 +29,7 @@ class SizeSetting extends Component<any> {
     this.props.iframeMenus.forEach((x) => {
       const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
-      $iframe.contentWindow?.postMessage({ type: COMP_SIZE, data: size }, '*');
+      $iframe.contentWindow?.postMessage({ type: COMP_SIZE, data: size }, config.postOrigin);
     });
     // 延迟 - 重要
     setTimeout(() => microEvent.$emit(COMP_SIZE, size));
