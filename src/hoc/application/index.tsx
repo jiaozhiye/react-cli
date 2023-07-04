@@ -142,8 +142,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       return document.getElementById(id) as Nullable<HTMLIFrameElement>;
     };
 
-    refreshView = (pathname: string) => {
-      const { search } = this.props.location;
+    refreshView = (pathname: string, search = '') => {
       // micro-app
       if (config.microType === 'micro-app') {
         const microItem = this.props.microMenus.find((x) => x.key === pathname);
@@ -151,7 +150,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           this.props.createMicroMenu(pathname, 'remove');
         }
       }
-      this.props.history.replace(`/redirect${pathname}` + search);
+      this.props.history.replace(`/redirect${pathname}` + (search || this.props.location.search));
       // iframe
       let $iframe = this.getIframeNode(pathname);
       if (!$iframe) return;

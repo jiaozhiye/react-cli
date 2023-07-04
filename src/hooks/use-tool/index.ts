@@ -15,10 +15,7 @@ export default function useTool() {
 
   // 打开新页签
   const openView = (fullpath: string, reload?: boolean) => {
-    window.parent.postMessage({ type: OPEN_VIEW, data: fullpath }, config.postOrigin);
-    if (reload) {
-      setTimeout(() => reloadView());
-    }
+    window.parent.postMessage({ type: OPEN_VIEW, data: fullpath, reload }, config.postOrigin);
   };
 
   // 关闭页签

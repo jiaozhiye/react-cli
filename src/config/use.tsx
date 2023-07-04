@@ -9,7 +9,13 @@ import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { notification, message, QmConfigProvider } from '@jiaozhiye/qm-design-react';
-import { createTheme, createLocaleLang, createComponentSize } from '@/store/actions';
+import {
+  createTheme,
+  createLocaleLang,
+  createComponentSize,
+  createMicroMenu,
+  createIframeMenu,
+} from '@/store/actions';
 import { isIframe } from '@/router';
 import { changeLocale } from '@/locale';
 import { getMicroEvent } from '@/utils/mitt';
@@ -189,7 +195,17 @@ class UseConfig extends Component<any> {
       this.props.openView(data.data);
     }
     if (data.type === types.CLOSE_VIEW) {
-      this.props.closeView(data.data);
+      const [pathname, search = ''] = data.data.split('?');
+      if (this.props.location.pathname === pathname) {
+        return this.props.refreshView(pathname, `?${search}`);
+      }
+      if (!data.reload) {
+        this.props.openView(data.data);
+      } else {
+        this.props.createMicroMenu(pathname, 'remove');
+        this.props.createIframeMenu(pathname, 'remove');
+        setTimeout(() => this.props.openView(data.data));
+      }
     }
     if (data.type === types.REFRESH_VIEW) {
       this.props.refreshView(this.props.location.pathname);
@@ -228,5 +244,7 @@ export default connect<unknown, unknown, any>(
     createTheme,
     createLocaleLang,
     createComponentSize,
+    createMicroMenu,
+    createIframeMenu,
   }
 )(UseConfig);

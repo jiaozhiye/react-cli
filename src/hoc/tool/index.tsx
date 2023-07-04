@@ -29,10 +29,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
 
     // 打开新页签
     openView = (fullpath: string, reload?: boolean) => {
-      window.parent.postMessage({ type: OPEN_VIEW, data: fullpath }, config.postOrigin);
-      if (reload) {
-        setTimeout(() => this.reloadView());
-      }
+      window.parent.postMessage({ type: OPEN_VIEW, data: fullpath, reload }, config.postOrigin);
     };
 
     // 关闭页签
