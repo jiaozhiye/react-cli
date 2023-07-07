@@ -159,6 +159,7 @@ class BasicLayout extends Component<any, IState> {
         />
       ) : (
         <micro-app
+          key={key}
           name={key.replace(/\/+/g, '-').slice(1)}
           baseroute={key}
           url={value}

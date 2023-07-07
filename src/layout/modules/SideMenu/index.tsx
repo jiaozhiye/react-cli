@@ -65,18 +65,13 @@ class SideMenu extends Component<any> {
     if (prevProps.sideMenus !== this.props.sideMenus) {
       this.setOpenKeys(this.getOpenKeys());
     }
-    if (prevProps.location.pathname + prevProps.location.search !== this.getFullPath()) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
       this.setOpenKeys(this.getOpenKeys());
     }
   }
 
-  getFullPath = (): string => {
-    const { location } = this.props;
-    return location.pathname + location.search;
-  };
-
   getOpenKeys = (): string[] => {
-    const allOpenKeys = deepGetPath(this.props.sideMenus, this.getFullPath()) || [];
+    const allOpenKeys = deepGetPath(this.props.sideMenus, this.props.location.pathname) || [];
     return allOpenKeys.slice(0, -1);
   };
 
@@ -128,8 +123,9 @@ class SideMenu extends Component<any> {
   };
 
   render() {
-    const { sideMenus } = this.props;
+    const { sideMenus, location } = this.props;
     const { openKeys } = this.state;
+    const { pathname } = location;
     return (
       <div className={classNames('app-side-menu')}>
         <Menu
@@ -138,7 +134,7 @@ class SideMenu extends Component<any> {
           theme="dark"
           inlineIndent={20}
           items={this.createMenuTree(sideMenus)}
-          selectedKeys={[this.getFullPath()]}
+          selectedKeys={[pathname]}
           openKeys={openKeys}
           onOpenChange={(keys) => {
             this.setState({ openKeys: keys });
