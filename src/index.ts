@@ -14,7 +14,7 @@ import config from '@/config';
 import App from './App';
 
 function render(props) {
-  const { container } = props;
+  const { container } = props || {};
   ReactDOM.render(
     React.createElement(App),
     container ? container.querySelector('#app') : document.querySelector('#app')
@@ -64,9 +64,9 @@ function doMount() {
       __webpack_public_path__ = window.__MICRO_APP_PUBLIC_PATH__;
       const __MICRO_APP_UMD__ = true; // 开启 umd 模式 - 内存优化
       if (__MICRO_APP_UMD__) {
-        window[`micro-app-${window.__MICRO_APP_NAME__}`] = { mount, unmount };
+        Object.assign(window, { mount, unmount });
       } else {
-        mount();
+        mount({});
         window.addEventListener('unmount', () => {
           ReactDOM.unmountComponentAtNode(document.querySelector('#app')!);
         });
@@ -87,14 +87,14 @@ doMount();
 
 export async function bootstrap() {}
 
-export async function mount(props: any = {}) {
+export async function mount(props) {
   window.__POWERED_BY_QIANKUN__ && initialMicro(props);
   window.__MICRO_APP_ENVIRONMENT__ && initialMicro(window.microApp.getData());
   render(props);
 }
 
-export async function unmount(props: any = {}) {
-  const { container } = props;
+export async function unmount(props) {
+  const { container } = props || {};
   destroyAlert();
   ReactDOM.unmountComponentAtNode(
     container ? container.querySelector('#app') : document.querySelector('#app')
