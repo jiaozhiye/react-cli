@@ -44,7 +44,7 @@ export const isIframe = (path: string): boolean => {
 // 设置 DocTitle
 export const setDocumentTitle = (title?: string) => {
   if (!config.powerByMicro) {
-    document.title = `${t('app.global.title')}-${title || ''}`;
+    document.title = t('app.global.title') + (title ? `-${title}` : '');
   }
 };
 

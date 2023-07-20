@@ -167,7 +167,6 @@ class BasicLayout extends Component<any, IState> {
             microEvent,
             isMainEnv: config.isMainApp,
           }}
-          disable-memory-router={true}
           style={{ display: route.path === key ? 'block' : 'none', height: '100%' }}
           onCreated={() => createMicroState(false)}
           onMounted={() => createMicroState(true)}
