@@ -166,11 +166,13 @@ class BasicLayout extends Component<any, IState> {
           data={{
             microEvent,
             isMainEnv: config.isMainApp,
+            isWidget: true,
+            pathRoute: key,
           }}
           style={{ display: route.path === key ? 'block' : 'none', height: '100%' }}
-          onCreated={() => createMicroState(false)}
-          onMounted={() => createMicroState(true)}
-          onError={() => createMicroState(true)}
+          // onCreated={() => createMicroState(false)}
+          // onMounted={() => createMicroState(true)}
+          // onError={() => createMicroState(true)}
         />
       );
     });
