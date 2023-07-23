@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-05-09 09:02:23
+ * @Last Modified time: 2023-07-23 18:46:01
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -57,6 +57,13 @@ class UseConfig extends Component<any> {
 
   private $dynamicStyles: HTMLElement[] = [];
 
+  constructor(props) {
+    super(props);
+    if (config.microType === 'micro-app') {
+      this.registerMicroApp();
+    }
+  }
+
   componentDidMount() {
     const localTheme = localStorage.getItem('theme_color');
     if (localTheme && localTheme !== this.props.themeColor) {
@@ -94,12 +101,9 @@ class UseConfig extends Component<any> {
     if (prevPathname !== nextPathname) {
       this.props.addTabMenus(prevPathname);
     }
-    if (prevProps.navLoaded !== this.props.navLoaded) {
+    if (prevProps.flattenMenus !== this.props.flattenMenus) {
       if (config.microType === 'qiankun') {
         this.registerQiankun();
-      }
-      if (config.microType === 'micro-app') {
-        this.registerMicroApp();
       }
     }
     if (prevProps.size !== this.props.size) {
@@ -238,7 +242,7 @@ export default connect<unknown, unknown, any>(
     size: state.app.size,
     lang: state.app.lang,
     themeColor: state.app.themeColor,
-    navLoaded: state.app.navLoaded,
+    flattenMenus: state.app.flattenMenus,
   }),
   {
     createTheme,

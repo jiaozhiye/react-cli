@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 15:52:33
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-06-24 21:45:22
+ * @Last Modified time: 2023-07-23 18:42:39
  */
 import {
   SIDE_MENU,
@@ -66,7 +66,6 @@ type IState = {
   device: Device;
   themeType: ThemeType;
   themeColor: string;
-  navLoaded: boolean;
   microAppReady: boolean;
   sideMenus: ISideMenu[];
   starMenus: ISideMenu[];
@@ -170,7 +169,6 @@ const initState: IState = {
   device: 'desktop', // 设备类型
   themeType: config.themeType, // 主题模式
   themeColor: process.env.THEME_COLOR || '', // 主题颜色
-  navLoaded: false, // 是否完成菜单的加载
   microAppReady: true, // 微应用加载状态
   sideMenus: [], // 侧栏菜单数据
   starMenus: [], // 收藏菜单
@@ -202,7 +200,6 @@ const setSideMenus = (state: IState, payload) => {
   const { route } = matchRoutes(routes, window.location.pathname).pop()!;
   setDocumentTitle(route.meta?.title);
   return Object.assign({}, state, {
-    navLoaded: true,
     sideMenus: payload,
     flattenMenus,
     tabMenus,
