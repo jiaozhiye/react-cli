@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:02:43
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-02-06 13:29:44
+ * @Last Modified time: 2023-07-23 18:36:43
  */
 import React, { Suspense } from 'react';
 import { Router, Switch, Route, Redirect, matchPath } from 'react-router-dom';
@@ -80,9 +80,14 @@ export const renderRoutes = (routes: IRoute[] = [], extraProps = {}, switchProps
                       return (
                         <ErrorBoundary>
                           {route.render ? (
-                            route.render({ ...props, ...extraProps, route })
+                            route.render({ ...props, ...route.props, ...extraProps, route })
                           ) : (
-                            <route.component {...props} {...extraProps} route={route} />
+                            <route.component
+                              {...props}
+                              {...route.props}
+                              {...extraProps}
+                              route={route}
+                            />
                           )}
                         </ErrorBoundary>
                       );
