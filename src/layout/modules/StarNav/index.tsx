@@ -2,10 +2,10 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-11-27 13:53:52
+ * @Last Modified time: 2023-07-23 18:20:36
  */
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import { Menu } from '@jiaozhiye/qm-design-react';
 import { StarFilled } from '@/icons';
@@ -17,6 +17,7 @@ import type { AppState } from '@/store/reducers/app';
 
 import './index.less';
 
+@withRouter
 class StarNav extends Component<any> {
   componentDidMount() {
     this.props.createStarMenu();
@@ -40,6 +41,7 @@ class StarNav extends Component<any> {
   }
 
   render() {
+    const { pathname } = this.props.location;
     const items = [
       {
         key: 'star-nav',
@@ -51,7 +53,13 @@ class StarNav extends Component<any> {
     ];
     return (
       <div className={classNames('app-star-nav')}>
-        <Menu mode="inline" theme="dark" inlineIndent={20} items={items} />
+        <Menu
+          mode="inline"
+          theme="dark"
+          inlineIndent={20}
+          selectedKeys={[pathname]}
+          items={items}
+        />
       </div>
     );
   }
