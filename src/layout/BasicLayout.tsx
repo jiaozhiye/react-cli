@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 13:31:45
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-03-28 18:40:58
+ * @Last Modified time: 2023-07-23 19:09:38
  */
 /** @jsxRuntime classic */
 /** @jsx jsxCustomEvent */
@@ -214,7 +214,7 @@ class BasicLayout extends Component<any, IState> {
           <Logo collapsed={collapsed} />
           <AllNav />
           {config.showStarNav && <StarNav />}
-          <SideMenu />
+          <SideMenu collapsed={collapsed} />
         </Sider>
         <Layout style={_style}>
           <Header>

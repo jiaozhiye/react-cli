@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-06 12:54:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2022-11-27 13:45:36
+ * @Last Modified time: 2023-07-23 19:16:05
  */
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
@@ -123,7 +123,7 @@ class SideMenu extends Component<any> {
   };
 
   render() {
-    const { sideMenus, location } = this.props;
+    const { sideMenus, location, collapsed } = this.props;
     const { openKeys } = this.state;
     const { pathname } = location;
     return (
@@ -135,7 +135,7 @@ class SideMenu extends Component<any> {
           inlineIndent={20}
           items={this.createMenuTree(sideMenus)}
           selectedKeys={[pathname]}
-          openKeys={openKeys}
+          openKeys={!collapsed ? openKeys : undefined}
           onOpenChange={(keys) => {
             this.setState({ openKeys: keys });
           }}
