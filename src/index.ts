@@ -6,7 +6,7 @@
  */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { getDomain, getUrlToken, queryFormat, destroyAlert } from '@/utils';
+import { getUrlToken, queryFormat, destroyAlert } from '@/utils';
 import { getToken, setToken } from './utils/cookies';
 import { setMicroEvent } from '@/utils/mitt';
 import { ACHIEVE_LOCAL } from '@/store/types';
@@ -22,16 +22,14 @@ function render(props) {
 }
 
 function initial() {
-  const domain = getDomain(config.baseUrl);
-  if (domain) {
-    document.domain = domain;
-  } else if (!config.isMainApp) {
-    try {
-      window.parent.localStorage;
-    } catch (err) {
-      const token = getUrlToken();
-      if (token && token !== getToken()) {
-        setToken(token);
+  try {
+    window.parent.localStorage;
+  } catch (err) {
+    const token = getUrlToken();
+    if (token && token !== getToken()) {
+      setToken(token);
+      // 判断是否被 iframe 集成
+      if (window.frameElement) {
         window.parent.postMessage({ type: ACHIEVE_LOCAL, data: window.name }, config.postOrigin);
       }
     }
