@@ -29,7 +29,7 @@ function initial() {
     if (token && token !== getToken()) {
       setToken(token);
       // 判断是否被 iframe 集成
-      if (window.frameElement) {
+      if (window.top !== window.self) {
         window.parent.postMessage({ type: ACHIEVE_LOCAL, data: window.name }, config.postOrigin);
       }
     }
