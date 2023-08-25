@@ -22,7 +22,6 @@ const MicroLayout: React.FC<IProps> = (props) => {
   const createIframeView = () => {
     return (
       <iframe
-        id={path}
         name={path}
         src={addUrlToken(iframePath!)}
         width="100%"

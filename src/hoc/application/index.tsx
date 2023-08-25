@@ -113,7 +113,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           },
           'add'
         );
-        this.getIframeNode(pathname)?.contentWindow!.postMessage(
+        this.getFrameByName(pathname)?.contentWindow!.postMessage(
           {
             type: `${SUB_EVENT}__${pathname.split('/').pop()}`,
             data: {
@@ -138,8 +138,8 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       }
     };
 
-    getIframeNode = (id: string) => {
-      return document.getElementById(id) as Nullable<HTMLIFrameElement>;
+    getFrameByName = (name: string) => {
+      return document.getElementsByName(name)[0] as Nullable<HTMLIFrameElement>;
     };
 
     refreshView = (pathname: string, search = '') => {
@@ -152,7 +152,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
       }
       this.props.history.replace(`/redirect${pathname}` + (search || this.props.location.search));
       // iframe
-      let $iframe = this.getIframeNode(pathname);
+      let $iframe = this.getFrameByName(pathname);
       if (!$iframe) return;
       // 释放 iframe 内存
       $iframe.src = 'about:blank';
@@ -251,7 +251,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
     };
 
     sendLocalStore = (name: string) => {
-      this.getIframeNode(name)?.contentWindow!.postMessage(
+      this.getFrameByName(name)?.contentWindow!.postMessage(
         {
           type: SEND_LOCAL,
           data: {
@@ -324,6 +324,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
           startMicroApp={this.startMicroApp}
           sendLocalStore={this.sendLocalStore}
           setLocalStore={this.setLocalStore}
+          getFrameByName={this.getFrameByName}
           openView={this.openView}
           closeView={this.closeView}
           closeAllTabs={this.closeAllTabs}

@@ -123,7 +123,6 @@ class BasicLayout extends Component<any, IState> {
           style={{ display: route.path === x.key ? 'block' : 'none' }}
         >
           <iframe
-            id={x.key}
             name={x.key}
             src={x.value}
             width="100%"

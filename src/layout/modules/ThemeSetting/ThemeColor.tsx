@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { createTheme } from '@/store/actions';
 import { emitter as microEvent } from '@/utils/mitt';
 import { t } from '@/locale';
+import { application } from '@/hoc';
 import { THEME_COLOR } from '@/store/types';
 import config from '@/config';
 
@@ -33,6 +34,7 @@ type IState = {
   colorList: Array<{ color: string }>;
 };
 
+@application
 class ThemeColor extends Component<any> {
   state: IState = {
     colorList: [
@@ -51,7 +53,7 @@ class ThemeColor extends Component<any> {
   themeColorChangeHandle(color) {
     this.props.createTheme(color);
     this.props.iframeMenus.forEach((x) => {
-      const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
+      const $iframe = this.props.getFrameByName(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
       $iframe.contentWindow?.postMessage({ type: THEME_COLOR, data: color }, config.postOrigin);
     });

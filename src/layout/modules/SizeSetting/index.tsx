@@ -27,7 +27,7 @@ class SizeSetting extends Component<any> {
     this.props.createComponentSize(size);
     localStorage.setItem('size', size);
     this.props.iframeMenus.forEach((x) => {
-      const $iframe = document.getElementById(x.key) as HTMLIFrameElement;
+      const $iframe = this.props.getFrameByName(x.key) as HTMLIFrameElement;
       if (!$iframe) return;
       $iframe.contentWindow?.postMessage({ type: COMP_SIZE, data: size }, config.postOrigin);
     });
