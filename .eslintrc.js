@@ -41,5 +41,6 @@ module.exports = {
     'react/jsx-wrap-multilines': 'off',
     'react/prop-types': 'off',
     'react/forbid-prop-types': 'off',
+    'react/no-deprecated': 'off',
   },
 };
