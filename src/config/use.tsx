@@ -2,7 +2,7 @@
  * @Author: 焦质晔
  * @Date: 2021-07-07 11:06:20
  * @Last Modified by: 焦质晔
- * @Last Modified time: 2023-07-23 18:46:01
+ * @Last Modified time: 2023-09-14 21:05:41
  */
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -14,7 +14,6 @@ import {
   createLocaleLang,
   createComponentSize,
   createMicroMenu,
-  createIframeMenu,
 } from '@/store/actions';
 import { isIframe } from '@/router';
 import { changeLocale } from '@/locale';
@@ -196,20 +195,15 @@ class UseConfig extends Component<any> {
     // qiankun、micro-app 环境下，window 的 `message` 事件未被隔离，当主应用触发事件时，子应用也会被触发
     if (config.powerByMicro) return;
     if (data.type === types.OPEN_VIEW) {
-      this.props.openView(data.data);
-    }
-    if (data.type === types.CLOSE_VIEW) {
       const [pathname, search = ''] = data.data.split('?');
-      if (this.props.location.pathname === pathname) {
-        return this.props.refreshView(pathname, `?${search}`);
-      }
       if (!data.reload) {
         this.props.openView(data.data);
       } else {
-        this.props.createMicroMenu(pathname, 'remove');
-        this.props.createIframeMenu(pathname, 'remove');
-        setTimeout(() => this.props.openView(data.data));
+        this.props.refreshView(pathname, `?${search}`);
       }
+    }
+    if (data.type === types.CLOSE_VIEW) {
+      this.props.closeView(data.data);
     }
     if (data.type === types.REFRESH_VIEW) {
       this.props.refreshView(this.props.location.pathname);
@@ -249,6 +243,5 @@ export default connect<unknown, unknown, any>(
     createLocaleLang,
     createComponentSize,
     createMicroMenu,
-    createIframeMenu,
   }
 )(UseConfig);
