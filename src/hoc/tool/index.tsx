@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import hoistStatics from 'hoist-non-react-statics';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { t } from '@/locale';
 import { OPEN_VIEW, CLOSE_VIEW, REFRESH_VIEW, PREVENT_TAB } from '@/store/types';
 import config from '@/config';
 
@@ -62,6 +63,7 @@ export default (WrappedComponent: React.ComponentType<any>): any => {
         <WrappedComponent
           ref={forwardedRef}
           {...this.props}
+          $t={t}
           openView={this.openView}
           closeView={this.closeView}
           reloadView={this.reloadView}
