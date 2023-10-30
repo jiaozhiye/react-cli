@@ -1163,10 +1163,10 @@
     "@types/yargs" "^17.0.8"
     chalk "^4.0.0"
 
-"@jiaozhiye/qm-design-react@^1.7.42":
-  version "1.7.42"
-  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.7.42.tgz#0fa7b10433c7fae731c1eaa0e8142446985c7c3a"
-  integrity sha512-4b5o1+exAArOdhds1G3q/Acnm0sa04VVphncKNAvC6IS0PI6Wi3Faskc2E+w8n1q6ViiGi4P6FnYYP+j0G9DPw==
+"@jiaozhiye/qm-design-react@^1.7.43":
+  version "1.7.43"
+  resolved "https://registry.npmmirror.com/@jiaozhiye/qm-design-react/-/qm-design-react-1.7.43.tgz#2025ca6a7d6a89fcb8b94f27e33169309c21c24e"
+  integrity sha512-MwMUaIKW8QTJbwaocnoqLHhwJnGCOE+9XmIitK6gR5NfS0ihKRgLCeoYDDfe5ekHmeAZCZ1e5U0ZDtBrnJfsqQ==
   dependencies:
     "@rc-component/portal" "^1.1.2"
     "@rc-component/trigger" "^1.14.4"
